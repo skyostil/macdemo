@@ -13,12 +13,7 @@ MXSurface* mxCreateWindow(int w, int h)
         return NULL;
     }
 
-    s = (MXSurface*)malloc(sizeof(MXSurface));
-    s->pixelFormat = MX_PIXELFORMAT_I1;
-    s->w = win->w;
-    s->h = win->h;
-    s->stride = s->w / 8;
-    s->pixels = malloc(s->h * s->stride);
+    s = mxCreateSurface(win->w, win->h, MX_PIXELFORMAT_I1);
     return s;
 }
 
@@ -26,8 +21,7 @@ void mxDestroyWindow(MXSurface* s)
 {
     if (s)
     {
-        free(s->pixels);
-        free(s);
+        mxDestroySurface(s);
     }
     if (win)
     {
@@ -65,3 +59,20 @@ void mxSwapBuffers(MXSurface* s)
     SDL_Flip(win);
 }
 
+int mxProcessEvents(void)
+{
+    SDL_Event event;
+    while (SDL_PollEvent(&event))
+    {
+        switch (event.type)
+        {
+            case SDL_KEYDOWN:
+                if (event.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    return 0;
+                }
+                break;
+        }
+    }
+    return 1;
+}

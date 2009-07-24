@@ -21,12 +21,18 @@ typedef struct MXSurface_t
     uint8_t* pixels;
 } MXSurface;
 
-/* Initialization */
+/* Surface management */
 MXSurface* mxCreateWindow(int w, int h);
 void mxDestroyWindow(MXSurface* s);
 void mxSwapBuffers(MXSurface* s);
+MXSurface* mxCreateSurface(int w, int h, MXPixelFormat format);
+void mxDestroySurface(MXSurface* s);
 
 /* Rendering */
-void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask, int x, int y, const MXRect* srcRect, int flags);
+void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
+            int x, int y, const MXRect* srcRect, int flags);
+
+/* Miscellaneous */
+int mxProcessEvents(void);
 
 #endif /* MONOXIDE_H */

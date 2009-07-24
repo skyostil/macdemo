@@ -39,13 +39,21 @@ void fillCircle(MXSurface* s, int cx, int cy, int r)
 
 int main(int argc, char** argv)
 {
-    MXSurface* surf = mxCreateWindow(512, 384);
+    MXSurface* winSurf = mxCreateWindow(512, 384);
+    MXSurface* surf = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1);
+    int t = 0;
 
-    fillCircle(surf, 256, 192, 128);
-    mxSwapBuffers(surf);
+    fillCircle(surf, 128, 128, 128);
 
-    SDL_Delay(3000);
+    while (mxProcessEvents())
+    {
+        mxBlit(winSurf, surf, NULL, t & 0x7f, t & 0x7f, NULL, 0);
+        mxSwapBuffers(winSurf);
+        t++;
+        SDL_Delay(100);
+    }
 
-    mxDestroyWindow(surf);
+    mxDestroyWindow(winSurf);
+    mxDestroySurface(surf);
     return 0;
 }
