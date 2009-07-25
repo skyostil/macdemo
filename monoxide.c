@@ -30,9 +30,39 @@ void mxDestroySurface(MXSurface* s)
     }
 }
 
+inline int min(int a, int b)
+{
+    return (a < b) ? a : b;
+}
+
+inline int max(int a, int b)
+{
+    return (a > b) ? a : b;
+}
+
 static int clipRect(const MXRect* srcRect, const MXRect* destRect, MXRect* result)
 {
-    
+    int x2 = srcRect->x + srcRect->w;
+    int y2 = srcRect->y + srcRect->h;
+    result->x = max(srcRect->x, destRect->x);
+    result->y = max(srcRect->y, destRect->y);
+    x2        = min(x2, destRect->x + destRect->w);
+    y2        = min(y2, destRect->y + destRect->h);
+
+    if (result->x >= destRect->x || result->y >= destRect->y)
+    {
+        return 0;
+    }
+
+    result->w = x2 - result->x;
+    result->h = y2 - result->y;
+
+    if (result->w <= 0 || result->h <= 0)
+    {
+        return 0;
+    }
+
+    return 1; 
 }
 
 static void blit_I1_I1(uint8_t* dest, const uint8_t* src, int w, int h, int srcStride, int destStride)
