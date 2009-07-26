@@ -1,11 +1,11 @@
-project(Monoxide)
+project(MacDemo)
 cmake_minimum_required(VERSION 2.6)
 
 set(SOURCES
-    main.c
-    monoxide.c
-    monoxide_blit.c
-    monoxide_sdl.c
+    monoxide/test_main.c
+    monoxide/monoxide.c
+    monoxide/monoxide_blit.c
+    monoxide/monoxide_sdl.c
 )
 
 find_package(SDL REQUIRED)
@@ -22,7 +22,7 @@ link_libraries(
 )
 
 add_executable(
-    monoxide
+    macdemo
     WIN32
     MACOSX_BUNDLE
     ${SOURCES}
@@ -30,7 +30,7 @@ add_executable(
 
 # ctags
 if (NOT APPLE AND NOT WIN32)
-    add_custom_command (TARGET monoxide POST_BUILD
+    add_custom_command (TARGET macdemo POST_BUILD
                         COMMAND ctags --c++-kinds=+p --fields=+iaS --extra=+q 
                                 -R .
                         COMMENT "Creating tags" VERBATIM)

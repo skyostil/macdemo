@@ -169,7 +169,6 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
     MX_ASSERT(dest->pixelFormat == MX_PIXELFORMAT_I1);
     MX_ASSERT(!mask || mask->pixelFormat == MX_PIXELFORMAT_I1);
     MX_ASSERT(src);
-    MX_ASSERT(!(src->flags & MX_SURFACE_FLAG_DIRTY));
     MX_UNUSED(flags);
     {
         MXRect fullSrcRect, fullDestRect, destRect, clippedDestRect;
@@ -205,6 +204,7 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
                 if (src->flags & MX_SURFACE_FLAG_PRESHIFT)
                 {
                     int plane = (clippedDestRect.x - (clippedDestRect.x - x)) & 0x7;
+                    MX_ASSERT(!(src->flags & MX_SURFACE_FLAG_DIRTY));
                     srcPixels += src->planeSize * plane;
                     if (mask)
                     {
