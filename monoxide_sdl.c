@@ -43,8 +43,8 @@ void mxSwapBuffers(MXSurface* s)
 {
     int x, y;
     const uint32_t palette[] = {
-        0x00000000,
         0xffffffff,
+        0x00000000,
     };
     uint32_t* dest = (uint32_t*)win->pixels;
     const uint8_t* src = (uint8_t*)s->pixels;

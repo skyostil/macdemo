@@ -66,7 +66,7 @@ void fillCircle(MXSurface* s, int cx, int cy, int r)
 
 void blitTest()
 {
-    MXSurface* winSurf = mxCreateWindow(512, 384);
+    MXSurface* winSurf = mxCreateWindow(512, 342);
     MXSurface* surf    = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
     MXSurface* surf2   = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
     MXRect rect;
@@ -82,8 +82,8 @@ void blitTest()
 
     while (mxProcessEvents())
     {
-        //mxFill(winSurf, NULL, 0);
-        fillCheckers(winSurf, 0, 0);
+        //fillCheckers(winSurf, 0, 0);
+        mxFill(winSurf, NULL, 1);
         mxBlit(winSurf, surf, NULL, 32, 32, NULL, 0);
         mxBlit(winSurf, surf, surf2, x, y, NULL, 0);
         //mxBlit(winSurf, surf, NULL, 256 - (t & 0x3ff), (t & 0x3ff) - 128, NULL, 0);
@@ -91,13 +91,13 @@ void blitTest()
         
         rect.x = x + 64;
         rect.y = y + 64;
-        rect.w = 127;
+        rect.w = 121;
         rect.h = 121;
         mxFill(winSurf, &rect, 1);
 
         mxSwapBuffers(winSurf);
         t++;
-        //SDL_Delay(1000);
+        SDL_Delay(100);
 
         x += dx;
         y += dy;

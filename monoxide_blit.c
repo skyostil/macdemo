@@ -8,12 +8,13 @@ void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
                    int srcStride, int destStride)
 {
     int x;
-    int w = ((destRect->w + (destRect->x & 0x7)) >> 3) - 1;
+    int w = ((destRect->w + (destRect->x & 0x7)) >> 3);
 
     /* Right lobe, sub-byte pixels */
+    if ((destRect->x + destRect->w) & 0x7)
     {
         int h = destRect->h;
-        uint8_t pixelMask = ~((0x80 >> ((destRect->x + destRect->w) & 0x7)) - 1);
+        uint8_t pixelMask = ~((0x100 >> ((destRect->x + destRect->w) & 0x7)) - 1);
         uint8_t* d = dest + w;
         const uint8_t* s = src + w;
 
@@ -29,7 +30,7 @@ void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
     if (destRect->x & 0x7)
     {
         int h = destRect->h;
-        uint8_t pixelMask = ((0x80 >> (destRect->x & 0x7)) - 1);
+        uint8_t pixelMask = ((0x100 >> (destRect->x & 0x7)) - 1);
         uint8_t* d = dest;
         const uint8_t* s = src;
 
@@ -93,12 +94,13 @@ void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mas
                            int srcStride, int destStride, int maskStride)
 {
     int x;
-    int w = ((destRect->w + (destRect->x & 0x7)) >> 3) - 1;
+    int w = ((destRect->w + (destRect->x & 0x7)) >> 3);
 
     /* Right lobe, sub-byte pixels */
+    if ((destRect->x + destRect->w) & 0x7)
     {
         int h = destRect->h;
-        uint8_t pixelMask = ~((0x80 >> ((destRect->x + destRect->w) & 0x7)) - 1);
+        uint8_t pixelMask = ~((0x100 >> ((destRect->x + destRect->w) & 0x7)) - 1);
         uint8_t* d = dest + w;
         const uint8_t* s = src + w;
         const uint8_t* m = mask + w;
@@ -116,7 +118,7 @@ void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mas
     if (destRect->x & 0x7)
     {
         int h = destRect->h;
-        uint8_t pixelMask = ~((0x80 >> (destRect->x & 0x7)) - 1);
+        uint8_t pixelMask = ~((0x100 >> (destRect->x & 0x7)) - 1);
         uint8_t* d = dest;
         const uint8_t* s = src;
         const uint8_t* m = mask;
@@ -188,15 +190,15 @@ void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mas
 void fill_I1(uint8_t* dest, const MXRect* destRect, int destStride, int color)
 {
     int x;
-    int w = ((destRect->w + (destRect->x & 0x7)) >> 3) - 1;
+    int w = ((destRect->w + (destRect->x & 0x7)) >> 3);
     color = color ? 0xff : 0x00;
 
     /* Right lobe, sub-byte pixels */
+    if ((destRect->x + destRect->w) & 0x7)
     {
         int h = destRect->h;
-        uint8_t pixelMask = ~((0x80 >> ((destRect->x + destRect->w) & 0x7)) - 1);
-        int offset = ((destRect->w + (destRect->x & 0x7)) >> 3) - 1;
-        uint8_t* d = dest + offset;
+        uint8_t pixelMask = ~((0x100 >> ((destRect->x + destRect->w) & 0x7)) - 1);
+        uint8_t* d = dest + w;
 
         while (h--)
         {
@@ -209,7 +211,7 @@ void fill_I1(uint8_t* dest, const MXRect* destRect, int destStride, int color)
     if (destRect->x & 0x7)
     {
         int h = destRect->h;
-        uint8_t pixelMask = ~((0x80 >> (destRect->x & 0x7)) - 1);
+        uint8_t pixelMask = ~((0x100 >> (destRect->x & 0x7)) - 1);
         uint8_t* d = dest;
 
         while (h--)
