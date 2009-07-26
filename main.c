@@ -47,10 +47,10 @@ int main(int argc, char** argv)
 
     while (mxProcessEvents())
     {
-        mxBlit(winSurf, surf, NULL, t & 0x7f, t & 0x7f, NULL, 0);
+        mxBlit(winSurf, surf, NULL, (t & 0x3ff) - 271, (t & 0x3ff) - 270, NULL, 0);
         mxSwapBuffers(winSurf);
         t++;
-        SDL_Delay(100);
+        SDL_Delay(1);
     }
 
     mxDestroyWindow(winSurf);

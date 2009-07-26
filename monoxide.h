@@ -16,7 +16,9 @@ typedef struct MXRect_t
 
 typedef struct MXSurface_t
 {
-    int w, h, stride;
+    int w, h;
+    int stride;
+    int log2stride;
     MXPixelFormat pixelFormat;
     uint8_t* pixels;
 } MXSurface;

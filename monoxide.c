@@ -5,6 +5,31 @@
 #define MX_SCANLINE_ALIGNMENT   0x10
 #define MX_ASSERT(X)            assert(X)
 
+inline int min(int a, int b)
+{
+    return (a < b) ? a : b;
+}
+
+inline int max(int a, int b)
+{
+    return (a > b) ? a : b;
+}
+
+int isPowerOfTwo(int n)
+{
+    return (n & (n - 1)) == 0;
+}
+
+int smallerPowerOfTwo(int n)
+{
+    int x = 0;
+    while ((1 << x) < n)
+    {
+        x++;
+    }
+    return x;
+}
+
 MXSurface* mxCreateSurface(int w, int h, MXPixelFormat format)
 {
     MXSurface* s = (MXSurface*)malloc(sizeof(MXSurface));
@@ -16,8 +41,13 @@ MXSurface* mxCreateSurface(int w, int h, MXPixelFormat format)
     s->w = w;
     s->h = h;
     s->stride = (format == MX_PIXELFORMAT_I1) ? (s->w / 8) : s->w;
-    s->stride += MX_SCANLINE_ALIGNMENT - (s->stride & (MX_SCANLINE_ALIGNMENT - 1));
+    s->stride += (MX_SCANLINE_ALIGNMENT - (s->stride & (MX_SCANLINE_ALIGNMENT - 1))) & (MX_SCANLINE_ALIGNMENT - 1);
+    s->log2stride = smallerPowerOfTwo(s->stride);
     s->pixels = malloc(s->h * s->stride);
+
+    MX_ASSERT(isPowerOfTwo(s->stride & (MX_SCANLINE_ALIGNMENT - 1) == 0));
+    MX_ASSERT(isPowerOfTwo(s->stride));
+
     return s;
 }
 
@@ -30,16 +60,6 @@ void mxDestroySurface(MXSurface* s)
     }
 }
 
-inline int min(int a, int b)
-{
-    return (a < b) ? a : b;
-}
-
-inline int max(int a, int b)
-{
-    return (a > b) ? a : b;
-}
-
 static int clipRect(const MXRect* srcRect, const MXRect* destRect, MXRect* result)
 {
     int x2 = srcRect->x + srcRect->w;
@@ -49,7 +69,7 @@ static int clipRect(const MXRect* srcRect, const MXRect* destRect, MXRect* resul
     x2        = min(x2, destRect->x + destRect->w);
     y2        = min(y2, destRect->y + destRect->h);
 
-    if (result->x >= destRect->x || result->y >= destRect->y)
+    if (result->x >= destRect->x + destRect->w || result->y >= destRect->y + destRect->h)
     {
         return 0;
     }
@@ -91,14 +111,26 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
     MX_ASSERT(dest->pixelFormat == MX_PIXELFORMAT_I1);
     MX_ASSERT(src);
     {
-        MXRect fullRect;
+        MXRect fullSrcRect, fullDestRect, destRect, clippedDestRect;
 
         if (!srcRect)
         {
-            fullRect.x = fullRect.y = 0;
-            fullRect.w = src->w;
-            fullRect.h = src->h;
-            srcRect = &fullRect;
+            fullSrcRect.x = fullSrcRect.y = 0;
+            fullSrcRect.w = src->w;
+            fullSrcRect.h = src->h;
+            srcRect = &fullSrcRect;
+        }
+        fullDestRect.x = fullDestRect.y = 0;
+        fullDestRect.w = dest->w;
+        fullDestRect.h = dest->h;
+        destRect.x = x;
+        destRect.y = y;
+        destRect.w = srcRect->w;
+        destRect.h = srcRect->h;
+
+        if (!clipRect(&destRect, &fullDestRect, &clippedDestRect))
+        {
+            return;
         }
 
         switch (src->pixelFormat)
@@ -108,10 +140,10 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
             uint8_t* destPixels = dest->pixels;
             uint8_t* srcPixels  = src->pixels;
 
-            destPixels += (y * dest->stride + x / 8);
-            srcPixels  += (srcRect->y * src->stride + srcRect->x / 8);
+            destPixels += ((clippedDestRect.y       << dest->log2stride) +  clippedDestRect.x      / 8);
+            srcPixels  += (((clippedDestRect.y - y) <<  src->log2stride) + (clippedDestRect.x - x) / 8);
 
-            blit_I1_I1(destPixels, srcPixels, srcRect->w, srcRect->h, src->stride, dest->stride);
+            blit_I1_I1(destPixels, srcPixels, clippedDestRect.w, clippedDestRect.h, src->stride, dest->stride);
             }
             break;
         default:
