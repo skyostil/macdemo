@@ -3,6 +3,7 @@
  *  Copyright (C) 2009 Sami Kyöstilä <sami.kyostila@unrealvoodoo.org>
  */
 #include "monoxide.h"
+#include "monoxide_sdl.h"
 #include <malloc.h>
 #include <assert.h>
 #include <SDL.h>
@@ -31,11 +32,11 @@ void fillCheckers(MXSurface* s, int cw, int ch)
             int d = ((x >> cw) + (y >> ch)) & 0x1;
             if (d)
             {
-                s->pixels[y * s->stride + x / 8] |= 1 << (x & 0x7);
+                s->pixels[y * s->stride + x / 8] |= 0x80 >> (x & 0x7);
             }
             else
             {
-                s->pixels[y * s->stride + x / 8] &= ~(1 << (x & 0x7));
+                s->pixels[y * s->stride + x / 8] &= ~(0x80 >> (x & 0x7));
             }
         }
     }
@@ -53,11 +54,11 @@ void fillCircle(MXSurface* s, int cx, int cy, int r)
             int d2 = (x - cx) * (x - cx) + (y - cy) * (y - cy);
             if (d2 <= r2)
             {
-                s->pixels[y * s->stride + x / 8] |= 1 << (x & 0x7);
+                s->pixels[y * s->stride + x / 8] |= 0x80 >> (x & 0x7);
             }
             else
             {
-                s->pixels[y * s->stride + x / 8] &= ~(1 << (x & 0x7));
+                s->pixels[y * s->stride + x / 8] &= ~(0x80 >> (x & 0x7));
             }
         }
     }
@@ -68,8 +69,9 @@ void blitTest()
     MXSurface* winSurf = mxCreateWindow(512, 384);
     MXSurface* surf    = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
     MXSurface* surf2   = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
+    MXRect rect;
     int t = 0;
-    int x = 23, y = 17;
+    int x = 93, y = 17;
     int dx = 1, dy = 1;
 
     fillCheckers(surf, 4, 4);
@@ -80,15 +82,22 @@ void blitTest()
 
     while (mxProcessEvents())
     {
-        mxFill(winSurf, NULL, 0);
-        //fillCheckers(winSurf, 0, 0);
+        //mxFill(winSurf, NULL, 0);
+        fillCheckers(winSurf, 0, 0);
         mxBlit(winSurf, surf, NULL, 32, 32, NULL, 0);
         mxBlit(winSurf, surf, surf2, x, y, NULL, 0);
         //mxBlit(winSurf, surf, NULL, 256 - (t & 0x3ff), (t & 0x3ff) - 128, NULL, 0);
         //mxBlit(winSurf, surf, NULL, -128 + (t & 0xf), -128 + (t & 0xf), NULL, 0);
+        
+        rect.x = x + 64;
+        rect.y = y + 64;
+        rect.w = 127;
+        rect.h = 121;
+        mxFill(winSurf, &rect, 1);
+
         mxSwapBuffers(winSurf);
         t++;
-        SDL_Delay(10);
+        //SDL_Delay(1000);
 
         x += dx;
         y += dy;

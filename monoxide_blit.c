@@ -1,18 +1,19 @@
 /**
  *  monoxide 1-bit blitting library
- *  Copyright (C) 2009 Sami Kyöstilä <sami.kyostila@unrealvoodoo.org>
+ *  Copyright (C) 2009 Sami Kyostila <sami.kyostila@unrealvoodoo.org>
  */
+#include "monoxide.h"
 
-static void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect, int srcStride, int destStride)
+void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
+                   int srcStride, int destStride)
 {
     int x;
-    int w = (destRect->w + 7) >> 3;
+    int w = ((destRect->w + (destRect->x & 0x7)) >> 3) - 1;
 
     /* Right lobe, sub-byte pixels */
-    if ((destRect->x + destRect->w) & 0x7)
     {
         int h = destRect->h;
-        uint8_t pixelMask = (1 << ((destRect->x + destRect->w) & 0x7)) - 1;
+        uint8_t pixelMask = ~((0x80 >> ((destRect->x + destRect->w) & 0x7)) - 1);
         uint8_t* d = dest + w;
         const uint8_t* s = src + w;
 
@@ -28,13 +29,13 @@ static void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destR
     if (destRect->x & 0x7)
     {
         int h = destRect->h;
-        uint8_t pixelMask = (1 << (destRect->x & 0x7)) - 1;
+        uint8_t pixelMask = ((0x80 >> (destRect->x & 0x7)) - 1);
         uint8_t* d = dest;
         const uint8_t* s = src;
 
         while (h--)
         {
-            *d = *s ^ ((*d ^ *s) & pixelMask);
+            *d = *d ^ ((*d ^ *s) & pixelMask);
             d += destStride;
             s += srcStride;
         }
@@ -88,17 +89,16 @@ static void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destR
     }
 }
 
-static void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mask, const MXRect* destRect,
-                                  int srcStride, int destStride, int maskStride)
+void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mask, const MXRect* destRect,
+                           int srcStride, int destStride, int maskStride)
 {
     int x;
-    int w = (destRect->w + 7) >> 3;
+    int w = ((destRect->w + (destRect->x & 0x7)) >> 3) - 1;
 
     /* Right lobe, sub-byte pixels */
-    if ((destRect->x + destRect->w) & 0x7)
     {
         int h = destRect->h;
-        uint8_t pixelMask = (1 << ((destRect->x + destRect->w) & 0x7)) - 1;
+        uint8_t pixelMask = ~((0x80 >> ((destRect->x + destRect->w) & 0x7)) - 1);
         uint8_t* d = dest + w;
         const uint8_t* s = src + w;
         const uint8_t* m = mask + w;
@@ -116,7 +116,7 @@ static void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8
     if (destRect->x & 0x7)
     {
         int h = destRect->h;
-        uint8_t pixelMask = (1 << (destRect->x & 0x7)) - 1;
+        uint8_t pixelMask = ~((0x80 >> (destRect->x & 0x7)) - 1);
         uint8_t* d = dest;
         const uint8_t* s = src;
         const uint8_t* m = mask;
@@ -185,4 +185,78 @@ static void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8
     }
 }
 
+void fill_I1(uint8_t* dest, const MXRect* destRect, int destStride, int color)
+{
+    int x;
+    int w = ((destRect->w + (destRect->x & 0x7)) >> 3) - 1;
+    color = color ? 0xff : 0x00;
 
+    /* Right lobe, sub-byte pixels */
+    {
+        int h = destRect->h;
+        uint8_t pixelMask = ~((0x80 >> ((destRect->x + destRect->w) & 0x7)) - 1);
+        int offset = ((destRect->w + (destRect->x & 0x7)) >> 3) - 1;
+        uint8_t* d = dest + offset;
+
+        while (h--)
+        {
+            *d = *d ^ ((*d ^ color) & pixelMask);
+            d += destStride;
+        }
+    }
+
+    /* Left lobe, sub-byte pixels */
+    if (destRect->x & 0x7)
+    {
+        int h = destRect->h;
+        uint8_t pixelMask = ~((0x80 >> (destRect->x & 0x7)) - 1);
+        uint8_t* d = dest;
+
+        while (h--)
+        {
+            *d = color ^ ((*d ^ color) & pixelMask);
+            d += destStride;
+        }
+
+        dest++;
+        w--;
+    }
+
+    /* Center lobe, 32-bit pixels */
+    if (w >= 0x4)
+    {
+        int h = destRect->h;
+        uint8_t* d = dest;
+        int color32 = color ? 0xffffffff : 0x00000000;
+        while (h--)
+        {
+            uint32_t* d32 = (uint32_t*)d;
+
+            for (x = 0; x <= w - 4; x += 4)
+            {
+                *d32++ = color32;
+            }
+
+            d += destStride;
+        }
+        dest += x;
+        w    &= 0x3;
+    }
+
+    /* Center lobe, 8-bit pixels */
+    if (w)
+    {
+        int h = destRect->h;
+        while (h--)
+        {
+            uint8_t* d = dest;
+
+            for (x = 0; x < w; x++)
+            {
+                *d++ = color;
+            }
+
+            dest += destStride;
+        }
+    }
+}

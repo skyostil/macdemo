@@ -2,7 +2,7 @@
  *  monoxide 1-bit blitting library
  *  Copyright (C) 2009 Sami Kyöstilä <sami.kyostila@unrealvoodoo.org>
  */
-#include "monoxide.h"
+#include "monoxide_sdl.h"
 #include <SDL.h>
 #include <assert.h>
 
@@ -58,7 +58,7 @@ void mxSwapBuffers(MXSurface* s)
     {
         for (x = 0; x < s->w; x++)
         {
-            int color = (src[x / 8] & (1 << (x & 0x7))) ? 1 : 0;
+            int color = (src[x / 8] & (1 << (7 - x & 0x7))) ? 1 : 0;
             dest[x] = palette[color];
         }
         dest += win->pitch / 4;

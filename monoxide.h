@@ -1,17 +1,22 @@
 /**
  *  monoxide 1-bit blitting library
- *  Copyright (C) 2009 Sami Kyöstilä <sami.kyostila@unrealvoodoo.org>
+ *  Copyright (C) 2009 Sami Kyostila <sami.kyostila@unrealvoodoo.org>
  */
 #ifndef MONOXIDE_H
 #define MONOXIDE_H
 
-#include <stdint.h>
+#if defined(HAVE_STDINT_H)
+#   include <stdint.h>
+#else
+typedef unsigned char uint8_t;
+typedef unsigned int  uint32_t;
+#endif
 
 typedef enum MXPixelFormat_t
 {
     MX_PIXELFORMAT_I1   = 1,
     MX_PIXELFORMAT_I8   = 8,
-    MX_PIXELFORMAT_LAST = (1 << 31),
+    MX_PIXELFORMAT_LAST = (1 << 31)
 } MXPixelFormat;
 
 typedef struct MXRect_t
@@ -21,9 +26,10 @@ typedef struct MXRect_t
 
 typedef enum MXSurfaceFlag_t
 {
-    MX_SURFACE_FLAG_PRESHIFT = 0x1,
-    MX_SURFACE_FLAG_DIRTY    = 0x2,
-    MX_SURFACE_FLAG_LAST     = (1 << 31),
+    MX_SURFACE_FLAG_PRESHIFT    = 0x1,
+    MX_SURFACE_FLAG_DIRTY       = 0x2,
+    MX_SURFACE_FLAG_USER_MEMORY = 0x4,
+    MX_SURFACE_FLAG_LAST        = (1 << 31)
 } MXSurfaceFlag;
 
 typedef struct MXSurface_t
@@ -39,19 +45,14 @@ typedef struct MXSurface_t
 } MXSurface;
 
 /* Surface management */
-MXSurface* mxCreateWindow(int w, int h);
-void mxDestroyWindow(MXSurface* s);
-void mxSwapBuffers(MXSurface* s);
 MXSurface* mxCreateSurface(int w, int h, MXPixelFormat format, int flags);
+MXSurface* mxCreateUserMemorySurface(int w, int h, MXPixelFormat format, int stride, int flags, void* data);
 void mxDestroySurface(MXSurface* s);
 void mxFlushSurface(MXSurface* s);
 
 /* Rendering */
 void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
             int x, int y, const MXRect* srcRect, int flags);
-void mxFill(MXSurface* dest, const MXRect* rect, int value);
-
-/* Miscellaneous */
-int mxProcessEvents(void);
+void mxFill(MXSurface* dest, const MXRect* rect, int color);
 
 #endif /* MONOXIDE_H */

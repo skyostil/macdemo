@@ -1,17 +1,21 @@
 /**
  *  monoxide 1-bit blitting library
- *  Copyright (C) 2009 Sami Kyöstilä <sami.kyostila@unrealvoodoo.org>
+ *  Copyright (C) 2009 Sami Kyostila <sami.kyostila@unrealvoodoo.org>
  */
 #include "monoxide.h"
-#include <malloc.h>
-#include <memory.h>
+#include <stdlib.h>
+#include <string.h>
 #include <assert.h>
 
 #define MX_SCANLINE_ALIGNMENT   0x10
 #define MX_ASSERT(X)            assert(X)
 #define MX_UNUSED(X)            (void)(X)
 
-#include "monoxide_blit.inl"
+void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mask, const MXRect* destRect,
+                           int srcStride, int destStride, int maskStride);
+void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
+                   int srcStride, int destStride);
+void fill_I1(uint8_t* dest, const MXRect* destRect, int destStride, int color);
 
 inline int min(int a, int b)
 {
@@ -64,7 +68,48 @@ MXSurface* mxCreateSurface(int w, int h, MXPixelFormat format, int flags)
             s->planes = 8;
         }
 
-        s->pixels = malloc(s->planes * s->planeSize + 4);
+        s->pixels = (uint8_t*)malloc(s->planes * s->planeSize + 4);
+
+        if (!s->pixels)
+        {
+            free(s);
+            return NULL;
+        }
+
+        MX_ASSERT(isPowerOfTwo(s->stride));
+        MX_ASSERT((s->stride & (MX_SCANLINE_ALIGNMENT - 1)) == 0);
+
+        return s;
+    }
+}
+
+MXSurface* mxCreateUserMemorySurface(int w, int h, MXPixelFormat format, int stride, int flags, void* data)
+{
+    MX_ASSERT(w >= 8);
+    MX_ASSERT(h >= 8);
+    {
+        MXSurface* s = (MXSurface*)malloc(sizeof(MXSurface));
+        if (!s)
+        {
+            return s;
+        }
+        s->pixelFormat = format;
+        s->flags = flags;
+        s->w = w;
+        s->h = h;
+        s->stride = stride;
+        s->log2Stride = log2i(s->stride);
+        s->planeSize = s->h << s->log2Stride;
+        s->planes = 1;
+
+        if (flags & MX_SURFACE_FLAG_PRESHIFT)
+        {
+            s->flags |= MX_SURFACE_FLAG_DIRTY;
+            s->planes = 8;
+        }
+
+        s->pixels = (uint8_t*)data;
+        s->flags |= MX_SURFACE_FLAG_USER_MEMORY;
 
         if (!s->pixels)
         {
@@ -83,7 +128,10 @@ void mxDestroySurface(MXSurface* s)
 {
     if (s)
     {
-        free(s->pixels);
+    	if (!(s->flags & MX_SURFACE_FLAG_USER_MEMORY))
+    	{
+        	free(s->pixels);
+        }
         free(s);
     }
 }
@@ -206,7 +254,7 @@ void mxFlushSurface(MXSurface* s)
         for (i = 1; i < 8; i++)
         {
             const uint8_t* srcPlane = s->pixels;
-            uint8_t mask = ((1 << i) - 1) << (8 - i);
+            uint8_t mask = ((1 << i) - 1);
             int invI = 8 - i;
 
             for (y = 0; y < s->h; y++)
@@ -214,10 +262,10 @@ void mxFlushSurface(MXSurface* s)
                 const uint8_t* src = srcPlane;
                 uint8_t*      dest = destPlane;
 
-                *dest++ = (*src++) << i;
+                *dest++ = (*src++) >> i;
                 for (x = 1; x < s->w / 8; x++)
                 {
-                    *dest++ = ((src[-1] & mask) >> invI) | (src[0] << i);
+                    *dest++ = ((src[-1] & mask) << invI) | (src[0] >> i);
                     src++;
                 }
 
@@ -229,12 +277,39 @@ void mxFlushSurface(MXSurface* s)
     }
 }
 
-void mxFill(MXSurface* s, const MXRect* rect, int value)
+void mxFill(MXSurface* s, const MXRect* rect, int color)
 {
-    MX_ASSERT(rect == NULL);
+    MX_ASSERT(s);
+    MX_ASSERT(s->pixelFormat == MX_PIXELFORMAT_I1);
     {
-        memset(s->pixels, value ? 0xff : 0x00, s->planeSize);
-        s->flags |= MX_SURFACE_FLAG_DIRTY;
+        MXRect fullRect, fullDestRect, clippedDestRect;
+
+        if (!rect)
+        {
+            fullRect.x = fullRect.y = 0;
+            fullRect.w = s->w;
+            fullRect.h = s->h;
+            rect = &fullRect;
+        }
+        MX_ASSERT(rect->w >= 8 && rect->h >= 8);
+
+        fullDestRect.x = fullDestRect.y = 0;
+        fullDestRect.w = s->w;
+        fullDestRect.h = s->h;
+
+        if (!clipRect(rect, &fullDestRect, &clippedDestRect))
+        {
+            return;
+        }
+
+        {
+            uint8_t* destPixels = s->pixels;
+            destPixels += (((clippedDestRect.y) << s->log2Stride) + ((clippedDestRect.x) >> 3));
+
+            fill_I1(destPixels, &clippedDestRect, s->stride, color);
+
+            s->flags |= MX_SURFACE_FLAG_DIRTY;
+        }
     }
 }
 
