@@ -313,3 +313,43 @@ void mxFill(MXSurface* s, const MXRect* rect, int color)
     }
 }
 
+#define GEN_SURFACE_FILLER(FUNC) \
+    { \
+        int x, y; \
+        uint8_t* pixels = s->pixels; \
+        for (y = 0; y < s->h; y++) \
+        { \
+            uint8_t* d = pixels; \
+            for (x = 0; x < s->w; ) \
+            { \
+                uint8_t pixel = 0; \
+                pixel |= (FUNC) ? (0x80 >> 0) : 0; x++; \
+                pixel |= (FUNC) ? (0x80 >> 1) : 0; x++; \
+                pixel |= (FUNC) ? (0x80 >> 2) : 0; x++; \
+                pixel |= (FUNC) ? (0x80 >> 3) : 0; x++; \
+                pixel |= (FUNC) ? (0x80 >> 4) : 0; x++; \
+                pixel |= (FUNC) ? (0x80 >> 5) : 0; x++; \
+                pixel |= (FUNC) ? (0x80 >> 6) : 0; x++; \
+                pixel |= (FUNC) ? (0x80 >> 7) : 0; x++; \
+                *d++ = pixel; \
+            } \
+            pixels += s->stride; \
+        } \
+        s->flags |= MX_SURFACE_FLAG_DIRTY; \
+    }
+
+void mxFillCheckerPattern(MXSurface* s, int cw, int ch)
+{
+    GEN_SURFACE_FILLER(((x >> cw) + (y >> ch)) & 0x1);
+}
+
+void mxFillCirclePattern(MXSurface* s, int cx, int cy, int r)
+{
+    int r2 = r * r;
+    GEN_SURFACE_FILLER((x - cx) * (x - cx) + (y - cy) * (y - cy) <= r2);
+}
+
+void mxFillSierpinskiPattern(MXSurface* s)
+{
+    GEN_SURFACE_FILLER(x & y);
+}

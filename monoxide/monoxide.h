@@ -12,6 +12,10 @@ typedef unsigned char uint8_t;
 typedef unsigned int  uint32_t;
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef enum MXPixelFormat_t
 {
     MX_PIXELFORMAT_I1   = 1,
@@ -54,5 +58,12 @@ void mxFlushSurface(MXSurface* s);
 void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
             int x, int y, const MXRect* srcRect, int flags);
 void mxFill(MXSurface* dest, const MXRect* rect, int color);
+void mxFillCheckerPattern(MXSurface* dest, int cw, int ch);
+void mxFillCirclePattern(MXSurface* s, int cx, int cy, int r);
+void mxFillSierpinskiPattern(MXSurface* dest);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* MONOXIDE_H */

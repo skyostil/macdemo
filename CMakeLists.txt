@@ -6,15 +6,19 @@ set(SOURCES
     monoxide/monoxide.c
     monoxide/monoxide_blit.c
     monoxide/monoxide_sdl.c
+    demo.c
+    main.cpp
 )
 
 find_package(SDL REQUIRED)
 find_package(SDL_image REQUIRED)
 include_directories(${SDL_INCLUDE_DIR})
 include_directories(${SDLIMAGE_INCLUDE_DIR})
+include_directories(monoxide)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
 add_definitions(-DHAVE_STDINT_H)
+add_definitions(-DUSE_SDL)
 
 link_libraries(
     ${SDL_LIBRARY}
