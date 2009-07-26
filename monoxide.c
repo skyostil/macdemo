@@ -115,13 +115,13 @@ static void blit_I1_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect
 {
     int x;
     int w = destRect->w >> 3;
-    int h = destRect->h;
 
+    /* Right lobe, sub-byte pixels */
     if ((destRect->x + destRect->w) & 0x7)
     {
         int h = destRect->h;
-        int mask = (1 << ((destRect->x + destRect->w) & 0x7)) - 1;
-        int invMask = ~mask;
+        uint8_t mask = (1 << ((destRect->x + destRect->w) & 0x7)) - 1;
+        uint8_t invMask = ~mask;
         uint8_t* d = dest + w;
         const uint8_t* s = src + w;
 
@@ -133,11 +133,12 @@ static void blit_I1_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect
         }
     }
 
+    /* Left lobe, sub-byte pixels */
     if (destRect->x & 0x7)
     {
         int h = destRect->h;
-        int mask = (1 << (destRect->x & 0x7)) - 1;
-        int invMask = ~mask;
+        uint8_t mask = (1 << (destRect->x & 0x7)) - 1;
+        uint8_t invMask = ~mask;
         uint8_t* d = dest;
         const uint8_t* s = src;
 
@@ -153,18 +154,47 @@ static void blit_I1_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect
         w--;
     }
 
-    while (h--)
+    /* Center lobe, 32-bit pixels */
+    if (w >= 0x4)
     {
+        int h = destRect->h;
         uint8_t* d = dest;
         const uint8_t* s = src;
-
-        for (x = 0; x < w; x++)
+        while (h--)
         {
-            *d++ = *s++;
-        }
+            uint32_t* d32 = (uint32_t*)d;
+            const uint32_t* s32 = (uint32_t*)s;
 
-        dest += destStride;
-        src  += srcStride;
+            for (x = 0; x <= w - 4; x += 4)
+            {
+                *d32++ = *s32++;
+            }
+
+            d += destStride;
+            s += srcStride;
+        }
+        dest += x;
+        src  += x;
+        w    &= 0x3;
+    }
+
+    /* Center lobe, 8-bit pixels */
+    if (w)
+    {
+        int h = destRect->h;
+        while (h--)
+        {
+            uint8_t* d = dest;
+            const uint8_t* s = src;
+
+            for (x = 0; x < w; x++)
+            {
+                *d++ = *s++;
+            }
+
+            dest += destStride;
+            src  += srcStride;
+        }
     }
 }
 
@@ -246,7 +276,7 @@ void mxFlushSurface(MXSurface* s)
         for (i = 1; i < 8; i++)
         {
             const uint8_t* srcPlane = s->pixels;
-            int mask = ((1 << i) - 1) << (8 - i);
+            uint8_t mask = ((1 << i) - 1) << (8 - i);
             int invI = 8 - i;
 
             for (y = 0; y < s->h; y++)

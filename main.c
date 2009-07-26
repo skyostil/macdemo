@@ -20,6 +20,27 @@ void fillPattern(MXSurface* s)
     }
 }
 
+void fillCheckers(MXSurface* s, int cw, int ch)
+{
+    int x, y;
+
+    for (y = 0; y < s->h; y++)
+    {
+        for (x = 0; x < s->w; x++)
+        {
+            int d = ((x >> cw) + (y >> ch)) & 0x1;
+            if (d)
+            {
+                s->pixels[y * s->stride + x / 8] |= 1 << (x & 0x7);
+            }
+            else
+            {
+                s->pixels[y * s->stride + x / 8] &= ~(1 << (x & 0x7));
+            }
+        }
+    }
+}
+
 void fillCircle(MXSurface* s, int cx, int cy, int r)
 {
     int x, y;
@@ -55,6 +76,8 @@ int main(int argc, char** argv)
 
     while (mxProcessEvents())
     {
+        //mxFill(winSurf, NULL, 1);
+        fillCheckers(winSurf, 0, 0);
         mxBlit(winSurf, surf, NULL, 32, 32, NULL, 0);
         mxBlit(winSurf, surf, NULL, (t & 0x3ff) - 128, (t & 0x3ff) - 128, NULL, 0);
         //mxBlit(winSurf, surf, NULL, 256 - (t & 0x3ff), (t & 0x3ff) - 128, NULL, 0);
