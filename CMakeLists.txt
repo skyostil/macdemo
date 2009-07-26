@@ -12,6 +12,8 @@ find_package(SDL_image REQUIRED)
 include_directories(${SDL_INCLUDE_DIR})
 include_directories(${SDLIMAGE_INCLUDE_DIR})
 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
+
 link_libraries(
     ${SDL_LIBRARY}
     ${SDLIMAGE_LIBRARY}

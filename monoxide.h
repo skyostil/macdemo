@@ -49,6 +49,7 @@ void mxFlushSurface(MXSurface* s);
 /* Rendering */
 void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
             int x, int y, const MXRect* srcRect, int flags);
+void mxFill(MXSurface* dest, const MXRect* rect, int value);
 
 /* Miscellaneous */
 int mxProcessEvents(void);

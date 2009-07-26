@@ -18,6 +18,11 @@ MXSurface* mxCreateWindow(int w, int h)
     }
 
     s = mxCreateSurface(win->w, win->h, MX_PIXELFORMAT_I1, 0);
+    if (s)
+    {
+        mxFill(s, NULL, 0);
+    }
+
     return s;
 }
 
@@ -42,7 +47,7 @@ void mxSwapBuffers(MXSurface* s)
         0xffffffff,
     };
     uint32_t* dest = (uint32_t*)win->pixels;
-    uint8_t* src = (uint8_t*)s->pixels;
+    const uint8_t* src = (uint8_t*)s->pixels;
     
     assert(win);
     assert(s->pixelFormat == MX_PIXELFORMAT_I1);
@@ -53,7 +58,8 @@ void mxSwapBuffers(MXSurface* s)
     {
         for (x = 0; x < s->w; x++)
         {
-            dest[x] = palette[src[x / 8] & (1 << (x & 0x7)) ? 1 : 0];
+            int color = (src[x / 8] & (1 << (x & 0x7))) ? 1 : 0;
+            dest[x] = palette[color];
         }
         dest += win->pitch / 4;
         src += s->stride;

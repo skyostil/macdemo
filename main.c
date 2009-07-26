@@ -5,6 +5,7 @@
 #include "monoxide.h"
 #include <malloc.h>
 #include <assert.h>
+#include <SDL.h>
 
 void fillPattern(MXSurface* s)
 {
@@ -46,17 +47,20 @@ int main(int argc, char** argv)
     MXSurface* winSurf = mxCreateWindow(512, 384);
     MXSurface* surf = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
     int t = 0;
+    (void)argc;
+    (void)argv;
 
     fillCircle(surf, 128, 128, 100);
     mxFlushSurface(surf);
 
     while (mxProcessEvents())
     {
-        mxBlit(winSurf, surf, NULL, (t & 0x3ff) - 256, (t & 0x3ff) - 256, NULL, 0);
+        mxBlit(winSurf, surf, NULL, 32, 32, NULL, 0);
+        mxBlit(winSurf, surf, NULL, (t & 0x3ff) - 128, (t & 0x3ff) - 128, NULL, 0);
         //mxBlit(winSurf, surf, NULL, -128 + (t & 0xf), -128 + (t & 0xf), NULL, 0);
         mxSwapBuffers(winSurf);
         t++;
-        //SDL_Delay(100);
+        SDL_Delay(100);
     }
 
     mxDestroyWindow(winSurf);
