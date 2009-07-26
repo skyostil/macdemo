@@ -63,31 +63,72 @@ void fillCircle(MXSurface* s, int cx, int cy, int r)
     }
 }
 
-int main(int argc, char** argv)
+void blitTest()
 {
     MXSurface* winSurf = mxCreateWindow(512, 384);
-    MXSurface* surf = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
+    MXSurface* surf    = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
+    MXSurface* surf2   = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
     int t = 0;
-    (void)argc;
-    (void)argv;
+    int x = 23, y = 17;
+    int dx = 1, dy = 1;
 
-    fillCircle(surf, 128, 128, 100);
+    fillCheckers(surf, 4, 4);
     mxFlushSurface(surf);
+
+    fillCircle(surf2, 128, 128, 100);
+    mxFlushSurface(surf2);
 
     while (mxProcessEvents())
     {
-        //mxFill(winSurf, NULL, 1);
-        fillCheckers(winSurf, 0, 0);
+        mxFill(winSurf, NULL, 0);
+        //fillCheckers(winSurf, 0, 0);
         mxBlit(winSurf, surf, NULL, 32, 32, NULL, 0);
-        mxBlit(winSurf, surf, NULL, (t & 0x3ff) - 128, (t & 0x3ff) - 128, NULL, 0);
+        mxBlit(winSurf, surf, surf2, x, y, NULL, 0);
         //mxBlit(winSurf, surf, NULL, 256 - (t & 0x3ff), (t & 0x3ff) - 128, NULL, 0);
         //mxBlit(winSurf, surf, NULL, -128 + (t & 0xf), -128 + (t & 0xf), NULL, 0);
         mxSwapBuffers(winSurf);
         t++;
-        SDL_Delay(100);
+        SDL_Delay(10);
+
+        x += dx;
+        y += dy;
+
+        if (x < 0)
+        {
+            x = -x;
+            dx = -dx;
+        }
+
+        if (x + surf->w > winSurf->w)
+        {
+            x += 2 * (winSurf->w - (x + surf->w));
+            dx = -dx;
+        }
+
+        if (y < 0)
+        {
+            y = -y;
+            dy = -dy;
+        }
+
+        if (y + surf->h > winSurf->h)
+        {
+            y += 2 * (winSurf->h - (y + surf->h));
+            dy = -dy;
+        }
     }
 
-    mxDestroyWindow(winSurf);
     mxDestroySurface(surf);
+    mxDestroySurface(surf2);
+    mxDestroyWindow(winSurf);
+}
+
+int main(int argc, char** argv)
+{
+    (void)argc;
+    (void)argv;
+
+    blitTest();
+
     return 0;
 }

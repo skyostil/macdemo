@@ -11,6 +11,8 @@
 #define MX_ASSERT(X)            assert(X)
 #define MX_UNUSED(X)            (void)(X)
 
+#include "monoxide_blit.inl"
+
 inline int min(int a, int b)
 {
     return (a < b) ? a : b;
@@ -111,101 +113,15 @@ static int clipRect(const MXRect* srcRect, const MXRect* destRect, MXRect* resul
     return 1; 
 }
 
-static void blit_I1_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect, int srcStride, int destStride)
-{
-    int x;
-    int w = destRect->w >> 3;
-
-    /* Right lobe, sub-byte pixels */
-    if ((destRect->x + destRect->w) & 0x7)
-    {
-        int h = destRect->h;
-        uint8_t mask = (1 << ((destRect->x + destRect->w) & 0x7)) - 1;
-        uint8_t invMask = ~mask;
-        uint8_t* d = dest + w;
-        const uint8_t* s = src + w;
-
-        while (h--)
-        {
-            *d = (*d & invMask) | (*s & mask);
-            d += destStride;
-            s += srcStride;
-        }
-    }
-
-    /* Left lobe, sub-byte pixels */
-    if (destRect->x & 0x7)
-    {
-        int h = destRect->h;
-        uint8_t mask = (1 << (destRect->x & 0x7)) - 1;
-        uint8_t invMask = ~mask;
-        uint8_t* d = dest;
-        const uint8_t* s = src;
-
-        while (h--)
-        {
-            *d = (*d & mask) | (*s & invMask);
-            d += destStride;
-            s += srcStride;
-        }
-
-        src++;
-        dest++;
-        w--;
-    }
-
-    /* Center lobe, 32-bit pixels */
-    if (w >= 0x4)
-    {
-        int h = destRect->h;
-        uint8_t* d = dest;
-        const uint8_t* s = src;
-        while (h--)
-        {
-            uint32_t* d32 = (uint32_t*)d;
-            const uint32_t* s32 = (uint32_t*)s;
-
-            for (x = 0; x <= w - 4; x += 4)
-            {
-                *d32++ = *s32++;
-            }
-
-            d += destStride;
-            s += srcStride;
-        }
-        dest += x;
-        src  += x;
-        w    &= 0x3;
-    }
-
-    /* Center lobe, 8-bit pixels */
-    if (w)
-    {
-        int h = destRect->h;
-        while (h--)
-        {
-            uint8_t* d = dest;
-            const uint8_t* s = src;
-
-            for (x = 0; x < w; x++)
-            {
-                *d++ = *s++;
-            }
-
-            dest += destStride;
-            src  += srcStride;
-        }
-    }
-}
 
 void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
             int x, int y, const MXRect* srcRect, int flags)
 {
     MX_ASSERT(dest);
     MX_ASSERT(dest->pixelFormat == MX_PIXELFORMAT_I1);
+    MX_ASSERT(!mask || mask->pixelFormat == MX_PIXELFORMAT_I1);
     MX_ASSERT(src);
     MX_ASSERT(!(src->flags & MX_SURFACE_FLAG_DIRTY));
-    MX_UNUSED(mask);
     MX_UNUSED(flags);
     {
         MXRect fullSrcRect, fullDestRect, destRect, clippedDestRect;
@@ -234,21 +150,35 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
         {
         case MX_PIXELFORMAT_I1:
             {
-            uint8_t* destPixels = dest->pixels;
-            uint8_t* srcPixels  = src->pixels;
+                uint8_t* destPixels = dest->pixels;
+                uint8_t* srcPixels  = src->pixels;
+                uint8_t* maskPixels = mask ? mask->pixels : NULL;
 
-            if (src->flags & MX_SURFACE_FLAG_PRESHIFT)
-            {
-                int plane = (clippedDestRect.x - (clippedDestRect.x - x)) & 0x7;
-                srcPixels += src->planeSize * plane;
+                if (src->flags & MX_SURFACE_FLAG_PRESHIFT)
+                {
+                    int plane = (clippedDestRect.x - (clippedDestRect.x - x)) & 0x7;
+                    srcPixels += src->planeSize * plane;
+                    if (mask)
+                    {
+                        maskPixels += mask->planeSize * plane;
+                    }
+                }
+
+                destPixels += (((clippedDestRect.y)     << dest->log2Stride) + ((clippedDestRect.x)         >> 3));
+                srcPixels  += (((clippedDestRect.y - y) <<  src->log2Stride) + ((clippedDestRect.x - x + 7) >> 3));
+
+                if (mask)
+                {
+                    maskPixels += (((clippedDestRect.y - y) <<  mask->log2Stride) + ((clippedDestRect.x - x + 7) >> 3));
+                    blit_I1_to_I1_mask_I1(destPixels, srcPixels, maskPixels, &clippedDestRect,
+                                          src->stride, dest->stride, mask->stride);
+                }
+                else
+                {
+                    blit_I1_to_I1(destPixels, srcPixels, &clippedDestRect, src->stride, dest->stride);
+                }
+                break;
             }
-
-            destPixels += (((clippedDestRect.y)     << dest->log2Stride) + ((clippedDestRect.x)         >> 3));
-            srcPixels  += (((clippedDestRect.y - y) <<  src->log2Stride) + ((clippedDestRect.x - x + 7) >> 3));
-
-            blit_I1_I1(destPixels, srcPixels, &clippedDestRect, src->stride, dest->stride);
-            }
-            break;
         default:
             MX_ASSERT(0);
             break;
