@@ -9,10 +9,6 @@
 #include "engine/Audio.h"
 #include <stdio.h>
 
-#if defined(USE_SDL)
-#    include "monoxide_sdl.h"
-#endif
-
 void flipScreen();
 
 /*
@@ -27,31 +23,71 @@ void flipScreen();
 static MXSurface* screen = 0;
 static Audio*     audio = 0;
 static Video*     video = 0;
-#if !defined(USE_SDL)
 static MXSurface* physicalScreen = 0;
-#endif
+static int x = 93, y = 17;
+static int dx = 1, dy = 1;
+static MXSurface* checkers = 0;
+static MXSurface* ball = 0;
+
+void moveBall()
+{
+    x += dx;
+    y += dy;
+
+    if (x < 0)
+    {
+        x = -x;
+        dx = -dx;
+    }
+
+    if (x + ball->w > screen->w)
+    {
+        x += 2 * (screen->w - (x + ball->w));
+        dx = -dx;
+    }
+
+    if (y < 0)
+    {
+        y = -y;
+        dy = -dy;
+    }
+
+    if (y + ball->h > screen->h)
+    {
+        y += 2 * (screen->h - (y + ball->h));
+        dy = -dy;
+    }
+}
 
 void effect1(int time, int duration)
 {
     mxFill(screen, NULL, 0);
+    mxBlit(screen, checkers, ball, x, y, NULL, 0);
+    moveBall();
     flipScreen();
 }
 
 void effect2(int time, int duration)
 {
     mxFillCirclePattern(screen, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, SCREEN_HEIGHT / 2);
+    mxBlit(screen, checkers, ball, x, y, NULL, 0);
+    moveBall();
     flipScreen();
 }
 
 void effect3(int time, int duration)
 {
     mxFillSierpinskiPattern(screen);
+    mxBlit(screen, checkers, ball, x, y, NULL, 0);
+    moveBall();
     flipScreen();
 }
 
 void effect4(int time, int duration)
 {
     mxFillCheckerPattern(screen, 4, 4);
+    mxBlit(screen, checkers, ball, x, y, NULL, 0);
+    moveBall();
     flipScreen();
 }
 
@@ -66,39 +102,42 @@ const Effect timeline[] =
 
 void setup()
 {
-#if defined(USE_SDL)
-    screen = mxCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT);
-#else
     video = new Video(SCREEN_WIDTH, SCREEN_HEIGHT);
     physicalScreen = mxCreateUserMemorySurface(video->screenWidth(), video->screenHeight(), 
                                                MX_PIXELFORMAT_I1, video->screenStride(), 
-                                               0, video->getScreen());
+                                               0, video->screenPixels());
     screen = mxCreateSurface(video->screenWidth(), video->screenHeight(), MX_PIXELFORMAT_I1, 0);
-#endif
     //Audio(8, 11127, 0, 512);
     //Audio(8, 22050, 0, 512);
     audio = new Audio(8, 22050, 0, 512);
+
+    /* Demo data */
+    checkers = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
+    ball = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
+
+    mxFillCheckerPattern(checkers, 4, 4);
+    mxFlushSurface(checkers);
+
+    mxFillCirclePattern(ball, 128, 128, 100);
+    mxFlushSurface(ball);
 }
 
 void teardown()
 {
+    mxDestroySurface(ball);
+    mxDestroySurface(checkers);
+
     delete audio;
-#if defined(USE_SDL)
-    mxDestroyWindow(screen);
-#else
     mxDestroySurface(screen);
     mxDestroySurface(physicalScreen);
     delete video;
-#endif
 }
 
 void flipScreen()
 {
-#if defined(USE_SDL)
-    mxSwapBuffers(screen);
-#else
+    video->waitRefresh();
     mxBlit(physicalScreen, screen, NULL, 0, 0, NULL, 0);
-#endif
+    video->swapBuffers();
 }
 
 void demoTest()
@@ -112,12 +151,10 @@ void demoTest()
         {
             time = 0;
         }
-#if defined(USE_SDL)
-        if (!mxProcessEvents())
+        if (!video->processInput())
         {
             break;
         }
-#endif
     }
 }
 

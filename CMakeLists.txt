@@ -2,20 +2,19 @@ project(MacDemo)
 cmake_minimum_required(VERSION 2.6)
 
 set(SOURCES
-    monoxide/test_main.c
     monoxide/monoxide.c
     monoxide/monoxide_blit.c
-    monoxide/monoxide_sdl.c
     engine/Engine.cpp
     engine/Audio.cpp
     engine/Mixer.cpp
+    engine/SdlVideo.cpp
     engine/SdlAudio.cpp
     FixedPointMath.cpp
     FixedPointMatrix.cpp
     FixedPointVector.cpp
     ModPlayer.cpp
+    Main.cpp
     demo.c
-    main.cpp
 )
 
 find_package(SDL REQUIRED)

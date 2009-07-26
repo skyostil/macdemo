@@ -11,11 +11,13 @@ public:
     ~Video();
     
     void waitRefresh();
-    int frames();
+    int refreshCount();
     int screenWidth();
     int screenHeight();
     int screenStride();
     void* screenPixels();
+    void swapBuffers();
+    bool processInput();
 };
 
 #endif

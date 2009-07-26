@@ -98,7 +98,7 @@ void* Video::screenPixels()
     return qd.screenBits.baseAddr;
 }
     
-int Video::frames()
+int Video::refreshCount()
 {
     return vblData.ticks;
 }
