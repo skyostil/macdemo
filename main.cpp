@@ -4,6 +4,9 @@
  */
 #include "demo.h"
 #include "monoxide.h"
+#include "Config.h"
+#include "engine/Video.h"
+#include "engine/Audio.h"
 #include <stdio.h>
 
 #if defined(USE_SDL)
@@ -22,6 +25,8 @@ void flipScreen();
  * Global state
  */
 static MXSurface* screen = 0;
+static Audio*     audio = 0;
+static Video*     video = 0;
 #if !defined(USE_SDL)
 static MXSurface* physicalScreen = 0;
 #endif
@@ -64,16 +69,26 @@ void setup()
 #if defined(USE_SDL)
     screen = mxCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT);
 #else
-#error fixme
+    video = new Video(SCREEN_WIDTH, SCREEN_HEIGHT);
+    physicalScreen = mxCreateUserMemorySurface(video->screenWidth(), video->screenHeight(), 
+                                               MX_PIXELFORMAT_I1, video->screenStride(), 
+                                               0, video->getScreen());
+    screen = mxCreateSurface(video->screenWidth(), video->screenHeight(), MX_PIXELFORMAT_I1, 0);
 #endif
+    //Audio(8, 11127, 0, 512);
+    //Audio(8, 22050, 0, 512);
+    audio = new Audio(8, 22050, 0, 512);
 }
 
 void teardown()
 {
+    delete audio;
 #if defined(USE_SDL)
     mxDestroyWindow(screen);
 #else
-#error fixme
+    mxDestroySurface(screen);
+    mxDestroySurface(physicalScreen);
+    delete video;
 #endif
 }
 

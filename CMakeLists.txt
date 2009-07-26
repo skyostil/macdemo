@@ -6,6 +6,14 @@ set(SOURCES
     monoxide/monoxide.c
     monoxide/monoxide_blit.c
     monoxide/monoxide_sdl.c
+    engine/Engine.cpp
+    engine/Audio.cpp
+    engine/Mixer.cpp
+    engine/SdlAudio.cpp
+    FixedPointMath.cpp
+    FixedPointMatrix.cpp
+    FixedPointVector.cpp
+    ModPlayer.cpp
     demo.c
     main.cpp
 )
@@ -14,6 +22,7 @@ find_package(SDL REQUIRED)
 find_package(SDL_image REQUIRED)
 include_directories(${SDL_INCLUDE_DIR})
 include_directories(${SDLIMAGE_INCLUDE_DIR})
+include_directories(engine)
 include_directories(monoxide)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
