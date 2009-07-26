@@ -114,15 +114,51 @@ static int clipRect(const MXRect* srcRect, const MXRect* destRect, MXRect* resul
 static void blit_I1_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect, int srcStride, int destStride)
 {
     int x;
-    int w = destRect->w;
+    int w = destRect->w >> 3;
     int h = destRect->h;
+
+    if ((destRect->x + destRect->w) & 0x7)
+    {
+        int h = destRect->h;
+        int mask = (1 << ((destRect->x + destRect->w) & 0x7)) - 1;
+        int invMask = ~mask;
+        uint8_t* d = dest + w;
+        const uint8_t* s = src + w;
+
+        while (h--)
+        {
+            *d = (*d & invMask) | (*s & mask);
+            d += destStride;
+            s += srcStride;
+        }
+    }
+
+    if (destRect->x & 0x7)
+    {
+        int h = destRect->h;
+        int mask = (1 << (destRect->x & 0x7)) - 1;
+        int invMask = ~mask;
+        uint8_t* d = dest;
+        const uint8_t* s = src;
+
+        while (h--)
+        {
+            *d = (*d & mask) | (*s & invMask);
+            d += destStride;
+            s += srcStride;
+        }
+
+        src++;
+        dest++;
+        w--;
+    }
 
     while (h--)
     {
         uint8_t* d = dest;
         const uint8_t* s = src;
 
-        for (x = 0; x < w; x += 8)
+        for (x = 0; x < w; x++)
         {
             *d++ = *s++;
         }

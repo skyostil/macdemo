@@ -57,6 +57,7 @@ int main(int argc, char** argv)
     {
         mxBlit(winSurf, surf, NULL, 32, 32, NULL, 0);
         mxBlit(winSurf, surf, NULL, (t & 0x3ff) - 128, (t & 0x3ff) - 128, NULL, 0);
+        //mxBlit(winSurf, surf, NULL, 256 - (t & 0x3ff), (t & 0x3ff) - 128, NULL, 0);
         //mxBlit(winSurf, surf, NULL, -128 + (t & 0xf), -128 + (t & 0xf), NULL, 0);
         mxSwapBuffers(winSurf);
         t++;
