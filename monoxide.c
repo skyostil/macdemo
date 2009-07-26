@@ -1,3 +1,7 @@
+/**
+ *  monoxide 1-bit blitting library
+ *  Copyright (C) 2009 Sami Kyöstilä <sami.kyostila@unrealvoodoo.org>
+ */
 #include "monoxide.h"
 #include <malloc.h>
 #include <assert.h>
@@ -30,25 +34,45 @@ int smallerPowerOfTwo(int n)
     return x;
 }
 
-MXSurface* mxCreateSurface(int w, int h, MXPixelFormat format)
+MXSurface* mxCreateSurface(int w, int h, MXPixelFormat format, int flags)
 {
-    MXSurface* s = (MXSurface*)malloc(sizeof(MXSurface));
-    if (!s)
+    MX_ASSERT(w >= 8);
+    MX_ASSERT(h >= 8);
     {
+        MXSurface* s = (MXSurface*)malloc(sizeof(MXSurface));
+        if (!s)
+        {
+            return s;
+        }
+        s->pixelFormat = format;
+        s->flags = flags;
+        s->w = w;
+        s->h = h;
+        s->stride = (format == MX_PIXELFORMAT_I1) ? (s->w / 8) : s->w;
+        s->stride += (MX_SCANLINE_ALIGNMENT - (s->stride & (MX_SCANLINE_ALIGNMENT - 1))) & (MX_SCANLINE_ALIGNMENT - 1);
+        s->log2Stride = smallerPowerOfTwo(s->stride);
+        s->planeSize = s->h << s->log2Stride;
+        s->planes = 1;
+
+        if (flags & MX_SURFACE_FLAG_PRESHIFT)
+        {
+            s->flags |= MX_SURFACE_FLAG_DIRTY;
+            s->planes = 8;
+        }
+
+        s->pixels = malloc(s->planes * s->planeSize);
+
+        if (!s->pixels)
+        {
+            free(s);
+            return NULL;
+        }
+
+        MX_ASSERT(isPowerOfTwo(s->stride & (MX_SCANLINE_ALIGNMENT - 1) == 0));
+        MX_ASSERT(isPowerOfTwo(s->stride));
+
         return s;
     }
-    s->pixelFormat = format;
-    s->w = w;
-    s->h = h;
-    s->stride = (format == MX_PIXELFORMAT_I1) ? (s->w / 8) : s->w;
-    s->stride += (MX_SCANLINE_ALIGNMENT - (s->stride & (MX_SCANLINE_ALIGNMENT - 1))) & (MX_SCANLINE_ALIGNMENT - 1);
-    s->log2stride = smallerPowerOfTwo(s->stride);
-    s->pixels = malloc(s->h * s->stride);
-
-    MX_ASSERT(isPowerOfTwo(s->stride & (MX_SCANLINE_ALIGNMENT - 1) == 0));
-    MX_ASSERT(isPowerOfTwo(s->stride));
-
-    return s;
 }
 
 void mxDestroySurface(MXSurface* s)
@@ -110,6 +134,7 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
     MX_ASSERT(dest);
     MX_ASSERT(dest->pixelFormat == MX_PIXELFORMAT_I1);
     MX_ASSERT(src);
+    MX_ASSERT(!(src->flags & MX_SURFACE_FLAG_DIRTY));
     {
         MXRect fullSrcRect, fullDestRect, destRect, clippedDestRect;
 
@@ -140,8 +165,14 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
             uint8_t* destPixels = dest->pixels;
             uint8_t* srcPixels  = src->pixels;
 
-            destPixels += ((clippedDestRect.y       << dest->log2stride) +  clippedDestRect.x      / 8);
-            srcPixels  += (((clippedDestRect.y - y) <<  src->log2stride) + (clippedDestRect.x - x) / 8);
+            if (src->flags & MX_SURFACE_FLAG_PRESHIFT)
+            {
+                int plane = (clippedDestRect.x - (clippedDestRect.x - x)) & 0x7;
+                srcPixels += src->planeSize * plane;
+            }
+
+            destPixels += (((clippedDestRect.y)     << dest->log2Stride) + ((clippedDestRect.x)         >> 3));
+            srcPixels  += (((clippedDestRect.y - y) <<  src->log2Stride) + ((clippedDestRect.x - x + 7) >> 3));
 
             blit_I1_I1(destPixels, srcPixels, clippedDestRect.w, clippedDestRect.h, src->stride, dest->stride);
             }
@@ -150,5 +181,47 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
             MX_ASSERT(0);
             break;
         }
+
+        dest->flags |= MX_SURFACE_FLAG_DIRTY;
+    }
+}
+
+void mxFlushSurface(MXSurface* s)
+{
+    if (!s->flags & MX_SURFACE_FLAG_PRESHIFT)
+    {
+        return;
+    }
+    MX_ASSERT(s->flags & MX_SURFACE_FLAG_DIRTY);
+    MX_ASSERT(s->planes == 8);
+    {
+        int i, x, y;
+        uint8_t* destPlane = s->pixels + s->planeSize;
+
+        MX_ASSERT(s->planeSize == s->stride * s->h);
+
+        for (i = 1; i < 8; i++)
+        {
+            const uint8_t* srcPlane = s->pixels;
+            int mask = ((1 << i) - 1) << (8 - i);
+            int invI = 8 - i;
+
+            for (y = 0; y < s->h; y++)
+            {
+                const uint8_t* src = srcPlane;
+                uint8_t*      dest = destPlane;
+
+                *dest++ = (*src++) << i;
+                for (x = 1; x < s->w; x++)
+                {
+                    *dest++ = ((src[-1] & mask) >> invI) | (src[0] << i);
+                    src++;
+                }
+
+                srcPlane  += s->stride;
+                destPlane += s->stride;
+            }
+        }
+        s->flags &= ~MX_SURFACE_FLAG_DIRTY;
     }
 }

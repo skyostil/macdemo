@@ -1,3 +1,7 @@
+/**
+ *  monoxide 1-bit blitting library
+ *  Copyright (C) 2009 Sami Kyöstilä <sami.kyostila@unrealvoodoo.org>
+ */
 #include "monoxide.h"
 #include <SDL.h>
 #include <assert.h>
@@ -13,7 +17,7 @@ MXSurface* mxCreateWindow(int w, int h)
         return NULL;
     }
 
-    s = mxCreateSurface(win->w, win->h, MX_PIXELFORMAT_I1);
+    s = mxCreateSurface(win->w, win->h, MX_PIXELFORMAT_I1, 0);
     return s;
 }
 

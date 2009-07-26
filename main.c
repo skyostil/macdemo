@@ -1,3 +1,7 @@
+/**
+ *  monoxide 1-bit blitting library
+ *  Copyright (C) 2009 Sami Kyöstilä <sami.kyostila@unrealvoodoo.org>
+ */
 #include "monoxide.h"
 #include <malloc.h>
 #include <assert.h>
@@ -40,17 +44,19 @@ void fillCircle(MXSurface* s, int cx, int cy, int r)
 int main(int argc, char** argv)
 {
     MXSurface* winSurf = mxCreateWindow(512, 384);
-    MXSurface* surf = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1);
+    MXSurface* surf = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
     int t = 0;
 
-    fillCircle(surf, 128, 128, 128);
+    fillCircle(surf, 128, 128, 100);
+    mxFlushSurface(surf);
 
     while (mxProcessEvents())
     {
-        mxBlit(winSurf, surf, NULL, (t & 0x3ff) - 271, (t & 0x3ff) - 270, NULL, 0);
+        mxBlit(winSurf, surf, NULL, (t & 0x3ff) - 256, (t & 0x3ff) - 256, NULL, 0);
+        //mxBlit(winSurf, surf, NULL, -128 + (t & 0xf), -128 + (t & 0xf), NULL, 0);
         mxSwapBuffers(winSurf);
         t++;
-        SDL_Delay(1);
+        //SDL_Delay(100);
     }
 
     mxDestroyWindow(winSurf);
