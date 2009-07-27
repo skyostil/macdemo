@@ -14,7 +14,7 @@ set(SOURCES
     FixedPointVector.cpp
     ModPlayer.cpp
     Main.cpp
-    demo.c
+    Demo.cpp
 )
 
 find_package(SDL REQUIRED)
