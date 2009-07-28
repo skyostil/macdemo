@@ -14,6 +14,7 @@ set(SOURCES
     FixedPointVector.cpp
     ModPlayer.cpp
     Main.cpp
+    Font.cpp
     Demo.cpp
 )
 

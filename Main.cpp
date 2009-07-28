@@ -4,6 +4,7 @@
  */
 #include "Config.h"
 #include "Demo.h"
+#include "Font.h"
 #include "engine/Video.h"
 #include "engine/Audio.h"
 #include "monoxide.h"

@@ -53,6 +53,143 @@ int yesWeHaveALoadingScreen(int time, int duration)
     return (loadingX++ >= screen->w);
 }
 
+int dummyEffect(const char* name, int time, int duration)
+{
+    mxFill(screen, NULL, 0);
+    mxBlit(screen, checkers, ball, x, y, NULL, 0);
+    drawDebugText(screen, 0, 0, name);
+    moveBall();
+    flipScreen();
+    return 1;
+}
+
+#define DUMMY_EFFECT(NAME) return dummyEffect(NAME, time, duration)
+
+int macOnStreet(int time, int duration)
+{
+    DUMMY_EFFECT("Mac on street");
+}
+
+int guysSpotMac(int time, int duration)
+{
+    DUMMY_EFFECT("Guys spot mac");
+}
+
+int pcRidicule(int time, int duration)
+{
+    DUMMY_EFFECT("PC ridicule");
+}
+
+int modernMacRidicule(int time, int duration)
+{
+    DUMMY_EFFECT("Modern Mac ridicule");
+}
+
+int sadMac(int time, int duration)
+{
+    DUMMY_EFFECT("Sad Mac");
+}
+
+int modernMacFxIntro(int time, int duration)
+{
+    DUMMY_EFFECT("Modern Mac Fx Intro");
+}
+
+int modernMacFx(int time, int duration)
+{
+    DUMMY_EFFECT("Modern Mac Fx");
+}
+
+int pcFxIntro(int time, int duration)
+{
+    DUMMY_EFFECT("PC Fx Intro");
+}
+
+int pcFx(int time, int duration)
+{
+    DUMMY_EFFECT("PC Fx");
+}
+
+int modernMacDare(int time, int duration)
+{
+    DUMMY_EFFECT("Modern Mac Dare");
+}
+
+int macFxLoading(int time, int duration)
+{
+    DUMMY_EFFECT("Mac Fx Loading");
+}
+
+int macFx(int time, int duration)
+{
+    DUMMY_EFFECT("Mac Fx");
+}
+
+int guysLol(int time, int duration)
+{
+    DUMMY_EFFECT("Guys LOL");
+}
+
+int sadMac2(int time, int duration)
+{
+    DUMMY_EFFECT("Sad Mac 2");
+}
+
+int kidHelp(int time, int duration)
+{
+    DUMMY_EFFECT("Kid Help");
+}
+
+int pedobearRun(int time, int duration)
+{
+    DUMMY_EFFECT("Pedobear Run");
+}
+
+int pcPanic(int time, int duration)
+{
+    DUMMY_EFFECT("PC Panic");
+}
+
+int modernMacPanic(int time, int duration)
+{
+    DUMMY_EFFECT("Modern Mac Panic");
+}
+
+int guysPanic(int time, int duration)
+{
+    DUMMY_EFFECT("Guys Panic");
+}
+
+int macHasPlan(int time, int duration)
+{
+    DUMMY_EFFECT("Mac Has Plan");
+}
+
+int macPlanLoading(int time, int duration)
+{
+    DUMMY_EFFECT("Mac Plan Loading");
+}
+
+int macGotDisk(int time, int duration)
+{
+    DUMMY_EFFECT("Mac Got Disk");
+}
+
+int diskTwirl(int time, int duration)
+{
+    DUMMY_EFFECT("Disk Twirl");
+}
+
+int diskImpact(int time, int duration)
+{
+    DUMMY_EFFECT("Disk Impact");
+}
+
+int theEnd(int time, int duration)
+{
+    DUMMY_EFFECT("The End");
+}
+
 int effect1(int time, int duration)
 {
     mxFill(screen, NULL, 0);
@@ -113,9 +250,36 @@ void teardownEffects()
 EffectEntry effects[] =
 {
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
+    {macOnStreet, 0x10000, 0},
+    {guysSpotMac, 0x10000, 0},
+    {pcRidicule, 0x10000, 0},
+    {modernMacRidicule, 0x10000, 0},
+    {sadMac, 0x10000, 0},
+    {modernMacFxIntro, 0x10000, 0},
+    {modernMacFx, 0x10000, 0},
+    {pcFxIntro, 0x10000, 0},
+    {pcFx, 0x10000, 0},
+    {modernMacDare, 0x10000, 0},
+    {macFxLoading, 0x10000, 0},
+    {macFx, 0x10000, 0},
+    {guysLol, 0x10000, 0},
+    {sadMac2, 0x10000, 0},
+    {kidHelp, 0x10000, 0},
+    {pedobearRun, 0x10000, 0},
+    {pcPanic, 0x10000, 0},
+    {modernMacPanic, 0x10000, 0},
+    {guysPanic, 0x10000, 0},
+    {macHasPlan, 0x10000, 0},
+    {macPlanLoading, 0x10000, 0},
+    {macGotDisk, 0x10000, 0},
+    {diskTwirl, 0x10000, 0},
+    {diskImpact, 0x10000, 0},
+    {theEnd, 0x10000, 0},
+    /*
     {effect1, 0x10000, 0},
     {effect2, 0x10000, 0},
     {effect3, 0x10000, 0},
     {effect4, 0x10000, 0},
+    */
     {NULL, 0, 0}
 };
