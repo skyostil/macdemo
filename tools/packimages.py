@@ -18,8 +18,13 @@ A = MX_PACK_ALPHA_CHANNEL
 C = MX_SURFACE_FLAG_RLE
 
 files = [
+    ("../data/intro_cityscape.png", BW, PS),
+    ("../data/intro_mac.png", BW, 0),
+    ("../data/intro_street.png", BW, PS),
     ("../data/mac_on_street_bg.png", BW, C),
     ("../data/mac_on_street.png", BW, PS),
+    ("../data/pc_on_street.png", BW, PS),
+    ("../data/macbook_on_street.png", BW, 0),
 ]
 
 def log2i(n):
@@ -68,5 +73,6 @@ if __name__ == "__main__":
         image = Image.open(f)
         print f, image.size, "(%s)" % ", ".join(info) if info else ""
         packImage(out, image, format, flags)
+    print ">>> %d bytes" % out.tell()
     out.close()
 

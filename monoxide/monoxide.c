@@ -247,6 +247,7 @@ void mxFlushSurface(MXSurface* s)
     MX_ASSERT(s->planes == 8);
     {
         int i, x, y;
+        int w = s->w / 8;
         uint8_t* destPlane = s->pixels + s->planeSize;
 
         MX_ASSERT(s->planeSize == s->stride * s->h);
@@ -262,8 +263,17 @@ void mxFlushSurface(MXSurface* s)
                 const uint8_t* src = srcPlane;
                 uint8_t*      dest = destPlane;
 
-                *dest++ = (*src++) >> i;
-                for (x = 1; x < s->w / 8; x++)
+                if (y > 1)
+                {
+                    *dest++ = ((src[w - 1 - s->stride] & mask) << invI) | ((*src) >> i);
+                }
+                else
+                {
+                    *dest++ = ((*src) >> i);
+                }
+                src++;
+
+                for (x = 1; x < w; x++)
                 {
                     *dest++ = ((src[-1] & mask) << invI) | (src[0] >> i);
                     src++;

@@ -3,16 +3,21 @@
  *  Copyright (C) 2009 by Sami Kyostila <sami.kyostila@unrealvoodoo.org>
  */
 
+static struct
+{
+    MXSurface* introCityscape;
+    MXSurface* introMac;
+    MXSurface* introStreet;
+    MXSurface* macOnStreetBg;
+    MXSurface* macOnStreet;
+    MXSurface* pcOnStreet;
+    MXSurface* macbookOnStreet;
+} img;
+
 static int x = 93, y = 17;
 static int dx = 1, dy = 1;
 static MXSurface* checkers = 0;
 static MXSurface* ball = 0;
-
-static struct
-{
-    MXSurface* macOnStreetBg;
-    MXSurface* macOnStreet;
-} img;
 
 void moveBall()
 {
@@ -139,19 +144,104 @@ int clearScreen(int time, int duration)
     return 1;
 }
 
+int intro(int time, int duration)
+{
+    int pos = -time >> 5;
+    int i;
+    int bop = (time & 0x100) >> 6;
+    MXRect rect;
+
+    DRAW_EFFECT_TITLE("Intro");
+
+    /* city skyline */
+    mxBlit(screen, img.introCityscape, NULL, pos, 60, NULL, 0);
+    mxBlit(screen, img.introCityscape, NULL, pos + 512, 60, NULL, 0);
+
+    /* street */
+    for (i = -128; i < 512; i += 128)
+    {
+        mxBlit(screen, img.introStreet, NULL, ((pos << 1) & 127) + i, 240, NULL, 0);
+    }
+
+    rect.x = 88;
+    rect.y = 200;
+    rect.w = img.introMac->w;
+    rect.h = 20;
+    mxFill(screen, &rect, 0);
+    mxBlit(screen, img.introMac, NULL, 88, 200 + bop, NULL, 0);
+}
+
+void scrollHoriz(MXSurface *s, int amount, int fillValue)
+{
+    int x, y;
+    uint8_t* d = s->pixels;
+
+    if (amount > 0)
+    {
+        for (y = 0; y < s->h; y++)
+        {
+            for (x = s->w - amount - 1; x >= 0; x--)
+            {
+                d[x] = d[x - amount];
+            }
+            for (x = 0; x < amount; x++)
+            {
+                d[x] = fillValue;
+            }
+            d += s->stride;
+        }
+    }
+    else
+    {
+        amount = -amount;
+        for (y = 0; y < s->h; y++)
+        {
+            for (x = amount; x < s->w; x++)
+            {
+                d[x] = d[x + amount];
+            }
+            for (x = s->w - amount; x < s->w; x++)
+            {
+                d[x] = fillValue;
+            }
+            d += s->stride;
+        }
+    }
+}
+
+int macOnStreetSetup(int time, int duration)
+{
+    mxBlit(screen, img.macOnStreetBg, NULL, 0, 0, NULL, 0);
+}
+
 int macOnStreet(int time, int duration)
 {
-    int yPos = pow2(max(0, (1500 - time) >> 3)) >> 5; 
-    int pos = time >> 6;
-    mxBlit(screen, img.macOnStreetBg, NULL, 0, yPos, NULL, 0);
+    int pos, pos2;
+    int bop = (time & 0x100) >> 6;
+
     DRAW_EFFECT_TITLE("Mac on street");
 
-    mxBlit(screen, img.macOnStreet, NULL, 88 + pos, yPos + 60 + (sawtooth(time >> 2) >> 4) + (pos >> 1), NULL, 0);
+    pos = min(time, 72 << 6);
+    pos2 = pos >> 3;
+    pos >>= 6;
+
+    mxBlit(screen, img.pcOnStreet, NULL, 800 - pos2, 300 - (pos2 >> 1) + bop, NULL, 0);
+    mxBlit(screen, img.macOnStreet, NULL, 10 + pos, 20 + (sawtooth(time >> 2) >> 4) + (pos >> 1), NULL, 0);
 }
 
 int guysSpotMac(int time, int duration)
 {
-    DUMMY_EFFECT("Guys spot mac");
+    int pos, pos2;
+    int bop = (time & 0x100) >> 6;
+    //mxBlit(screen, img.macOnStreetBg, NULL, 0, 0, NULL, 0);
+    DRAW_EFFECT_TITLE("Guys spot Mac");
+
+    pos = min(time, 72 << 6);
+    pos2 = pos >> 3;
+    pos >>= 6;
+
+    mxBlit(screen, img.pcOnStreet, NULL, 800 - pos2, 300 - (pos2 >> 1) + bop, NULL, 0);
+    mxBlit(screen, img.macOnStreet, NULL, 10 + pos, 20 + (sawtooth(time >> 2) >> 4) + (pos >> 1), NULL, 0);
 }
 
 int pcRidicule(int time, int duration)
@@ -339,7 +429,9 @@ EffectEntry effects[] =
 {
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
     {clearScreen,             0, EFFECT_FLAG_DYNAMIC},
-    {macOnStreet,             4000, 0},
+    {intro,                   4000, 0},
+    {macOnStreetSetup,        0, EFFECT_FLAG_DYNAMIC},
+    {macOnStreet,             6000, 0},
     {guysSpotMac,             1000, 0},
     {pcRidicule,              1000, 0},
     {modernMacRidicule,       1000, 0},
