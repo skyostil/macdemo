@@ -67,7 +67,7 @@ void moveBall()
 
 void drawLoadingScreen(int steps, int total)
 {
-    int loadingX = (((steps << 16) / total) * screen->w) >> 16;
+    int loadingX = (((steps << 8) / total) * screen->w) >> 8;
     MXRect rect;
 
     if (loadingX < 8)
@@ -86,10 +86,17 @@ void drawLoadingScreen(int steps, int total)
 int yesWeHaveALoadingScreen(int time, int duration)
 {
     static int loadingPos = 0;
+    static int musicLoadingPos = 0;
     static FILE* packFile = 0;
+    static FILE* rawMusicFile = 0;
+    static SampleChunk* sampleChunk = 0;
+    static Mixer* mixer;
+    static ModPlayer* modPlayer;
     MXSurface** imagesToLoad = (MXSurface**)&img;
     const int imageCount = sizeof(img) / sizeof(imagesToLoad[0]);
+    int musicLength = audio->mixFreq() * MUSIC_LENGTH;
 
+    /* Load images */
     if (loadingPos < imageCount)
     {
         if (!packFile)
@@ -98,7 +105,7 @@ int yesWeHaveALoadingScreen(int time, int duration)
             assert(packFile);
         }
 
-        drawLoadingScreen(loadingPos, imageCount);
+        drawLoadingScreen(loadingPos / 2, imageCount);
 
         imagesToLoad[loadingPos] = loadImage(packFile);
         assert(imagesToLoad[loadingPos]);
@@ -111,6 +118,77 @@ int yesWeHaveALoadingScreen(int time, int duration)
     {
         fclose(packFile);
         packFile = 0;
+    }
+
+    /* Load music */
+    if (musicLoadingPos < musicLength)
+    {
+        if (!rawMusicFile)
+        {
+            rawMusicFile = fopen(RAWMUSICFILE, "wb");
+        }
+
+        if (!sampleChunk)
+        {
+            SampleFormat format(8, 1);
+            sampleChunk = new SampleChunk(&format, audio->mixFreq() * 4, audio->mixFreq());
+            assert(sampleChunk);
+        }
+
+        if (!mixer)
+        {
+            mixer = new Mixer(audio->mixFreq(), 4);
+            assert(mixer);
+        }
+
+        if (!modPlayer)
+        {
+            modPlayer = new ModPlayer(mixer);
+            assert(modPlayer);
+            assert(modPlayer->load(SONGFILE));
+            modPlayer->play();
+        }
+
+        mixer->render(sampleChunk);
+        assert(fwrite(sampleChunk->data, sampleChunk->bytes, 1, rawMusicFile) == 1);
+
+        musicLoadingPos += sampleChunk->length;
+        drawLoadingScreen(musicLoadingPos / 2 + musicLength / 2, musicLength);
+
+        return 0;
+    }
+
+    if (modPlayer)
+    {
+        delete modPlayer;
+        modPlayer = 0;
+    }
+
+    if (mixer)
+    {
+        delete mixer;
+        mixer = 0;
+    }
+
+    if (sampleChunk)
+    {
+        delete sampleChunk;
+        sampleChunk = 0;
+    }
+
+    if (rawMusicFile)
+    {
+        fclose(rawMusicFile);
+        rawMusicFile = 0;
+
+        if (musicRenderer)
+        {
+            audio->stop();
+            delete musicRenderer;
+        }
+        musicRenderer = new MusicRenderer();
+        assert(musicRenderer);
+        audio->start(musicRenderer);
     }
 
     return 1;
@@ -579,11 +657,15 @@ void teardownEffects()
     const int imageCount = sizeof(img) / sizeof(imagesToDestroy[0]);
     int i;
 
+    audio->stop();
+    delete musicRenderer;
+    musicRenderer = 0;
+
     for (i = 0; i < imageCount; i++)
     {
         mxDestroySurface(imagesToDestroy[i]);
     }
-
+    
     mxDestroySurface(ball);
     mxDestroySurface(checkers);
 }

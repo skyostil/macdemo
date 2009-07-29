@@ -23,16 +23,40 @@ MXSurface* loadImage(FILE* packFile);
 #define SONGFILE        "macmod.mod"
 #define SCREEN_WIDTH    512
 #define SCREEN_HEIGHT   342
+#define MUSIC_LENGTH    (1 * 60)
+#define RAWMUSICFILE    "music.raw"
+
+class MusicRenderer: public AudioRenderer
+{
+public:
+    MusicRenderer()
+    {
+        audioFile = fopen(RAWMUSICFILE, "rb");
+        assert(audioFile);
+    }
+
+    ~MusicRenderer()
+    {
+        fclose(audioFile);
+    }
+
+    void render(SampleChunk* buffer)
+    {
+        fread(buffer->data, buffer->bytes, 1, audioFile);
+    }
+
+private:
+    FILE* audioFile;
+};
 
 /*
  * Global state
  */
-static MXSurface* screen = 0;
-static Audio*     audio = 0;
-static Video*     video = 0;
-static MXSurface* physicalScreen = 0;
-static Mixer      mixer(22050, 4);
-//static ModPlayer  player(&mixer);
+static MXSurface*     screen = 0;
+static Audio*         audio = 0;
+static Video*         video = 0;
+static MXSurface*     physicalScreen = 0;
+static MusicRenderer* musicRenderer = 0;
 
 #include "Effects.h"
 
@@ -45,7 +69,7 @@ void setup()
     screen = mxCreateSurface(video->screenWidth(), video->screenHeight(), MX_PIXELFORMAT_I1, 0);
     //Audio(8, 11127, 0, 512);
     //Audio(8, 22050, 0, 512);
-    audio = new Audio(8, 22050, 0, 2048);
+    audio = new Audio(8, 22050, false, 8192);
     
     //assert(player.load(SONGFILE));
     
@@ -75,10 +99,10 @@ void flipScreen()
 #ifdef BIG_ENDIAN
 uint32_t swapEndian(uint32_t x)
 {
-	return (x >> 24) |
-	       ((x << 8) & 0x00ff0000) |
-	       ((x >> 8) & 0x0000ff00) |
-	       (x << 24);
+    return (x >> 24) |
+           ((x << 8) & 0x00ff0000) |
+           ((x >> 8) & 0x0000ff00) |
+           (x << 24);
 }
 #endif
 
@@ -89,11 +113,11 @@ MXSurface* loadImage(FILE* packFile)
     assert(fread(&header, sizeof(header) - sizeof(void*), 1, packFile) == 1);
     
 #ifdef BIG_ENDIAN
-	header.w = swapEndian(header.w);
-	header.h = swapEndian(header.h);
-	header.pixelFormat = (MXPixelFormat)swapEndian(header.pixelFormat);
-	header.flags = swapEndian(header.flags);
-	header.planeSize = swapEndian(header.planeSize);
+    header.w = swapEndian(header.w);
+    header.h = swapEndian(header.h);
+    header.pixelFormat = (MXPixelFormat)swapEndian(header.pixelFormat);
+    header.flags = swapEndian(header.flags);
+    header.planeSize = swapEndian(header.planeSize);
 #endif
     
     surf = mxCreateSurface(header.w, header.h, header.pixelFormat, header.flags);

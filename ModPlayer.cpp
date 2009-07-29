@@ -528,7 +528,7 @@ void ModPlayer::tick()
         int cr = currentRow;
         int co = currentOrder;
 
-//      printf("%d/%d %2d:%02d\n", currentTick, songSpeed, order[currentOrder], currentRow);
+        //printf("%d/%d %2d:%02d\n", currentTick, songSpeed, order[currentOrder], currentRow);
 
         if (!playing)
             return;

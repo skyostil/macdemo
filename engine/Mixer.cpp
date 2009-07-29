@@ -80,6 +80,9 @@ Mixer::Mixer(int _outputFreq, int _channelCount):
 {
         int ch;
 
+        tickerCounter = 0;
+        tickerInterval = 0x7fffffff;
+
         channel = new Channel[channelCount];
         for(ch=0; ch<channelCount; ch++)
                 channel[ch].setOutputFrequency(outputFreq);
