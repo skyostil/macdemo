@@ -12,9 +12,9 @@
 #define MX_UNUSED(X)            (void)(X)
 
 void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mask, const MXRect* destRect,
-                           int srcStride, int destStride, int maskStride);
+                           int srcStride, int destStride, int maskStride, int srcFlags);
 void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
-                   int srcStride, int destStride);
+                   int srcStride, int destStride, int srcFlags);
 void fill_I1(uint8_t* dest, const MXRect* destRect, int destStride, int color);
 
 inline int min(int a, int b)
@@ -219,11 +219,12 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
                 {
                     maskPixels += (((clippedDestRect.y - y) <<  mask->log2Stride) + ((clippedDestRect.x - x + 7) >> 3));
                     blit_I1_to_I1_mask_I1(destPixels, srcPixels, maskPixels, &clippedDestRect,
-                                          src->stride, dest->stride, mask->stride);
+                                          src->stride, dest->stride, mask->stride, src->flags);
                 }
                 else
                 {
-                    blit_I1_to_I1(destPixels, srcPixels, &clippedDestRect, src->stride, dest->stride);
+                    blit_I1_to_I1(destPixels, srcPixels, &clippedDestRect, 
+                                  src->stride, dest->stride, src->flags);
                 }
                 break;
             }

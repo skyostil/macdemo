@@ -24,7 +24,8 @@ static struct
     MXSurface* pedobearRunFrontMask;
     MXSurface* macDiskLoad;
     MXSurface* macDiskFire;
-    MXSurface* macDiskImpact;
+    MXSurface* diskImpact;
+    MXSurface* diskImpactMask;
     MXSurface* pedobearImpact;
     MXSurface* pedobearImpactMask;
 } img;
@@ -115,13 +116,13 @@ int yesWeHaveALoadingScreen(int time, int duration)
     return 1;
 }
 
-#define DRAW_EFFECT_TITLE(NAME) drawDebugText(screen, 0, 0, NAME);
+#define EFFECT_TITLE(NAME) drawDebugText(screen, 0, 0, NAME);
 
 int dummyEffect(const char* name, int time, int duration)
 {
     mxFill(screen, NULL, 0);
     mxBlit(screen, checkers, ball, x, y, NULL, 0);
-    DRAW_EFFECT_TITLE(name);
+    EFFECT_TITLE(name);
     moveBall();
     return 1;
 }
@@ -159,14 +160,9 @@ int clearScreen(int time, int duration)
     return 1;
 }
 
-int intro(int time, int duration)
+void drawCity(int pos)
 {
-    int pos = -time >> 5;
     int i;
-    int bop = (time & 0x100) >> 6;
-    MXRect rect;
-
-    DRAW_EFFECT_TITLE("Intro");
 
     /* city skyline */
     mxBlit(screen, img.introCityscape, NULL, pos, 60, NULL, 0);
@@ -177,6 +173,16 @@ int intro(int time, int duration)
     {
         mxBlit(screen, img.introStreet, NULL, ((pos << 1) & 127) + i, 240, NULL, 0);
     }
+}
+
+int intro(int time, int duration)
+{
+    int pos = -time >> 5;
+    int bop = (time & 0x100) >> 6;
+    MXRect rect;
+
+    drawCity(pos);
+    EFFECT_TITLE("Intro");
 
     rect.x = 88;
     rect.y = 200;
@@ -232,7 +238,7 @@ int macOnStreet(int time, int duration)
     int bop = (time & 0x100) >> 6;
 
     mxBlit(screen, img.macOnStreetBg, NULL, 0, 0, NULL, 0);
-    DRAW_EFFECT_TITLE("Mac on street");
+    EFFECT_TITLE("Mac on street");
 
     pos = min(time, 72 << 6);
     pos2 = pos >> 3;
@@ -252,7 +258,7 @@ int guysSpotMac(int time, int duration)
     MXRect rect;
 
     mxBlit(screen, img.macOnStreetBg, NULL, camPos, 0, NULL, 0);
-    DRAW_EFFECT_TITLE("Guys spot mac");
+    EFFECT_TITLE("Guys spot mac");
 
     rect.x = 512 + (camPos & ~0x7);
     rect.y = 0;
@@ -269,104 +275,202 @@ int guysSpotMac(int time, int duration)
     mxBlit(screen, img.macbookOnStreet, NULL, camPos + 1050 - pos2, 400 - (pos2 >> 1) + bop3, NULL, 0);
 }
 
-int pcRidicule(int time, int duration)
-{
-    DUMMY_EFFECT("PC ridicule");
-}
-
 int macbookRidicule(int time, int duration)
 {
-    DUMMY_EFFECT("Modern Mac ridicule");
+    /* Some text here */
+}
+
+int pcRidicule(int time, int duration)
+{
+    int bop = sawtooth(time >> 1) >> 3;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("PC ridicule");
+
+    mxBlit(screen, img.pcCloseUp, NULL, -64, 120 + bop, NULL, 0);
 }
 
 int sadMac(int time, int duration)
 {
-    DUMMY_EFFECT("Sad Mac");
+    int bop = time >> 4;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Sad Mac");
+
+    mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 60 + bop, NULL, 0);
 }
 
 int macbookFxIntro(int time, int duration)
 {
-    DUMMY_EFFECT("Modern Mac Fx Intro");
+    int bop = sawtooth(time >> 1) >> 3;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Macbook Fx Intro");
+
+    mxBlit(screen, img.macbookCloseUp, NULL, 64, 100 + bop, NULL, 0);
 }
 
 int macbookFx(int time, int duration)
 {
-    DUMMY_EFFECT("Modern Mac Fx");
+    mxBlit(screen, img.macbookScreenBg, NULL, 0, 0, NULL, 0);
+    EFFECT_TITLE("Macbook Fx");
 }
 
 int pcFxIntro(int time, int duration)
 {
-    DUMMY_EFFECT("PC Fx Intro");
+    int bop = sawtooth(time >> 1) >> 3;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("PC Fx Intro");
+
+    mxBlit(screen, img.pcCloseUp, NULL, -64, 120 + bop, NULL, 0);
 }
 
 int pcFx(int time, int duration)
 {
-    DUMMY_EFFECT("PC Fx");
+    mxBlit(screen, img.pcScreenBg, NULL, 0, 0, NULL, 0);
+    EFFECT_TITLE("PC Fx");
 }
 
 int macbookDare(int time, int duration)
 {
-    DUMMY_EFFECT("Modern Mac Dare");
+    int bop = sawtooth(time >> 1) >> 3;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Macbook Dare");
+
+    mxBlit(screen, img.macbookCloseUp, NULL, 64, 100 + bop, NULL, 0);
 }
 
 int macFxLoading(int time, int duration)
 {
-    DUMMY_EFFECT("Mac Fx Loading");
+    int bop = -time >> 5;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Mac Fx Loading");
+
+    mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 120 + bop, NULL, 0);
 }
 
 int macFx(int time, int duration)
 {
-    DUMMY_EFFECT("Mac Fx");
+    int bop = 0;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Mac Fx");
+
+    mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 60 + bop, NULL, 0);
+}
+
+void drawGuys(int time)
+{
+    int bop = (time & 0x100) >> 6;
+    int bop2 = ((time + 177) & 0x100) >> 6;
+
+    mxBlit(screen, img.pcOnStreet, NULL, 0, 100 + bop, NULL, 0);
+    mxBlit(screen, img.macbookOnStreet, NULL, 256, 160 + bop2, NULL, 0);
 }
 
 int guysLol(int time, int duration)
 {
-    DUMMY_EFFECT("Guys LOL");
+    mxFill(screen, NULL, 0);
+    drawGuys(time);
+    EFFECT_TITLE("Guys LOL");
 }
 
 int sadMac2(int time, int duration)
 {
-    DUMMY_EFFECT("Sad Mac 2");
+    int bop = time >> 4;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Sad Mac #2");
+
+    mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 60 + bop, NULL, 0);
 }
 
 int kidHelp(int time, int duration)
 {
-    DUMMY_EFFECT("Kid Help");
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Kid Help");
+    drawGuys(time);
 }
 
-int pedobearRun(int time, int duration)
+int pedobearRunSide(int time, int duration)
 {
-    DUMMY_EFFECT("Pedobear Run");
+    int pos = -128 + (time >> 2);
+    int bop = sawtooth(time >> 1) >> 2;
+
+    mxFill(screen, NULL, 0);
+    drawCity(0);
+    mxBlit(screen, img.guysOnStreet, NULL, 0, 200, NULL, 0);
+    mxBlit(screen, img.pedobearRunSide, img.pedobearRunSideMask, pos, 170 + bop, NULL, 0);
+    EFFECT_TITLE("Pedobear Run");
+}
+
+int pedobearRunFront(int time, int duration)
+{
+    int bop = (time & 0x100) >> 6;
+
+    mxFill(screen, NULL, 0);
+    mxBlit(screen, img.pedobearRunFront, img.pedobearRunFrontMask, 256 - 128, 171 - 128 + bop, NULL, 0);
+    EFFECT_TITLE("Pedobear Run");
 }
 
 int pcPanic(int time, int duration)
 {
-    DUMMY_EFFECT("PC Panic");
+    int bop = sawtooth(time >> 1) >> 3;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("PC Panic");
+
+    mxBlit(screen, img.pcCloseUp, NULL, -64, 120 + bop, NULL, 0);
 }
 
 int macbookPanic(int time, int duration)
 {
-    DUMMY_EFFECT("Modern Mac Panic");
+    int bop = sawtooth(time >> 1) >> 3;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("PC Panic");
+
+    mxBlit(screen, img.pcCloseUp, NULL, -64, 120 + bop, NULL, 0);
 }
 
 int guysPanic(int time, int duration)
 {
-    DUMMY_EFFECT("Guys Panic");
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Guys Panic");
+    drawGuys(time);
 }
-
+    
 int macHasPlan(int time, int duration)
 {
-    DUMMY_EFFECT("Mac Has Plan");
+    int bop = -time >> 4;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Mac Has Plan");
+
+    mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 120 + bop, NULL, 0);
 }
 
-int macPlanLoading(int time, int duration)
+int macLoadDisk(int time, int duration)
 {
-    DUMMY_EFFECT("Mac Plan Loading");
+    int bop = time >> 4;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Mac Load Disk");
+
+    mxBlit(screen, img.macDiskLoad, NULL, 256 - 128 - bop, 50, NULL, 0);
 }
 
-int macGotDisk(int time, int duration)
+int macFireDisk(int time, int duration)
 {
-    DUMMY_EFFECT("Mac Got Disk");
+    int bop = -time >> 5;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Mac Fire Disk");
+
+    mxBlit(screen, img.macDiskFire, NULL, 256 - 128 - bop, 50, NULL, 0);
 }
 
 int diskTwirl(int time, int duration)
@@ -376,7 +480,14 @@ int diskTwirl(int time, int duration)
 
 int diskImpact(int time, int duration)
 {
-    DUMMY_EFFECT("Disk Impact");
+    int bop = (time & 0x100) >> 6;
+    int pos = time >> 6;
+
+    mxFill(screen, NULL, time & 0x40);
+    EFFECT_TITLE("Disk Impact");
+
+    mxBlit(screen, img.pedobearImpact, img.pedobearImpactMask, 192 - 128 + (pos << 2), 60 + pos, NULL, 0);
+    mxBlit(screen, img.diskImpact, img.diskImpactMask, 192 - pos, 60 - pos, NULL, 0);
 }
 
 int theEnd(int time, int duration)
@@ -457,29 +568,29 @@ EffectEntry effects[] =
     {intro,                   4000, 0},
     {macOnStreet,             6000, 0},
     {guysSpotMac,             2000, 0},
-    {macbookRidicule,         1000, 0},
-    {pcRidicule,              1000, 0},
+    {macbookRidicule,         2000, 0},
+    {pcRidicule,              2000, 0},
     {sadMac,                  1000, 0},
-    {macbookFxIntro,          1000, 0},
-    {macbookFx,               1000, 0},
-    {pcFxIntro,               1000, 0},
-    {pcFx,                    1000, 0},
-    {macbookDare,             1000, 0},
-    {macFxLoading,            1000, 0},
-    {macFx,                   1000, 0},
-    {guysLol,                 1000, 0},
+    {macbookFxIntro,          2000, 0},
+    {macbookFx,               4000, 0},
+    {pcFxIntro,               2000, 0},
+    {pcFx,                    4000, 0},
+    {macbookDare,             2000, 0},
+    {macFxLoading,            2000, 0},
+    {macFx,                   4000, 0},
+    {guysLol,                 2000, 0},
     {sadMac2,                 1000, 0},
-    {kidHelp,                 1000, 0},
-    {pedobearRun,             1000, 0},
+    {kidHelp,                 2000, 0},
+    {pedobearRunSide,         3000, 0},
+    {pedobearRunFront,        2000, 0},
     {pcPanic,                 1000, 0},
     {macbookPanic,            1000, 0},
     {guysPanic,               1000, 0},
-    {macHasPlan,              1000, 0},
-    {macPlanLoading,          1000, 0},
-    {macGotDisk,              1000, 0},
-    {diskTwirl,               1000, 0},
-    {diskImpact,              1000, 0},
-    {theEnd,                  1000, 0},
+    {macLoadDisk,             1500, 0},
+    {macFireDisk,             1500, 0},
+    {diskTwirl,               3000, 0},
+    {diskImpact,              3000, 0},
+    {theEnd,                  5000, 0},
     /*
     {effect1, 0x10000, 0},
     {effect2, 0x10000, 0},

@@ -5,13 +5,14 @@
 #include "monoxide.h"
 
 void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
-                   int srcStride, int destStride)
+                   int srcStride, int destStride, int srcFlags)
 {
     int x;
     int w = ((destRect->w + (destRect->x & 0x7)) >> 3);
 
     /* Right lobe, sub-byte pixels */
-    if ((destRect->x + destRect->w) & 0x7)
+    if ((srcFlags & MX_SURFACE_FLAG_PRESHIFT) &&
+       ((destRect->x + destRect->w) & 0x7))
     {
         int h = destRect->h;
         uint8_t pixelMask = ~((0x100 >> ((destRect->x + destRect->w) & 0x7)) - 1);
@@ -27,7 +28,8 @@ void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
     }
 
     /* Left lobe, sub-byte pixels */
-    if (destRect->x & 0x7)
+    if ((srcFlags & MX_SURFACE_FLAG_PRESHIFT) &&
+        (destRect->x & 0x7))
     {
         int h = destRect->h;
         uint8_t pixelMask = ((0x100 >> (destRect->x & 0x7)) - 1);
@@ -91,13 +93,14 @@ void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
 }
 
 void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mask, const MXRect* destRect,
-                           int srcStride, int destStride, int maskStride)
+                           int srcStride, int destStride, int maskStride, int srcFlags)
 {
     int x;
     int w = ((destRect->w + (destRect->x & 0x7)) >> 3);
 
     /* Right lobe, sub-byte pixels */
-    if ((destRect->x + destRect->w) & 0x7)
+    if ((srcFlags & MX_SURFACE_FLAG_PRESHIFT) &&
+       ((destRect->x + destRect->w) & 0x7))
     {
         int h = destRect->h;
         uint8_t pixelMask = ~((0x100 >> ((destRect->x + destRect->w) & 0x7)) - 1);
@@ -115,7 +118,8 @@ void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mas
     }
 
     /* Left lobe, sub-byte pixels */
-    if (destRect->x & 0x7)
+    if ((srcFlags & MX_SURFACE_FLAG_PRESHIFT) &&
+        (destRect->x & 0x7))
     {
         int h = destRect->h;
         uint8_t pixelMask = ~((0x100 >> (destRect->x & 0x7)) - 1);

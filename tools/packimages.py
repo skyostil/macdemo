@@ -37,7 +37,8 @@ files = [
     ("../data/pedobear_run_front.png", BW, A),
     ("../data/mac_disk_load.png", BW, 0),
     ("../data/mac_disk_fire.png", BW, 0),
-    ("../data/disk_impact.png", BW, PS),
+    ("../data/disk_impact.png", BW, 0),
+    ("../data/disk_impact.png", BW, A),
     ("../data/pedobear_impact.png", BW, 0),
     ("../data/pedobear_impact.png", BW, A),
 ]
