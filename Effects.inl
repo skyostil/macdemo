@@ -12,6 +12,21 @@ static struct
     MXSurface* macOnStreet;
     MXSurface* pcOnStreet;
     MXSurface* macbookOnStreet;
+    MXSurface* pcCloseUp;
+    MXSurface* macCloseUp;
+    MXSurface* macbookCloseUp;
+    MXSurface* pcScreenBg;
+    MXSurface* macbookScreenBg;
+    MXSurface* guysOnStreet;
+    MXSurface* pedobearRunSide;
+    MXSurface* pedobearRunSideMask;
+    MXSurface* pedobearRunFront;
+    MXSurface* pedobearRunFrontMask;
+    MXSurface* macDiskLoad;
+    MXSurface* macDiskFire;
+    MXSurface* macDiskImpact;
+    MXSurface* pedobearImpact;
+    MXSurface* pedobearImpactMask;
 } img;
 
 static int x = 93, y = 17;
@@ -259,7 +274,7 @@ int pcRidicule(int time, int duration)
     DUMMY_EFFECT("PC ridicule");
 }
 
-int modernMacRidicule(int time, int duration)
+int macbookRidicule(int time, int duration)
 {
     DUMMY_EFFECT("Modern Mac ridicule");
 }
@@ -269,12 +284,12 @@ int sadMac(int time, int duration)
     DUMMY_EFFECT("Sad Mac");
 }
 
-int modernMacFxIntro(int time, int duration)
+int macbookFxIntro(int time, int duration)
 {
     DUMMY_EFFECT("Modern Mac Fx Intro");
 }
 
-int modernMacFx(int time, int duration)
+int macbookFx(int time, int duration)
 {
     DUMMY_EFFECT("Modern Mac Fx");
 }
@@ -289,7 +304,7 @@ int pcFx(int time, int duration)
     DUMMY_EFFECT("PC Fx");
 }
 
-int modernMacDare(int time, int duration)
+int macbookDare(int time, int duration)
 {
     DUMMY_EFFECT("Modern Mac Dare");
 }
@@ -329,7 +344,7 @@ int pcPanic(int time, int duration)
     DUMMY_EFFECT("PC Panic");
 }
 
-int modernMacPanic(int time, int duration)
+int macbookPanic(int time, int duration)
 {
     DUMMY_EFFECT("Modern Mac Panic");
 }
@@ -442,14 +457,14 @@ EffectEntry effects[] =
     {intro,                   4000, 0},
     {macOnStreet,             6000, 0},
     {guysSpotMac,             2000, 0},
+    {macbookRidicule,         1000, 0},
     {pcRidicule,              1000, 0},
-    {modernMacRidicule,       1000, 0},
     {sadMac,                  1000, 0},
-    {modernMacFxIntro,        1000, 0},
-    {modernMacFx,             1000, 0},
+    {macbookFxIntro,          1000, 0},
+    {macbookFx,               1000, 0},
     {pcFxIntro,               1000, 0},
     {pcFx,                    1000, 0},
-    {modernMacDare,           1000, 0},
+    {macbookDare,             1000, 0},
     {macFxLoading,            1000, 0},
     {macFx,                   1000, 0},
     {guysLol,                 1000, 0},
@@ -457,7 +472,7 @@ EffectEntry effects[] =
     {kidHelp,                 1000, 0},
     {pedobearRun,             1000, 0},
     {pcPanic,                 1000, 0},
-    {modernMacPanic,          1000, 0},
+    {macbookPanic,            1000, 0},
     {guysPanic,               1000, 0},
     {macHasPlan,              1000, 0},
     {macPlanLoading,          1000, 0},

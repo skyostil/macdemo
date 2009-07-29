@@ -25,6 +25,21 @@ files = [
     ("../data/mac_on_street.png", BW, PS),
     ("../data/pc_on_street.png", BW, PS),
     ("../data/macbook_on_street.png", BW, 0),
+    ("../data/pc_closeup.png", BW, 0),
+    ("../data/mac_closeup.png", BW, 0),
+    ("../data/macbook_closeup.png", BW, 0),
+    ("../data/pc_screen_bg.png", BW, C),
+    ("../data/macbook_screen_bg.png", BW, C),
+    ("../data/guys_on_street.png", BW, 0),
+    ("../data/pedobear_run_side.png", BW, 0),
+    ("../data/pedobear_run_side.png", BW, A),
+    ("../data/pedobear_run_front.png", BW, 0),
+    ("../data/pedobear_run_front.png", BW, A),
+    ("../data/mac_disk_load.png", BW, 0),
+    ("../data/mac_disk_fire.png", BW, 0),
+    ("../data/disk_impact.png", BW, PS),
+    ("../data/pedobear_impact.png", BW, 0),
+    ("../data/pedobear_impact.png", BW, A),
 ]
 
 def log2i(n):
@@ -62,8 +77,11 @@ def packImage(out, image, format, flags):
     out.write(header)
     data.tofile(out)
 
+    return planeSize * (8 if (flags & MX_SURFACE_FLAG_PRESHIFT) else 1)
+
 if __name__ == "__main__":
     out = open(packFile, "wb")
+    bytes = 0
     for f, format, flags in files:
         info = []
         if flags & MX_SURFACE_FLAG_PRESHIFT:
@@ -72,7 +90,7 @@ if __name__ == "__main__":
             info += ["mask"]
         image = Image.open(f)
         print f, image.size, "(%s)" % ", ".join(info) if info else ""
-        packImage(out, image, format, flags)
-    print ">>> %d bytes" % out.tell()
+        bytes += packImage(out, image, format, flags)
+    print ">>> %d bytes (%d on disk)" % (bytes, out.tell())
     out.close()
 

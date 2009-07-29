@@ -15,7 +15,10 @@
    inkscape:version="0.46"
    sodipodi:docname="mockup.svg"
    sodipodi:docbase="/home/tsoots/ohj/translations/po"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_closeup.png"
+   inkscape:export-xdpi="12.35"
+   inkscape:export-ydpi="12.35">
   <defs
      id="defs1903">
     <inkscape:perspective
@@ -33,9 +36,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="449.79467"
-     inkscape:cy="646.79163"
+     inkscape:zoom="0.24748737"
+     inkscape:cx="-72.018512"
+     inkscape:cy="-4124.7608"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      gridtolerance="10000"
@@ -113,45 +116,287 @@
        id="path3305"
        d="M 432.34896,297.57181 L 461.31836,280.84631"
        style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:0.47706424;fill-rule:nonzero;stroke:#00a226;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3345"
+       width="511.87503"
+       height="341.875"
+       x="117.81894"
+       y="988.50085"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_on_street_bg.png"
+       inkscape:export-xdpi="89.848938"
+       inkscape:export-ydpi="89.848938" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:0.47706424;fill-rule:nonzero;stroke:#00a226;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3477"
+       width="511.87503"
+       height="341.875"
+       x="160.24533"
+       y="1513.7802"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_on_street_bg.png"
+       inkscape:export-xdpi="89.848938"
+       inkscape:export-ydpi="89.848938" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:0.47706424;fill-rule:nonzero;stroke:#00a226;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3533"
+       width="511.87503"
+       height="341.875"
+       x="63.270679"
+       y="2509.7908"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/pc_screen_bg.png"
+       inkscape:export-xdpi="89.900002"
+       inkscape:export-ydpi="89.900002" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:0.47706424;fill-rule:nonzero;stroke:#00a226;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3555"
+       width="511.87503"
+       height="341.875"
+       x="49.418499"
+       y="2942.136"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/macbook_screen_bg.png"
+       inkscape:export-xdpi="89.900002"
+       inkscape:export-ydpi="89.900002" />
+    <g
+       style="display:inline"
+       id="g3557"
+       transform="matrix(2.2608127,0,0,2.2608127,1660.9524,-2149.6168)">
+      <g
+         transform="translate(-1355.8885,1666.3033)"
+         id="g3559"
+         style="display:inline">
+        <g
+           id="g3561"
+           transform="matrix(-3.2331782,0,0,3.2331782,2088.6655,-3351.58)"
+           style="fill:#ffffff;fill-opacity:1;display:inline"
+           inkscape:export-filename="/home/skyostil/proj/macdemo/data/pc_on_street.png"
+           inkscape:export-xdpi="90.333923"
+           inkscape:export-ydpi="90.333923">
+          <path
+             sodipodi:nodetypes="ccccc"
+             id="path3563"
+             d="M 386.991,1227.4996 L 435.06755,1227.4996 L 434.89767,1256.2414 L 387.70481,1256.2414 L 386.991,1227.4996 z"
+             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.54722476;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+          <path
+             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.54722476;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+             d="M 387.70481,1256.764 L 434.89767,1256.764 L 452.57727,1263.2963 L 368.93201,1263.2963 L 387.70481,1256.764 z"
+             id="path3565"
+             sodipodi:nodetypes="ccccc" />
+        </g>
+        <text
+           xml:space="preserve"
+           style="font-size:62.5746994px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+           x="950.71967"
+           y="520.45581"
+           id="text3567"
+           inkscape:export-filename="/home/skyostil/proj/macdemo/data/pc_on_street.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90"
+           transform="scale(0.7469511,1.3387758)"><tspan
+             sodipodi:role="line"
+             id="tspan3569"
+             x="950.71967"
+             y="520.45581">MAC</tspan></text>
+      </g>
+    </g>
+    <rect
+       style="opacity:1;fill:none;fill-opacity:0.47706424;fill-rule:nonzero;stroke:#00a226;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3625"
+       width="511.87503"
+       height="341.875"
+       x="46.919621"
+       y="3812.853"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/macbook_screen_bg.png"
+       inkscape:export-xdpi="89.900002"
+       inkscape:export-ydpi="89.900002" />
+    <g
+       id="g3702"
+       transform="translate(-58.571427,350.00001)"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/pedobear_run_front.png"
+       inkscape:export-xdpi="167.34"
+       inkscape:export-ydpi="167.34">
+      <path
+         transform="matrix(0.4919557,-6.5136496e-2,6.5136496e-2,0.4919557,16.095163,1873.2973)"
+         d="M 208.09142,3447.4338 A 38.385796,31.31473 0 1 1 131.31983,3447.4338 A 38.385796,31.31473 0 1 1 208.09142,3447.4338 z"
+         sodipodi:ry="31.31473"
+         sodipodi:rx="38.385796"
+         sodipodi:cy="3447.4338"
+         sodipodi:cx="169.70563"
+         id="path3591"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:8.06046867;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.4919557,-6.5136496e-2,6.5136496e-2,0.4919557,-70.017155,1842.8741)"
+         d="M 353.55338,3530.2664 A 21.213203,13.131983 0 1 1 311.12698,3530.2664 A 21.213203,13.131983 0 1 1 353.55338,3530.2664 z"
+         sodipodi:ry="13.131983"
+         sodipodi:rx="21.213203"
+         sodipodi:cy="3530.2664"
+         sodipodi:cx="332.34018"
+         id="path3691"
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:8.06046867;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         sodipodi:type="arc"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:8.06046867;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path3593"
+         sodipodi:cx="169.70563"
+         sodipodi:cy="3447.4338"
+         sodipodi:rx="38.385796"
+         sodipodi:ry="31.31473"
+         d="M 208.09142,3447.4338 A 38.385796,31.31473 0 1 1 131.31983,3447.4338 A 38.385796,31.31473 0 1 1 208.09142,3447.4338 z"
+         transform="matrix(0.4919557,-6.5136496e-2,6.5136496e-2,0.4919557,80.063212,1871.4013)" />
+      <path
+         inkscape:transform-center-y="-35.300592"
+         inkscape:transform-center-x="-12.648546"
+         transform="matrix(0.4863297,9.8724942e-2,-9.8724942e-2,0.4863297,712.46165,1800.0599)"
+         d="M 184.28571,3740.9336 A 61.42857,12.857142 0 1 1 61.42857,3740.9336 A 61.42857,12.857142 0 1 1 184.28571,3740.9336 z"
+         sodipodi:ry="12.857142"
+         sodipodi:rx="61.42857"
+         sodipodi:cy="3740.9336"
+         sodipodi:cx="122.85714"
+         id="path3613"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:8.06046772;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.1575535,0.4227946,-0.2885585,0.251514,1414.3325,2655.5207)"
+         d="M 291.42856,3753.0764 A 135.71428,137.85715 0 1 1 20,3753.0764 A 135.71428,137.85715 0 1 1 291.42856,3753.0764 z"
+         sodipodi:ry="137.85715"
+         sodipodi:rx="135.71428"
+         sodipodi:cy="3753.0764"
+         sodipodi:cx="155.71428"
+         id="path3611"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:9.94951344;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.4919557,-6.5136496e-2,6.5136496e-2,0.4919557,-4.3816768,1840.6684)"
+         d="M 353.55338,3530.2664 A 21.213203,13.131983 0 1 1 311.12698,3530.2664 A 21.213203,13.131983 0 1 1 353.55338,3530.2664 z"
+         sodipodi:ry="13.131983"
+         sodipodi:rx="21.213203"
+         sodipodi:cy="3530.2664"
+         sodipodi:cx="332.34018"
+         id="path3693"
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:8.06046867;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.4606494,-6.0991445e-2,6.0969893e-2,0.4604866,-27.150799,1968.5814)"
+         d="M 468.71078,3570.6724 A 111.11678,85.862968 0 1 1 246.47721,3570.6724 A 111.11678,85.862968 0 1 1 468.71078,3570.6724 z"
+         sodipodi:ry="85.862968"
+         sodipodi:rx="111.11678"
+         sodipodi:cy="3570.6724"
+         sodipodi:cx="357.59399"
+         id="path3585"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:8.60978889;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         sodipodi:nodetypes="csssc"
+         id="path3699"
+         d="M 365.21071,3609.8131 C 365.68287,3613.3792 362.51771,3617.873 356.75706,3618.6357 C 350.99641,3619.3984 348.10785,3615.0692 347.63569,3611.5032 C 347.16352,3607.937 350.90338,3612.5937 356.66402,3611.831 C 362.42467,3611.0682 364.73853,3606.2469 365.21071,3609.8131 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.00000048;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         transform="matrix(0.4919557,-6.5136496e-2,6.5136496e-2,0.4919557,-50.556259,1863.6835)"
+         d="M 353.55338,3530.2664 A 21.213203,13.131983 0 1 1 311.12698,3530.2664 A 21.213203,13.131983 0 1 1 353.55338,3530.2664 z"
+         sodipodi:ry="13.131983"
+         sodipodi:rx="21.213203"
+         sodipodi:cy="3530.2664"
+         sodipodi:cx="332.34018"
+         id="path3587"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:8.06046867;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.4919557,-6.5136496e-2,6.5136496e-2,0.4919557,-22.287737,1862.1982)"
+         d="M 353.55338,3530.2664 A 21.213203,13.131983 0 1 1 311.12698,3530.2664 A 21.213203,13.131983 0 1 1 353.55338,3530.2664 z"
+         sodipodi:ry="13.131983"
+         sodipodi:rx="21.213203"
+         sodipodi:cy="3530.2664"
+         sodipodi:cx="332.34018"
+         id="path3589"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:8.06046867;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         sodipodi:nodetypes="cc"
+         id="path3597"
+         d="M 333.93821,3601.9753 C 350.76623,3614.0093 364.21408,3610.5482 376.20843,3600.4239"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:2.9000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path3601"
+         d="M 341.45711,3563.014 L 352.41945,3565.6079"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:4.10000038;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:4.10000038;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 371.40572,3560.06 L 361.49614,3565.4173"
+         id="path3603" />
+      <path
+         transform="matrix(0.4919557,-6.5136496e-2,6.5136496e-2,0.4919557,-52.336883,1861.6924)"
+         d="M 371.42857,3565.9336 A 11.428572,3.5714285 0 1 1 348.57143,3565.9336 A 11.428572,3.5714285 0 1 1 371.42857,3565.9336 z"
+         sodipodi:ry="3.5714285"
+         sodipodi:rx="11.428572"
+         sodipodi:cy="3565.9336"
+         sodipodi:cx="360"
+         id="path3607"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:8.26198006;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         id="path3609"
+         d="M 357.39099,3592.4781 L 357.76136,3610.1282"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:4.10000038;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         transform="matrix(0.1731993,-0.4650433,0.4650433,0.1731993,-1449.6613,3063.9505)"
+         d="M 184.28571,3740.9336 A 61.42857,12.857142 0 1 1 61.42857,3740.9336 A 61.42857,12.857142 0 1 1 184.28571,3740.9336 z"
+         sodipodi:ry="12.857142"
+         sodipodi:rx="61.42857"
+         sodipodi:cy="3740.9336"
+         sodipodi:cx="122.85714"
+         id="path3615"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:8.06046772;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.3049663,0.118868,-0.1802191,0.4623681,957.01564,1917.9808)"
+         d="M 416.18286,3794.9263 A 47.477169,49.497475 0 1 1 321.22852,3794.9263 A 47.477169,49.497475 0 1 1 416.18286,3794.9263 z"
+         sodipodi:ry="49.497475"
+         sodipodi:rx="47.477169"
+         sodipodi:cy="3794.9263"
+         sodipodi:cx="368.70569"
+         id="path3619"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:9.92494965;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         inkscape:transform-center-y="-5.8526829"
+         inkscape:transform-center-x="20.241753"
+         transform="matrix(0.2332147,0.4380344,-0.2413658,0.128506,1158.6325,3070.2011)"
+         d="M 416.18286,3794.9263 A 47.477169,49.497475 0 1 1 321.22852,3794.9263 A 47.477169,49.497475 0 1 1 416.18286,3794.9263 z"
+         sodipodi:ry="49.497475"
+         sodipodi:rx="47.477169"
+         sodipodi:cy="3794.9263"
+         sodipodi:cx="368.70569"
+         id="path3621"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:10.85866451;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+    </g>
+    <rect
+       style="opacity:1;fill:none;fill-opacity:0.47706424;fill-rule:nonzero;stroke:#00a226;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3722"
+       width="511.87503"
+       height="341.875"
+       x="44.735355"
+       y="3410.9275"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/macbook_screen_bg.png"
+       inkscape:export-xdpi="89.900002"
+       inkscape:export-ydpi="89.900002" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:0.47706424;fill-rule:nonzero;stroke:#00a226;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3909"
+       width="511.87503"
+       height="341.875"
+       x="47.108234"
+       y="5148.3086"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/macbook_screen_bg.png"
+       inkscape:export-xdpi="89.900002"
+       inkscape:export-ydpi="89.900002" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="sprites"
      style="display:inline">
-    <g
-       style="opacity:1"
-       id="g3229"
-       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_on_street.png"
-       inkscape:export-xdpi="84.32"
-       inkscape:export-ydpi="84.32"
-       transform="translate(-101.42857,-18.571429)">
-      <path
-         inkscape:export-ydpi="84.570587"
-         inkscape:export-xdpi="84.570587"
-         inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
-         sodipodi:nodetypes="cccccc"
-         id="rect3210"
-         d="M 251.77457,522.72237 L 353.33079,522.72237 L 383.44899,540.19884 L 282.6165,679.40624 L 251.77457,662.97767 L 251.77457,522.72237 z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-      <rect
-         inkscape:export-ydpi="84.570587"
-         inkscape:export-xdpi="84.570587"
-         inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
-         y="539.86523"
-         x="282.48886"
-         height="140.25529"
-         width="101.55622"
-         id="rect3208"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-      <path
-         inkscape:export-ydpi="84.570587"
-         inkscape:export-xdpi="84.570587"
-         inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
-         id="path3219"
-         d="M 282.5,539.86218 L 251.42857,522.36218"
-         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    </g>
     <path
        style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        d="M 471.42856,448.07645 L 518.57141,448.07645 L 518.57141,649.50502 C 499.18551,663.56695 485.22071,656.89003 471.42856,649.50502 L 471.42856,448.07645 z"
@@ -180,42 +425,6 @@
        inkscape:export-filename="/home/skyostil/proj/macdemo/data/intro_mac.png"
        inkscape:export-xdpi="78.75"
        inkscape:export-ydpi="78.75" />
-    <g
-       id="g3324"
-       transform="matrix(-3.2331782,0,0,3.2331782,2088.6655,-3351.58)"
-       style="fill:#ffffff;fill-opacity:1;display:inline"
-       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_on_street_pc.png"
-       inkscape:export-xdpi="90.333923"
-       inkscape:export-ydpi="90.333923">
-      <path
-         sodipodi:nodetypes="ccccc"
-         id="path3326"
-         d="M 399.58365,1227.4996 L 446.77651,1227.4996 L 434.89767,1256.2414 L 387.70481,1256.2414 L 399.58365,1227.4996 z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.23717272;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-      <path
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.23717272;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         d="M 387.70481,1256.764 L 434.89767,1256.764 L 416.12486,1263.2963 L 368.93201,1263.2963 L 387.70481,1256.764 z"
-         id="path3328"
-         sodipodi:nodetypes="ccccc" />
-    </g>
-    <g
-       inkscape:export-ydpi="90.333923"
-       inkscape:export-xdpi="90.333923"
-       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_on_street_mmac.png"
-       style="fill:#ffffff;fill-opacity:1;display:inline"
-       transform="matrix(3.2331782,0,0,3.2331782,-254.37976,-3293.0087)"
-       id="g3330">
-      <path
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.23717272;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         d="M 399.58365,1227.4996 L 446.77651,1227.4996 L 434.89767,1256.2414 L 387.70481,1256.2414 L 399.58365,1227.4996 z"
-         id="path3332"
-         sodipodi:nodetypes="ccccc" />
-      <path
-         sodipodi:nodetypes="ccccc"
-         id="path3334"
-         d="M 387.70481,1256.764 L 434.89767,1256.764 L 416.12486,1263.2963 L 368.93201,1263.2963 L 387.70481,1256.764 z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.23717272;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    </g>
     <path
        sodipodi:nodetypes="cccccccccccccccccccccccccccccccccc"
        id="path3336"
@@ -246,5 +455,770 @@
        style="opacity:1;display:inline;fill:none;fill-opacity:0.75000000000000000;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;overflow:visible;enable-background:accumulate"
        d="M 59.658477,314.24191 L 694.03426,314.24191"
        id="path3277" />
+    <g
+       id="g3443"
+       transform="matrix(0.9959531,8.9874751e-2,-8.9874751e-2,0.9959531,74.50699,-248.05648)"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/macbook_on_street.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         id="path3353"
+         d="M 1133.7645,642.36753 C 1147.9834,642.36753 1159.5145,656.8367 1159.5145,674.68003 C 1159.5145,676.6211 1159.3075,678.48909 1159.0458,680.33628 C 1158.1835,680.28749 1157.4125,680.19448 1156.5458,680.14878 C 1150.4814,679.82902 1144.3086,679.59394 1138.0458,679.43003 C 1131.783,679.26612 1125.4444,679.18003 1119.0145,679.18003 C 1115.4202,679.18003 1111.9026,679.25326 1108.3583,679.30503 C 1108.182,677.7793 1108.0145,676.26674 1108.0145,674.68003 C 1108.0145,656.8367 1119.5456,642.36754 1133.7645,642.36753 z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         id="path3383"
+         d="M 1051.5457,682.55503 C 1051.1633,680.34043 1050.9208,678.03766 1050.9208,675.68003 C 1050.9208,657.8367 1062.4832,643.36751 1076.702,643.36753 C 1090.921,643.36753 1102.452,657.83673 1102.4521,675.68003 C 1102.4521,676.95026 1102.2532,678.16664 1102.1396,679.39878 C 1101.4185,679.41548 1100.6708,679.41122 1099.9521,679.43003 C 1093.6893,679.59394 1087.5164,679.82902 1081.452,680.14878 C 1071.0791,680.69571 1061.2142,681.58409 1051.5457,682.55503 z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         sodipodi:type="arc"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.42222226;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path3363"
+         sodipodi:cx="947.52307"
+         sodipodi:cy="881.64642"
+         sodipodi:rx="4.0406103"
+         sodipodi:ry="4.0406103"
+         d="M 951.56368,881.64642 A 4.0406103,4.0406103 0 1 1 943.48246,881.64642 A 4.0406103,4.0406103 0 1 1 951.56368,881.64642 z"
+         transform="matrix(-2.8125,0,0,2.8125,3728.9688,-1807.9837)" />
+      <path
+         transform="matrix(-2.5625,0,0,2.5625,3547.6463,-1589.0874)"
+         d="M 951.56368,881.64642 A 4.0406103,4.0406103 0 1 1 943.48246,881.64642 A 4.0406103,4.0406103 0 1 1 951.56368,881.64642 z"
+         sodipodi:ry="4.0406103"
+         sodipodi:rx="4.0406103"
+         sodipodi:cy="881.64642"
+         sodipodi:cx="947.52307"
+         id="path3361"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.56097555;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         id="path3381"
+         d="M 1119.0145,679.18003 C 1125.4444,679.18003 1131.783,679.26612 1138.0458,679.43003 C 1144.3086,679.59394 1150.4814,679.82902 1156.5458,680.14878 C 1157.4125,680.19448 1158.1835,680.28749 1159.0458,680.33628 C 1158.5841,683.5944 1157.7178,686.6793 1156.5458,689.52378 L 1111.7645,691.33628 C 1110.0357,687.72493 1108.8605,683.65171 1108.3583,679.30503 C 1111.9026,679.25326 1115.4202,679.18003 1119.0145,679.18003 z M 1102.1396,679.39878 C 1101.7254,683.88488 1100.5671,688.09557 1098.8582,691.83628 L 1055.2957,693.58628 C 1053.5407,690.28101 1052.2381,686.56331 1051.5457,682.55503 C 1061.2142,681.58409 1071.0792,680.69571 1081.452,680.14878 C 1087.5165,679.82902 1093.6893,679.59394 1099.9521,679.43003 C 1100.6708,679.41122 1101.4185,679.41548 1102.1396,679.39878 z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <g
+       id="g3421"
+       transform="matrix(0.9981963,6.0035526e-2,-4.7542257e-2,0.790474,144.94528,-250.82688)"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/macbook_on_street.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         id="path3387"
+         d="M 1055.0174,937.69117 C 1042.6284,959.51928 1013.3939,970.18441 984.55403,961.81559 C 972.89443,958.43212 962.87389,952.38378 955.13533,944.72935 C 959.7474,961.40739 972.27389,975.22584 989.64621,980.26701 C 1016.7728,988.13872 1045.4522,971.66953 1053.6741,943.5009 C 1054.2371,941.57188 1054.6715,939.62325 1055.0174,937.69117 z"
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.49494267;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         id="path3392"
+         d="M 973.78706,956.39769 L 972.27183,969.52967"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.12373579px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         id="path3394"
+         d="M 993.48503,964.47891 L 991.46473,979.6312"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.12373579px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         id="path3396"
+         d="M 1012.1729,963.97383 L 1012.1729,979.12612"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.12373579px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         id="path3398"
+         d="M 1030.8607,958.92307 L 1030.8607,973.57028"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.12373579px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g3458">
+      <g
+         inkscape:export-ydpi="90.333923"
+         inkscape:export-xdpi="90.333923"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/pc_on_street.png"
+         style="fill:#ffffff;fill-opacity:1;display:inline"
+         transform="matrix(-3.2331782,0,0,3.2331782,2088.6655,-3351.58)"
+         id="g3324">
+        <path
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.23717272;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="M 399.58365,1227.4996 L 446.77651,1227.4996 L 434.89767,1256.2414 L 387.70481,1256.2414 L 399.58365,1227.4996 z"
+           id="path3326"
+           sodipodi:nodetypes="ccccc" />
+        <path
+           sodipodi:nodetypes="ccccc"
+           id="path3328"
+           d="M 387.70481,1256.764 L 434.89767,1256.764 L 416.12486,1263.2963 L 368.93201,1263.2963 L 387.70481,1256.764 z"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.23717272;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      </g>
+      <text
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/pc_on_street.png"
+         id="text3450"
+         y="696.77362"
+         x="686.30341"
+         style="font-size:83.77349091px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="696.77362"
+           x="686.30341"
+           id="tspan3452"
+           sodipodi:role="line">PC</tspan></text>
+    </g>
+    <g
+       id="g3514">
+      <g
+         id="g3330"
+         transform="matrix(3.2331782,0,0,3.2331782,-248.66547,-3311.5801)"
+         style="fill:#ffffff;fill-opacity:1;display:inline"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/macbook_on_street.png"
+         inkscape:export-xdpi="90.333923"
+         inkscape:export-ydpi="90.333923">
+        <path
+           sodipodi:nodetypes="ccccc"
+           id="path3332"
+           d="M 399.58365,1227.4996 L 446.77651,1227.4996 L 434.89767,1256.2414 L 387.70481,1256.2414 L 399.58365,1227.4996 z"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.23717272;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+        <path
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.23717272;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="M 387.70481,1256.764 L 434.89767,1256.764 L 416.12486,1263.2963 L 368.93201,1263.2963 L 387.70481,1256.764 z"
+           id="path3334"
+           sodipodi:nodetypes="ccccc" />
+      </g>
+      <text
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/macbook_on_street.png"
+         id="text3454"
+         y="719.49628"
+         x="1040.3844"
+         style="font-size:52.61991119px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="719.49628"
+           x="1040.3844"
+           id="tspan3456"
+           sodipodi:role="line">MAC</tspan></text>
+    </g>
+    <g
+       style="display:inline"
+       id="g3465"
+       transform="matrix(1.6874335,0,0,1.6874335,-990.21714,102.22028)"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/pc_closeup.png"
+       inkscape:export-xdpi="107.49"
+       inkscape:export-ydpi="107.49">
+      <g
+         inkscape:export-ydpi="90.333923"
+         inkscape:export-xdpi="90.333923"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/pc_on_street.png"
+         style="fill:#ffffff;fill-opacity:1;display:inline"
+         transform="matrix(-3.2331782,0,0,3.2331782,2088.6655,-3351.58)"
+         id="g3467">
+        <path
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.73316824;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="M 399.58365,1227.4996 L 446.77651,1227.4996 L 434.89767,1256.2414 L 387.70481,1256.2414 L 399.58365,1227.4996 z"
+           id="path3469"
+           sodipodi:nodetypes="ccccc" />
+        <path
+           sodipodi:nodetypes="ccccc"
+           id="path3471"
+           d="M 387.70481,1256.764 L 434.89767,1256.764 L 416.12486,1263.2963 L 368.93201,1263.2963 L 387.70481,1256.764 z"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.73316824;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      </g>
+      <text
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/pc_on_street.png"
+         id="text3473"
+         y="696.77362"
+         x="686.30341"
+         style="font-size:83.77349091px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="696.77362"
+           x="686.30341"
+           id="tspan3475"
+           sodipodi:role="line">PC</tspan></text>
+    </g>
+    <g
+       id="g3481">
+      <g
+         transform="translate(-101.42857,-18.571429)"
+         inkscape:export-ydpi="84.32"
+         inkscape:export-xdpi="84.32"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_on_street.png"
+         id="g3229"
+         style="opacity:1">
+        <path
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="M 251.77457,522.72237 L 353.33079,522.72237 L 383.44899,540.19884 L 282.6165,679.40624 L 251.77457,662.97767 L 251.77457,522.72237 z"
+           id="rect3210"
+           sodipodi:nodetypes="cccccc"
+           inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
+           inkscape:export-xdpi="84.570587"
+           inkscape:export-ydpi="84.570587" />
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect3208"
+           width="101.55622"
+           height="140.25529"
+           x="282.48886"
+           y="539.86523"
+           inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
+           inkscape:export-xdpi="84.570587"
+           inkscape:export-ydpi="84.570587" />
+        <path
+           style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="M 282.5,539.86218 L 251.42857,522.36218"
+           id="path3219"
+           inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
+           inkscape:export-xdpi="84.570587"
+           inkscape:export-ydpi="84.570587" />
+      </g>
+      <rect
+         inkscape:export-ydpi="84"
+         inkscape:export-xdpi="84"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_on_street.png"
+         rx="9.0913725"
+         ry="9.0913725"
+         y="531.10315"
+         x="187.86807"
+         height="67.680222"
+         width="87.88327"
+         id="rect3479"
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <g
+       style="display:inline"
+       id="g3488"
+       transform="matrix(1.7420424,0,0,1.7420424,22.421139,748.89231)"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_closeup.png"
+       inkscape:export-xdpi="195.93161"
+       inkscape:export-ydpi="195.93161">
+      <g
+         transform="translate(-101.42857,-18.571429)"
+         inkscape:export-ydpi="84.32"
+         inkscape:export-xdpi="84.32"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_on_street.png"
+         id="g3490"
+         style="opacity:1">
+        <path
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.29615545;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="M 251.77457,522.72237 L 353.33079,522.72237 L 383.44899,540.19884 L 282.6165,679.40624 L 251.77457,662.97767 L 251.77457,522.72237 z"
+           id="path3492"
+           sodipodi:nodetypes="cccccc"
+           inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
+           inkscape:export-xdpi="84.570587"
+           inkscape:export-ydpi="84.570587" />
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.29615545;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect3494"
+           width="101.55622"
+           height="140.25529"
+           x="282.48886"
+           y="539.86523"
+           inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
+           inkscape:export-xdpi="84.570587"
+           inkscape:export-ydpi="84.570587" />
+        <path
+           style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:2.29615545;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="M 282.5,539.86218 L 251.42857,522.36218"
+           id="path3496"
+           inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
+           inkscape:export-xdpi="84.570587"
+           inkscape:export-ydpi="84.570587" />
+      </g>
+      <rect
+         inkscape:export-ydpi="84"
+         inkscape:export-xdpi="84"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_on_street.png"
+         rx="5.218801"
+         ry="5.218801"
+         y="531.10315"
+         x="187.86807"
+         height="67.680222"
+         width="87.88327"
+         id="rect3498"
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.29615545;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <rect
+       style="opacity:1;fill:none;fill-opacity:0.47706424;fill-rule:nonzero;stroke:#00a226;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3500"
+       width="511.87503"
+       height="341.875"
+       x="61.1334"
+       y="1999.1897"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_on_street_bg.png"
+       inkscape:export-xdpi="89.848938"
+       inkscape:export-ydpi="89.848938" />
+    <g
+       style="display:inline"
+       id="g3521"
+       transform="matrix(1.5930152,0,0,1.5930152,-1290.2406,1126.1921)"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/macbook_closeup.png"
+       inkscape:export-xdpi="113.79514"
+       inkscape:export-ydpi="113.79514">
+      <g
+         id="g3523"
+         transform="matrix(3.2331782,0,0,3.2331782,-248.66547,-3311.5801)"
+         style="fill:#ffffff;fill-opacity:1;display:inline"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/macbook_on_street.png"
+         inkscape:export-xdpi="90.333923"
+         inkscape:export-ydpi="90.333923">
+        <path
+           sodipodi:nodetypes="ccccc"
+           id="path3525"
+           d="M 399.58365,1227.4996 L 446.77651,1227.4996 L 434.89767,1256.2414 L 387.70481,1256.2414 L 399.58365,1227.4996 z"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.77662325;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+        <path
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.77662325;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="M 387.70481,1256.764 L 434.89767,1256.764 L 416.12486,1263.2963 L 368.93201,1263.2963 L 387.70481,1256.764 z"
+           id="path3527"
+           sodipodi:nodetypes="ccccc" />
+      </g>
+      <text
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/macbook_on_street.png"
+         id="text3529"
+         y="719.49628"
+         x="1040.3844"
+         style="font-size:52.61991119px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="719.49628"
+           x="1040.3844"
+           id="tspan3531"
+           sodipodi:role="line">MAC</tspan></text>
+    </g>
+    <g
+       id="g3547"
+       transform="matrix(2.2608127,0,0,2.2608127,1674.8046,-2581.9619)">
+      <g
+         transform="translate(-1355.8885,1666.3033)"
+         id="g3535"
+         style="display:inline">
+        <g
+           id="g3537"
+           transform="matrix(-3.2331782,0,0,3.2331782,2088.6655,-3351.58)"
+           style="fill:#ffffff;fill-opacity:1;display:inline"
+           inkscape:export-filename="/home/skyostil/proj/macdemo/data/pc_on_street.png"
+           inkscape:export-xdpi="90.333923"
+           inkscape:export-ydpi="90.333923">
+          <path
+             sodipodi:nodetypes="ccccc"
+             id="path3539"
+             d="M 386.991,1227.4996 L 435.06755,1227.4996 L 434.89767,1256.2414 L 387.70481,1256.2414 L 386.991,1227.4996 z"
+             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.54722476;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+          <path
+             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.54722476;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+             d="M 387.70481,1256.764 L 434.89767,1256.764 L 452.57727,1263.2963 L 368.93201,1263.2963 L 387.70481,1256.764 z"
+             id="path3541"
+             sodipodi:nodetypes="ccccc" />
+        </g>
+        <text
+           xml:space="preserve"
+           style="font-size:83.77349091px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+           x="706.50647"
+           y="696.77362"
+           id="text3543"
+           inkscape:export-filename="/home/skyostil/proj/macdemo/data/pc_on_street.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90"><tspan
+             sodipodi:role="line"
+             id="tspan3545"
+             x="706.50647"
+             y="696.77362">PC</tspan></text>
+      </g>
+    </g>
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3762"
+       width="36.57143"
+       height="57.14286"
+       x="170.70201"
+       y="3588.3904"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/guys_on_street.png"
+       inkscape:export-xdpi="83.169998"
+       inkscape:export-ydpi="83.169998" />
+    <g
+       id="g3766"
+       transform="matrix(-1.1512845,0,0,1.1512845,763.64924,2168.207)"
+       style="fill:#000000;fill-opacity:1;display:inline"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/guys_on_street.png"
+       inkscape:export-xdpi="83.169998"
+       inkscape:export-ydpi="83.169998">
+      <path
+         sodipodi:nodetypes="ccccc"
+         id="path3768"
+         d="M 399.58365,1227.4996 L 446.77651,1227.4996 L 434.89767,1256.2414 L 387.70481,1256.2414 L 399.58365,1227.4996 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.47438002;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.47438002;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 387.70481,1256.764 L 434.89767,1256.764 L 416.12486,1263.2963 L 368.93201,1263.2963 L 387.70481,1256.764 z"
+         id="path3770"
+         sodipodi:nodetypes="ccccc" />
+    </g>
+    <g
+       inkscape:export-ydpi="83.169998"
+       inkscape:export-xdpi="83.169998"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/guys_on_street.png"
+       style="fill:#000000;fill-opacity:1;display:inline"
+       transform="matrix(1.1512845,0,0,1.1512845,-68.637957,2182.4503)"
+       id="g3778">
+      <path
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.47438002;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 399.58365,1227.4996 L 446.77651,1227.4996 L 434.89767,1256.2414 L 387.70481,1256.2414 L 399.58365,1227.4996 z"
+         id="path3780"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         sodipodi:nodetypes="ccccc"
+         id="path3782"
+         d="M 387.70481,1256.764 L 434.89767,1256.764 L 416.12486,1263.2963 L 368.93201,1263.2963 L 387.70481,1256.764 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.47438002;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <g
+       id="g3842"
+       transform="translate(232.14286,-322.85714)"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/pedobear_run_side.png"
+       inkscape:export-xdpi="169.31"
+       inkscape:export-ydpi="169.31">
+      <path
+         transform="matrix(0.3200123,0.5407719,-0.5395884,0.3207142,1973.8811,2848.9191)"
+         d="M -226.27418,4106.0532 A 21.213203,51.51778 0 1 1 -268.70058,4106.0532 A 21.213203,51.51778 0 1 1 -226.27418,4106.0532 z"
+         sodipodi:ry="51.51778"
+         sodipodi:rx="21.213203"
+         sodipodi:cy="4106.0532"
+         sodipodi:cx="-247.48738"
+         id="path3808"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <g
+         transform="matrix(0.5990801,-0.1865979,0.1861895,0.6003941,-815.82154,1549.9356)"
+         id="g3816"
+         style="opacity:1;display:inline">
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758423;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect3814"
+           width="98.994949"
+           height="66.670059"
+           x="-388.90872"
+           y="3861.5962" />
+        <path
+           sodipodi:type="arc"
+           style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path3812"
+           sodipodi:cx="-391.43411"
+           sodipodi:cy="3894.9314"
+           sodipodi:rx="19.697975"
+           sodipodi:ry="33.335033"
+           d="M -371.73614,3894.9314 A 19.697975,33.335033 0 1 1 -411.13209,3894.9314 A 19.697975,33.335033 0 1 1 -371.73614,3894.9314 z" />
+      </g>
+      <path
+         transform="matrix(0.584684,0.2278928,-0.227394,0.5859665,794.39905,1712.1845)"
+         d="M -220.21326,4009.0786 A 56.568542,95.964493 0 1 1 -333.35034,4009.0786 A 56.568542,95.964493 0 1 1 -220.21326,4009.0786 z"
+         sodipodi:ry="95.964493"
+         sodipodi:rx="56.568542"
+         sodipodi:cy="4009.0786"
+         sodipodi:cx="-276.7818"
+         id="path3802"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.6273463,0,0,0.6287224,-119.69178,1472.2977)"
+         d="M -219.2031,3857.0508 A 12.626906,14.647212 0 1 1 -244.45691,3857.0508 A 12.626906,14.647212 0 1 1 -219.2031,3857.0508 z"
+         sodipodi:ry="14.647212"
+         sodipodi:rx="12.626906"
+         sodipodi:cy="3857.0508"
+         sodipodi:cx="-231.83"
+         id="path3822"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.6273463,0,0,0.6287224,-105.43317,1477.6961)"
+         d="M -187.88838,3895.9417 A 48.487324,49.497475 0 1 1 -284.86303,3895.9417 A 48.487324,49.497475 0 1 1 -187.88838,3895.9417 z"
+         sodipodi:ry="49.497475"
+         sodipodi:rx="48.487324"
+         sodipodi:cy="3895.9417"
+         sodipodi:cx="-236.3757"
+         id="path3804"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.5823378,-0.2338487,0.2333369,0.5836152,-1072.1312,1587.2514)"
+         d="M -226.27418,4106.0532 A 21.213203,51.51778 0 1 1 -268.70058,4106.0532 A 21.213203,51.51778 0 1 1 -226.27418,4106.0532 z"
+         sodipodi:ry="51.51778"
+         sodipodi:rx="21.213203"
+         sodipodi:cy="4106.0532"
+         sodipodi:cx="-247.48738"
+         id="path3806"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.4458867,-0.1802445,0.1786623,0.4498353,-877.60186,2093.3006)"
+         d="M -226.27418,4106.0532 A 21.213203,51.51778 0 1 1 -268.70058,4106.0532 A 21.213203,51.51778 0 1 1 -226.27418,4106.0532 z"
+         sodipodi:ry="51.51778"
+         sodipodi:rx="21.213203"
+         sodipodi:cy="4106.0532"
+         sodipodi:cx="-247.48738"
+         id="path3810"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:6.01072168;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.6273463,0,0,0.6287224,-105.43317,1477.6961)"
+         d="M -219.2031,3857.0508 A 12.626906,14.647212 0 1 1 -244.45691,3857.0508 A 12.626906,14.647212 0 1 1 -219.2031,3857.0508 z"
+         sodipodi:ry="14.647212"
+         sodipodi:rx="12.626906"
+         sodipodi:cy="3857.0508"
+         sodipodi:cx="-231.83"
+         id="path3820"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.6273463,0,0,0.6287224,-106.06689,1481.5067)"
+         d="M -193.94928,3879.2742 A 9.5964489,4.5456862 0 1 1 -213.14218,3879.2742 A 9.5964489,4.5456862 0 1 1 -193.94928,3879.2742 z"
+         sodipodi:ry="4.5456862"
+         sodipodi:rx="9.5964489"
+         sodipodi:cy="3879.2742"
+         sodipodi:cx="-203.54573"
+         id="path3826"
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.6273463,0,0,0.6287224,-107.96804,1477.061)"
+         d="M -172.73609,3904.5278 A 10.101525,6.5659914 0 1 1 -192.93914,3904.5278 A 10.101525,6.5659914 0 1 1 -172.73609,3904.5278 z"
+         sodipodi:ry="6.5659914"
+         sodipodi:rx="10.101525"
+         sodipodi:cy="3904.5278"
+         sodipodi:cx="-182.83762"
+         id="path3828"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+    </g>
+    <rect
+       style="opacity:1;fill:none;fill-opacity:0.47706424;fill-rule:nonzero;stroke:#00a226;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3856"
+       width="511.87503"
+       height="341.875"
+       x="43.775326"
+       y="4248.1367"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_on_street_bg.png"
+       inkscape:export-xdpi="89.848938"
+       inkscape:export-ydpi="89.848938" />
+    <g
+       id="g3860"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_disk_load.png"
+       inkscape:export-xdpi="89.540001"
+       inkscape:export-ydpi="89.540001"
+       transform="matrix(1.7420424,0,0,1.7420424,-245.02745,3374.4678)">
+      <path
+         inkscape:export-ydpi="84.570587"
+         inkscape:export-xdpi="84.570587"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
+         sodipodi:nodetypes="cccccc"
+         id="path3862"
+         d="M 251.77457,522.72237 L 353.33079,522.72237 L 383.44899,540.19884 L 282.6165,679.40624 L 251.77457,662.97767 C 230.04106,616.90508 239.03144,569.87236 251.77457,522.72237 z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.29615545;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         id="rect3864"
+         d="M 282.48886,539.86523 L 384.04508,539.86523 C 357.82121,590.14713 353.48111,637.48314 384.04508,680.12053 L 282.48886,680.12053 C 259.18477,638.74663 263.23091,591.06114 282.48886,539.86523 z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.29615545;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         inkscape:export-ydpi="84.570587"
+         inkscape:export-xdpi="84.570587"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
+         id="path3866"
+         d="M 282.5,539.86218 L 251.42857,522.36218"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:2.29615545;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <path
+       sodipodi:nodetypes="ccccccccc"
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="M 260.88807,4325.5956 L 395.80172,4325.5956 C 400.83834,4325.5956 404.89309,4329.6503 404.89309,4334.687 C 388.73357,4375.7528 374.70191,4414.6909 379.1788,4435.1203 C 379.1788,4440.157 375.12406,4444.2117 370.08743,4444.2117 L 241.60236,4444.2117 C 236.56575,4444.2117 232.51099,4440.157 232.51099,4435.1203 C 226.25435,4397.5985 238.16216,4366.7839 251.7967,4334.687 C 251.7967,4329.6503 255.85146,4325.5956 260.88807,4325.5956 z"
+       id="rect3868"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_disk_load.png"
+       inkscape:export-xdpi="89.540001"
+       inkscape:export-ydpi="89.540001" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:0.47706424;fill-rule:nonzero;stroke:#00a226;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3897"
+       width="511.87503"
+       height="341.875"
+       x="45.533108"
+       y="4651.8032"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_on_street_bg.png"
+       inkscape:export-xdpi="89.848938"
+       inkscape:export-ydpi="89.848938" />
+    <g
+       style="display:inline"
+       id="g3899"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_disk_fire.png"
+       inkscape:export-xdpi="84.040001"
+       inkscape:export-ydpi="84.040001"
+       transform="matrix(1.7420424,0,0,1.7420424,-243.26966,3778.1343)">
+      <path
+         inkscape:export-ydpi="84.570587"
+         inkscape:export-xdpi="84.570587"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
+         sodipodi:nodetypes="cccccc"
+         id="path3901"
+         d="M 251.77457,522.72237 L 353.33079,522.72237 L 383.44899,540.19884 C 349.83816,586.60131 348.06154,653.04753 282.6165,679.40624 L 251.77457,662.97767 C 287.02826,643.79792 278.68977,588.58753 251.77457,522.72237 z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.29615545;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         id="path3903"
+         d="M 282.48886,539.86523 L 384.04508,539.86523 C 421.43044,600.34861 405.52984,645.83058 384.04508,680.12053 L 282.48886,680.12053 C 322.58364,650.06786 322.26148,601.60231 282.48886,539.86523 z"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.29615545;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         inkscape:export-ydpi="84.570587"
+         inkscape:export-xdpi="84.570587"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/streetmac.png"
+         id="path3905"
+         d="M 282.5,539.86218 L 251.42857,522.36218"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:2.29615545;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <path
+       sodipodi:nodetypes="ccccccccc"
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="M 416.56184,4728.5478 L 281.64819,4728.5478 C 276.61157,4728.5478 272.55682,4732.6025 272.55682,4737.6392 C 288.71634,4778.705 310.60514,4817.6431 306.12825,4838.0725 C 306.12825,4843.1092 310.18299,4847.1639 315.21962,4847.1639 L 435.84755,4847.1639 C 440.88416,4847.1639 444.93892,4843.1092 444.93892,4838.0725 C 451.19556,4800.5507 439.28775,4769.7361 425.65321,4737.6392 C 425.65321,4732.6025 421.59845,4728.5478 416.56184,4728.5478 z"
+       id="path3907"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/mac_disk_fire.png"
+       inkscape:export-xdpi="84.040001"
+       inkscape:export-ydpi="84.040001" />
+    <path
+       sodipodi:type="star"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.9000001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3960"
+       sodipodi:sides="5"
+       sodipodi:cx="295.71429"
+       sodipodi:cy="5182.3623"
+       sodipodi:r1="84.140312"
+       sodipodi:r2="33.658821"
+       sodipodi:arg1="0.70125992"
+       sodipodi:arg2="1.3295785"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 360.00001,5236.648 L 303.75489,5215.0466 L 263.95089,5260.2769 L 267.11434,5200.1094 L 211.79772,5176.2304 L 269.99795,5160.6463 L 275.6144,5100.658 L 308.42068,5151.194 L 367.20846,5137.9982 L 329.28362,5184.8153 L 360.00001,5236.648 z"
+       transform="translate(47.142857,75.714285)" />
+    <g
+       id="g3973">
+      <g
+         transform="translate(10,10)"
+         id="g3949">
+        <path
+           sodipodi:type="arc"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path3913"
+           sodipodi:cx="-247.48738"
+           sodipodi:cy="4106.0532"
+           sodipodi:rx="21.213203"
+           sodipodi:ry="51.51778"
+           d="M -226.27418,4106.0532 A 21.213203,51.51778 0 1 1 -268.70058,4106.0532 A 21.213203,51.51778 0 1 1 -226.27418,4106.0532 z"
+           transform="matrix(9.4879775e-2,0.6211602,-0.6203245,9.5972909e-2,2818.9961,5108.8497)" />
+        <path
+           sodipodi:type="arc"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path3921"
+           sodipodi:cx="-276.7818"
+           sodipodi:cy="4009.0786"
+           sodipodi:rx="56.568542"
+           sodipodi:ry="95.964493"
+           d="M -220.21326,4009.0786 A 56.568542,95.964493 0 1 1 -333.35034,4009.0786 A 56.568542,95.964493 0 1 1 -220.21326,4009.0786 z"
+           transform="matrix(0.457256,0.429776,-0.4297923,0.458632,2149.4312,3613.8492)" />
+        <path
+           sodipodi:type="arc"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path3923"
+           sodipodi:cx="-231.83"
+           sodipodi:cy="3857.0508"
+           sodipodi:rx="12.626906"
+           sodipodi:ry="14.647212"
+           d="M -219.2031,3857.0508 A 12.626906,14.647212 0 1 1 -244.45691,3857.0508 A 12.626906,14.647212 0 1 1 -219.2031,3857.0508 z"
+           transform="matrix(0.5819473,0.2343091,-0.2348231,0.5832238,1391.0862,3049.9162)" />
+        <path
+           sodipodi:type="arc"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path3925"
+           sodipodi:cx="-236.3757"
+           sodipodi:cy="3895.9417"
+           sodipodi:rx="48.487324"
+           sodipodi:ry="49.497475"
+           d="M -187.88838,3895.9417 A 48.487324,49.497475 0 1 1 -284.86303,3895.9417 A 48.487324,49.497475 0 1 1 -187.88838,3895.9417 z"
+           transform="matrix(0.5819473,0.2343091,-0.2348231,0.5832238,1402.2967,3060.2494)" />
+        <path
+           sodipodi:type="arc"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path3927"
+           sodipodi:cx="-247.48738"
+           sodipodi:cy="4106.0532"
+           sodipodi:rx="21.213203"
+           sodipodi:ry="51.51778"
+           d="M -226.27418,4106.0532 A 21.213203,51.51778 0 1 1 -268.70058,4106.0532 A 21.213203,51.51778 0 1 1 -226.27418,4106.0532 z"
+           transform="matrix(0.6275366,5.7299344e-4,-1.5248554e-3,0.6285304,464.6374,2800.822)" />
+        <path
+           sodipodi:type="arc"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:6.01072168;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path3929"
+           sodipodi:cx="-247.48738"
+           sodipodi:cy="4106.0532"
+           sodipodi:rx="21.213203"
+           sodipodi:ry="51.51778"
+           d="M -226.27418,4106.0532 A 21.213203,51.51778 0 1 1 -268.70058,4106.0532 A 21.213203,51.51778 0 1 1 -226.27418,4106.0532 z"
+           transform="matrix(0.4809393,-6.6543592e-4,-2.2770379e-3,0.4840112,456.08368,3342.9053)" />
+        <path
+           sodipodi:type="arc"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path3931"
+           sodipodi:cx="-231.83"
+           sodipodi:cy="3857.0508"
+           sodipodi:rx="12.626906"
+           sodipodi:ry="14.647212"
+           d="M -219.2031,3857.0508 A 12.626906,14.647212 0 1 1 -244.45691,3857.0508 A 12.626906,14.647212 0 1 1 -219.2031,3857.0508 z"
+           transform="matrix(0.5819473,0.2343091,-0.2348231,0.5832238,1402.2967,3060.2494)" />
+        <path
+           sodipodi:type="arc"
+           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path3933"
+           sodipodi:cx="-203.54573"
+           sodipodi:cy="3879.2742"
+           sodipodi:rx="9.5964489"
+           sodipodi:ry="4.5456862"
+           d="M -193.94928,3879.2742 A 9.5964489,4.5456862 0 1 1 -213.14218,3879.2742 A 9.5964489,4.5456862 0 1 1 -193.94928,3879.2742 z"
+           transform="matrix(0.5819473,0.2343091,-0.2348231,0.5832238,1400.2856,3063.5475)" />
+        <path
+           sodipodi:type="arc"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.61758471;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path3935"
+           sodipodi:cx="-182.83762"
+           sodipodi:cy="3904.5278"
+           sodipodi:rx="10.101525"
+           sodipodi:ry="6.5659914"
+           d="M -172.73609,3904.5278 A 10.101525,6.5659914 0 1 1 -192.93914,3904.5278 A 10.101525,6.5659914 0 1 1 -172.73609,3904.5278 z"
+           transform="matrix(0.5819473,0.2343091,-0.2348231,0.5832238,1400.1824,3058.7135)" />
+      </g>
+    </g>
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.9000001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3962"
+       width="47.142857"
+       height="47.142857"
+       x="-2391.1174"
+       y="4611.5659"
+       transform="matrix(0.8649997,-0.5017723,0.5017723,0.8649997,0,0)" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.9000001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3964"
+       sodipodi:cx="272.85715"
+       sodipodi:cy="5193.0767"
+       sodipodi:rx="7.1428571"
+       sodipodi:ry="7.1428571"
+       d="M 280,5193.0767 A 7.1428571,7.1428571 0 1 1 265.71429,5193.0767 A 7.1428571,7.1428571 0 1 1 280,5193.0767 z"
+       transform="translate(6.2626907,6.9336478)" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.9000001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3966"
+       width="18.571428"
+       height="12.142858"
+       x="-2368.0557"
+       y="4616.5806"
+       transform="matrix(0.8660254,-0.5,0.5,0.8660254,0,0)" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.90920186;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3971"
+       width="0.83240288"
+       height="4.1073465"
+       x="-2113.6289"
+       y="4505.002"
+       transform="matrix(0.8355607,-0.5493981,0.4521697,0.8919319,0,0)" />
   </g>
 </svg>
