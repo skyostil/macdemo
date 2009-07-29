@@ -5,8 +5,8 @@
 #include "Config.h"
 #include "Demo.h"
 #include "Font.h"
-#include "engine/Video.h"
-#include "engine/Audio.h"
+#include "Video.h"
+#include "Audio.h"
 #include "Mixer.h"
 #include "ModPlayer.h"
 #include "monoxide.h"
@@ -19,8 +19,8 @@ MXSurface* loadImage(FILE* packFile);
 /*
  * Configuration
  */
-#define PACKFILE        "data/images.dat"
-#define SONGFILE        "data/macmod.mod"
+#define PACKFILE        "images.dat"
+#define SONGFILE        "macmod.mod"
 #define SCREEN_WIDTH    512
 #define SCREEN_HEIGHT   342
 
@@ -32,9 +32,9 @@ static Audio*     audio = 0;
 static Video*     video = 0;
 static MXSurface* physicalScreen = 0;
 static Mixer      mixer(22050, 4);
-static ModPlayer  player(&mixer);
+//static ModPlayer  player(&mixer);
 
-#include "Effects.inl"
+#include "Effects.h"
 
 void setup()
 {
@@ -47,9 +47,9 @@ void setup()
     //Audio(8, 22050, 0, 512);
     audio = new Audio(8, 22050, 0, 2048);
     
-    assert(player.load(SONGFILE));
+    //assert(player.load(SONGFILE));
     
-    player.play();
+    //player.play();
     //audio->start(&mixer);
 
     setupEffects();
@@ -72,11 +72,30 @@ void flipScreen()
     video->swapBuffers();
 }
 
+#ifdef BIG_ENDIAN
+uint32_t swapEndian(uint32_t x)
+{
+	return (x >> 24) |
+	       ((x << 8) & 0x00ff0000) |
+	       ((x >> 8) & 0x0000ff00) |
+	       (x << 24);
+}
+#endif
+
 MXSurface* loadImage(FILE* packFile)
 {
     MXSurface header;
     MXSurface* surf;
     assert(fread(&header, sizeof(header) - sizeof(void*), 1, packFile) == 1);
+    
+#ifdef BIG_ENDIAN
+	header.w = swapEndian(header.w);
+	header.h = swapEndian(header.h);
+	header.pixelFormat = (MXPixelFormat)swapEndian(header.pixelFormat);
+	header.flags = swapEndian(header.flags);
+	header.planeSize = swapEndian(header.planeSize);
+#endif
+    
     surf = mxCreateSurface(header.w, header.h, header.pixelFormat, header.flags);
 
     if (!surf)

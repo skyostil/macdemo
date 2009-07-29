@@ -5,16 +5,9 @@
 #ifndef DEMO_H
 #define DEMO_H
 
-class Effect
-{
-public:
-    typedef int (*Func)(int time, int duration);
+#include "Config.h"
 
-    Effect(Func f);
-    virtual int operator()(int time, int duration);
-private:
-    Func m_func;
-};
+typedef int (*Effect)(int time, int duration);
 
 enum EffectFlags
 {

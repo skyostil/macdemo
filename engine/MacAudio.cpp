@@ -16,11 +16,11 @@ extern "C"
 #endif
 }
 
-static Mixer*                mixer = NULL;
+static AudioRenderer*        renderer = NULL;
 static SndChannelPtr         soundChannel = NULL;
 static SndDoubleBufferHeader doubleHeader;
 static SampleChunk*          currentChunk = NULL;
-static int                   mixFreq, bufferSize;
+static int                   currentMixFreq, bufferSize, bits;
 static bool                  stereo;
 static SampleFormat*         sampleFormat;
 
@@ -32,7 +32,7 @@ static pascal void soundCallback(SndChannelPtr soundChannel, SndDoubleBufferPtr 
 #endif
 
 	currentChunk->data = (Sample8*)&doubleBuffer->dbSoundData[0];
-	mixer->render(currentChunk);
+	renderer->render(currentChunk);
 #if 0
 	if (doubleHeader.dbhNumChannels == 2) written>>=1;
 	if (doubleHeader.dbhSampleSize == 16) written>>=1
@@ -47,6 +47,8 @@ static pascal void soundCallback(SndChannelPtr soundChannel, SndDoubleBufferPtr 
 
 Audio::Audio(int bits_, int mixFreq_, bool stereo_, int bufferSize_)
 {
+	return;
+	
 	OSErr err,iErr;
 	int i;
 	SndDoubleBufferPtr doubleBuffer;
@@ -57,8 +59,8 @@ Audio::Audio(int bits_, int mixFreq_, bool stereo_, int bufferSize_)
 	Boolean NewSoundManager, NewSoundManager31;
 
 	NewSoundManager31 = NewSoundManager = false;
-	mixFreq = mixFreq_;
 	stereo = stereo_;
+	currentMixFreq = mixFreq_;
 	bits = bits_;
 	bufferSize = bufferSize_;
 
@@ -104,7 +106,7 @@ Audio::Audio(int bits_, int mixFreq_, bool stereo_, int bufferSize_)
 //	}
 #endif
 
-	switch (mixFreq) {
+	switch (currentMixFreq) {
 //		case 48000:rate=rate48khz;break;
 		case 44100:rate=rate44khz;break;
 		case 22254:rate=rate22khz;break;
@@ -124,8 +126,8 @@ Audio::Audio(int bits_, int mixFreq_, bool stereo_, int bufferSize_)
 	if (rate > maxrate)
 		rate = maxrate;
 		
-	if (mixFreq > (maxrate >> 16))
-		mixFreq = maxrate >> 16;
+	if (currentMixFreq > (maxrate >> 16))
+		currentMixFreq = maxrate >> 16;
 
 	err = SndNewChannel(&soundChannel, sampledSynth,
 	                   stereo ? initStereo : initMono, NULL);
@@ -162,7 +164,7 @@ Audio::Audio(int bits_, int mixFreq_, bool stereo_, int bufferSize_)
 	
 	sampleFormat = new SampleFormat(bits, stereo ? 2 : 1);
 	currentChunk = new SampleChunk(sampleFormat, NULL, 
-	                               bufferSize / sampleFormat->bytesPerSample, mixFreq);
+	                               bufferSize / sampleFormat->bytesPerSample, currentMixFreq);
 }
 
 Audio::~Audio(void)
@@ -187,9 +189,9 @@ Audio::~Audio(void)
 	currentChunk = NULL;
 }
 
-void Audio::start(Mixer* mixer_)
+void Audio::start(AudioRenderer* renderer_)
 {
-	mixer = mixer_;
+	renderer = renderer_;
 
 	soundCallback(soundChannel,doubleHeader.dbhBufferPtr[0]);
 	soundCallback(soundChannel,doubleHeader.dbhBufferPtr[1]);
@@ -210,4 +212,9 @@ void Audio::stop(void)
 	cmd.param1=0;
 	cmd.param2=0;
 	SndDoImmediate(soundChannel,&cmd);
+}
+
+int Audio::mixFreq()
+{
+    return currentMixFreq;
 }

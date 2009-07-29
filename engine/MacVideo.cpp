@@ -2,9 +2,9 @@
  * Copyright (C) 2009 Sami Kyostila <sami.kyostila@unrealvoodoo.org>
  */
 #include "Video.h"
-#include "../Config.h"
+#include "Config.h"
 
-#define VBL_RATE 4
+#define VBL_RATE 1
 #if 0
 #define SCREEN_WIDTH 	(qd.screenBits.bounds.right - qd.screenBits.bounds.left)
 #define SCREEN_HEIGHT	(qd.screenBits.bounds.bottom - qd.screenBits.bounds.top)
@@ -14,6 +14,8 @@
 #endif
 
 #include <Retrace.h>
+#include <Timer.h>
+
 #ifndef GENERATING68K
 #error 68k only
 #endif
@@ -118,7 +120,18 @@ int Video::screenStride()
     return screenWidth() >> 3;
 }
 
-};
+int Video::ticks()
+{
+	UnsignedWide t;
+	Microseconds(&t);
+    return t.lo / 1000;
+}
 
-#endif
+int Video::processInput()
+{
+	return !Button();
+}
 
+void Video::swapBuffers()
+{
+}

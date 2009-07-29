@@ -24,6 +24,7 @@ include_directories(${SDL_INCLUDE_DIR})
 include_directories(${SDLIMAGE_INCLUDE_DIR})
 include_directories(engine)
 include_directories(monoxide)
+include_directories(.)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
 add_definitions(-DHAVE_STDINT_H)

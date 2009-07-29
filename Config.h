@@ -7,10 +7,10 @@
 #if defined(__GNUC__)
 #   define PACKED __attribute__((packed)) 
 #else
+#   define BIG_ENDIAN
 #   define CODEWARRIOR
 #   define PACKED
 #   define GENERATING68K 1
-#   define USE_BACKBUFFER
 #endif
 
 #define CT_ASSERT(expr) switch(0){case 0: case expr:;}

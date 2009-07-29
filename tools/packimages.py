@@ -10,7 +10,7 @@ MX_SURFACE_FLAG_PRESHIFT = 0x1
 MX_SURFACE_FLAG_RLE = 0x8
 MX_PACK_ALPHA_CHANNEL = (0x1 << 32)
 
-packFile = "../data/images.dat"
+packFile = "../images.dat"
 
 BW = MX_PIXELFORMAT_I1
 PS = MX_SURFACE_FLAG_PRESHIFT

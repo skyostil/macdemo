@@ -4,6 +4,8 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 
+#include "Config.h"
+
 class Video
 {
 public:

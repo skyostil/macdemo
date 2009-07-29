@@ -59,13 +59,3 @@ void Timeline::reset()
     m_effects = m_firstEffect;
     m_baseTime = 0;
 }
-
-Effect::Effect(Effect::Func f):
-    m_func(f)
-{
-}
-
-int Effect::operator()(int time, int duration)
-{
-    return m_func(time, duration);
-}
