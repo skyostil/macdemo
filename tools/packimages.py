@@ -6,7 +6,7 @@ MX_PIXELFORMAT_I1 = 1
 MX_SURFACE_FLAG_PRESHIFT = 0x1
 MX_PACK_ALPHA_CHANNEL = (0x1 << 32)
 
-packFile = "images.dat"
+packFile = "../data/images.dat"
 
 files = [
     ("../data/star.png", MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT),

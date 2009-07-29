@@ -9,12 +9,14 @@
 #include "engine/Audio.h"
 #include "monoxide.h"
 #include <stdio.h>
+#include <assert.h>
 
 void flipScreen();
 
 /*
  * Configuration
  */
+#define PACKFILE        "data/images.dat"
 #define SCREEN_WIDTH    512
 #define SCREEN_HEIGHT   342
 
@@ -25,6 +27,24 @@ static MXSurface* screen = 0;
 static Audio*     audio = 0;
 static Video*     video = 0;
 static MXSurface* physicalScreen = 0;
+
+static MXSurface* loadImage(FILE* packFile)
+{
+    MXSurface header;
+    MXSurface* surf;
+    assert(fread(&header, sizeof(header) - sizeof(void*), 1, packFile) == 1);
+    surf = mxCreateSurface(header.w, header.h, header.pixelFormat, header.flags);
+
+    if (!surf)
+    {
+        return surf;
+    }
+
+    assert(fread(surf->pixels, header.planeSize, 1, packFile) == 1);
+    mxFlushSurface(surf);
+
+    return surf;
+}
 
 #include "Effects.inl"
 

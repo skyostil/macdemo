@@ -38,10 +38,24 @@ void moveBall()
     }
 }
 
-int yesWeHaveALoadingScreen(int time, int duration)
+static MXSurface* starImage = 0;
+static MXSurface* starMask = 0;
+
+static MXSurface** imagesToLoad[] =
 {
-    static int loadingX = 8;
+    &starImage,
+    &starMask
+};
+
+void drawLoadingScreen(int steps, int total)
+{
+    int loadingX = (((steps << 16) / total) * screen->w) >> 16;
     MXRect rect;
+
+    if (loadingX < 8)
+    {
+        loadingX = 8;
+    }
 
     rect.x = rect.y = 0;
     rect.w = loadingX;
@@ -49,14 +63,40 @@ int yesWeHaveALoadingScreen(int time, int duration)
 
     mxFill(screen, &rect, 0);
     flipScreen();
+}
 
-    return (loadingX++ >= screen->w);
+int yesWeHaveALoadingScreen(int time, int duration)
+{
+    static int loadingPos = 0;
+    static FILE* packFile = 0;
+    const int loadingTotal = sizeof(imagesToLoad) / sizeof(imagesToLoad[0]);
+
+    if (loadingPos < loadingTotal)
+    {
+        if (!packFile)
+        {
+            packFile = fopen(PACKFILE, "rb");
+            assert(packFile);
+        }
+
+        drawLoadingScreen(loadingPos, loadingTotal);
+
+        *imagesToLoad[loadingPos] = loadImage(packFile);
+        assert(*imagesToLoad[loadingPos]);
+        loadingPos++;
+
+        return 0;
+    }
+    fclose(packFile);
+    packFile = 0;
+
+    return 1;
 }
 
 int dummyEffect(const char* name, int time, int duration)
 {
     mxFill(screen, NULL, 0);
-    mxBlit(screen, checkers, ball, x, y, NULL, 0);
+    mxBlit(screen, starImage, starMask, x, y, NULL, 0);
     drawDebugText(screen, 0, 0, name);
     moveBall();
     flipScreen();
