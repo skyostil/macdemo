@@ -216,7 +216,7 @@ static const char debugFont[] =
 
 void drawDebugText(MXSurface* surf, int x, int y, const char* text)
 {
-    int fy;
+    int fx, fy;
     x >>= 3;
 
     while (*text && x < surf->w - 8)
@@ -224,7 +224,12 @@ void drawDebugText(MXSurface* surf, int x, int y, const char* text)
         uint8_t* d = &surf->pixels[(y << surf->log2Stride) + x];
         for (fy = 0; fy < 8; fy++, d += surf->stride)
         {
-           *d = debugFont[*text * 8 + fy];
+            uint8_t pixel = 0;
+            for (fx = 0; fx < 8; fx++)
+            {
+                pixel |= (debugFont[*text * 8 + fx] & (1 << fy)) ? (0x80 >> fx) : 0;
+            }
+            *d = pixel;
         }
         text++;
         x++;
