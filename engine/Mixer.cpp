@@ -151,38 +151,39 @@ void Mixer::render(SampleChunk *buffer)
 #define MIX_CHANNEL(channelNum) \
                                 if (c->sample && c->pos <= c->sample->length)\
                                 {\
-						                if (c->loopLength && \
-	          								c->pos>=c->loopEnd) \
-                        				{ \
-                            				c->pos-=c->loopLength;\
-                        				}\
-										else\
-										{\
-					                        a += (c->sample->data[c->pos]);\
-        	        						c->pos += c->hspeed;\
-			        				        c->counter += c->lspeed;\
-            	    						if (c->counter >> 16)\
-               								{\
-                    	    					c->counter -= 0xffff;\
-                        						c->pos++;\
-											}\
-										}\
+                                    if (c->loopLength && \
+                                        c->pos>=c->loopEnd) \
+                                    { \
+                                        c->pos-=c->loopLength;\
+                                    }\
+                                    else\
+                                    {\
+                                        a += (c->sample->data[c->pos]);\
+                                        c->pos += c->hspeed;\
+                                        c->counter += c->lspeed;\
+                                        if (c->counter >> 16)\
+                                        {\
+                                            c->counter -= 0xffff;\
+                                            c->pos++;\
+                                        }\
+                                    }\
                                 }
 #if 1
-				Sample16 a;
-				Channel* c;
+                Sample16 a;
+                Channel* c;
 				
                 while (count)
                 {
-                		int dt = tickerInterval - tickerCounter;
-                		int run = count < dt ? count : dt;
+                        int dt = tickerInterval - tickerCounter;
+                        int run = count < dt ? count : dt;
                 		
-                		count -= run;
+                        count -= run;
                         tickerCounter += run;
-                		while (run--)
+
+                        while (run--)
                         {
-                        		a = 0;
-                        		c = &channel[0];
+                                a = 0;
+                                c = &channel[0];
                                 MIX_CHANNEL(0)
                                 c++;
                                 MIX_CHANNEL(1)
@@ -190,7 +191,7 @@ void Mixer::render(SampleChunk *buffer)
                                 MIX_CHANNEL(2)
                                 c++;
                                 MIX_CHANNEL(3)
-                                *data++ = (a >> 2) ^ 0x80;
+                                *data++ = (a >> 2);// ^ 0x80;
                         }
 
 //                      *data++ = (a/(channelCount*2))>>8;
@@ -200,8 +201,8 @@ void Mixer::render(SampleChunk *buffer)
 
                         if (tickerCounter == tickerInterval)
                         {
-                                tickerCounter = 0;
-                                ticker->tick();
+                            tickerCounter = 0;
+                            ticker->tick();
 //                                channelMask = 0;
 //                                for (ch=0; ch<channelCount; ch++)
 //                                {

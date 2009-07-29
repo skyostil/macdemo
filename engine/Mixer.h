@@ -5,6 +5,7 @@
 #define MIXER_H
 
 #include "Engine.h"
+#include "Audio.h"
 
 // 16 bit internal mixing
 class Channel
@@ -16,43 +17,45 @@ public:
         
         inline Sample8 play()
         {
-                Sample8 a;
-                
-                //if (!sample)
-                //        return 0;
-                
-                if (loopLength)
-                        if (pos>=loopEnd)
-                        {
-                            pos-=loopLength;
-                        }                
-                else if (pos >= sample->length)
-				{
-                    sample = 0;
-					return 0;
-				}
-
-                //switch(sample->format.bytesPerSample)
-                //{
-                //case 1:
-                //        a = (sample->data[pos] * volume);
-                        a = (sample->data[pos]);
-                //break;
-                //case 2:
-                //        a = (((Sample16*)sample->data)[pos] * volume) >> 8;
-                //break;
-                //}
-                
-                counter += lspeed;
-                pos += hspeed;
-                
-                if (counter>0xffff)
+            Sample8 a;
+            
+            //if (!sample)
+            //        return 0;
+            
+            if (loopLength)
+            {
+                if (pos>=loopEnd)
                 {
-                        counter -= 0xffff;
-                        pos++;
-                }
-                
-                return a;
+                    pos-=loopLength;
+                }                
+            }
+            else if (pos >= sample->length)
+            {
+                sample = 0;
+                return 0;
+            }
+
+            //switch(sample->format.bytesPerSample)
+            //{
+            //case 1:
+            //        a = (sample->data[pos] * volume);
+                    a = (sample->data[pos]);
+            //break;
+            //case 2:
+            //        a = (((Sample16*)sample->data)[pos] * volume) >> 8;
+            //break;
+            //}
+            
+            counter += lspeed;
+            pos += hspeed;
+            
+            if (counter>0xffff)
+            {
+                counter -= 0xffff;
+                pos++;
+            }
+            
+            return a;
         }
         
         void    start(SampleChunk *_sample, int _freq, int _loopStart = 0, int _loopLength = 0);
@@ -70,7 +73,7 @@ public:
         int                     loopStart, loopLength, loopEnd;
         int                     volume;
         int                     outputFreq;
-        char					padding[20];
+        char                    padding[20];
 };
 
 class Ticker
@@ -79,10 +82,10 @@ public:
         virtual void tick() = 0;
 };
 
-class Mixer
+class Mixer: public AudioRenderer
 {
 public:
-        Mixer(int _outputFreq, int _channelCount = 8);
+        Mixer(int _outputFreq, int _channelCount = 4);
         ~Mixer();
 
         void    render(SampleChunk *buffer);

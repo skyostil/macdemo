@@ -8,6 +8,15 @@ static int dx = 1, dy = 1;
 static MXSurface* checkers = 0;
 static MXSurface* ball = 0;
 
+static MXSurface* starImage = 0;
+static MXSurface* starMask = 0;
+
+static MXSurface** imagesToLoad[] =
+{
+    &starImage,
+    &starMask
+};
+
 void moveBall()
 {
     x += dx;
@@ -19,9 +28,9 @@ void moveBall()
         dx = -dx;
     }
 
-    if (x + ball->w > screen->w)
+    if (x + starImage->w > screen->w)
     {
-        x += 2 * (screen->w - (x + ball->w));
+        x += 2 * (screen->w - (x + starImage->w));
         dx = -dx;
     }
 
@@ -31,21 +40,12 @@ void moveBall()
         dy = -dy;
     }
 
-    if (y + ball->h > screen->h)
+    if (y + starImage->h > screen->h)
     {
-        y += 2 * (screen->h - (y + ball->h));
+        y += 2 * (screen->h - (y + starImage->h));
         dy = -dy;
     }
 }
-
-static MXSurface* starImage = 0;
-static MXSurface* starMask = 0;
-
-static MXSurface** imagesToLoad[] =
-{
-    &starImage,
-    &starMask
-};
 
 void drawLoadingScreen(int steps, int total)
 {
@@ -87,8 +87,12 @@ int yesWeHaveALoadingScreen(int time, int duration)
 
         return 0;
     }
-    fclose(packFile);
-    packFile = 0;
+
+    if (packFile)
+    {
+        fclose(packFile);
+        packFile = 0;
+    }
 
     return 1;
 }

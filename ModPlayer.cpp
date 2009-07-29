@@ -21,6 +21,7 @@
 
 #include "Config.h"
 #include <stdio.h>
+#include <assert.h>
 
 static const unsigned short periodTable[][36] =
 {
@@ -212,6 +213,7 @@ bool ModPlayer::load(const char *file)
                 // no support for old 15 sample mods
                 return false;
                 
+        assert(mixer->channelCount >= channels);
         channel = new ModChannel[channels];
                 
         // read sample information (skip the module name)

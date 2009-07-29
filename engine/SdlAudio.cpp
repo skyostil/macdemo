@@ -4,16 +4,43 @@
 #include "Audio.h"
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 #include <SDL.h>
 
-static Mixer*        _mixer = 0;
-static SDL_AudioSpec _audioSpec;
+static AudioRenderer* _renderer = 0;
+static SDL_AudioSpec  _audioSpec;
+static SampleFormat   _sampleFormat(0, 0);
+static bool           _monoUpMix = false;
+static bool           _8bitUpMix = false;
 
 static void audioCallback(void* userData, Uint8* stream, int len)
 {
-    if (!_mixer)
+    if (!_renderer)
     {
         return;
+    }
+    int mixLen = len / (_sampleFormat.bytesPerSample * _sampleFormat.channels);
+    if (_monoUpMix && _8bitUpMix)
+    {
+        mixLen /= 2;
+    }
+
+    SampleChunk chunk(&_sampleFormat, (Sample8*)stream,
+                      mixLen, _audioSpec.freq);
+    _renderer->render(&chunk);
+
+    if (_monoUpMix && _8bitUpMix)
+    {
+        assert(_sampleFormat.bytesPerSample == 1);
+        int i;
+        // mono & 16bit expansion
+        for (i = len / 4; i >= 0; i--)
+        {
+            stream[i * 4] = 
+            stream[i * 4 + 1] = 
+            stream[i * 4 + 2] = 
+            stream[i * 4 + 3] = stream[i];
+        }
     }
 }
 
@@ -31,8 +58,22 @@ Audio::Audio(int bits, int mixFreq, bool stereo, int bufferSize)
 
     if (SDL_OpenAudio(&audio, &_audioSpec))
     {
-        fprintf(stderr, "Unable to open audio device.\n");
+        printf("Unable to open audio device.\n");
     }
+    printf("Audio: format 0x%x, %d channels, %d Hz\n", _audioSpec.format, _audioSpec.channels, _audioSpec.freq);
+    _sampleFormat = SampleFormat(bits, _audioSpec.channels);
+
+    if (_audioSpec.channels > 1 && !stereo)
+    {
+        _monoUpMix = true;
+    }
+
+    if (!(_audioSpec.format == AUDIO_S8 || _audioSpec.format == AUDIO_U8) && bits == 8)
+    {
+        _8bitUpMix = true;
+    }
+
+    assert((_monoUpMix && _8bitUpMix) || (!_monoUpMix && !_8bitUpMix));
 }
 
 Audio::~Audio()
@@ -41,15 +82,16 @@ Audio::~Audio()
     SDL_CloseAudio();
 }
 
-void Audio::start(Mixer* mixer)
+void Audio::start(AudioRenderer* renderer)
 {
-    _mixer = mixer;
+    _renderer = renderer;
     SDL_PauseAudio(0);
 }
 
 void Audio::stop()
 {
     SDL_PauseAudio(1);
+    _renderer = 0;
 }
 
 int Audio::mixFreq()

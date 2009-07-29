@@ -7,16 +7,20 @@
 #include "Font.h"
 #include "engine/Video.h"
 #include "engine/Audio.h"
+#include "Mixer.h"
+#include "ModPlayer.h"
 #include "monoxide.h"
 #include <stdio.h>
 #include <assert.h>
 
 void flipScreen();
+MXSurface* loadImage(FILE* packFile);
 
 /*
  * Configuration
  */
 #define PACKFILE        "data/images.dat"
+#define SONGFILE        "data/macmod.mod"
 #define SCREEN_WIDTH    512
 #define SCREEN_HEIGHT   342
 
@@ -27,24 +31,8 @@ static MXSurface* screen = 0;
 static Audio*     audio = 0;
 static Video*     video = 0;
 static MXSurface* physicalScreen = 0;
-
-static MXSurface* loadImage(FILE* packFile)
-{
-    MXSurface header;
-    MXSurface* surf;
-    assert(fread(&header, sizeof(header) - sizeof(void*), 1, packFile) == 1);
-    surf = mxCreateSurface(header.w, header.h, header.pixelFormat, header.flags);
-
-    if (!surf)
-    {
-        return surf;
-    }
-
-    assert(fread(surf->pixels, header.planeSize, 1, packFile) == 1);
-    mxFlushSurface(surf);
-
-    return surf;
-}
+static Mixer mixer(22050, 4);
+static ModPlayer player(&mixer);
 
 #include "Effects.inl"
 
@@ -57,7 +45,13 @@ void setup()
     screen = mxCreateSurface(video->screenWidth(), video->screenHeight(), MX_PIXELFORMAT_I1, 0);
     //Audio(8, 11127, 0, 512);
     //Audio(8, 22050, 0, 512);
-    audio = new Audio(8, 22050, 0, 512);
+    audio = new Audio(8, 22050, 0, 2048);
+    
+    assert(player.load(SONGFILE));
+    
+    player.play();
+    audio->start(&mixer);
+
     setupEffects();
 }
 
@@ -76,6 +70,24 @@ void flipScreen()
     video->waitRefresh();
     mxBlit(physicalScreen, screen, NULL, 0, 0, NULL, 0);
     video->swapBuffers();
+}
+
+MXSurface* loadImage(FILE* packFile)
+{
+    MXSurface header;
+    MXSurface* surf;
+    assert(fread(&header, sizeof(header) - sizeof(void*), 1, packFile) == 1);
+    surf = mxCreateSurface(header.w, header.h, header.pixelFormat, header.flags);
+
+    if (!surf)
+    {
+        return surf;
+    }
+
+    assert(fread(surf->pixels, header.planeSize, 1, packFile) == 1);
+    mxFlushSurface(surf);
+
+    return surf;
 }
 
 void demoTest()
