@@ -12,6 +12,7 @@ public:
     
     void waitRefresh();
     int refreshCount();
+    int ticks();
     int screenWidth();
     int screenHeight();
     int screenStride();

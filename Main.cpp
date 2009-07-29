@@ -31,8 +31,8 @@ static MXSurface* screen = 0;
 static Audio*     audio = 0;
 static Video*     video = 0;
 static MXSurface* physicalScreen = 0;
-static Mixer mixer(22050, 4);
-static ModPlayer player(&mixer);
+static Mixer      mixer(22050, 4);
+static ModPlayer  player(&mixer);
 
 #include "Effects.inl"
 
@@ -50,7 +50,7 @@ void setup()
     assert(player.load(SONGFILE));
     
     player.play();
-    audio->start(&mixer);
+    //audio->start(&mixer);
 
     setupEffects();
 }
@@ -90,22 +90,38 @@ MXSurface* loadImage(FILE* packFile)
     return surf;
 }
 
-void demoTest()
+void demo()
 {
-    int time;
+    int time, startTime;
+    int frameStartTime, frames = 0;
+    char status[64];
     Timeline timeline(effects);
 
-    for (time = 0; ; time += 0x100)
+    status[0] = 0;
+    frameStartTime = startTime = video->ticks();
+
+    while (1)
     {
-        //printf("%d\n", time);
-        if (!timeline.run(time))
+        time = video->ticks();
+        if (!timeline.run(time - startTime))
         {
             timeline.reset();
-            time = 0;
+            startTime = time;
         }
+
+        drawDebugText(screen, 512 - 8 * 8, 0, status);
+        flipScreen();
+
         if (!video->processInput())
         {
             break;
+        }
+        if (++frames == 60)
+        {
+            int fps = 1000 * ((frames << 16) / ((time - frameStartTime)));
+            frameStartTime = time;
+            frames = 0;
+            sprintf(status, "%d fps", fps >> 16);
         }
     }
 }
@@ -116,7 +132,7 @@ int main(int argc, char** argv)
     (void)argv;
 
     setup();
-    demoTest();
+    demo();
     teardown();
 
     return 0;

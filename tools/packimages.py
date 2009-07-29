@@ -1,16 +1,25 @@
 import Image
 import struct
 import numpy
+import psyco
+
+psyco.full()
 
 MX_PIXELFORMAT_I1 = 1
 MX_SURFACE_FLAG_PRESHIFT = 0x1
+MX_SURFACE_FLAG_RLE = 0x8
 MX_PACK_ALPHA_CHANNEL = (0x1 << 32)
 
 packFile = "../data/images.dat"
 
+BW = MX_PIXELFORMAT_I1
+PS = MX_SURFACE_FLAG_PRESHIFT
+A = MX_PACK_ALPHA_CHANNEL
+C = MX_SURFACE_FLAG_RLE
+
 files = [
-    ("../data/star.png", MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT),
-    ("../data/star.png", MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT | MX_PACK_ALPHA_CHANNEL),
+    ("../data/mac_on_street_bg.png", BW, C),
+    ("../data/mac_on_street.png", BW, PS),
 ]
 
 def log2i(n):
@@ -42,7 +51,7 @@ def packImage(out, image, format, flags):
             if flags & MX_PACK_ALPHA_CHANNEL:
                 c = p[-1]
             else:
-                c = p[0] | p[1] | p[2]
+                c = not (p[0] | p[1] | p[2])
             if c:
                 data[y * stride + (x >> 3)] |= (0x80 >> (x & 0x7))
     out.write(header)

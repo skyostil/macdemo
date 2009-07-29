@@ -8,14 +8,11 @@ static int dx = 1, dy = 1;
 static MXSurface* checkers = 0;
 static MXSurface* ball = 0;
 
-static MXSurface* starImage = 0;
-static MXSurface* starMask = 0;
-
-static MXSurface** imagesToLoad[] =
+static struct
 {
-    &starImage,
-    &starMask
-};
+    MXSurface* macOnStreetBg;
+    MXSurface* macOnStreet;
+} img;
 
 void moveBall()
 {
@@ -28,9 +25,9 @@ void moveBall()
         dx = -dx;
     }
 
-    if (x + starImage->w > screen->w)
+    if (x + ball->w > screen->w)
     {
-        x += 2 * (screen->w - (x + starImage->w));
+        x += 2 * (screen->w - (x + ball->w));
         dx = -dx;
     }
 
@@ -40,9 +37,9 @@ void moveBall()
         dy = -dy;
     }
 
-    if (y + starImage->h > screen->h)
+    if (y + ball->h > screen->h)
     {
-        y += 2 * (screen->h - (y + starImage->h));
+        y += 2 * (screen->h - (y + ball->h));
         dy = -dy;
     }
 }
@@ -69,9 +66,10 @@ int yesWeHaveALoadingScreen(int time, int duration)
 {
     static int loadingPos = 0;
     static FILE* packFile = 0;
-    const int loadingTotal = sizeof(imagesToLoad) / sizeof(imagesToLoad[0]);
+    MXSurface** imagesToLoad = (MXSurface**)&img;
+    const int imageCount = sizeof(img) / sizeof(imagesToLoad[0]);
 
-    if (loadingPos < loadingTotal)
+    if (loadingPos < imageCount)
     {
         if (!packFile)
         {
@@ -79,10 +77,10 @@ int yesWeHaveALoadingScreen(int time, int duration)
             assert(packFile);
         }
 
-        drawLoadingScreen(loadingPos, loadingTotal);
+        drawLoadingScreen(loadingPos, imageCount);
 
-        *imagesToLoad[loadingPos] = loadImage(packFile);
-        assert(*imagesToLoad[loadingPos]);
+        imagesToLoad[loadingPos] = loadImage(packFile);
+        assert(imagesToLoad[loadingPos]);
         loadingPos++;
 
         return 0;
@@ -97,21 +95,58 @@ int yesWeHaveALoadingScreen(int time, int duration)
     return 1;
 }
 
+#define DRAW_EFFECT_TITLE(NAME) drawDebugText(screen, 0, 0, NAME);
+
 int dummyEffect(const char* name, int time, int duration)
 {
     mxFill(screen, NULL, 0);
-    mxBlit(screen, starImage, starMask, x, y, NULL, 0);
-    drawDebugText(screen, 0, 0, name);
+    mxBlit(screen, checkers, ball, x, y, NULL, 0);
+    DRAW_EFFECT_TITLE(name);
     moveBall();
-    flipScreen();
     return 1;
 }
 
 #define DUMMY_EFFECT(NAME) return dummyEffect(NAME, time, duration)
 
+int sawtooth(int t)
+{
+    t &= 0xff;
+    if (t > 0x7f)
+    {
+        t = 0x7f + (0x7f - t);
+    }
+    return t;
+}
+
+inline int min(int a, int b)
+{
+    return (a < b) ? a : b;
+}
+
+inline int max(int a, int b)
+{
+    return (a > b) ? a : b;
+}
+
+inline int pow2(int i)
+{
+    return i * i;
+}
+
+int clearScreen(int time, int duration)
+{
+    mxFill(screen, NULL, 0);
+    return 1;
+}
+
 int macOnStreet(int time, int duration)
 {
-    DUMMY_EFFECT("Mac on street");
+    int yPos = pow2(max(0, (1500 - time) >> 3)) >> 5; 
+    int pos = time >> 6;
+    mxBlit(screen, img.macOnStreetBg, NULL, 0, yPos, NULL, 0);
+    DRAW_EFFECT_TITLE("Mac on street");
+
+    mxBlit(screen, img.macOnStreet, NULL, 88 + pos, yPos + 60 + (sawtooth(time >> 2) >> 4) + (pos >> 1), NULL, 0);
 }
 
 int guysSpotMac(int time, int duration)
@@ -287,6 +322,15 @@ void setupEffects()
 
 void teardownEffects()
 {
+    MXSurface** imagesToDestroy = (MXSurface**)&img;
+    const int imageCount = sizeof(img) / sizeof(imagesToDestroy[0]);
+    int i;
+
+    for (i = 0; i < imageCount; i++)
+    {
+        mxDestroySurface(imagesToDestroy[i]);
+    }
+
     mxDestroySurface(ball);
     mxDestroySurface(checkers);
 }
@@ -294,31 +338,32 @@ void teardownEffects()
 EffectEntry effects[] =
 {
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
-    {macOnStreet, 0x10000, 0},
-    {guysSpotMac, 0x10000, 0},
-    {pcRidicule, 0x10000, 0},
-    {modernMacRidicule, 0x10000, 0},
-    {sadMac, 0x10000, 0},
-    {modernMacFxIntro, 0x10000, 0},
-    {modernMacFx, 0x10000, 0},
-    {pcFxIntro, 0x10000, 0},
-    {pcFx, 0x10000, 0},
-    {modernMacDare, 0x10000, 0},
-    {macFxLoading, 0x10000, 0},
-    {macFx, 0x10000, 0},
-    {guysLol, 0x10000, 0},
-    {sadMac2, 0x10000, 0},
-    {kidHelp, 0x10000, 0},
-    {pedobearRun, 0x10000, 0},
-    {pcPanic, 0x10000, 0},
-    {modernMacPanic, 0x10000, 0},
-    {guysPanic, 0x10000, 0},
-    {macHasPlan, 0x10000, 0},
-    {macPlanLoading, 0x10000, 0},
-    {macGotDisk, 0x10000, 0},
-    {diskTwirl, 0x10000, 0},
-    {diskImpact, 0x10000, 0},
-    {theEnd, 0x10000, 0},
+    {clearScreen,             0, EFFECT_FLAG_DYNAMIC},
+    {macOnStreet,             4000, 0},
+    {guysSpotMac,             1000, 0},
+    {pcRidicule,              1000, 0},
+    {modernMacRidicule,       1000, 0},
+    {sadMac,                  1000, 0},
+    {modernMacFxIntro,        1000, 0},
+    {modernMacFx,             1000, 0},
+    {pcFxIntro,               1000, 0},
+    {pcFx,                    1000, 0},
+    {modernMacDare,           1000, 0},
+    {macFxLoading,            1000, 0},
+    {macFx,                   1000, 0},
+    {guysLol,                 1000, 0},
+    {sadMac2,                 1000, 0},
+    {kidHelp,                 1000, 0},
+    {pedobearRun,             1000, 0},
+    {pcPanic,                 1000, 0},
+    {modernMacPanic,          1000, 0},
+    {guysPanic,               1000, 0},
+    {macHasPlan,              1000, 0},
+    {macPlanLoading,          1000, 0},
+    {macGotDisk,              1000, 0},
+    {diskTwirl,               1000, 0},
+    {diskImpact,              1000, 0},
+    {theEnd,                  1000, 0},
     /*
     {effect1, 0x10000, 0},
     {effect2, 0x10000, 0},
