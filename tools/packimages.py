@@ -51,8 +51,13 @@ def packImage(out, image, format, flags):
 if __name__ == "__main__":
     out = open(packFile, "wb")
     for f, format, flags in files:
-        print f, "(mask)" if (flags & MX_PACK_ALPHA_CHANNEL) else ""
+        info = []
+        if flags & MX_SURFACE_FLAG_PRESHIFT:
+            info += ["preshift"]
+        if flags & MX_PACK_ALPHA_CHANNEL:
+            info += ["mask"]
         image = Image.open(f)
+        print f, image.size, "(%s)" % ", ".join(info) if info else ""
         packImage(out, image, format, flags)
     out.close()
 
