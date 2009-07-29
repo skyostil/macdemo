@@ -18,7 +18,8 @@ private:
 
 enum EffectFlags
 {
-    EFFECT_FLAG_DYNAMIC = 0x1
+    EFFECT_FLAG_DYNAMIC       = 0x1,
+    EFFECT_FLAG_INFINITESIMAL = 0x2
 };
 
 typedef struct EffectEntry_t

@@ -23,14 +23,14 @@ bool Timeline::run(int time)
             break;
         }
 
-        t += f->duration;
-        m_baseTime += f->duration;
-        f++;
-
         if (!f->duration)
         {
             return 0;
         }
+
+        t += f->duration;
+        m_baseTime += f->duration;
+        f++;
     }
 
     if (f->flags & EFFECT_FLAG_DYNAMIC)
@@ -38,7 +38,10 @@ bool Timeline::run(int time)
         int dt = time - t;
         if (f->effect(dt, dt))
         {
-            m_baseTime += dt;
+            if (!(f->flags & EFFECT_FLAG_INFINITESIMAL))
+            {
+                m_baseTime += dt;
+            }
             f++;
         }
     }

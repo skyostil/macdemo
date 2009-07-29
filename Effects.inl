@@ -174,19 +174,20 @@ int intro(int time, int duration)
 void scrollHoriz(MXSurface *s, int amount, int fillValue)
 {
     int x, y;
+    int w = s->w / 8;
     uint8_t* d = s->pixels;
 
     if (amount > 0)
     {
         for (y = 0; y < s->h; y++)
         {
-            for (x = s->w - amount - 1; x >= 0; x--)
-            {
-                d[x] = d[x - amount];
-            }
             for (x = 0; x < amount; x++)
             {
                 d[x] = fillValue;
+            }
+            for (x = w - amount - 1; x >= 0; x--)
+            {
+                d[x] = d[x - amount];
             }
             d += s->stride;
         }
@@ -196,52 +197,61 @@ void scrollHoriz(MXSurface *s, int amount, int fillValue)
         amount = -amount;
         for (y = 0; y < s->h; y++)
         {
-            for (x = amount; x < s->w; x++)
-            {
-                d[x] = d[x + amount];
-            }
-            for (x = s->w - amount; x < s->w; x++)
+            for (x = w - amount; x < w; x++)
             {
                 d[x] = fillValue;
+            }
+            for (x = 0; x < w - amount; x++)
+            {
+                d[x] = d[x + amount];
             }
             d += s->stride;
         }
     }
 }
 
-int macOnStreetSetup(int time, int duration)
-{
-    mxBlit(screen, img.macOnStreetBg, NULL, 0, 0, NULL, 0);
-}
-
 int macOnStreet(int time, int duration)
 {
     int pos, pos2;
+    int bop2 = ((time + 177) & 0x100) >> 6;
     int bop = (time & 0x100) >> 6;
 
+    mxBlit(screen, img.macOnStreetBg, NULL, 0, 0, NULL, 0);
     DRAW_EFFECT_TITLE("Mac on street");
 
     pos = min(time, 72 << 6);
     pos2 = pos >> 3;
     pos >>= 6;
 
-    mxBlit(screen, img.pcOnStreet, NULL, 800 - pos2, 300 - (pos2 >> 1) + bop, NULL, 0);
-    mxBlit(screen, img.macOnStreet, NULL, 10 + pos, 20 + (sawtooth(time >> 2) >> 4) + (pos >> 1), NULL, 0);
+    mxBlit(screen, img.pcOnStreet, NULL, 800 - pos2, 300 - (pos2 >> 1) + bop2, NULL, 0);
+    mxBlit(screen, img.macOnStreet, NULL, 10 + pos, 20 + bop + (pos >> 1), NULL, 0);
 }
 
 int guysSpotMac(int time, int duration)
 {
     int pos, pos2;
     int bop = (time & 0x100) >> 6;
-    //mxBlit(screen, img.macOnStreetBg, NULL, 0, 0, NULL, 0);
-    DRAW_EFFECT_TITLE("Guys spot Mac");
+    int bop2 = ((time + 177) & 0x100) >> 6;
+    int bop3 = ((time + 61) & 0x100) >> 6;
+    int camPos = max(-time >> 2, -200);
+    MXRect rect;
 
-    pos = min(time, 72 << 6);
+    mxBlit(screen, img.macOnStreetBg, NULL, camPos, 0, NULL, 0);
+    DRAW_EFFECT_TITLE("Guys spot mac");
+
+    rect.x = 512 + (camPos & ~0x7);
+    rect.y = 0;
+    rect.w = screen->w;
+    rect.h = screen->h;
+    mxFill(screen, &rect, 0);
+
+    pos = 72 << 6;
     pos2 = pos >> 3;
     pos >>= 6;
 
-    mxBlit(screen, img.pcOnStreet, NULL, 800 - pos2, 300 - (pos2 >> 1) + bop, NULL, 0);
-    mxBlit(screen, img.macOnStreet, NULL, 10 + pos, 20 + (sawtooth(time >> 2) >> 4) + (pos >> 1), NULL, 0);
+    mxBlit(screen, img.pcOnStreet, NULL, camPos + 800 - pos2, 300 - (pos2 >> 1) + bop2, NULL, 0);
+    mxBlit(screen, img.macOnStreet, NULL, camPos + 10 + pos, 20 + bop + (pos >> 1), NULL, 0);
+    mxBlit(screen, img.macbookOnStreet, NULL, camPos + 1050 - pos2, 400 - (pos2 >> 1) + bop3, NULL, 0);
 }
 
 int pcRidicule(int time, int duration)
@@ -428,11 +438,10 @@ void teardownEffects()
 EffectEntry effects[] =
 {
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
-    {clearScreen,             0, EFFECT_FLAG_DYNAMIC},
+    {clearScreen,             0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {intro,                   4000, 0},
-    {macOnStreetSetup,        0, EFFECT_FLAG_DYNAMIC},
     {macOnStreet,             6000, 0},
-    {guysSpotMac,             1000, 0},
+    {guysSpotMac,             2000, 0},
     {pcRidicule,              1000, 0},
     {modernMacRidicule,       1000, 0},
     {sadMac,                  1000, 0},
