@@ -15,7 +15,6 @@ static int timeSkipOffset = 0;
 
 Video::Video(int w, int h)
 {
-    MXSurface* s;
     win = SDL_SetVideoMode(w, h, 32, 0);
 
     if (!win)

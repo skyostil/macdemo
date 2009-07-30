@@ -156,7 +156,7 @@ ModPlayer::~ModPlayer()
 
 bool ModPlayer::load(const char *file)
 {
-#ifdef CODEWARRIOR
+#if defined(CODEWARRIOR) || defined(_MSC_VER)
 #pragma pack(1)
 #endif
         typedef struct
@@ -176,8 +176,8 @@ bool ModPlayer::load(const char *file)
                 unsigned char   byte2;
                 unsigned char   byte3;
         } PACKED Note;
-#ifdef CODEWARRIOR
-#pragma pack(0)
+#if defined(CODEWARRIOR) || defined(_MSC_VER)
+#pragma pack()
 #endif
 
 #ifdef MOD_USE_TAGFILE
@@ -314,7 +314,7 @@ unsigned short ModPlayer::bigEndian16(unsigned short x)
 }
 
 
-#ifdef CODEWARRIOR
+#if defined(CODEWARRIOR) || defined(_MSC_VER)
 #pragma pack(1)
 #endif
 typedef struct
@@ -337,8 +337,8 @@ typedef struct
     unsigned char   effectNumber;
     unsigned char   effectParameter;
 } PACKED PackedModNote;
-#ifdef CODEWARRIOR
-#pragma pack(0)
+#if defined(CODEWARRIOR) || defined(_MSC_VER)
+#pragma pack()
 #endif
 
 

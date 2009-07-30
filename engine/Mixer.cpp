@@ -194,7 +194,8 @@ void Mixer::render(SampleChunk *buffer)
                                 MIX_CHANNEL(2)
                                 c++;
                                 MIX_CHANNEL(3)
-#ifdef CODEWARRIOR
+#if defined(CODEWARRIOR) || defined(_MSC_VER)
+								/* Yay for portability */
                                 *data++ = (a >> 2) ^ 0x80;
 #else
                                 *data++ = (a >> 2);

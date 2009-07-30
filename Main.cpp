@@ -14,6 +14,10 @@
 #include <assert.h>
 #include <string.h>
 
+#if defined(_MSC_VER)
+#   include <sdl_main.h>
+#endif
+
 void flipScreen();
 MXSurface* loadImage(FILE* packFile);
 

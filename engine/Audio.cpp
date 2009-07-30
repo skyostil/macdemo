@@ -46,7 +46,7 @@ void SampleChunk::setSample(int n, int channel, Sample sample)
         {
         case 8:
         {
-                ((Sample8*)data)[n*format.channels + channel] = sample;
+                ((Sample8*)data)[n*format.channels + channel] = (Sample8)sample;
         }
         break;
         case 16:

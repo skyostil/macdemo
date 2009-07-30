@@ -17,12 +17,18 @@ void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
                    int srcStride, int destStride, int srcFlags);
 void fill_I1(uint8_t* dest, const MXRect* destRect, int destStride, int color);
 
-inline int min(int a, int b)
+#if !defined(_MSC_VER)
+#  define INLINE inline
+#else
+#  define INLINE
+#endif
+
+INLINE int mxMin(int a, int b)
 {
     return (a < b) ? a : b;
 }
 
-inline int max(int a, int b)
+INLINE int mxMax(int a, int b)
 {
     return (a > b) ? a : b;
 }
@@ -140,10 +146,10 @@ static int clipRect(const MXRect* srcRect, const MXRect* destRect, MXRect* resul
 {
     int x2 = srcRect->x + srcRect->w;
     int y2 = srcRect->y + srcRect->h;
-    result->x = max(srcRect->x, destRect->x);
-    result->y = max(srcRect->y, destRect->y);
-    x2        = min(x2, destRect->x + destRect->w);
-    y2        = min(y2, destRect->y + destRect->h);
+    result->x = mxMax(srcRect->x, destRect->x);
+    result->y = mxMax(srcRect->y, destRect->y);
+    x2        = mxMin(x2, destRect->x + destRect->w);
+    y2        = mxMin(y2, destRect->y + destRect->h);
 
     if (result->x >= destRect->x + destRect->w || result->y >= destRect->y + destRect->h)
     {

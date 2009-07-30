@@ -27,7 +27,6 @@ include_directories(monoxide)
 include_directories(.)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
-add_definitions(-DHAVE_STDINT_H)
 add_definitions(-DUSE_SDL)
 
 link_libraries(
@@ -35,17 +34,21 @@ link_libraries(
     ${SDLIMAGE_LIBRARY}
 )
 
+if (WIN32)
+    link_libraries(${SDLMAIN_LIBRARY})
+endif (WIN32)
+
+if (NOT APPLE AND NOT WIN32)
+    add_definitions(-DHAVE_STDINT_H)
+    add_custom_command (TARGET macdemo POST_BUILD
+                        COMMAND ctags --c++-kinds=+p --fields=+iaS --extra=+q 
+                                -R .
+                        COMMENT "Creating tags" VERBATIM)
+endif (NOT APPLE AND NOT WIN32)
+
 add_executable(
     macdemo
     WIN32
     MACOSX_BUNDLE
     ${SOURCES}
 )
-
-# ctags
-if (NOT APPLE AND NOT WIN32)
-    add_custom_command (TARGET macdemo POST_BUILD
-                        COMMAND ctags --c++-kinds=+p --fields=+iaS --extra=+q 
-                                -R .
-                        COMMENT "Creating tags" VERBATIM)
-endif (NOT APPLE AND NOT WIN32)

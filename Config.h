@@ -6,6 +6,8 @@
 
 #if defined(__GNUC__)
 #   define PACKED __attribute__((packed)) 
+#elif defined(_MSC_VER)
+#   define PACKED
 #else
 #   define BIG_ENDIAN
 #   define CODEWARRIOR
