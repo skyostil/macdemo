@@ -47,8 +47,6 @@ static pascal void soundCallback(SndChannelPtr soundChannel, SndDoubleBufferPtr 
 
 Audio::Audio(int bits_, int mixFreq_, bool stereo_, int bufferSize_)
 {
-	return;
-	
 	OSErr err,iErr;
 	int i;
 	SndDoubleBufferPtr doubleBuffer;

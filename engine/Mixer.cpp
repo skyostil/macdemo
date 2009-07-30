@@ -194,7 +194,11 @@ void Mixer::render(SampleChunk *buffer)
                                 MIX_CHANNEL(2)
                                 c++;
                                 MIX_CHANNEL(3)
-                                *data++ = (a >> 2);// ^ 0x80;
+#ifdef CODEWARRIOR
+                                *data++ = (a >> 2) ^ 0x80;
+#else
+                                *data++ = (a >> 2);
+#endif
                         }
 
 //                      *data++ = (a/(channelCount*2))>>8;

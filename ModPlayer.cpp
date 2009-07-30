@@ -7,7 +7,7 @@
  *     - effect 8xy (pan)                                                  
  *     - effect e0x (set filter)                                           
  *     - effect e4x (set vibrato waveform)                                 
- *     - effect e7x (set tremolo waveform)                                 
+ *     - effect e7x (set tremolo waveform)                                
  *     - effect efx (invert loop)                                          
  *     - old 15 sample mods                                                
  *     - the portas are somewhat buggy                                     
@@ -228,6 +228,10 @@ bool ModPlayer::load(const char *file)
                 header.length = bigEndian16(header.length) * 2;
                 header.loopStart = bigEndian16(header.loopStart) * 2;
                 header.loopLength = bigEndian16(header.loopLength) * 2;
+#else
+                header.length *= 2;
+                header.loopStart *= 2;
+                header.loopLength *= 2;
 #endif
                 
                 if (header.loopLength <= 2)
@@ -528,7 +532,7 @@ void ModPlayer::tick()
         int cr = currentRow;
         int co = currentOrder;
 
-        //printf("%d/%d %2d:%02d\n", currentTick, songSpeed, order[currentOrder], currentRow);
+//      printf("%d/%d %2d:%02d\n", currentTick, songSpeed, order[currentOrder], currentRow);
 
         if (!playing)
             return;
@@ -744,7 +748,7 @@ void ModPlayer::playNote(int ch, ModNote *n)
                 {
                         int freq = amigaToHz(periodTable[channel[ch].sample->fineTune][n->note]);
                         
-//                      printf("Channel %d: Playnote %3d, %6d Hz: len %d, loop start %d, len %d\n", ch, n->note, freq, channel[ch].sample->sample->length, channel[ch].sample->loopStart, channel[ch].sample->loopLength);
+                        //printf("Channel %d: Playnote %3d, %2d, %6d Hz: len %d, loop start %d, len %d\n", ch, n->note, n->sampleNumber, freq, channel[ch].sample->sample->length, channel[ch].sample->loopStart, channel[ch].sample->loopLength);
                         
                         channel[ch].amigaPeriod = n->amigaPeriod;
                         channel[ch].note = n->note;

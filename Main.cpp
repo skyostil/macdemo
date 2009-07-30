@@ -12,6 +12,7 @@
 #include "monoxide.h"
 #include <stdio.h>
 #include <assert.h>
+#include <string.h>
 
 void flipScreen();
 MXSurface* loadImage(FILE* packFile);
@@ -26,27 +27,96 @@ MXSurface* loadImage(FILE* packFile);
 #define MUSIC_LENGTH    (1 * 60)
 #define RAWMUSICFILE    "music.raw"
 
+int sawtooth(int t)
+{
+    t &= 0xff;
+    if (t > 0x7f)
+    {
+        t = 0x7f + (0x7f - t);
+    }
+    return t;
+}
+
+inline int min(int a, int b)
+{
+    return (a < b) ? a : b;
+}
+
+inline int max(int a, int b)
+{
+    return (a > b) ? a : b;
+}
+
+inline int pow2(int i)
+{
+    return i * i;
+}
+
 class MusicRenderer: public AudioRenderer
 {
 public:
-    MusicRenderer()
+    MusicRenderer(int _mixFreq)
     {
+    	mixFreq = _mixFreq;
+        readBytes = playBytes = 0;
+
+        SampleFormat format(8, 1);
+        audioBuffer = new SampleChunk(&format, 0x80000, mixFreq);
+        assert(audioBuffer);
+        assert(audioBuffer->data);
+    
         audioFile = fopen(RAWMUSICFILE, "rb");
         assert(audioFile);
+        
+        preload(audioBuffer->bytes >> 1);
     }
 
     ~MusicRenderer()
     {
+    	delete audioBuffer;
         fclose(audioFile);
+    }
+    
+    void preload(int bytesToLoad = 0x20000)
+    {
+        while (bytesToLoad > 0)
+        {
+      	    int readPos = readBytes & (audioBuffer->bytes - 1);
+    	    int readSize = min(bytesToLoad, audioBuffer->bytes - readPos);
+    	    //printf("LOAD %d bytes at %d (%d total)\n", readSize, readPos, readBytes);
+            int n = fread(audioBuffer->data + readPos, 1, readSize, audioFile);
+            if (n <= 0)
+            {
+                break;
+            }
+            bytesToLoad -= n;
+            readBytes += n;
+    	}
     }
 
     void render(SampleChunk* buffer)
     {
-        fread(buffer->data, buffer->bytes, 1, audioFile);
+    	int bytesToPlay = buffer->bytes;
+        while (playBytes + buffer->bytes > readBytes && !feof(audioFile))
+        {
+    	    //printf("UNDERRUN (%d read, %d played)\n", readBytes, playBytes);
+            preload();
+        }
+        while (bytesToPlay > 0)
+        {
+    	    int playPos = playBytes & (audioBuffer->bytes - 1);
+     	    int playSize = min(bytesToPlay, audioBuffer->bytes - playPos);
+    	    //printf("PLAY %d bytes (%d total, %d read)\n", playSize, playBytes, readBytes);
+            memcpy(buffer->data, audioBuffer->data + playPos, playSize);
+            bytesToPlay -= playSize;
+            playBytes += playSize;
+        }
     }
 
 private:
     FILE* audioFile;
+    SampleChunk* audioBuffer;
+    int readBytes, playBytes, mixFreq;
 };
 
 /*
@@ -69,7 +139,7 @@ void setup()
     screen = mxCreateSurface(video->screenWidth(), video->screenHeight(), MX_PIXELFORMAT_I1, 0);
     //Audio(8, 11127, 0, 512);
     //Audio(8, 22050, 0, 512);
-    audio = new Audio(8, 22050, false, 8192);
+    audio = new Audio(8, 11127, false, 0x8000);
     
     //assert(player.load(SONGFILE));
     

@@ -75,13 +75,15 @@ void drawLoadingScreen(int steps, int total)
         loadingX = 8;
     }
 
-    rect.x = rect.y = 0;
+    rect.x = 0;
+    rect.y = 171 - 8;
     rect.w = loadingX;
-    rect.h = screen->h;
+    rect.h = 16;
 
     mxFill(screen, &rect, 0);
-    flipScreen();
 }
+
+#define EFFECT_TITLE(NAME) drawDebugText(screen, 0, 0, NAME);
 
 int yesWeHaveALoadingScreen(int time, int duration)
 {
@@ -94,7 +96,8 @@ int yesWeHaveALoadingScreen(int time, int duration)
     static ModPlayer* modPlayer;
     MXSurface** imagesToLoad = (MXSurface**)&img;
     const int imageCount = sizeof(img) / sizeof(imagesToLoad[0]);
-    int musicLength = audio->mixFreq() * MUSIC_LENGTH;
+    int musicLength;
+    int mixFreq;
 
     /* Load images */
     if (loadingPos < imageCount)
@@ -106,7 +109,7 @@ int yesWeHaveALoadingScreen(int time, int duration)
         }
 
         drawLoadingScreen(loadingPos / 2, imageCount);
-
+        EFFECT_TITLE("Loading screen (graphics)");
         imagesToLoad[loadingPos] = loadImage(packFile);
         assert(imagesToLoad[loadingPos]);
         loadingPos++;
@@ -119,25 +122,35 @@ int yesWeHaveALoadingScreen(int time, int duration)
         fclose(packFile);
         packFile = 0;
     }
+    
+    if (!audio)
+    {
+    	return 1;
+    }
 
+    mixFreq = audio->mixFreq();
+    musicLength = mixFreq * MUSIC_LENGTH;
+    
     /* Load music */
+#if 1
     if (musicLoadingPos < musicLength)
     {
         if (!rawMusicFile)
         {
             rawMusicFile = fopen(RAWMUSICFILE, "wb");
+            assert(rawMusicFile);
         }
 
         if (!sampleChunk)
         {
             SampleFormat format(8, 1);
-            sampleChunk = new SampleChunk(&format, audio->mixFreq() * 4, audio->mixFreq());
+            sampleChunk = new SampleChunk(&format, mixFreq * 4, mixFreq);
             assert(sampleChunk);
         }
 
         if (!mixer)
         {
-            mixer = new Mixer(audio->mixFreq(), 4);
+            mixer = new Mixer(mixFreq, 4);
             assert(mixer);
         }
 
@@ -151,10 +164,9 @@ int yesWeHaveALoadingScreen(int time, int duration)
 
         mixer->render(sampleChunk);
         assert(fwrite(sampleChunk->data, sampleChunk->bytes, 1, rawMusicFile) == 1);
-
         musicLoadingPos += sampleChunk->length;
         drawLoadingScreen(musicLoadingPos / 2 + musicLength / 2, musicLength);
-
+        EFFECT_TITLE("Loading screen (music)    ");
         return 0;
     }
 
@@ -186,15 +198,27 @@ int yesWeHaveALoadingScreen(int time, int duration)
             audio->stop();
             delete musicRenderer;
         }
-        musicRenderer = new MusicRenderer();
+        musicRenderer = new MusicRenderer(mixFreq);
         assert(musicRenderer);
         audio->start(musicRenderer);
     }
+#else
+    musicRenderer = new MusicRenderer(mixFreq);
+    assert(musicRenderer);
+    audio->start(musicRenderer);
+#endif
 
     return 1;
 }
 
-#define EFFECT_TITLE(NAME) drawDebugText(screen, 0, 0, NAME);
+int preloadMusic(int steps, int total)
+{
+	if (musicRenderer)
+	{
+		musicRenderer->preload();
+	}
+	return 1;
+}
 
 int dummyEffect(const char* name, int time, int duration)
 {
@@ -206,31 +230,6 @@ int dummyEffect(const char* name, int time, int duration)
 }
 
 #define DUMMY_EFFECT(NAME) return dummyEffect(NAME, time, duration)
-
-int sawtooth(int t)
-{
-    t &= 0xff;
-    if (t > 0x7f)
-    {
-        t = 0x7f + (0x7f - t);
-    }
-    return t;
-}
-
-inline int min(int a, int b)
-{
-    return (a < b) ? a : b;
-}
-
-inline int max(int a, int b)
-{
-    return (a > b) ? a : b;
-}
-
-inline int pow2(int i)
-{
-    return i * i;
-}
 
 int clearScreen(int time, int duration)
 {
@@ -675,30 +674,38 @@ EffectEntry effects[] =
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
     {clearScreen,             0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {intro,                   4000, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macOnStreet,             6000, 0},
     {guysSpotMac,             2000, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macbookRidicule,         2000, 0},
     {pcRidicule,              2000, 0},
     {sadMac,                  1000, 0},
     {macbookFxIntro,          2000, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macbookFx,               4000, 0},
     {pcFxIntro,               2000, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {pcFx,                    4000, 0},
     {macbookDare,             2000, 0},
     {macFxLoading,            2000, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macFx,                   4000, 0},
     {guysLol,                 2000, 0},
     {sadMac2,                 1000, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {kidHelp,                 2000, 0},
     {pedobearRunSide,         3000, 0},
     {pedobearRunFront,        2000, 0},
     {pcPanic,                 1000, 0},
     {macbookPanic,            1000, 0},
     {guysPanic,               1000, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macLoadDisk,             1500, 0},
     {macFireDisk,             1500, 0},
     {diskTwirl,               3000, 0},
     {diskImpact,              3000, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {theEnd,                  5000, 0},
     /*
     {effect1, 0x10000, 0},
