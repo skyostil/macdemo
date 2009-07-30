@@ -37,15 +37,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.8771192"
-     inkscape:cx="306.51547"
-     inkscape:cy="-2555.397"
+     inkscape:cx="222.14837"
+     inkscape:cy="734.71785"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      gridtolerance="10000"
      inkscape:window-width="1337"
      inkscape:window-height="1060"
-     inkscape:window-x="284"
-     inkscape:window-y="0"
+     inkscape:window-x="110"
+     inkscape:window-y="110"
      showgrid="false" />
   <metadata
      id="metadata1906">
@@ -401,7 +401,23 @@
        inkscape:export-filename="/home/skyostil/proj/macdemo/data/guys_on_street.png"
        inkscape:export-xdpi="101.66"
        inkscape:export-ydpi="101.66" />
-  </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2546"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       transform="matrix(1.2201563,0,0,1.2201563,639.26901,42.277628)"
+       inkscape:export-filename="C:\cygwin\home\Sami\proj\macdemo\data\text_title.png"
+       inkscape:export-xdpi="72.527443"
+       inkscape:export-ydpi="72.527443"><flowRegion
+         id="flowRegion2548"><rect
+           id="rect2550"
+           width="247.40082"
+           height="149.35257"
+           x="-256.52158"
+           y="20.575397" /></flowRegion><flowPara
+         id="flowPara2552">TITLE</flowPara><flowPara
+         id="flowPara2554">    goes</flowPara><flowPara
+         id="flowPara2556">       HERE</flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"

@@ -41,26 +41,19 @@ files = [
     ("../data/disk_impact.png", BW, A),
     ("../data/pedobear_impact.png", BW, 0),
     ("../data/pedobear_impact.png", BW, A),
+    ("../data/text_title.png", BW, 0),
+    ("../data/text_title.png", BW, A),
 ]
-
-def log2i(n):
-    x = 0
-    while (1 << x) < n:
-        x += 1
-    return x
-
-def isPowerOfTwo(n):
-    return (n & (n - 1)) == 0
 
 def packImage(out, image, format, flags):
     assert format == MX_PIXELFORMAT_I1
-    assert isPowerOfTwo(image.size[0])
+    assert (image.size[0] % 8) == 0
 
     stride = image.size[0] / 8
     planeSize = stride * image.size[1]
-    header = struct.pack("iiiiiiii", 
+    header = struct.pack("iiiiiii",
             image.size[0], image.size[1],
-            stride, log2i(stride),
+            stride,
             format,
             flags & 0xffffffff,
             planeSize,

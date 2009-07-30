@@ -143,7 +143,11 @@ void setup()
     screen = mxCreateSurface(video->screenWidth(), video->screenHeight(), MX_PIXELFORMAT_I1, 0);
     //Audio(8, 11127, 0, 512);
     //Audio(8, 22050, 0, 512);
+#if defined(CODEWARRIOR)
     audio = new Audio(8, 11127, false, 0x8000);
+#else
+    audio = new Audio(8, 11127, false, 512);
+#endif
     
     //assert(player.load(SONGFILE));
     

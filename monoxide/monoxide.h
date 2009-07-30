@@ -19,7 +19,6 @@ extern "C" {
 typedef enum MXPixelFormat_t
 {
     MX_PIXELFORMAT_I1   = 1,
-    MX_PIXELFORMAT_I8   = 8,
     MX_PIXELFORMAT_LAST = (1 << 31)
 } MXPixelFormat;
 
@@ -40,7 +39,6 @@ typedef struct MXSurface_t
 {
     int w, h;
     int stride;
-    int log2Stride;
     MXPixelFormat pixelFormat;
     int flags;
     int planeSize;

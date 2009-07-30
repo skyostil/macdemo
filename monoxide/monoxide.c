@@ -33,21 +33,6 @@ INLINE int mxMax(int a, int b)
     return (a > b) ? a : b;
 }
 
-int isPowerOfTwo(int n)
-{
-    return (n & (n - 1)) == 0;
-}
-
-int log2i(int n)
-{
-    int x = 0;
-    while ((1 << x) < n)
-    {
-        x++;
-    }
-    return x;
-}
-
 MXSurface* mxCreateSurface(int w, int h, MXPixelFormat format, int flags)
 {
     MX_ASSERT(w >= 8);
@@ -64,8 +49,7 @@ MXSurface* mxCreateSurface(int w, int h, MXPixelFormat format, int flags)
         s->h = h;
         s->stride = (format == MX_PIXELFORMAT_I1) ? (s->w / 8) : s->w;
         s->stride += (MX_SCANLINE_ALIGNMENT - (s->stride & (MX_SCANLINE_ALIGNMENT - 1))) & (MX_SCANLINE_ALIGNMENT - 1);
-        s->log2Stride = log2i(s->stride);
-        s->planeSize = s->h << s->log2Stride;
+        s->planeSize = s->h * s->stride;
         s->planes = 1;
 
         if (flags & MX_SURFACE_FLAG_PRESHIFT)
@@ -82,7 +66,7 @@ MXSurface* mxCreateSurface(int w, int h, MXPixelFormat format, int flags)
             return NULL;
         }
 
-        MX_ASSERT(isPowerOfTwo(s->stride));
+        MX_ASSERT((s->w % 8) == 0);
         MX_ASSERT((s->stride & (MX_SCANLINE_ALIGNMENT - 1)) == 0);
 
         return s;
@@ -104,8 +88,7 @@ MXSurface* mxCreateUserMemorySurface(int w, int h, MXPixelFormat format, int str
         s->w = w;
         s->h = h;
         s->stride = stride;
-        s->log2Stride = log2i(s->stride);
-        s->planeSize = s->h << s->log2Stride;
+        s->planeSize = s->h * s->stride;
         s->planes = 1;
 
         if (flags & MX_SURFACE_FLAG_PRESHIFT)
@@ -123,7 +106,7 @@ MXSurface* mxCreateUserMemorySurface(int w, int h, MXPixelFormat format, int str
             return NULL;
         }
 
-        MX_ASSERT(isPowerOfTwo(s->stride));
+        MX_ASSERT((s->w % 8) == 0);
         MX_ASSERT((s->stride & (MX_SCANLINE_ALIGNMENT - 1)) == 0);
 
         return s;
@@ -218,12 +201,12 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
                     }
                 }
 
-                destPixels += (((clippedDestRect.y)     << dest->log2Stride) + ((clippedDestRect.x)         >> 3));
-                srcPixels  += (((clippedDestRect.y - y) <<  src->log2Stride) + ((clippedDestRect.x - x + 7) >> 3));
+                destPixels += (((clippedDestRect.y)     * dest->stride) + ((clippedDestRect.x)         >> 3));
+                srcPixels  += (((clippedDestRect.y - y) *  src->stride) + ((clippedDestRect.x - x + 7) >> 3));
 
                 if (mask)
                 {
-                    maskPixels += (((clippedDestRect.y - y) <<  mask->log2Stride) + ((clippedDestRect.x - x + 7) >> 3));
+                    maskPixels += (((clippedDestRect.y - y) * mask->stride) + ((clippedDestRect.x - x + 7) >> 3));
                     blit_I1_to_I1_mask_I1(destPixels, srcPixels, maskPixels, &clippedDestRect,
                                           src->stride, dest->stride, mask->stride, src->flags);
                 }
@@ -321,7 +304,7 @@ void mxFill(MXSurface* s, const MXRect* rect, int color)
 
         {
             uint8_t* destPixels = s->pixels;
-            destPixels += (((clippedDestRect.y) << s->log2Stride) + ((clippedDestRect.x) >> 3));
+            destPixels += (((clippedDestRect.y) * s->stride) + ((clippedDestRect.x) >> 3));
 
             fill_I1(destPixels, &clippedDestRect, s->stride, color);
 

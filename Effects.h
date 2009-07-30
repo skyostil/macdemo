@@ -28,6 +28,8 @@ static struct
     MXSurface* diskImpactMask;
     MXSurface* pedobearImpact;
     MXSurface* pedobearImpactMask;
+    MXSurface* textTitle;
+    MXSurface* textTitleMask;
 } img;
 
 static int x = 93, y = 17;
@@ -260,6 +262,8 @@ int intro(int time, int duration)
 
     drawCity(pos);
     EFFECT_TITLE("Intro");
+
+    mxBlit(screen, img.textTitle, img.textTitleMask, 256, 30, NULL, 0);
 
     rect.x = 88;
     rect.y = 200;
