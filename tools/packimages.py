@@ -43,6 +43,8 @@ files = [
     ("../data/pedobear_impact.png", BW, A),
     ("../data/text_title.png", BW, 0),
     ("../data/text_title.png", BW, A),
+    ("../data/note1.png", BW, 0),
+    ("../data/note2.png", BW, 0),
 ]
 
 def packImage(out, image, format, flags):

@@ -37,8 +37,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.8771192"
-     inkscape:cx="222.14837"
-     inkscape:cy="734.71785"
+     inkscape:cx="68.103448"
+     inkscape:cy="545.86293"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      gridtolerance="10000"
@@ -417,7 +417,51 @@
            y="20.575397" /></flowRegion><flowPara
          id="flowPara2552">TITLE</flowPara><flowPara
          id="flowPara2554">    goes</flowPara><flowPara
-         id="flowPara2556">       HERE</flowPara></flowRoot>  </g>
+         id="flowPara2556">       HERE</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2566"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Arial;font-style:normal;font-weight:normal;font-size:40px;-inkscape-font-specification:Arial;font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion2568"><rect
+           id="rect2570"
+           width="245.12062"
+           height="135.67142"
+           x="-369.39108"
+           y="356.90369"
+           style="-inkscape-font-specification:Arial;font-family:Arial;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal" /></flowRegion><flowPara
+         id="flowPara2572"></flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="-258.80176"
+       y="409.34811"
+       id="text2574"><tspan
+         sodipodi:role="line"
+         id="tspan2576"></tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2578"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial;font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion2580"><rect
+           id="rect2582"
+           width="198.37668"
+           height="136.81151"
+           x="-320.36694"
+           y="389.96646"
+           style="-inkscape-font-specification:Arial;font-family:Arial;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal" /></flowRegion><flowPara
+         id="flowPara2584" /></flowRoot>    <path
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial;-inkscape-font-specification:Arial"
+       d="M -53.210555,450.3501 L -52.468365,450.3501 C -50.228795,450.35012 -48.750935,450.44127 -48.034775,450.62353 C -47.006145,450.88398 -46.101195,451.38528 -45.319935,452.12744 C -44.734015,452.67434 -44.271775,453.44582 -43.933215,454.44189 C -43.594695,455.43801 -43.425425,456.60012 -43.425405,457.92822 L -43.425405,459.93994 L -45.358995,459.93994 L -45.358995,459.1001 C -45.359015,458.2147 -45.544555,457.46275 -45.915635,456.84424 C -46.286745,456.22577 -46.836875,455.75376 -47.566025,455.42822 C -48.516565,455.01158 -49.571245,454.80324 -50.730085,454.80322 L -51.276965,454.80322 L -51.276965,471.11181 C -51.276975,472.68734 -51.485305,473.91455 -51.901965,474.79345 C -52.318645,475.67236 -53.034785,476.37549 -54.050405,476.90283 C -55.066035,477.43017 -56.172805,477.69384 -57.370715,477.69385 C -58.789985,477.69384 -59.913035,477.29345 -60.739855,476.49267 C -61.566675,475.69189 -61.980085,474.64046 -61.980085,473.33838 C -61.980085,471.97119 -61.485295,470.82211 -60.495715,469.89111 C -59.506135,468.96013 -58.210565,468.49464 -56.608995,468.49463 C -55.593375,468.49464 -54.460565,468.79411 -53.210555,469.39306 L -53.210555,450.3501 z"
+       id="flowRoot2586"
+       inkscape:export-filename="C:\cygwin\home\Sami\proj\macdemo\data\note1.png"
+       inkscape:export-xdpi="77.610001"
+       inkscape:export-ydpi="77.610001" />
+    <path
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Arial;-inkscape-font-specification:Arial"
+       d="M -56.961582,502.99669 L -41.414712,498.15294 L -41.414712,519.79357 C -41.414732,521.40816 -41.619812,522.6256 -42.029942,523.44591 C -42.440122,524.26623 -43.136742,524.94331 -44.119792,525.47716 C -45.102882,526.01102 -46.212912,526.27794 -47.449862,526.27794 C -48.869152,526.27794 -50.001962,525.87104 -50.848302,525.05724 C -51.694672,524.24344 -52.117852,523.19201 -52.117832,521.90294 C -52.117852,520.60086 -51.616552,519.47782 -50.613932,518.5338 C -49.611342,517.5898 -48.315772,517.11779 -46.727212,517.11778 C -46.206402,517.11779 -45.747412,517.16337 -45.350252,517.2545 C -44.953142,517.34566 -44.305362,517.58003 -43.406892,517.95763 L -43.406892,503.817 L -55.027992,507.43028 L -55.027992,523.75841 C -55.028002,525.33393 -55.236332,526.56114 -55.652992,527.44005 C -56.069672,528.31896 -56.785812,529.01882 -57.801432,529.53966 C -58.817062,530.06049 -59.923832,530.32091 -61.121742,530.32091 C -62.541012,530.32091 -63.664062,529.92052 -64.490882,529.11974 C -65.317702,528.31896 -65.731122,527.27403 -65.731112,525.98497 C -65.731122,524.61779 -65.236322,523.4687 -64.246742,522.53771 C -63.257162,521.60672 -61.961592,521.14123 -60.360022,521.14122 C -59.344402,521.14123 -58.211592,521.44071 -56.961582,522.03966 L -56.961582,502.99669 z"
+       id="flowRoot2594"
+       inkscape:export-filename="C:\cygwin\home\Sami\proj\macdemo\data\note2.png"
+       inkscape:export-xdpi="59.220001"
+       inkscape:export-ydpi="59.220001" />
+  </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"

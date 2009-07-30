@@ -30,6 +30,8 @@ static struct
     MXSurface* pedobearImpactMask;
     MXSurface* textTitle;
     MXSurface* textTitleMask;
+    MXSurface* note1;
+    MXSurface* note2;
 } img;
 
 static int x = 93, y = 17;
@@ -318,6 +320,7 @@ int macOnStreet(int time, int duration)
     int pos, pos2;
     int bop2 = ((time + 177) & 0x100) >> 6;
     int bop = (time & 0x100) >> 6;
+	int notePos;
 
     mxBlit(screen, img.macOnStreetBg, NULL, 0, 0, NULL, 0);
     EFFECT_TITLE("Mac on street");
@@ -325,9 +328,24 @@ int macOnStreet(int time, int duration)
     pos = min(time, 72 << 6);
     pos2 = pos >> 3;
     pos >>= 6;
+	notePos = ((time >> 3) & 0x7f);
 
     mxBlit(screen, img.pcOnStreet, NULL, 800 - pos2, 300 - (pos2 >> 1) + bop2, NULL, 0);
     mxBlit(screen, img.macOnStreet, NULL, 10 + pos, 20 + bop + (pos >> 1), NULL, 0);
+
+	if (time > 300)
+	{
+	    mxBlit(screen, img.note1, NULL, pos + 32 - (notePos >> 2), 97 - (notePos >> 3) - bop, NULL, 0);
+	}
+	if (time > 500)
+	{
+		mxBlit(screen, img.note2, NULL, pos - 5 - (notePos >> 2), 64 - (notePos >> 2) + bop2, NULL, 0);
+	}
+	if (time > 800)
+	{
+	    mxBlit(screen, img.note1, NULL, pos + 12 - (notePos >> 3), 36 - (notePos >> 1) + bop, NULL, 0);
+	}
+
     return 1;
 }
 

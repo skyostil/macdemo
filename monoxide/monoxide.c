@@ -7,7 +7,7 @@
 #include <string.h>
 #include <assert.h>
 
-#define MX_SCANLINE_ALIGNMENT   0x4
+#define MX_SCANLINE_ALIGNMENT   0x1 /* no alignment at the moment */
 #define MX_ASSERT(X)            assert(X)
 #define MX_UNUSED(X)            (void)(X)
 
