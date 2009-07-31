@@ -26,6 +26,8 @@ files = [
     ("../data/pc_on_street.png", BW, PS),
     ("../data/macbook_on_street.png", BW, 0),
     ("../data/pc_closeup.png", BW, 0),
+    ("../data/pc_closeup_bluescreen.png", BW, 0),
+    ("../data/pc_closeup_bluescreen.png", BW, A),
     ("../data/mac_closeup.png", BW, 0),
     ("../data/macbook_closeup.png", BW, 0),
     ("../data/pc_screen_bg.png", BW, C),

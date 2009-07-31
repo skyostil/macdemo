@@ -13,6 +13,8 @@ static struct
     MXSurface* pcOnStreet;
     MXSurface* macbookOnStreet;
     MXSurface* pcCloseUp;
+    MXSurface* pcCloseUpBluescreen;
+    MXSurface* pcCloseUpBluescreenMask;
     MXSurface* macCloseUp;
     MXSurface* macbookCloseUp;
     MXSurface* pcScreenBg;
@@ -76,6 +78,8 @@ static struct
     MXSurface* textQuickMask;
     MXSurface* textCallThe;
     MXSurface* textCallTheMask;
+    MXSurface* textCops;
+    MXSurface* textCopsMask;
     MXSurface* textSureThing;
     MXSurface* textSureThingMask;
     MXSurface* textI;
@@ -641,7 +645,7 @@ int macFxLoading(int time, int duration)
 
 	rect.x = 256 - 44;
 	rect.y = 120 + bop + 110;
-	rect.w = 8 + min(144, time >> 5);
+	rect.w = 8 + min(144, max(0, (time - 2000)) >> 5);
 	rect.h = 16;
 	mxFill(screen, &rect, 1);
 
@@ -731,44 +735,98 @@ int pedobearRunFront(int time, int duration)
     return 1;
 }
 
-int pcPanic(int time, int duration)
-{
-    int bop = sawtooth(time >> 1) >> 3;
-
-    mxFill(screen, NULL, 0);
-    EFFECT_TITLE("PC Panic");
-
-    mxBlit(screen, img.pcCloseUp, NULL, -64, 120 + bop, NULL, 0);
-    return 1;
-}
-
 int macbookPanic(int time, int duration)
 {
     int bop = sawtooth(time >> 1) >> 3;
+    int bop2 = sawtooth(time << 1) >> 3;
+    int bop3 = sawtooth(time) >> 3;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Macbook Panic");
+
+    mxBlit(screen, img.macbookCloseUp, NULL, -64, 120 + bop, NULL, 0);
+
+    int pos1 = pow2(max(0,  600 - time)) >> 8;
+    int pos2 = pow2(max(0,  900 - time)) >> 8;
+    int pos3 = pow2(max(0, 1200 - time)) >> 8;
+
+	blitCentered(screen, img.textQuick, NULL, 256, 60 + pos1 + bop2, NULL, 0);
+	blitCentered(screen, img.textCallThe, NULL, 256, 120 + pos2 + bop3, NULL, 0);
+	blitCentered(screen, img.textCops, NULL, 256, 200 + pos3 + bop2, NULL, 0);
+
+    return 1;
+}
+
+int pcPanic(int time, int duration)
+{
+    int bop = sawtooth(time >> 1) >> 3;
+    int bop2 = sawtooth(time << 1) >> 3;
+    int bop3 = sawtooth(time) >> 3;
 
     mxFill(screen, NULL, 0);
     EFFECT_TITLE("PC Panic");
 
-    mxBlit(screen, img.pcCloseUp, NULL, -64, 120 + bop, NULL, 0);
+	if (time > 1500)
+	{
+		bop = 0;
+	}
+
+	mxBlit(screen, img.pcCloseUp, NULL, -64, 120 + bop, NULL, 0);
+
+	if (time > 1500)
+	{
+		mxBlit(screen, img.pcCloseUpBluescreen, img.pcCloseUpBluescreenMask, -64, 120 + bop, NULL, 0);
+	}
+
+    int pos1 = pow2(max(0,  600 - time)) >> 8;
+    int pos2 = pow2(max(0,  900 - time)) >> 8;
+
+	blitCentered(screen, img.textSureThing, NULL, 256, 60 + pos1 + bop2, NULL, 0);
+	blitCentered(screen, img.textI, NULL, 256, 120 + pos2 + bop3, NULL, 0);
+
+	if ((time > 1200 && time < 1500) && (time & 0x40))
+	{
+	    mxInvert(screen, NULL);
+	}
+
     return 1;
 }
 
-int guysPanic(int time, int duration)
+int macbookPanic2(int time, int duration)
 {
+    int bop = sawtooth(time << 1) >> 3;
+
     mxFill(screen, NULL, 0);
-    EFFECT_TITLE("Guys Panic");
-    drawGuys(time);
+    EFFECT_TITLE("Macbook Panic");
+
+    mxBlit(screen, img.macbookCloseUp, NULL, -64, 120, NULL, 0);
+
+    int pos1 = pow2(max(0, 2500 - time)) >> 8;
+
+	blitCentered(screen, img.textOhNo, NULL, 256, 60 + pos1 + bop, NULL, 0);
+
     return 1;
 }
     
 int macHasPlan(int time, int duration)
 {
-    int bop = -time >> 4;
+    int bop = -time >> 8;
+	MXRect rect;
+    int pos1 = pow2(max(0, 1500 - time)) >> 8;
 
     mxFill(screen, NULL, 0);
     EFFECT_TITLE("Mac Has Plan");
 
+	rect.x = 0;
+	rect.y = 0;
+	rect.w = 8 + (time >> 2);
+	rect.h = img.textStepAside->h;
+
+	blitCentered(screen, img.textStepAside, NULL, 192, 60, &rect, 0);
+	blitCentered(screen, img.textKids, NULL, 350, 55 - pos1, NULL, 0);
+
     mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 120 + bop, NULL, 0);
+
     return 1;
 }
 
@@ -894,7 +952,6 @@ EffectEntry effects[] =
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
     {clearScreen,             0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {intro,                   4000, 0},
-#if 0
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macOnStreet,             6000, 0},
     {guysSpotMac,             2000, 0},
@@ -909,9 +966,8 @@ EffectEntry effects[] =
     {pcFxIntro,               3000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {pcFx,                    4000, 0},
-#endif
     {macbookDare,             3000, 0},
-    {macFxLoading,            4000, 0},
+    {macFxLoading,            6000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macFx,                   4000, 0},
     {guysLol,                 2000, 0},
@@ -920,10 +976,11 @@ EffectEntry effects[] =
     {kidHelp,                 2000, 0},
     {pedobearRunSide,         3000, 0},
     {pedobearRunFront,        2000, 0},
-    {pcPanic,                 1000, 0},
-    {macbookPanic,            1000, 0},
-    {guysPanic,               1000, 0},
+    {macbookPanic,            3000, 0},
+    {pcPanic,                 3000, 0},
+    {macbookPanic2,           4000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
+    {macHasPlan,              3000, 0},
     {macLoadDisk,             1500, 0},
     {macFireDisk,             1500, 0},
     {diskTwirl,               3000, 0},

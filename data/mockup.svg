@@ -37,10 +37,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.62021693"
-     inkscape:cx="492.45493"
-     inkscape:cy="-1922.5644"
+     inkscape:cx="332.83336"
+     inkscape:cy="-579.48596"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      gridtolerance="10000"
      inkscape:window-width="1337"
      inkscape:window-height="1060"
@@ -659,8 +659,8 @@
        style="font-size:40px;font-style:normal;font-weight:normal;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
        transform="translate(323.76396,121.11951)"
        inkscape:export-filename="C:\cygwin\home\Sami\proj\macdemo\data\text_lets_see.png"
-       inkscape:export-xdpi="122.79292"
-       inkscape:export-ydpi="122.79292"><flowRegion
+       inkscape:export-xdpi="122.4718"
+       inkscape:export-ydpi="122.4718"><flowRegion
          id="flowRegion2751"><rect
            id="rect2753"
            width="496.6004"
@@ -725,8 +725,8 @@
        style="font-size:40px;font-style:normal;font-weight:normal;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
        transform="translate(171.05382,187.72274)"
        inkscape:export-filename="C:\cygwin\home\Sami\proj\macdemo\data\text_quick.png"
-       inkscape:export-xdpi="83.551651"
-       inkscape:export-ydpi="83.551651"><flowRegion
+       inkscape:export-xdpi="84.475937"
+       inkscape:export-ydpi="84.475937"><flowRegion
          id="flowRegion2797"><rect
            id="rect2799"
            width="380.51202"
@@ -866,8 +866,8 @@
        style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
        transform="translate(-96.740345,46.819529)"
        inkscape:export-filename="C:\cygwin\home\Sami\proj\macdemo\data\text_call_the.png"
-       inkscape:export-xdpi="80.639999"
-       inkscape:export-ydpi="80.639999"><flowRegion
+       inkscape:export-xdpi="80.64315"
+       inkscape:export-ydpi="80.64315"><flowRegion
          id="flowRegion2926"><rect
            id="rect2928"
            width="228.95215"
@@ -880,8 +880,8 @@
        style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
        transform="translate(-87.06631,22.634442)"
        inkscape:export-filename="C:\cygwin\home\Sami\proj\macdemo\data\text_cops.png"
-       inkscape:export-xdpi="100.85252"
-       inkscape:export-ydpi="100.85252"><flowRegion
+       inkscape:export-xdpi="150.69597"
+       inkscape:export-ydpi="150.69597"><flowRegion
          id="flowRegion2934"><rect
            id="rect2936"
            width="293.44571"
@@ -1813,5 +1813,39 @@
        id="path4017"
        d="M 132.2334,3643.3887 L 161.2028,3626.6632"
        style="opacity:1;fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
+    <g
+       id="g3010"
+       inkscape:export-filename="C:\cygwin\home\Sami\proj\macdemo\data\pc_closeup_bluescreen.png"
+       inkscape:export-xdpi="105.92"
+       inkscape:export-ydpi="105.92">
+      <g
+         inkscape:export-ydpi="90.333923"
+         inkscape:export-xdpi="90.333923"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/pc_on_street.png"
+         style="fill:#ffffff;fill-opacity:1;display:inline"
+         transform="matrix(-5.4557732,0,0,5.4557732,2099.3979,-5518.1314)"
+         id="g2991">
+        <path
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.73316824;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="M 399.58365,1227.4996 L 446.77651,1227.4996 L 434.89767,1256.2414 L 387.70481,1256.2414 L 399.58365,1227.4996 z"
+           id="path2993"
+           sodipodi:nodetypes="ccccc" />
+      </g>
+      <text
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/skyostil/proj/macdemo/data/pc_on_street.png"
+         id="text2997"
+         y="1268.0505"
+         x="-258.9332"
+         style="font-size:141.36219788px;font-style:normal;font-weight:normal;line-height:125%;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         xml:space="preserve"
+         sodipodi:linespacing="125%"><tspan
+           y="1268.0505"
+           x="-258.9332"
+           sodipodi:role="line"
+           id="tspan3001"
+           style="font-size:23.62406921px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans">PC bluescreen</tspan></text>
+    </g>
   </g>
 </svg>
