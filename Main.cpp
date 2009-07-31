@@ -243,7 +243,7 @@ void demo()
         {
             break;
         }
-        if (++frames == 60)
+        if (++frames == 60 && time > frameStartTime)
         {
             int fps = 1000 * ((frames << 16) / ((time - frameStartTime)));
             frameStartTime = time;

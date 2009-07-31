@@ -11,7 +11,9 @@
 static SDL_Surface* win = 0;
 static MXSurface* backbuffer = 0;
 static bool timeSkip = false;
+static bool paused = false;
 static int timeSkipOffset = 0;
+static int pauseTime = 0;
 
 Video::Video(int w, int h)
 {
@@ -112,6 +114,18 @@ bool Video::processInput(void)
                 {
                     return false;
                 }
+                else if (event.key.keysym.sym == 'p')
+                {
+                    if (!paused)
+                    {
+                        pauseTime = SDL_GetTicks();
+                    }
+                    else
+                    {
+                        timeSkipOffset -= SDL_GetTicks() - pauseTime;
+                    }
+                    paused = !paused;
+                }
                 else if (event.key.keysym.sym == SDLK_LCTRL ||
                          event.key.keysym.sym == SDLK_RCTRL)
                 {
@@ -132,9 +146,14 @@ bool Video::processInput(void)
 
 int Video::ticks()
 {
+    int t = SDL_GetTicks();
     if (timeSkip)
     {
         timeSkipOffset += 20;
     }
-    return SDL_GetTicks() + timeSkipOffset;
+    if (paused)
+    {
+        return pauseTime + timeSkipOffset;
+    }
+    return t + timeSkipOffset;
 }
