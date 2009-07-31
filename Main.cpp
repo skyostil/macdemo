@@ -51,6 +51,12 @@ inline int max(int a, int b)
     return (a > b) ? a : b;
 }
 
+inline int absi(int v)
+{
+    const int mask = v >> sizeof(int) * 8 - 1;
+    return (v + mask) ^ mask;
+}
+
 inline int pow2(int i)
 {
     return i * i;
@@ -61,7 +67,7 @@ class MusicRenderer: public AudioRenderer
 public:
     MusicRenderer(int _mixFreq)
     {
-    	mixFreq = _mixFreq;
+        mixFreq = _mixFreq;
         readBytes = playBytes = 0;
 
         SampleFormat format(8, 1);
@@ -77,7 +83,7 @@ public:
 
     ~MusicRenderer()
     {
-    	delete audioBuffer;
+        delete audioBuffer;
         fclose(audioFile);
     }
     
@@ -85,9 +91,9 @@ public:
     {
         while (bytesToLoad > 0)
         {
-      	    int readPos = readBytes & (audioBuffer->bytes - 1);
-    	    int readSize = min(bytesToLoad, audioBuffer->bytes - readPos);
-    	    //printf("LOAD %d bytes at %d (%d total)\n", readSize, readPos, readBytes);
+            int readPos = readBytes & (audioBuffer->bytes - 1);
+            int readSize = min(bytesToLoad, audioBuffer->bytes - readPos);
+            //printf("LOAD %d bytes at %d (%d total)\n", readSize, readPos, readBytes);
             int n = fread(audioBuffer->data + readPos, 1, readSize, audioFile);
             if (n <= 0)
             {
@@ -95,22 +101,22 @@ public:
             }
             bytesToLoad -= n;
             readBytes += n;
-    	}
+        }
     }
 
     void render(SampleChunk* buffer)
     {
-    	int bytesToPlay = buffer->bytes;
+        int bytesToPlay = buffer->bytes;
         while (playBytes + buffer->bytes > readBytes && !feof(audioFile))
         {
-    	    //printf("UNDERRUN (%d read, %d played)\n", readBytes, playBytes);
+            //printf("UNDERRUN (%d read, %d played)\n", readBytes, playBytes);
             preload();
         }
         while (bytesToPlay > 0)
         {
-    	    int playPos = playBytes & (audioBuffer->bytes - 1);
-     	    int playSize = min(bytesToPlay, audioBuffer->bytes - playPos);
-    	    //printf("PLAY %d bytes (%d total, %d read)\n", playSize, playBytes, readBytes);
+            int playPos = playBytes & (audioBuffer->bytes - 1);
+            int playSize = min(bytesToPlay, audioBuffer->bytes - playPos);
+            //printf("PLAY %d bytes (%d total, %d read)\n", playSize, playBytes, readBytes);
             memcpy(buffer->data, audioBuffer->data + playPos, playSize);
             bytesToPlay -= playSize;
             playBytes += playSize;

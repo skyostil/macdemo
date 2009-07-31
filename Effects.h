@@ -621,10 +621,106 @@ int macbookFxIntro(int time, int duration)
     return 1;
 }
 
+inline uint8_t dither(int y, int v)
+{
+#if 0
+    static uint32_t const dither4x4[] =
+    {
+        0x008020a0,
+        0xc040e060,
+        0x30b01090,
+        0xf070d050
+    };
+#endif
+    static const uint32_t dither8x8[] =
+    {
+        0x008020a0 >> 1, 0x088828a8 >> 1,
+        0xc040e060 >> 1, 0xc848e868 >> 1,
+        0x30b01090 >> 1, 0x38b81898 >> 1,
+        0xf070d050 >> 1, 0xf878d858 >> 1,
+        0x0c8c2cac >> 1, 0x048424a4 >> 1,
+        0xcc4cec6c >> 1, 0xc444e464 >> 1,
+        0x3cbc1c9c >> 1, 0x34b41494 >> 1,
+        0xfc7cdc5c >> 1, 0xf474d454 >> 1
+    };
+
+    char p = (y & 7) << 1;
+    uint8_t ha = v >> 1;
+    uint32_t c32 = ha | (ha << 8) | (ha << 16) | (ha << 24);
+    uint32_t d32 = c32;
+    uint8_t c;
+
+    c32 -= dither8x8[p    ] >> 1;
+    d32 -= dither8x8[p + 1] >> 1;
+    c32 &= 0x80808080;
+    d32 &= 0x80808080;
+
+    c = (d32 >> 28) | (d32 >> 21) | (d32 >> 14) | (d32 >> 7);
+    c = (c32 >> 28) | (c32 >> 21) | (c32 >> 14) | (c32 >> 7) | (c << 4);
+
+    return c;
+}
+
 int macbookFx(int time, int duration)
 {
+    int angle = time << 12;
+    int x, y;
+    int center = 256;
+    int angle2 = sini((time + 12345) >> 4) >> 2;
+    uint8_t* d = screen->pixels + screen->stride * 75;
+
     mxBlit(screen, img.macbookScreenBg, NULL, 0, 0, NULL, 0);
     EFFECT_TITLE("Macbook Fx");
+   
+    for (y = 0; y < 200; y++)
+    {
+        int w1, w2;
+        uint8_t a = angle >> 16;
+        int i;
+
+        if (a & 0x40)
+        {
+            w1 = absi((sini(a))) >> 9;
+            w2 = absi((cosi(a))) >> 9;
+        }
+        else
+        {
+            w2 = absi((sini(a))) >> 9;
+            w1 = absi((cosi(a))) >> 9;
+        }
+
+        int w = w1 + w2;
+        uint8_t c1 = dither(y, w1 >> 1);
+        uint8_t c2 = dither(y, w2 >> 1);
+        uint8_t leftMask   = (0x1 << ((w >> 1) & 7)) - 1;
+        uint8_t rightMask  = ~((0xff >> ((w >> 1) & 7)));
+
+        int left  = center - ((w + 2) >> 1);
+        int subW  = w + (left & 0x7);
+        int right = center + ((subW) >> 1) - 8;
+        uint8_t* dest = &d[left >> 3];
+
+        *dest++ = leftMask & c1;
+
+        for (x = left & ~7; x < left + w1 - 8; x += 8)
+        {
+            *dest++ = c1;
+        }
+
+        uint8_t middleMask = (0xff >> (((left + w1 + 7) & 7)));
+        
+        *dest++ = c1 ^ ((c1 ^ c2) & middleMask);
+
+        for (; x < right; x += 8)
+        {
+            *dest++ = c2;
+        }
+        *dest++ = rightMask & c2;
+
+        d += screen->stride;
+        angle += angle2;
+    }
+
     return 1;
 }
 
@@ -1084,6 +1180,7 @@ EffectEntry effects[] =
 {
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
     {clearScreen,             0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
+#if 0
     {intro,                   4000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macOnStreet,             6000, 0},
@@ -1095,7 +1192,8 @@ EffectEntry effects[] =
     {sadMac,                  3000, 0},
     {macbookFxIntro,          3000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-    {macbookFx,               4000, 0},
+#endif
+    {macbookFx,               4000 * 60, 0},
     {pcFxIntro,               3000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {pcFx,                    4000, 0},
