@@ -847,10 +847,79 @@ int macFxLoading(int time, int duration)
 
 int macFx(int time, int duration)
 {
+    static int bx = 4;
+    static int by = 7;
+    static int dx = 1;
+    static int dy = 1;
+    static int p1 = 6;
+    static int p2 = 2;
+    static int t = 0;
+
     mxFill(screen, NULL, 0);
     EFFECT_TITLE("Mac Fx");
 
     blitCentered(screen, img.macCloseUp, NULL, 256, 100 + 135, NULL, 0);
+    
+    MXRect rect;
+    rect.x = 256 - 42 + (bx << 3);
+    rect.y = 150 + (by << 3);
+    rect.w = 8;
+    rect.h = 8;
+    mxFill(screen, &rect, 1);
+
+    rect.x = 256 - 42;
+    rect.y = 150 + (p1 << 3);
+    rect.w = 8;
+    rect.h = 32;
+    mxFill(screen, &rect, 1);
+
+    rect.x = 256 - 42 + (17 << 3);
+    rect.y = 150 + (p2 << 3);
+    rect.w = 8;
+    rect.h = 32;
+    mxFill(screen, &rect, 1);
+
+    while (t < time)
+    {
+        bx += dx;
+        by += dy;
+
+        if (bx < 2 || bx > 15)
+        {
+            dx = -dx;
+        }
+
+        if (by < 2 || by > 12)
+        {
+            dy = -dy;
+        }
+
+        if (dx < 0)
+        {
+            if (p1 < by - 2)
+            {
+                p1++;
+            }
+            else if (p1 > by - 2)
+            {
+                p1--;
+            }
+        }
+        else
+        {
+            if (p2 < by - 2)
+            {
+                p2++;
+            }
+            else if (p2 > by - 2)
+            {
+                p2--;
+            }
+        }
+
+        t += 100;
+    }
+
     return 1;
 }
 
