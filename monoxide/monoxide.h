@@ -56,6 +56,7 @@ void mxFlushSurface(MXSurface* s);
 void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
             int x, int y, const MXRect* srcRect, int flags);
 void mxFill(MXSurface* dest, const MXRect* rect, int color);
+void mxInvert(MXSurface* dest, const MXRect* rect);
 void mxFillCheckerPattern(MXSurface* dest, int cw, int ch);
 void mxFillCirclePattern(MXSurface* s, int cx, int cy, int r);
 void mxFillSierpinskiPattern(MXSurface* dest);

@@ -266,3 +266,79 @@ void fill_I1(uint8_t* dest, const MXRect* destRect, int destStride, int color)
         }
     }
 }
+
+void invert_I1(uint8_t* dest, const MXRect* destRect, int destStride)
+{
+    int x;
+    int w = ((destRect->w + (destRect->x & 0x7)) >> 3);
+
+    /* Right lobe, sub-byte pixels */
+    if ((destRect->x + destRect->w) & 0x7)
+    {
+        int h = destRect->h;
+        uint8_t pixelMask = ~((0x100 >> ((destRect->x + destRect->w) & 0x7)) - 1);
+        uint8_t* d = dest + w;
+
+        while (h--)
+        {
+            *d ^= pixelMask;
+            d += destStride;
+        }
+    }
+
+    /* Left lobe, sub-byte pixels */
+    if (destRect->x & 0x7)
+    {
+        int h = destRect->h;
+        uint8_t pixelMask = ~((0x100 >> (destRect->x & 0x7)) - 1);
+        uint8_t* d = dest;
+
+        while (h--)
+        {
+            *d ^= pixelMask;
+            d += destStride;
+        }
+
+        dest++;
+        w--;
+    }
+
+    /* Center lobe, 32-bit pixels */
+    if (w >= 0x4)
+    {
+        int h = destRect->h;
+        uint8_t* d = dest;
+        while (h--)
+        {
+            uint32_t* d32 = (uint32_t*)d;
+
+            for (x = 0; x <= w - 4; x += 4)
+            {
+                *d32 = ~*d32;
+				d32++;
+            }
+
+            d += destStride;
+        }
+        dest += x;
+        w    &= 0x3;
+    }
+
+    /* Center lobe, 8-bit pixels */
+    if (w)
+    {
+        int h = destRect->h;
+        while (h--)
+        {
+            uint8_t* d = dest;
+
+            for (x = 0; x < w; x++)
+            {
+                *d = ~*d;
+				d++;
+            }
+
+            dest += destStride;
+        }
+    }
+}

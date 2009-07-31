@@ -16,6 +16,7 @@ void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mas
 void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
                    int srcStride, int destStride, int srcFlags);
 void fill_I1(uint8_t* dest, const MXRect* destRect, int destStride, int color);
+void invert_I1(uint8_t* dest, const MXRect* destRect, int destStride);
 
 #if !defined(_MSC_VER)
 #  define INLINE inline
@@ -317,6 +318,42 @@ void mxFill(MXSurface* s, const MXRect* rect, int color)
             destPixels += (((clippedDestRect.y) * s->stride) + ((clippedDestRect.x) >> 3));
 
             fill_I1(destPixels, &clippedDestRect, s->stride, color);
+
+            s->flags |= MX_SURFACE_FLAG_DIRTY;
+        }
+    }
+}
+
+void mxInvert(MXSurface* s, const MXRect* rect)
+{
+    MX_ASSERT(s);
+    MX_ASSERT(s->pixelFormat == MX_PIXELFORMAT_I1);
+    {
+        MXRect fullRect, fullDestRect, clippedDestRect;
+
+        if (!rect)
+        {
+            fullRect.x = fullRect.y = 0;
+            fullRect.w = s->w;
+            fullRect.h = s->h;
+            rect = &fullRect;
+        }
+        MX_ASSERT(rect->w >= 8 && rect->h >= 8);
+
+        fullDestRect.x = fullDestRect.y = 0;
+        fullDestRect.w = s->w;
+        fullDestRect.h = s->h;
+
+        if (!clipRect(rect, &fullDestRect, &clippedDestRect))
+        {
+            return;
+        }
+
+        {
+            uint8_t* destPixels = s->pixels;
+            destPixels += (((clippedDestRect.y) * s->stride) + ((clippedDestRect.x) >> 3));
+
+            invert_I1(destPixels, &clippedDestRect, s->stride);
 
             s->flags |= MX_SURFACE_FLAG_DIRTY;
         }

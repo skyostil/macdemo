@@ -605,33 +605,55 @@ int pcFx(int time, int duration)
 int macbookDare(int time, int duration)
 {
     int bop = sawtooth(time >> 1) >> 3;
+	MXRect rect;
 
     mxFill(screen, NULL, 0);
     EFFECT_TITLE("Macbook Dare");
 
     mxBlit(screen, img.macbookCloseUp, NULL, 64, 100 + bop, NULL, 0);
+
+	rect.x = 0;
+	rect.y = 0;
+	rect.w = img.textLetsSee->w;
+	rect.h = (time >> 3);
+
+	blitCentered(screen, img.textLetsSee, img.textLetsSeeMask, 256, 342 / 2, &rect, 0);
+
     return 1;
 }
 
 int macFxLoading(int time, int duration)
 {
-    int bop = -time >> 5;
+    int bop = -time >> 8;
+	MXRect rect;
 
     mxFill(screen, NULL, 0);
     EFFECT_TITLE("Mac Fx Loading");
 
+	rect.x = 0;
+	rect.y = 0;
+	rect.w = 8 + (time >> 2);
+	rect.h = img.textOkay->h;
+
+	blitCentered(screen, img.textOkay, NULL, 256, 60, &rect, 0);
+
     mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 120 + bop, NULL, 0);
+
+	rect.x = 256 - 44;
+	rect.y = 120 + bop + 110;
+	rect.w = 8 + min(144, time >> 5);
+	rect.h = 16;
+	mxFill(screen, &rect, 1);
+
     return 1;
 }
 
 int macFx(int time, int duration)
 {
-    int bop = 0;
-
     mxFill(screen, NULL, 0);
     EFFECT_TITLE("Mac Fx");
 
-    mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 60 + bop, NULL, 0);
+    mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 100, NULL, 0);
     return 1;
 }
 
@@ -640,21 +662,25 @@ void drawGuys(int time)
     int bop = (time & 0x100) >> 6;
     int bop2 = ((time + 177) & 0x100) >> 6;
 
-    mxBlit(screen, img.pcOnStreet, NULL, 0, 100 + bop, NULL, 0);
-    mxBlit(screen, img.macbookOnStreet, NULL, 256, 160 + bop2, NULL, 0);
+    mxBlit(screen, img.pcOnStreet, NULL, 0, 140 + bop, NULL, 0);
+    mxBlit(screen, img.macbookOnStreet, NULL, 256, 200 + bop2, NULL, 0);
 }
 
 int guysLol(int time, int duration)
 {
+    int bop = sawtooth(time << 1) >> 3;
+
     mxFill(screen, NULL, 0);
     drawGuys(time);
+	blitCentered(screen, img.textLol, NULL, 256, 60 + bop, NULL, 0);
+
     EFFECT_TITLE("Guys LOL");
     return 1;
 }
 
 int sadMac2(int time, int duration)
 {
-    int bop = time >> 4;
+    int bop = time >> 6;
 
     mxFill(screen, NULL, 0);
     EFFECT_TITLE("Sad Mac #2");
@@ -665,9 +691,20 @@ int sadMac2(int time, int duration)
 
 int kidHelp(int time, int duration)
 {
-    mxFill(screen, NULL, 0);
+    int bop = sawtooth(time << 1) >> 3;
+    int pos = pow2(max(0,  500 - time)) >> 8;
+
+	mxFill(screen, NULL, 0);
     EFFECT_TITLE("Kid Help");
     drawGuys(time);
+
+	blitCentered(screen, img.textHelp, NULL, 256 - pos, 60 + bop, NULL, 0);
+
+	if ((time < 500) && (time & 0x40))
+	{
+	    mxInvert(screen, NULL);
+	}
+
     return 1;
 }
 
@@ -857,6 +894,7 @@ EffectEntry effects[] =
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
     {clearScreen,             0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {intro,                   4000, 0},
+#if 0
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macOnStreet,             6000, 0},
     {guysSpotMac,             2000, 0},
@@ -871,12 +909,13 @@ EffectEntry effects[] =
     {pcFxIntro,               3000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {pcFx,                    4000, 0},
-    {macbookDare,             2000, 0},
-    {macFxLoading,            2000, 0},
+#endif
+    {macbookDare,             3000, 0},
+    {macFxLoading,            4000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macFx,                   4000, 0},
     {guysLol,                 2000, 0},
-    {sadMac2,                 1000, 0},
+    {sadMac2,                 2000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {kidHelp,                 2000, 0},
     {pedobearRunSide,         3000, 0},
