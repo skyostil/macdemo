@@ -942,11 +942,11 @@ void drawGuys(int time, bool laugh)
 
     if (laugh && (time + 59) & 0x80)
     {
-        blitCentered(screen, img.faceMacbookNoticeMac, NULL, 384 + 40, 256 + bop, NULL, 0);
+        blitCentered(screen, img.faceMacbookTalk, NULL, 384 + 40, 256 + bop, NULL, 0);
     }
     else
     {
-        blitCentered(screen, img.faceMacbookTalk, NULL, 384 + 40, 256 + bop, NULL, 0);
+        blitCentered(screen, img.faceMacbookNoticeMac, NULL, 384 + 40, 256 + bop, NULL, 0);
     }
 }
 
