@@ -13,10 +13,12 @@
 
 void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mask, const MXRect* destRect,
                            int srcStride, int destStride, int maskStride, int srcFlags);
-void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
-                   int srcStride, int destStride, int srcFlags);
-void fill_I1(uint8_t* dest, const MXRect* destRect, int destStride, int color);
-void invert_I1(uint8_t* dest, const MXRect* destRect, int destStride);
+void blit_I1_to_I1        (uint8_t* dest, const uint8_t* src, const MXRect* destRect,
+                           int srcStride, int destStride, int srcFlags);
+void blit_I1_to_I1_xor    (uint8_t* dest, const uint8_t* src, const MXRect* destRect,
+                           int srcStride, int destStride, int srcFlags);
+void fill_I1              (uint8_t* dest, const MXRect* destRect, int destStride, int color);
+void invert_I1            (uint8_t* dest, const MXRect* destRect, int destStride);
 
 #if !defined(_MSC_VER)
 #  define INLINE inline
@@ -52,6 +54,9 @@ MXSurface* mxCreateSurface(int w, int h, MXPixelFormat format, int flags)
         s->stride += (MX_SCANLINE_ALIGNMENT - (s->stride & (MX_SCANLINE_ALIGNMENT - 1))) & (MX_SCANLINE_ALIGNMENT - 1);
         s->planeSize = s->h * s->stride;
         s->planes = 1;
+        s->clipRect.x = s->clipRect.y = 0;
+        s->clipRect.w = w;
+        s->clipRect.h = h;
 
         if (flags & MX_SURFACE_FLAG_PRESHIFT)
         {
@@ -91,6 +96,9 @@ MXSurface* mxCreateUserMemorySurface(int w, int h, MXPixelFormat format, int str
         s->stride = stride;
         s->planeSize = s->h * s->stride;
         s->planes = 1;
+        s->clipRect.x = s->clipRect.y = 0;
+        s->clipRect.w = w;
+        s->clipRect.h = h;
 
         if (flags & MX_SURFACE_FLAG_PRESHIFT)
         {
@@ -161,7 +169,7 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
     MX_ASSERT(src);
     MX_UNUSED(flags);
     {
-        MXRect fullSrcRect, fullDestRect, destRect, clippedDestRect, clippedSrcRect;
+        MXRect fullSrcRect, destRect, clippedDestRect, clippedSrcRect;
 
         fullSrcRect.x = fullSrcRect.y = 0;
         fullSrcRect.w = src->w;
@@ -180,15 +188,12 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
             srcRect = &clippedSrcRect;
 		}
 
-        fullDestRect.x = fullDestRect.y = 0;
-        fullDestRect.w = dest->w;
-        fullDestRect.h = dest->h;
         destRect.x = x;
         destRect.y = y;
         destRect.w = srcRect->w;
         destRect.h = srcRect->h;
 
-        if (!clipRect(&destRect, &fullDestRect, &clippedDestRect))
+        if (!clipRect(&destRect, &dest->clipRect, &clippedDestRect))
         {
             return;
         }
@@ -223,8 +228,16 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
                 }
                 else
                 {
-                    blit_I1_to_I1(destPixels, srcPixels, &clippedDestRect, 
-                                  src->stride, dest->stride, src->flags);
+                    if (flags & MX_BLIT_FLAG_INVERT)
+                    {
+                        blit_I1_to_I1_xor(destPixels, srcPixels, &clippedDestRect, 
+                                          src->stride, dest->stride, src->flags);
+                    }
+                    else
+                    {
+                        blit_I1_to_I1(destPixels, srcPixels, &clippedDestRect, 
+                                      src->stride, dest->stride, src->flags);
+                    }
                 }
                 break;
             }
@@ -293,7 +306,7 @@ void mxFill(MXSurface* s, const MXRect* rect, int color)
     MX_ASSERT(s);
     MX_ASSERT(s->pixelFormat == MX_PIXELFORMAT_I1);
     {
-        MXRect fullRect, fullDestRect, clippedDestRect;
+        MXRect fullRect, clippedDestRect;
 
         if (!rect)
         {
@@ -304,11 +317,7 @@ void mxFill(MXSurface* s, const MXRect* rect, int color)
         }
         MX_ASSERT(rect->w >= 8 && rect->h >= 8);
 
-        fullDestRect.x = fullDestRect.y = 0;
-        fullDestRect.w = s->w;
-        fullDestRect.h = s->h;
-
-        if (!clipRect(rect, &fullDestRect, &clippedDestRect))
+        if (!clipRect(rect, &s->clipRect, &clippedDestRect))
         {
             return;
         }
@@ -329,7 +338,7 @@ void mxInvert(MXSurface* s, const MXRect* rect)
     MX_ASSERT(s);
     MX_ASSERT(s->pixelFormat == MX_PIXELFORMAT_I1);
     {
-        MXRect fullRect, fullDestRect, clippedDestRect;
+        MXRect fullRect, clippedDestRect;
 
         if (!rect)
         {
@@ -340,11 +349,7 @@ void mxInvert(MXSurface* s, const MXRect* rect)
         }
         MX_ASSERT(rect->w >= 8 && rect->h >= 8);
 
-        fullDestRect.x = fullDestRect.y = 0;
-        fullDestRect.w = s->w;
-        fullDestRect.h = s->h;
-
-        if (!clipRect(rect, &fullDestRect, &clippedDestRect))
+        if (!clipRect(rect, &s->clipRect, &clippedDestRect))
         {
             return;
         }
@@ -394,6 +399,30 @@ void mxFillCirclePattern(MXSurface* s, int cx, int cy, int r)
 {
     int r2 = r * r;
     GEN_SURFACE_FILLER((x - cx) * (x - cx) + (y - cy) * (y - cy) <= r2);
+}
+
+static int sqrti(int a)
+{
+    /* From http://guru.multimedia.cx/fast-integer-square-root/ */
+    int ret=0;
+    int s;
+    int ret_sq=-a-1;
+    /*for(s=30; s>=0; s-=2){*/
+    for(s=20; s>=0; s-=2){
+        int b;
+        ret+= ret;
+        b=ret_sq + ((2*ret+1)<<s);
+        if(b<0){
+            ret_sq=b;
+            ret++;
+        }
+    }
+    return ret;
+}
+
+void mxFillConcentricCirclePattern(MXSurface* s, int cx, int cy, int scale)
+{
+    GEN_SURFACE_FILLER((sqrti(((x - cx) * (x - cx) + (y - cy) * (y - cy))) >> scale) & 1);
 }
 
 void mxFillSierpinskiPattern(MXSurface* s)

@@ -35,6 +35,12 @@ typedef enum MXSurfaceFlag_t
     MX_SURFACE_FLAG_LAST        = (1 << 31)
 } MXSurfaceFlag;
 
+typedef enum MXBlitFlag_t
+{
+    MX_BLIT_FLAG_INVERT    = 0x1,
+    MX_BLIT_FLAG_LAST      = (1 << 31)
+} MXBlitFlag;
+
 typedef struct MXSurface_t
 {
     int w, h;
@@ -43,6 +49,7 @@ typedef struct MXSurface_t
     int flags;
     int planeSize;
     int planes;
+    MXRect clipRect;
     uint8_t* pixels;
 } MXSurface;
 
@@ -59,6 +66,7 @@ void mxFill(MXSurface* dest, const MXRect* rect, int color);
 void mxInvert(MXSurface* dest, const MXRect* rect);
 void mxFillCheckerPattern(MXSurface* dest, int cw, int ch);
 void mxFillCirclePattern(MXSurface* s, int cx, int cy, int r);
+void mxFillConcentricCirclePattern(MXSurface* s, int cx, int cy, int scale);
 void mxFillSierpinskiPattern(MXSurface* dest);
 
 #ifdef __cplusplus

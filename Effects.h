@@ -143,7 +143,6 @@ const int sintab[256] =
 
 static int x = 93, y = 17;
 static int dx = 1, dy = 1;
-static MXSurface* checkers = 0;
 static MXSurface* ball = 0;
 
 void moveBall()
@@ -339,7 +338,7 @@ int preloadMusic(int steps, int total)
 int dummyEffect(const char* name, int time, int duration)
 {
     mxFill(screen, NULL, 0);
-    mxBlit(screen, checkers, ball, x, y, NULL, 0);
+    mxBlit(screen, ball, ball, x, y, NULL, 0);
     EFFECT_TITLE(name);
     moveBall();
     return 1;
@@ -621,6 +620,64 @@ int macbookFxIntro(int time, int duration)
     return 1;
 }
 
+int macbookFx(int time, int duration)
+{
+    MXRect origClipRect = screen->clipRect;
+    mxBlit(screen, img.pcScreenBg, NULL, 0, 0, NULL, 0);
+
+    screen->clipRect.x = 104;
+    screen->clipRect.y = 75;
+    screen->clipRect.w = 320;
+    screen->clipRect.h = 200;
+
+    int t1 = time + 7234;
+    int t2 = time + 7234;
+    int t3 = time - 3607;
+    int x1 = (sini(t1 >> 4) + cosi(t1 >> 3)) >> 10;
+    int y1 = (cosi(t1 >> 3) + sini(t3 >> 4)) >> 11;
+    int x2 = (sini(t1 >> 3) + cosi(t2 >> 4)) >> 10;
+    int y2 = (cosi(t1 >> 4) + sini(t1 >> 3)) >> 11;
+
+    blitCentered(screen, ball, NULL, 256 + x1, 171 + y1, NULL, MX_BLIT_FLAG_INVERT);
+    blitCentered(screen, ball, NULL, 256 + x2, 171 + y2, NULL, MX_BLIT_FLAG_INVERT);
+
+    screen->clipRect = origClipRect;
+
+    EFFECT_TITLE("PC Fx");
+    return 1;
+}
+
+int pcFxIntro(int time, int duration)
+{
+    int bop = sawtooth(time >> 1) >> 3;
+    int bop2 = sawtooth(time) >> 3;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("PC Fx Intro");
+
+    blitCentered(screen, img.pcOnStreet, NULL, 128, 256 + bop, NULL, 0);
+    if (time & 0x80 && time < 1700)
+    {
+        blitCentered(screen, img.facePcTalk, NULL, 128 - 24, 256 - 16 + bop, NULL, 0);
+    }
+    else
+    {
+        blitCentered(screen, img.facePcIdle, NULL, 128 - 24, 256 - 16 + bop, NULL, 0);
+    }
+
+    int pos1 = pow2(max(0,  600 - time)) >> 8;
+    int pos2 = pow2(max(0,  900 - time)) >> 8;
+    int pos3 = pow2(max(0, 1200 - time)) >> 8;
+    int pos4 = pow2(max(0, 1500 - time)) >> 8;
+
+    blitCentered(screen, img.textYeah, NULL, 128 + 160 + bop2, 60 + pos1, NULL, 0);
+    blitCentered(screen, img.textGetA, NULL, 128 + 192, 120 + pos2, NULL, 0);
+    blitCentered(screen, img.textLoadOf, NULL, 128 + 224, 200 + pos3, NULL, 0);
+    blitCentered(screen, img.textThis, NULL, 128 + 256, 280 + pos4, NULL, 0);
+
+    return 1;
+}
+
 inline uint8_t dither(int y, int v)
 {
 #if 0
@@ -661,7 +718,7 @@ inline uint8_t dither(int y, int v)
     return c;
 }
 
-int macbookFx(int time, int duration)
+int pcFx(int time, int duration)
 {
     int angle = time << 12;
     int x, y;
@@ -692,8 +749,8 @@ int macbookFx(int time, int duration)
         int w = w1 + w2;
         uint8_t c1 = dither(y, w1 >> 1);
         uint8_t c2 = dither(y, w2 >> 1);
-        uint8_t leftMask   = (0x1 << ((w >> 1) & 7)) - 1;
-        uint8_t rightMask  = ~((0xff >> ((w >> 1) & 7)));
+        uint8_t leftMask  = (0x1 << ((w >> 1) & 7)) - 1;
+        uint8_t rightMask = ~((0xff >> ((w >> 1) & 7)));
 
         int left  = center - ((w + 2) >> 1);
         int subW  = w + (left & 0x7);
@@ -721,44 +778,6 @@ int macbookFx(int time, int duration)
         angle += angle2;
     }
 
-    return 1;
-}
-
-int pcFxIntro(int time, int duration)
-{
-    int bop = sawtooth(time >> 1) >> 3;
-    int bop2 = sawtooth(time) >> 3;
-
-    mxFill(screen, NULL, 0);
-    EFFECT_TITLE("PC Fx Intro");
-
-    blitCentered(screen, img.pcOnStreet, NULL, 128, 256 + bop, NULL, 0);
-    if (time & 0x80 && time < 1700)
-    {
-        blitCentered(screen, img.facePcTalk, NULL, 128 - 24, 256 - 16 + bop, NULL, 0);
-    }
-    else
-    {
-        blitCentered(screen, img.facePcIdle, NULL, 128 - 24, 256 - 16 + bop, NULL, 0);
-    }
-
-    int pos1 = pow2(max(0,  600 - time)) >> 8;
-    int pos2 = pow2(max(0,  900 - time)) >> 8;
-    int pos3 = pow2(max(0, 1200 - time)) >> 8;
-    int pos4 = pow2(max(0, 1500 - time)) >> 8;
-
-    blitCentered(screen, img.textYeah, NULL, 128 + 160 + bop2, 60 + pos1, NULL, 0);
-    blitCentered(screen, img.textGetA, NULL, 128 + 192, 120 + pos2, NULL, 0);
-    blitCentered(screen, img.textLoadOf, NULL, 128 + 224, 200 + pos3, NULL, 0);
-    blitCentered(screen, img.textThis, NULL, 128 + 256, 280 + pos4, NULL, 0);
-
-    return 1;
-}
-
-int pcFx(int time, int duration)
-{
-    mxBlit(screen, img.pcScreenBg, NULL, 0, 0, NULL, 0);
-    EFFECT_TITLE("PC Fx");
     return 1;
 }
 
@@ -1106,54 +1125,14 @@ int theEnd(int time, int duration)
     return 1;
 }
 
-int effect1(int time, int duration)
-{
-    mxFill(screen, NULL, 0);
-    mxBlit(screen, checkers, ball, x, y, NULL, 0);
-    moveBall();
-    flipScreen();
-    return 1;
-}
-
-int effect2(int time, int duration)
-{
-    mxFillCirclePattern(screen, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, SCREEN_HEIGHT / 2);
-    mxBlit(screen, checkers, ball, x, y, NULL, 0);
-    moveBall();
-    flipScreen();
-    return 1;
-}
-
-int effect3(int time, int duration)
-{
-    mxFillSierpinskiPattern(screen);
-    mxBlit(screen, checkers, ball, x, y, NULL, 0);
-    moveBall();
-    flipScreen();
-    return 1;
-}
-
-int effect4(int time, int duration)
-{
-    mxFillCheckerPattern(screen, 4, 4);
-    mxBlit(screen, checkers, ball, x, y, NULL, 0);
-    moveBall();
-    flipScreen();
-    return 1;
-}
-
 void setupEffects()
 {
     mxFill(screen, NULL, 1);
     flipScreen();
 
-    checkers = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
-    ball = mxCreateSurface(256, 256, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
+    ball = mxCreateSurface(512, 300, MX_PIXELFORMAT_I1, MX_SURFACE_FLAG_PRESHIFT);
 
-    mxFillCheckerPattern(checkers, 4, 4);
-    mxFlushSurface(checkers);
-
-    mxFillCirclePattern(ball, 128, 128, 100);
+    mxFillConcentricCirclePattern(ball, ball->w / 2, ball->h / 2, 4);
     mxFlushSurface(ball);
 }
 
@@ -1173,14 +1152,12 @@ void teardownEffects()
     }
     
     mxDestroySurface(ball);
-    mxDestroySurface(checkers);
 }
 
 EffectEntry effects[] =
 {
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
     {clearScreen,             0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-#if 0
     {intro,                   4000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macOnStreet,             6000, 0},
@@ -1192,8 +1169,7 @@ EffectEntry effects[] =
     {sadMac,                  3000, 0},
     {macbookFxIntro,          3000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-#endif
-    {macbookFx,               4000 * 60, 0},
+    {macbookFx,               4000, 0},
     {pcFxIntro,               3000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {pcFx,                    4000, 0},
@@ -1218,11 +1194,5 @@ EffectEntry effects[] =
     {diskImpact,              3000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {theEnd,                  5000, 0},
-    /*
-    {effect1, 0x10000, 0},
-    {effect2, 0x10000, 0},
-    {effect3, 0x10000, 0},
-    {effect4, 0x10000, 0},
-    */
     {NULL, 0, 0}
 };

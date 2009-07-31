@@ -194,7 +194,7 @@ MXSurface* loadImage(FILE* packFile)
 {
     MXSurface header;
     MXSurface* surf;
-    assert(fread(&header, sizeof(header) - sizeof(void*), 1, packFile) == 1);
+    assert(fread(&header, sizeof(int) * 7, 1, packFile) == 1);
     
 #ifdef BIG_ENDIAN
     header.w = swapEndian(header.w);
