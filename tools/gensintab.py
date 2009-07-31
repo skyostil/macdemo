@@ -9,7 +9,7 @@ print "   ",
 
 for i in range(size):
     print "%d," % int(float(1 << shift) * math.sin(2 * math.pi * i / float(size))),
-    if not i % 8: 
+    if not i % 8:
         print
         print "   ",
 

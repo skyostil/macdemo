@@ -32,7 +32,101 @@ static struct
     MXSurface* textTitleMask;
     MXSurface* note1;
     MXSurface* note2;
+    MXSurface* textHey;
+    MXSurface* textHeyMask;
+    MXSurface* textLook;
+    MXSurface* textLookMask;
+    MXSurface* textIts;
+    MXSurface* textItsMask;
+    MXSurface* textGramps;
+    MXSurface* textGrampsMask;
+    MXSurface* textRun;
+    MXSurface* textRunMask;
+    MXSurface* textAny;
+    MXSurface* textAnyMask;
+    MXSurface* textDemos;
+    MXSurface* textDemosMask;
+    MXSurface* textLately;
+    MXSurface* textLatelyMask;
+    MXSurface* textWellNo;
+    MXSurface* textWellNoMask;
+    MXSurface* textHa;
+    MXSurface* textHaMask;
+    MXSurface* textCheck;
+    MXSurface* textCheckMask;
+    MXSurface* textThis;
+    MXSurface* textThisMask;
+    MXSurface* textOut;
+    MXSurface* textOutMask;
+    MXSurface* textYeah;
+    MXSurface* textYeahMask;
+    MXSurface* textGetA;
+    MXSurface* textGetAMask;
+    MXSurface* textLoadOf;
+    MXSurface* textLoadOfMask;
+    MXSurface* textLetsSee;
+    MXSurface* textLetsSeeMask;
+    MXSurface* textOkay;
+    MXSurface* textOkayMask;
+    MXSurface* textLol;
+    MXSurface* textLolMask;
+    MXSurface* textHelp;
+    MXSurface* textHelpMask;
+    MXSurface* textQuick;
+    MXSurface* textQuickMask;
+    MXSurface* textCallThe;
+    MXSurface* textCallTheMask;
+    MXSurface* textSureThing;
+    MXSurface* textSureThingMask;
+    MXSurface* textI;
+    MXSurface* textIMask;
+    MXSurface* textOhNo;
+    MXSurface* textOhNoMask;
+    MXSurface* textStepAside;
+    MXSurface* textStepAsideMask;
+    MXSurface* textKids;
+    MXSurface* textKidsMask;
 } img;
+
+const int sintab[256] =
+{
+    0,
+    1608, 3215, 4821, 6423, 8022, 9616, 11204, 12785,
+    14359, 15923, 17479, 19024, 20557, 22078, 23586, 25079,
+    26557, 28020, 29465, 30893, 32302, 33692, 35061, 36409,
+    37736, 39039, 40319, 41575, 42806, 44011, 45189, 46340,
+    47464, 48558, 49624, 50660, 51665, 52639, 53581, 54491,
+    55368, 56212, 57022, 57797, 58538, 59243, 59913, 60547,
+    61144, 61705, 62228, 62714, 63162, 63571, 63943, 64276,
+    64571, 64826, 65043, 65220, 65358, 65457, 65516, 65536,
+    65516, 65457, 65358, 65220, 65043, 64826, 64571, 64276,
+    63943, 63571, 63162, 62714, 62228, 61705, 61144, 60547,
+    59913, 59243, 58538, 57797, 57022, 56212, 55368, 54491,
+    53581, 52639, 51665, 50660, 49624, 48558, 47464, 46340,
+    45189, 44011, 42806, 41575, 40319, 39039, 37736, 36409,
+    35061, 33692, 32302, 30893, 29465, 28020, 26557, 25079,
+    23586, 22078, 20557, 19024, 17479, 15923, 14359, 12785,
+    11204, 9616, 8022, 6423, 4821, 3215, 1608, 0,
+    -1608, -3215, -4821, -6423, -8022, -9616, -11204, -12785,
+    -14359, -15923, -17479, -19024, -20557, -22078, -23586, -25079,
+    -26557, -28020, -29465, -30893, -32302, -33692, -35061, -36409,
+    -37736, -39039, -40319, -41575, -42806, -44011, -45189, -46340,
+    -47464, -48558, -49624, -50660, -51665, -52639, -53581, -54491,
+    -55368, -56212, -57022, -57797, -58538, -59243, -59913, -60547,
+    -61144, -61705, -62228, -62714, -63162, -63571, -63943, -64276,
+    -64571, -64826, -65043, -65220, -65358, -65457, -65516, -65536,
+    -65516, -65457, -65358, -65220, -65043, -64826, -64571, -64276,
+    -63943, -63571, -63162, -62714, -62228, -61705, -61144, -60547,
+    -59913, -59243, -58538, -57797, -57022, -56212, -55368, -54491,
+    -53581, -52639, -51665, -50660, -49624, -48558, -47464, -46340,
+    -45189, -44011, -42806, -41575, -40319, -39039, -37736, -36409,
+    -35061, -33692, -32302, -30893, -29465, -28020, -26557, -25079,
+    -23586, -22078, -20557, -19024, -17479, -15923, -14359, -12785,
+    -11204, -9616, -8022, -6423, -4821, -3215, -1608
+};
+
+#define sini(X) (sintab[(X) & 0xff])
+#define cosi(X) (sintab[((X) + 64) & 0xff])
 
 static int x = 93, y = 17;
 static int dx = 1, dy = 1;
@@ -85,6 +179,11 @@ void drawLoadingScreen(int steps, int total)
     rect.h = 16;
 
     mxFill(screen, &rect, 0);
+}
+
+void blitCentered(MXSurface* dest, MXSurface* src, MXSurface* mask, int x, int y, MXRect* srcRect, int flags)
+{
+	mxBlit(dest, src, mask, x - (src->w >> 1), y - (src->h >> 1), srcRect, flags);
 }
 
 #define EFFECT_TITLE(NAME) drawDebugText(screen, 0, 0, NAME);
@@ -377,9 +476,26 @@ int guysSpotMac(int time, int duration)
     return 1;
 }
 
+int macbookRidiculePrep(int time, int duration)
+{
+    mxBlit(img.macOnStreetBg, screen, NULL, 0, 0, NULL, 0);
+	return 1;
+}
+
 int macbookRidicule(int time, int duration)
 {
-    /* Some text here */
+    int pos1 = pow2(max(0,  400 - time)) >> 8;
+    int pos2 = pow2(max(0,  500 - time)) >> 8;
+    int pos3 = pow2(max(0, 1200 - time)) >> 8;
+    int pos4 = pow2(max(0, 1400 - time)) >> 8;
+
+    mxBlit(screen, img.macOnStreetBg, NULL, 0, 0, NULL, 0);
+    EFFECT_TITLE("Macbook Ridicule");
+
+	blitCentered(screen, img.textHey, NULL, 100 + pos1, 40, NULL, 0);
+	blitCentered(screen, img.textLook, NULL, 200 + pos2, 100, NULL, 0);
+	blitCentered(screen, img.textIts, NULL, 256 + pos3, 180, NULL, 0);
+	blitCentered(screen, img.textGramps, NULL, 256, 250 + pos4, NULL, 0);
     return 1;
 }
 
@@ -388,31 +504,64 @@ int pcRidicule(int time, int duration)
     int bop = sawtooth(time >> 1) >> 3;
 
     mxFill(screen, NULL, 0);
-    EFFECT_TITLE("PC ridicule");
+    EFFECT_TITLE("PC Ridicule");
 
     mxBlit(screen, img.pcCloseUp, NULL, -64, 120 + bop, NULL, 0);
+
+    int pos1 = pow2(max(0,  600 - time)) >> 8;
+    int pos2 = pow2(max(0,  900 - time)) >> 8;
+    int pos3 = pow2(max(0, 1200 - time)) >> 8;
+    int pos4 = pow2(max(0, 1500 - time)) >> 8;
+
+	blitCentered(screen, img.textRun, NULL, 256 - 64, 40 + pos1, NULL, 0);
+	blitCentered(screen, img.textAny, NULL, 256 + 64, 100 + pos2, NULL, 0);
+	blitCentered(screen, img.textDemos, img.textDemosMask, 256, 180 + pos3, NULL, 0);
+	blitCentered(screen, img.textLately, img.textLatelyMask, 256, 260 + pos4, NULL, 0);
+
     return 1;
 }
 
 int sadMac(int time, int duration)
 {
-    int bop = time >> 4;
+    int bop = time >> 6;
+	int shift = sawtooth(time >> 2) >> 2;
+	MXRect rect;
 
     mxFill(screen, NULL, 0);
     EFFECT_TITLE("Sad Mac");
 
-    mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 60 + bop, NULL, 0);
-    return 1;
+    mxBlit(screen, img.macCloseUp, NULL, 256 - 128 + shift, 100 + bop, NULL, 0);
+
+	rect.x = 0;
+	rect.y = 0;
+	rect.w = 8 + (time >> 2);
+	rect.h = img.textWellNo->h;
+
+	blitCentered(screen, img.textWellNo, NULL, 256, 60, &rect, 0);
+	
+	return 1;
 }
 
 int macbookFxIntro(int time, int duration)
 {
     int bop = sawtooth(time >> 1) >> 3;
+    int bop2 = sawtooth(time) >> 3;
 
     mxFill(screen, NULL, 0);
     EFFECT_TITLE("Macbook Fx Intro");
 
     mxBlit(screen, img.macbookCloseUp, NULL, 64, 100 + bop, NULL, 0);
+
+    int pos1 = pow2(max(0,  600 - time)) >> 8;
+    int pos2 = pow2(max(0,  900 - time)) >> 8;
+    int pos3 = pow2(max(0, 1200 - time)) >> 8;
+    int pos4 = pow2(max(0, 1500 - time)) >> 8;
+
+	blitCentered(screen, img.textHa, NULL, -128 + 352 + bop2, 60 + pos1, NULL, 0);
+	blitCentered(screen, img.textCheck, NULL, -128 + 320, 120 + pos2, NULL, 0);
+	blitCentered(screen, img.textThis, NULL, -128 + 288, 200 + pos3, NULL, 0);
+	blitCentered(screen, img.textOut, NULL, -128 + 256, 280 + pos4, NULL, 0);
+
     return 1;
 }
 
@@ -426,11 +575,23 @@ int macbookFx(int time, int duration)
 int pcFxIntro(int time, int duration)
 {
     int bop = sawtooth(time >> 1) >> 3;
+    int bop2 = sawtooth(time) >> 3;
 
     mxFill(screen, NULL, 0);
     EFFECT_TITLE("PC Fx Intro");
 
-    mxBlit(screen, img.pcCloseUp, NULL, -64, 120 + bop, NULL, 0);
+	mxBlit(screen, img.pcCloseUp, NULL, -64, 120 + bop, NULL, 0);
+
+    int pos1 = pow2(max(0,  600 - time)) >> 8;
+    int pos2 = pow2(max(0,  900 - time)) >> 8;
+    int pos3 = pow2(max(0, 1200 - time)) >> 8;
+    int pos4 = pow2(max(0, 1500 - time)) >> 8;
+
+	blitCentered(screen, img.textYeah, NULL, 128 + 160 + bop2, 60 + pos1, NULL, 0);
+	blitCentered(screen, img.textGetA, NULL, 128 + 192, 120 + pos2, NULL, 0);
+	blitCentered(screen, img.textLoadOf, NULL, 128 + 224, 200 + pos3, NULL, 0);
+	blitCentered(screen, img.textThis, NULL, 128 + 256, 280 + pos4, NULL, 0);
+
     return 1;
 }
 
@@ -699,14 +860,15 @@ EffectEntry effects[] =
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macOnStreet,             6000, 0},
     {guysSpotMac,             2000, 0},
-    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-    {macbookRidicule,         2000, 0},
-    {pcRidicule,              2000, 0},
-    {sadMac,                  1000, 0},
-    {macbookFxIntro,          2000, 0},
+	{preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
+    {macbookRidiculePrep,     0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
+    {macbookRidicule,         2500, 0},
+    {pcRidicule,              3000, 0},
+    {sadMac,                  3000, 0},
+    {macbookFxIntro,          3000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macbookFx,               4000, 0},
-    {pcFxIntro,               2000, 0},
+    {pcFxIntro,               3000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {pcFx,                    4000, 0},
     {macbookDare,             2000, 0},

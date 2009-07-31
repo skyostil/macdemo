@@ -160,15 +160,25 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
     MX_ASSERT(src);
     MX_UNUSED(flags);
     {
-        MXRect fullSrcRect, fullDestRect, destRect, clippedDestRect;
+        MXRect fullSrcRect, fullDestRect, destRect, clippedDestRect, clippedSrcRect;
+
+        fullSrcRect.x = fullSrcRect.y = 0;
+        fullSrcRect.w = src->w;
+        fullSrcRect.h = src->h;
 
         if (!srcRect)
         {
-            fullSrcRect.x = fullSrcRect.y = 0;
-            fullSrcRect.w = src->w;
-            fullSrcRect.h = src->h;
             srcRect = &fullSrcRect;
         }
+		else
+		{
+			if (!clipRect(srcRect, &fullSrcRect, &clippedSrcRect))
+			{
+				return;
+			}
+            srcRect = &clippedSrcRect;
+		}
+
         fullDestRect.x = fullDestRect.y = 0;
         fullDestRect.w = dest->w;
         fullDestRect.h = dest->h;
