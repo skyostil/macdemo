@@ -107,6 +107,8 @@ files = [
     ("../data/face_pc_notice_mac.png", BW, 0),
     ("../data/face_macbook_notice_mac.png", BW, 0),
     ("../data/face_macbook_notice_mac_talk.png", BW, 0),
+    ("../data/face_macbook_talk.png", BW, 0),
+    ("../data/face_pc_talk.png", BW, 0),
 ]
 
 def packImage(out, image, format, flags):

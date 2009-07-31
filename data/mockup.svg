@@ -36,11 +36,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="1306.8679"
-     inkscape:cy="424.70288"
+     inkscape:zoom="1"
+     inkscape:cx="799.81063"
+     inkscape:cy="-1957.5555"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      gridtolerance="10000"
      inkscape:window-width="1337"
      inkscape:window-height="1060"
@@ -65,7 +65,22 @@
      inkscape:groupmode="layer"
      id="layer1"
      style="opacity:1;display:inline">
-    <path
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2777"
+       style="font-size:40px;font-style:normal;font-weight:normal;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
+       transform="translate(60.149981,40.523383)"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/text_lol.png"
+       inkscape:export-xdpi="264.19"
+       inkscape:export-ydpi="264.19"><flowRegion
+         id="flowRegion2779"><rect
+           id="rect2781"
+           width="382.12436"
+           height="114.47607"
+           x="683.63177"
+           y="2598.5955" /></flowRegion><flowPara
+         id="flowPara2783"
+         style="font-weight:bold">LOLwut</flowPara></flowRoot>    <path
        sodipodi:type="star"
        style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="path2380"
@@ -693,21 +708,6 @@
    style="font-weight:bold"
    id="flowSpan2775">*sigh*</flowSpan>...okay...</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
-       id="flowRoot2777"
-       style="font-size:40px;font-style:normal;font-weight:normal;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
-       transform="translate(60.149981,40.523383)"
-       inkscape:export-filename="C:\cygwin\home\Sami\proj\macdemo\data\text_lol.png"
-       inkscape:export-xdpi="287.37"
-       inkscape:export-ydpi="287.37"><flowRegion
-         id="flowRegion2779"><rect
-           id="rect2781"
-           width="382.12436"
-           height="114.47607"
-           x="683.63177"
-           y="2598.5955" /></flowRegion><flowPara
-         id="flowPara2783"
-         style="font-weight:bold">LOL</flowPara></flowRoot>    <flowRoot
-       xml:space="preserve"
        id="flowRoot2787"
        style="font-size:40px;font-style:normal;font-weight:normal;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
        transform="translate(49.76267,102.24923)"
@@ -920,9 +920,9 @@
        id="flowRoot2971"
        style="font-size:40px;font-style:normal;font-weight:normal;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
        transform="translate(63.027098,584.35815)"
-       inkscape:export-filename="C:\cygwin\home\Sami\proj\macdemo\data\text_oh_no.png"
-       inkscape:export-xdpi="90.587303"
-       inkscape:export-ydpi="90.587303"><flowRegion
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/text_oh_no.png"
+       inkscape:export-xdpi="90.419998"
+       inkscape:export-ydpi="90.419998"><flowRegion
          id="flowRegion2973"><rect
            id="rect2975"
            width="382.12436"
@@ -930,7 +930,7 @@
            x="683.63177"
            y="2598.5955" /></flowRegion><flowPara
          id="flowPara2977"
-         style="font-weight:bold">Oh no!</flowPara></flowRoot>    <flowRoot
+         style="font-weight:bold">Oh snap!</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot2981"
        style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
@@ -4647,12 +4647,12 @@
        sodipodi:rx="28"
        sodipodi:ry="28"
        d="M 1380,388.36218 A 28,28 0 1 1 1324,388.36218 A 28,28 0 1 1 1380,388.36218 z"
-       transform="matrix(0.182493,0,0,0.182493,1106.6296,327.82243)"
+       transform="matrix(0.182493,0,0,0.182493,1107.1599,320.39781)"
        inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_pc_idle.png"
        inkscape:export-xdpi="87.069771"
        inkscape:export-ydpi="87.069771" />
     <path
-       transform="matrix(0.182493,0,0,0.182493,1052.4703,326.39)"
+       transform="matrix(0.182493,0,0,0.182493,1055.8291,320.55637)"
        d="M 1380,388.36218 A 28,28 0 1 1 1324,388.36218 A 28,28 0 1 1 1380,388.36218 z"
        sodipodi:ry="28"
        sodipodi:rx="28"
@@ -4772,12 +4772,12 @@
        inkscape:export-ydpi="93.678444" />
     <path
        style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.70000005;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="M 1424.4741,650.15875 C 1424.4741,657.54175 1421.9581,666.03375 1410.8491,666.03375 C 1399.7401,666.03375 1384.2241,657.54175 1384.2241,650.15875 C 1384.2241,642.77575 1392.7401,645.28375 1403.8491,645.28375 C 1414.9581,645.28375 1424.4741,642.77575 1424.4741,650.15875 z"
+       d="M 1353.4741,731.64403 C 1353.4741,739.02703 1337.4581,753.01903 1326.3491,753.01903 C 1315.2401,753.01903 1297.926,744.16517 1299.7241,737.14403 C 1302.7807,725.20891 1319.2141,736.25443 1329.1849,736.9654 C 1344.0705,738.02683 1353.4741,728.65088 1353.4741,731.64403 z"
        id="path9395"
        sodipodi:nodetypes="csssc"
-       inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_macbook_notice_mac_talk.png"
-       inkscape:export-xdpi="89.440002"
-       inkscape:export-ydpi="89.440002" />
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_macbook_talk.png"
+       inkscape:export-xdpi="93.882492"
+       inkscape:export-ydpi="93.882492" />
     <path
        style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.70000005;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        d="M 1331.741,652.09093 C 1331.741,656.47023 1327.5021,656.01453 1320.9128,656.01453 C 1314.3234,656.01453 1305.944,656.74488 1305.944,652.36557 C 1305.944,647.98627 1312.9177,649.19926 1319.5071,649.19926 C 1326.0966,649.19926 1331.741,647.71163 1331.741,652.09093 z"
@@ -4786,5 +4786,103 @@
        inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_macbook_notice_mac.png"
        inkscape:export-xdpi="93.678444"
        inkscape:export-ydpi="93.678444" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.70000005;stroke-linecap:butt;stroke-linejoin:round;marker:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="M 1341.0789,700.84993 C 1339.555,700.94697 1338.0496,701.2018 1336.5766,701.60196 C 1335.3692,701.8466 1334.2774,702.45779 1333.1538,702.94204 C 1332.3033,703.45748 1331.5702,703.98349 1330.8828,704.67096 C 1330.1842,705.3155 1329.6475,706.11745 1329.2398,706.96545 C 1328.79,707.81387 1328.5116,708.62186 1328.2892,709.52838 C 1327.8428,711.22563 1327.9107,712.9932 1327.7039,714.72493 C 1327.61,715.98476 1327.6234,717.26174 1327.8601,718.50618 C 1328.0108,719.30126 1328.3326,720.18254 1328.7367,720.91217 C 1329.0906,721.65005 1329.76,722.24104 1330.3927,722.8418 C 1331.0862,723.63072 1332.0968,723.91937 1333.0115,724.36696 C 1334.9371,725.28594 1337.0849,725.61603 1339.1874,725.86987 C 1343.1089,726.17489 1347.0489,726.07701 1350.9748,725.91815 C 1355.1714,725.65717 1359.3771,725.28885 1363.4956,724.41587 C 1366.4664,723.70469 1369.523,722.79145 1371.8853,720.76542 C 1373.8517,719.15319 1374.85,716.38437 1374.1413,713.91243 C 1373.5423,711.71369 1371.7823,710.11213 1370.0418,708.76484 C 1368.5042,707.59642 1366.8257,706.62793 1365.0506,705.86801 C 1361.2849,704.18958 1357.3397,702.88892 1353.2976,702.06868 C 1350.4589,701.55657 1347.6058,701.10461 1344.7246,700.92157 C 1343.5124,700.83606 1342.2929,700.77006 1341.0789,700.84993 z M 1339.5476,704.44368 C 1342.9356,704.61745 1346.3346,704.54918 1349.7139,704.87777 C 1352.3607,705.14456 1354.9936,705.55177 1357.6166,705.98873 C 1359.9996,706.46723 1362.3619,707.09667 1364.6363,707.95629 C 1366.8246,708.79478 1368.9753,709.83928 1370.7351,711.41243 C 1371.7676,712.42263 1372.8108,713.63628 1372.8289,715.16243 C 1372.9705,716.81296 1372.1198,718.47263 1370.7976,719.44368 C 1369.3557,720.34487 1367.8024,721.08388 1366.1304,721.4386 C 1362.9628,722.22579 1359.6913,722.39707 1356.4421,722.5074 C 1350.7704,722.68413 1345.0985,722.38963 1339.4273,722.3109 C 1337.7319,722.30227 1336.0514,722.03385 1334.3601,721.94368 C 1332.8961,721.65096 1331.3286,721.37214 1330.1726,720.34993 C 1329.5356,719.8402 1329.1204,719.0652 1328.7503,718.37238 C 1328.3314,717.50991 1328.1651,716.60935 1328.1119,715.65248 C 1328.0655,713.49933 1328.1814,711.30524 1328.8913,709.25618 C 1329.2601,708.45133 1329.7444,707.6281 1330.3999,707.0289 C 1331.1328,706.27915 1332.0934,705.81818 1333.0163,705.34993 C 1333.8742,704.96792 1334.8062,704.94173 1335.7351,704.72493 C 1336.999,704.55171 1338.2695,704.40941 1339.5476,704.44368 z"
+       id="path9402"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_macbook_talk.png"
+       inkscape:export-xdpi="93.882492"
+       inkscape:export-ydpi="93.882492" />
+    <path
+       inkscape:export-ydpi="93.882492"
+       inkscape:export-xdpi="93.882492"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_macbook_talk.png"
+       sodipodi:type="arc"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:14;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path9404"
+       sodipodi:cx="1352"
+       sodipodi:cy="388.36218"
+       sodipodi:rx="28"
+       sodipodi:ry="28"
+       d="M 1380,388.36218 A 28,28 0 1 1 1324,388.36218 A 28,28 0 1 1 1380,388.36218 z"
+       transform="matrix(0.1754366,0,0,0.1754366,1100.4382,645.08138)" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="M 1276.0617,695.62301 C 1277.1293,698.16817 1291.3847,694.34654 1301.1835,690.23631 C 1310.9824,686.12605 1312.6324,683.27595 1311.5648,680.73079 C 1310.4972,678.18567 1307.3302,678.71164 1297.5313,682.82191 C 1287.7325,686.93213 1274.9941,693.07785 1276.0617,695.62301 z"
+       id="path9406"
+       sodipodi:nodetypes="csssc"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_macbook_talk.png"
+       inkscape:export-xdpi="93.882492"
+       inkscape:export-ydpi="93.882492" />
+    <path
+       inkscape:export-ydpi="93.882492"
+       inkscape:export-xdpi="93.882492"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_macbook_talk.png"
+       sodipodi:type="arc"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:14;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path9408"
+       sodipodi:cx="1352"
+       sodipodi:cy="388.36218"
+       sodipodi:rx="28"
+       sodipodi:ry="28"
+       d="M 1380,388.36218 A 28,28 0 1 1 1324,388.36218 A 28,28 0 1 1 1380,388.36218 z"
+       transform="matrix(0.1754366,0,0,0.1754366,1047.0517,642.62948)" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="M 1371.7396,694.01651 C 1370.7834,696.60553 1356.3757,693.4051 1346.4079,689.7232 C 1336.4403,686.04137 1334.6684,683.26545 1335.6247,680.6764 C 1336.581,678.08737 1339.7679,678.47568 1349.7356,682.15755 C 1359.7034,685.83944 1372.6959,691.42747 1371.7396,694.01651 z"
+       id="path9410"
+       sodipodi:nodetypes="csssc"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_macbook_talk.png"
+       inkscape:export-xdpi="93.882492"
+       inkscape:export-ydpi="93.882492" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.70000005;stroke-linecap:butt;stroke-linejoin:round;marker:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="M 1288.0992,699.13559 C 1286.5753,699.23263 1285.0699,699.48746 1283.5969,699.88762 C 1282.3895,700.13226 1281.2977,700.74345 1280.1741,701.2277 C 1279.3236,701.74314 1278.5905,702.26915 1277.9031,702.95662 C 1277.2045,703.60116 1276.6678,704.40311 1276.2601,705.25111 C 1275.8103,706.09953 1275.5319,706.90752 1275.3095,707.81404 C 1274.8631,709.51129 1274.931,711.27886 1274.7242,713.01059 C 1274.6303,714.27042 1274.6437,715.5474 1274.8804,716.79184 C 1275.0311,717.58692 1275.3529,718.4682 1275.757,719.19783 C 1276.1109,719.93571 1276.7803,720.5267 1277.413,721.12746 C 1278.1065,721.91638 1279.1171,722.20503 1280.0318,722.65262 C 1281.9574,723.5716 1284.1052,723.90169 1286.2077,724.15553 C 1290.1292,724.46055 1294.0692,724.36267 1297.9951,724.20381 C 1302.1917,723.94283 1306.3974,723.57451 1310.5159,722.70153 C 1313.4867,721.99035 1316.5433,721.07711 1318.9056,719.05108 C 1320.872,717.43885 1321.8703,714.67003 1321.1616,712.19809 C 1320.5626,709.99935 1318.8026,708.39779 1317.0621,707.0505 C 1315.5245,705.88208 1313.846,704.91359 1312.0709,704.15367 C 1308.3052,702.47524 1304.36,701.17458 1300.3179,700.35434 C 1297.4792,699.84223 1294.6261,699.39027 1291.7449,699.20723 C 1290.5327,699.12172 1289.3132,699.05572 1288.0992,699.13559 z M 1286.5679,702.72934 C 1289.9559,702.90311 1293.3549,702.83484 1296.7342,703.16343 C 1299.381,703.43022 1302.0139,703.83743 1304.6369,704.27439 C 1307.0199,704.75289 1309.3822,705.38233 1311.6566,706.24195 C 1313.8449,707.08044 1315.9956,708.12494 1317.7554,709.69809 C 1318.7879,710.70829 1319.8311,711.92194 1319.8492,713.44809 C 1319.9908,715.09862 1319.1401,716.75829 1317.8179,717.72934 C 1316.376,718.63053 1314.8227,719.36954 1313.1507,719.72426 C 1309.9831,720.51145 1306.7116,720.68273 1303.4624,720.79306 C 1297.7907,720.96979 1292.1188,720.67529 1286.4476,720.59656 C 1284.7522,720.58793 1283.0717,720.31951 1281.3804,720.22934 C 1279.9164,719.93662 1278.3489,719.6578 1277.1929,718.63559 C 1276.5559,718.12586 1276.1407,717.35086 1275.7706,716.65804 C 1275.3517,715.79557 1275.1854,714.89501 1275.1322,713.93814 C 1275.0858,711.78499 1275.2017,709.5909 1275.9116,707.54184 C 1276.2804,706.73699 1276.7647,705.91376 1277.4202,705.31456 C 1278.1531,704.56481 1279.1137,704.10384 1280.0366,703.63559 C 1280.8945,703.25358 1281.8265,703.22739 1282.7554,703.01059 C 1284.0193,702.83737 1285.2898,702.69507 1286.5679,702.72934 z"
+       id="path9412"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_macbook_talk.png"
+       inkscape:export-xdpi="93.882492"
+       inkscape:export-ydpi="93.882492" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:14;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="M 1481.1926,416.54134 C 1481.1926,420.26972 1467.7623,441.05836 1452.8487,441.05836 C 1437.9353,441.05836 1435.5223,422.00118 1435.5223,418.27281 C 1435.5223,414.54443 1431.1208,414.67159 1446.0343,414.67159 C 1460.9479,414.67159 1481.1926,412.81296 1481.1926,416.54134 z"
+       id="path9424"
+       sodipodi:nodetypes="csssc"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_pc_talk.png"
+       inkscape:export-xdpi="87.579445"
+       inkscape:export-ydpi="87.579445" />
+    <path
+       style="opacity:1;fill:#000000;display:inline"
+       d="M 1481.3587,413.36003 C 1479.9066,413.09463 1477.4559,412.34313 1476.0752,411.7399 C 1473.0507,410.41843 1470.7949,408.58686 1468.7681,405.80694 C 1467.0205,403.41003 1465.8244,400.3741 1464.457,394.86548 C 1463.731,391.93978 1463.6326,391.7438 1462.549,391.06324 C 1461.7034,390.53212 1461.4283,390.45069 1459.9759,390.30157 C 1458.5735,390.15759 1458.2277,390.18113 1457.4627,390.47257 C 1456.4346,390.86426 1456.0674,391.37249 1454.5827,394.45887 C 1453.3569,397.00722 1452.3644,398.52623 1450.2926,401.02428 C 1447.6863,404.16696 1445.9191,405.51441 1443.1156,406.49677 C 1440.1383,407.54 1437.2854,407.71224 1432.6897,407.12614 C 1423.6992,405.97957 1417.9955,403.01836 1415.3849,398.14197 C 1413.9786,395.5148 1413.2384,393.07614 1412.2606,387.84695 C 1411.2711,382.55631 1410.9443,381.77191 1409.0126,380.05198 C 1408.3751,379.48431 1408.3844,379.5628 1408.4583,375.35678 C 1408.4941,373.32526 1408.5231,373.13103 1408.8289,372.88674 C 1409.1197,372.65459 1409.619,372.65945 1412.8462,372.92606 C 1414.873,373.09352 1416.5378,373.16596 1416.5455,373.08705 C 1416.5584,372.95556 1420.08,373.38855 1422.2841,373.79264 C 1422.7918,373.88572 1424.6444,374.14751 1426.4013,374.37444 C 1431.1988,374.99412 1438.9032,376.49907 1442.6698,377.55238 C 1443.2185,377.70579 1444.4165,378.03169 1445.332,378.27662 C 1446.2475,378.52152 1447.3673,378.86074 1447.8203,379.03045 C 1448.2736,379.20017 1449.3555,379.53339 1450.2247,379.77093 C 1452.3306,380.3464 1454.3465,381.03494 1455.8446,381.69042 C 1457.6926,382.49899 1460.0771,383.20457 1461.4136,383.33823 C 1462.4413,383.44103 1465.5633,383.21342 1465.9888,383.00468 C 1466.2113,382.89551 1467.8662,382.77063 1476.3585,382.22221 C 1477.5782,382.14343 1479.1285,382.1219 1479.8036,382.17439 C 1480.4786,382.22688 1481.0079,382.22106 1480.9797,382.16148 C 1480.9024,381.99787 1484.3297,382.01316 1488.3344,382.19427 C 1496.471,382.56225 1514.8529,384.97287 1515.2613,385.72545 C 1515.3347,385.86067 1515.2954,386.55696 1515.174,387.27276 C 1514.9302,388.71077 1514.1021,392.25162 1513.9687,392.4267 C 1513.922,392.48788 1513.4546,392.72779 1512.9299,392.95985 C 1511.1433,393.74983 1510.5781,394.55083 1508.6464,399.03017 C 1506.26,404.56384 1504.5507,407.47991 1502.3774,409.72471 C 1499.7039,412.48634 1495.1102,413.94351 1488.8089,414.02881 C 1487.3895,414.04802 1482.935,413.64815 1481.3587,413.36003 z M 1491.4917,411.92171 C 1495.8512,411.32366 1498.7579,410.07649 1500.9583,407.85994 C 1503.3975,405.40305 1505.8216,399.63681 1506.3075,395.13619 C 1506.615,392.28775 1506.3145,390.73133 1505.1751,389.27055 C 1504.3479,388.20994 1503.6077,387.77239 1501.115,386.8703 C 1496.8241,385.31747 1488.1651,384.20629 1481.9683,384.41331 C 1474.594,384.65967 1470.1993,385.94153 1468.7249,388.27621 C 1467.2719,390.57655 1467.4844,396.05486 1469.2209,401.06205 C 1470.6717,405.08844 1473.7775,408.0786 1477.5005,410.01928 C 1478.9125,410.31702 1476.9796,410.24515 1486.1225,411.80583 C 1489.2902,412.06408 1490.2956,412.08579 1491.4917,411.92171 z M 1434.7528,405.24312 C 1435.1754,405.24451 1436.097,405.25253 1436.8008,405.26099 C 1440.3492,405.30357 1443.3999,404.3926 1445.4625,402.67452 C 1446.1508,402.10121 1446.9146,401.43521 1447.1597,401.19452 C 1448.543,399.8369 1450.2824,396.84569 1451.304,394.06774 C 1452.9815,389.50663 1452.9892,386.6699 1451.3295,384.716 C 1450.6624,383.93062 1448.8436,382.6676 1447.2504,381.88345 C 1444.7091,380.63265 1439.6582,379.06318 1435.6099,378.26637 C 1433.3086,377.81342 1425.7981,377.07309 1423.7545,377.09776 C 1420.5635,377.13627 1418.2472,377.65105 1417.2726,378.53826 C 1416.694,379.06487 1415.9467,380.22009 1415.5733,381.16487 C 1415.2219,382.05434 1414.8817,385.44858 1414.9714,387.16976 C 1415.3369,390.8424 1415.7645,394.06837 1417.4297,397.31704 C 1419.5111,401.1148 1425.4946,404.39338 1431.3649,404.95266 C 1432.9621,405.08767 1433.1825,405.1516 1434.7528,405.24312 z"
+       id="path9426"
+       sodipodi:nodetypes="csssssssssssssssssssssssssssssssssssssccsssssscccccsssssssssscccc"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_pc_talk.png"
+       inkscape:export-xdpi="87.579445"
+       inkscape:export-ydpi="87.579445" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:14;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path9428"
+       sodipodi:cx="1352"
+       sodipodi:cy="388.36218"
+       sodipodi:rx="28"
+       sodipodi:ry="28"
+       d="M 1380,388.36218 A 28,28 0 1 1 1324,388.36218 A 28,28 0 1 1 1380,388.36218 z"
+       transform="matrix(0.182493,0,0,0.182493,1249.3629,321.74928)"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_pc_talk.png"
+       inkscape:export-xdpi="87.579445"
+       inkscape:export-ydpi="87.579445" />
+    <path
+       transform="matrix(0.182493,0,0,0.182493,1198.0321,321.90784)"
+       d="M 1380,388.36218 A 28,28 0 1 1 1324,388.36218 A 28,28 0 1 1 1380,388.36218 z"
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="388.36218"
+       sodipodi:cx="1352"
+       id="path9430"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:14;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="arc"
+       inkscape:export-filename="/home/skyostil/proj/macdemo/data/face_pc_talk.png"
+       inkscape:export-xdpi="87.579445"
+       inkscape:export-ydpi="87.579445" />
   </g>
 </svg>
