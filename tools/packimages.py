@@ -25,11 +25,9 @@ files = [
     ("../data/mac_on_street.png", BW, PS),
     ("../data/pc_on_street.png", BW, PS),
     ("../data/macbook_on_street.png", BW, 0),
-    ("../data/pc_closeup.png", BW, 0),
     ("../data/pc_closeup_bluescreen.png", BW, 0),
     ("../data/pc_closeup_bluescreen.png", BW, A),
     ("../data/mac_closeup.png", BW, 0),
-    ("../data/macbook_closeup.png", BW, 0),
     ("../data/pc_screen_bg.png", BW, C),
     ("../data/macbook_screen_bg.png", BW, C),
     ("../data/guys_on_street.png", BW, 0),
@@ -103,6 +101,12 @@ files = [
     ("../data/text_step_aside.png", BW, A),
     ("../data/text_kids.png", BW, 0),
     ("../data/text_kids.png", BW, A),
+    ("../data/face_mac_happy.png", BW, PS),
+    ("../data/face_mac_huh.png", BW, 0),
+    ("../data/face_pc_idle.png", BW, PS),
+    ("../data/face_pc_notice_mac.png", BW, 0),
+    ("../data/face_macbook_notice_mac.png", BW, 0),
+    ("../data/face_macbook_notice_mac_talk.png", BW, 0),
 ]
 
 def packImage(out, image, format, flags):
