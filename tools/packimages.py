@@ -1,9 +1,12 @@
 import Image
 import struct
 import numpy
-import psyco
 
-psyco.full()
+try:
+    import psyco
+    psyco.full()
+except ImportError:
+    pass
 
 MX_PIXELFORMAT_I1 = 1
 MX_SURFACE_FLAG_PRESHIFT = 0x1

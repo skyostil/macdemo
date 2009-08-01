@@ -19,9 +19,7 @@ set(SOURCES
 )
 
 find_package(SDL REQUIRED)
-find_package(SDL_image REQUIRED)
 include_directories(${SDL_INCLUDE_DIR})
-include_directories(${SDLIMAGE_INCLUDE_DIR})
 include_directories(engine)
 include_directories(monoxide)
 include_directories(.)
@@ -31,7 +29,6 @@ add_definitions(-DUSE_SDL)
 
 link_libraries(
     ${SDL_LIBRARY}
-    ${SDLIMAGE_LIBRARY}
 )
 
 if (WIN32)
