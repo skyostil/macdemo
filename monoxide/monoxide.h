@@ -64,6 +64,7 @@ void mxBlit(MXSurface* dest, const MXSurface* src, const MXSurface* mask,
             int x, int y, const MXRect* srcRect, int flags);
 void mxFill(MXSurface* dest, const MXRect* rect, int color);
 void mxInvert(MXSurface* dest, const MXRect* rect);
+void mxDrawLine(MXSurface* dest, int x0, int y0, int x1, int y1);
 void mxFillCheckerPattern(MXSurface* dest, int cw, int ch);
 void mxFillCirclePattern(MXSurface* s, int cx, int cy, int r);
 void mxFillConcentricCirclePattern(MXSurface* s, int cx, int cy, int scale);

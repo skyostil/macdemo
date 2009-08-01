@@ -733,7 +733,6 @@ int pcFx(int time, int duration)
     {
         int w1, w2;
         uint8_t a = angle >> 16;
-        int i;
 
         if (a & 0x40)
         {
@@ -791,7 +790,7 @@ int macbookDare(int time, int duration)
 
     blitCentered(screen, img.macbookOnStreet, NULL, 384, 256 + bop, NULL, 0);
     blitCentered(screen, img.faceMacbookNoticeMac, NULL, 384 + 40, 256 - 16 + bop, NULL, 0);
-    if ((time < 1500 && time & 0x80) | time > 1500)
+    if ((time < 1500 && time & 0x80) || time > 1500)
     {
         blitCentered(screen, img.faceMacbookNoticeMacTalk, NULL, 384 + 40, 256 + 16 + bop, NULL, 0);
     }
@@ -1169,9 +1168,128 @@ int macFireDisk(int time, int duration)
     return 1;
 }
 
+#define F(X) ((X) << 8)
+static const int diskVertices[] =
+{
+    F(-10), F(-10), F(0),
+      F(8), F(-10), F(0),
+     F(10),  F(-8), F(0),
+     F(10),  F(10), F(0),
+     F(10),  F(10), F(0),
+    F(-10),  F(10), F(0),
+    F(-10), F(-10), F(0),
+
+     F(-6), F(-10), F(0),
+     F(-6), F(-3),  F(0),
+     F( 6), F(-3),  F(0),
+     F( 6), F(-10), F(0),
+
+     F( 2), F(-9), F(0),
+     F( 2), F(-4), F(0),
+     F( 5), F(-4), F(0),
+     F( 5), F(-9), F(0),
+     F( 2), F(-9), F(0),
+
+     F(-7),  F(10), F(0),
+     F(-7),  F(-1), F(0),
+     F( 7),  F(-1), F(0),
+     F( 7),  F(10), F(0),
+
+     F(-2),  F(-1), F(0),
+     F( 0),  F(-2), F(0),
+     F( 2),  F(-1), F(0),
+     F( 2),  F( 1), F(0),
+     F( 0),  F( 2), F(0),
+     F(-2),  F( 1), F(0),
+     F(-2),  F(-1), F(0),
+};
+#undef F
+
+static const int diskSpans[] =
+{
+    7,
+    4,
+    5,
+    4,
+    0
+};
+
+static const int diskSpans2[] =
+{
+    7,
+    4,
+    5,
+    -4,
+    7,
+    0
+};
+
+void drawStreak(int y, int v)
+{
+    uint32_t* d = (uint32_t*)(screen->pixels + y * screen->stride);
+    int x;
+    int w = screen->w / 32;
+
+    for (x = 0; x < w; x++)
+    {
+        *d++ = v;
+    }
+}
+
 int diskTwirl(int time, int duration)
 {
-    DUMMY_EFFECT("Disk Twirl");
+    int i, x, y, j;
+    int angle = time >> 3;
+    int angle2 = time >> 5;
+    int camPos = -64 + ((time >> 6) & 127);
+    const int *vertex = diskVertices;
+    int sinA = sini(angle);
+    int cosA = cosi(angle);
+    int sinB = sini(angle2);
+    int cosB = cosi(angle2);
+    int oldPx, oldPy;
+
+    mxFill(screen, NULL, 0);
+    EFFECT_TITLE("Disk Twirl");
+
+    const int* spans = ((angle2 + 0x3f) & 0x80) ? diskSpans2 : diskSpans;
+
+    while (*spans)
+    {
+        int n = *spans++;
+        if (n < 0)
+        {
+            vertex -= 3 * n;
+            continue;
+        }
+        for (j = 0; j < n; j++)
+        {
+            int px = (vertex[0] * cosA - vertex[1] * sinA) >> 16;
+            int py = (vertex[0] * sinA + vertex[1] * cosA) >> 16;
+            int pz = vertex[2];
+
+            py = (py * cosB - pz * sinB) >> 16;
+            pz = (py * sinB + pz * cosB) >> 16;
+#if 1
+            pz *= 16;
+            pz = (1 << 31) / (pz + (1 << 17));
+            px *= pz;
+            py *= pz;
+            px >>= 14;
+            py >>= 14;
+#endif
+            px = (px >> 5) + 256 + camPos;
+            py = (py >> 5) + 171;
+            if (j > 0)
+            {
+                mxDrawLine(screen, px, py, oldPx, oldPy);
+            }
+            oldPx = px;
+            oldPy = py;
+            vertex += 3;
+        }
+    }
+
     return 1;
 }
 
