@@ -19,6 +19,7 @@
 #endif
 
 void flipScreen();
+uint32_t swapEndian(uint32_t n);
 MXSurface* loadImage(FILE* packFile);
 
 /*
@@ -180,7 +181,6 @@ void flipScreen()
     video->swapBuffers();
 }
 
-#ifdef BIG_ENDIAN
 uint32_t swapEndian(uint32_t x)
 {
     return (x >> 24) |
@@ -188,7 +188,6 @@ uint32_t swapEndian(uint32_t x)
            ((x >> 8) & 0x0000ff00) |
            (x << 24);
 }
-#endif
 
 MXSurface* loadImage(FILE* packFile)
 {

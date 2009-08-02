@@ -11,7 +11,9 @@ static struct
     MXSurface* macOnStreetBg;
     MXSurface* macOnStreet;
     MXSurface* pcOnStreet;
+    MXSurface* pcOnStreetMask;
     MXSurface* macbookOnStreet;
+    MXSurface* macbookOnStreetMask;
     MXSurface* pcCloseUpBluescreen;
     MXSurface* pcCloseUpBluescreenMask;
     MXSurface* macCloseUp;
@@ -524,21 +526,100 @@ int macbookRidicule(int time, int duration)
         mxBlit(screen, img.faceMacbookNoticeMacTalk, NULL, 104 - 200 + 1050 - (72 << 3) + 32, 20 + 400 - (72 << 2) + 50, NULL, 0);
     }
 
-    blitCentered(screen, img.textHey, NULL, 100 + pos1, 40, NULL, 0);
-    blitCentered(screen, img.textLook, NULL, 200 + pos2, 100, NULL, 0);
-    blitCentered(screen, img.textIts, NULL, 256 + pos3, 180, NULL, 0);
-    blitCentered(screen, img.textGramps, NULL, 256, 250 + pos4, NULL, 0);
+    blitCentered(screen, img.textHey, img.textHeyMask, 100 + pos1, 40, NULL, 0);
+    blitCentered(screen, img.textLook, img.textLookMask, 200 + pos2, 100, NULL, 0);
+    blitCentered(screen, img.textIts, img.textItsMask, 256 + pos3, 180, NULL, 0);
+    blitCentered(screen, img.textGramps, img.textGrampsMask, 256, 250 + pos4, NULL, 0);
     return 1;
+}
+
+inline uint32_t ror(uint32_t value, uint32_t n)
+{
+    return (value >> n) | (value << (sizeof(uint32_t) * 8) - n);
+}
+
+inline uint32_t rol(uint32_t value, uint32_t n)
+{
+    return (value << n) | (value >> (sizeof(uint32_t) * 8) - n);
+}
+
+void drawBackgroundPattern(int time)
+{
+    int t = time >> 7;
+    int x, y;
+    uint32_t* dest = (uint32_t*)screen->pixels;
+    uint32_t color = ror(0x88880000, t & 31);
+
+#if !defined(BIG_ENDIAN)
+    color = swapEndian(color);
+#endif
+
+    assert(!(screen->stride & 4));
+
+    for (y = 0; y < screen->h; y++)
+    {
+        uint32_t c = color;
+        if ((y + t & 0x3) == 0)
+        {
+            c = rol(c, (y + t) & 0x10);
+            for (x = 0; x < screen->w; x += 32)
+            {
+                *dest++ = c;
+            }
+        }
+        else
+        {
+            for (x = 0; x < screen->w; x += 32)
+            {
+                *dest++ = 0;
+            }
+        }
+    }
+}
+
+void drawBackgroundPattern2(int time)
+{
+    int t = time >> 7;
+    int x, y;
+    uint32_t* dest = (uint32_t*)screen->pixels;
+    uint32_t color = rol(0x88880000, t & 31);
+
+    assert(!(screen->stride & 4));
+
+    for (y = 0; y < (screen->h & ~3); y += 4)
+    {
+        uint32_t c = color;
+        c = ror(c, y & 0x1f);
+#if !defined(BIG_ENDIAN)
+        c = swapEndian(c);
+#endif
+
+        for (x = 0; x < screen->w; x += 32)
+        {
+            *dest++ = c;
+        }
+        for (x = 0; x < screen->w * 3; x += 32)
+        {
+            *dest++ = 0;
+        }
+    }
+    for (; y < screen->h; y++)
+    {
+        for (x = 0; x < screen->w; x += 32)
+        {
+            *dest++ = 0;
+        }
+    }
 }
 
 int pcRidicule(int time, int duration)
 {
     int bop = sawtooth(time >> 1) >> 3;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern(time);
     EFFECT_TITLE("PC Ridicule");
 
-    blitCentered(screen, img.pcOnStreet, NULL, 128, 256 + bop, NULL, 0);
+    blitCentered(screen, img.pcOnStreet, img.pcOnStreetMask, 128, 256 + bop, NULL, 0);
 
     if (time & 0x80 && time < 1700)
     {
@@ -554,8 +635,8 @@ int pcRidicule(int time, int duration)
     int pos3 = pow2(max(0, 1200 - time)) >> 8;
     int pos4 = pow2(max(0, 1500 - time)) >> 8;
 
-    blitCentered(screen, img.textRun, NULL, 256 - 64, 40 + pos1, NULL, 0);
-    blitCentered(screen, img.textAny, NULL, 256 + 64, 100 + pos2, NULL, 0);
+    blitCentered(screen, img.textRun, img.textRunMask, 256 - 64, 40 + pos1, NULL, 0);
+    blitCentered(screen, img.textAny, img.textAnyMask, 256 + 64, 100 + pos2, NULL, 0);
     blitCentered(screen, img.textDemos, img.textDemosMask, 256, 180 + pos3, NULL, 0);
     blitCentered(screen, img.textLately, img.textLatelyMask, 256, 260 + pos4, NULL, 0);
 
@@ -586,7 +667,7 @@ int sadMac(int time, int duration)
     rect.w = 8 + (time >> 2);
     rect.h = img.textWellNo->h;
 
-    blitCentered(screen, img.textWellNo, NULL, 256, 60, &rect, 0);
+    blitCentered(screen, img.textWellNo, img.textWellNoMask, 256, 60, &rect, 0);
     
     return 1;
 }
@@ -596,10 +677,10 @@ int macbookFxIntro(int time, int duration)
     int bop = sawtooth(time >> 1) >> 3;
     int bop2 = sawtooth(time) >> 3;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern2(time);
     EFFECT_TITLE("Macbook Fx Intro");
 
-    blitCentered(screen, img.macbookOnStreet, NULL, 384, 256 + bop, NULL, 0);
+    blitCentered(screen, img.macbookOnStreet, img.macbookOnStreetMask, 384, 256 + bop, NULL, 0);
     if (time & 0x80 && time < 1700)
     {
         blitCentered(screen, img.faceMacbookNoticeMac, NULL, 384 + 40, 256 - 16 + bop, NULL, 0);
@@ -614,10 +695,10 @@ int macbookFxIntro(int time, int duration)
     int pos3 = pow2(max(0, 1200 - time)) >> 8;
     int pos4 = pow2(max(0, 1500 - time)) >> 8;
 
-    blitCentered(screen, img.textHa, NULL, -128 + 352 + bop2, 60 + pos1, NULL, 0);
-    blitCentered(screen, img.textCheck, NULL, -128 + 320, 120 + pos2, NULL, 0);
-    blitCentered(screen, img.textThis, NULL, -128 + 288, 200 + pos3, NULL, 0);
-    blitCentered(screen, img.textOut, NULL, -128 + 256, 280 + pos4, NULL, 0);
+    blitCentered(screen, img.textHa, img.textHaMask, -128 + 352 + bop2, 60 + pos1, NULL, 0);
+    blitCentered(screen, img.textCheck, img.textCheckMask, -128 + 320, 120 + pos2, NULL, 0);
+    blitCentered(screen, img.textThis, img.textThisMask, -128 + 288, 200 + pos3, NULL, 0);
+    blitCentered(screen, img.textOut, img.textOutMask, -128 + 256, 280 + pos4, NULL, 0);
 
     return 1;
 }
@@ -654,10 +735,10 @@ int pcFxIntro(int time, int duration)
     int bop = sawtooth(time >> 1) >> 3;
     int bop2 = sawtooth(time) >> 3;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern(time);
     EFFECT_TITLE("PC Fx Intro");
 
-    blitCentered(screen, img.pcOnStreet, NULL, 128, 256 + bop, NULL, 0);
+    blitCentered(screen, img.pcOnStreet, img.pcOnStreetMask, 128, 256 + bop, NULL, 0);
     if (time & 0x80 && time < 1700)
     {
         blitCentered(screen, img.facePcTalk, NULL, 128 - 24, 256 - 16 + bop, NULL, 0);
@@ -672,10 +753,10 @@ int pcFxIntro(int time, int duration)
     int pos3 = pow2(max(0, 1200 - time)) >> 8;
     int pos4 = pow2(max(0, 1500 - time)) >> 8;
 
-    blitCentered(screen, img.textYeah, NULL, 128 + 160 + bop2, 60 + pos1, NULL, 0);
-    blitCentered(screen, img.textGetA, NULL, 128 + 192, 120 + pos2, NULL, 0);
-    blitCentered(screen, img.textLoadOf, NULL, 128 + 224, 200 + pos3, NULL, 0);
-    blitCentered(screen, img.textThis, NULL, 128 + 256, 280 + pos4, NULL, 0);
+    blitCentered(screen, img.textYeah, img.textYeahMask, 128 + 160 + bop2, 60 + pos1, NULL, 0);
+    blitCentered(screen, img.textGetA, img.textGetAMask, 128 + 192, 120 + pos2, NULL, 0);
+    blitCentered(screen, img.textLoadOf, img.textLoadOfMask, 128 + 224, 200 + pos3, NULL, 0);
+    blitCentered(screen, img.textThis, img.textThisMask, 128 + 256, 280 + pos4, NULL, 0);
 
     return 1;
 }
@@ -787,10 +868,10 @@ int macbookDare(int time, int duration)
     int bop = sawtooth(time >> 1) >> 3;
     MXRect rect;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern2(time);
     EFFECT_TITLE("Macbook Dare");
 
-    blitCentered(screen, img.macbookOnStreet, NULL, 384, 256 + bop, NULL, 0);
+    blitCentered(screen, img.macbookOnStreet, img.macbookOnStreetMask, 384, 256 + bop, NULL, 0);
     blitCentered(screen, img.faceMacbookNoticeMac, NULL, 384 + 40, 256 - 16 + bop, NULL, 0);
     if ((time < 1500 && time & 0x80) || time > 1500)
     {
@@ -823,7 +904,7 @@ int macFxLoading(int time, int duration)
     blitCentered(screen, img.macCloseUp, NULL, 256, 100 + 160 + bop, NULL, 0);
     if (time < 2000)
     {
-        blitCentered(screen, img.textOkay, NULL, 256, 60, &rect, 0);
+        blitCentered(screen, img.textOkay, img.textOkayMask, 256, 60, &rect, 0);
 
         if (time & 0x80 && time < 1500)
         {
@@ -929,8 +1010,8 @@ void drawGuys(int time, bool laugh)
     int bop = (time & 0x100) >> 6;
     int bop2 = ((time + 177) & 0x100) >> 6;
 
-    blitCentered(screen, img.pcOnStreet, NULL, 128, 140 + 64 + bop, NULL, 0);
-    blitCentered(screen, img.macbookOnStreet, NULL, 384, 200 + 64 + bop2, NULL, 0);
+    blitCentered(screen, img.pcOnStreet, img.pcOnStreetMask, 128, 140 + 64 + bop, NULL, 0);
+    blitCentered(screen, img.macbookOnStreet, img.macbookOnStreetMask, 384, 200 + 64 + bop2, NULL, 0);
     
     if (laugh && time & 0x80)
     {
@@ -957,7 +1038,7 @@ int guysLol(int time, int duration)
 
     mxFill(screen, NULL, 0);
     drawGuys(time, true);
-    blitCentered(screen, img.textLol, NULL, 256, 60 + bop, NULL, 0);
+    blitCentered(screen, img.textLol, img.textLolMask, 256, 60 + bop, NULL, 0);
 
     EFFECT_TITLE("Guys LOL");
     return 1;
@@ -985,7 +1066,7 @@ int kidHelp(int time, int duration)
     EFFECT_TITLE("Kid Help");
     drawGuys(time, false);
 
-    blitCentered(screen, img.textHelp, NULL, 256 - pos, 60 + bop, NULL, 0);
+    blitCentered(screen, img.textHelp, img.textHelpMask, 256 - pos, 60 + bop, NULL, 0);
 
     if ((time < 500) && (time & 0x40))
     {
@@ -1024,10 +1105,10 @@ int macbookPanic(int time, int duration)
     int bop2 = sawtooth(time << 1) >> 3;
     int bop3 = sawtooth(time) >> 3;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern2(time);
     EFFECT_TITLE("Macbook Panic");
 
-    blitCentered(screen, img.macbookOnStreet, NULL, 384, 256 + bop, NULL, 0);
+    blitCentered(screen, img.macbookOnStreet, img.macbookOnStreetMask, 384, 256 + bop, NULL, 0);
     blitCentered(screen, img.faceMacbookNoticeMac, NULL, 384 + 40, 256 - 16 + bop, NULL, 0);
     if (time & 0x80 && time < 1400)
     {
@@ -1038,9 +1119,9 @@ int macbookPanic(int time, int duration)
     int pos2 = pow2(max(0,  900 - time)) >> 8;
     int pos3 = pow2(max(0, 1200 - time)) >> 8;
 
-    blitCentered(screen, img.textQuick, NULL, 128, 60 + pos1 + bop2, NULL, 0);
-    blitCentered(screen, img.textCallThe, NULL, 128, 120 + pos2 + bop3, NULL, 0);
-    blitCentered(screen, img.textCops, NULL, 128, 200 + pos3 + bop2, NULL, 0);
+    blitCentered(screen, img.textQuick, img.textQuickMask, 128, 60 + pos1 + bop2, NULL, 0);
+    blitCentered(screen, img.textCallThe, img.textCallTheMask, 128, 120 + pos2 + bop3, NULL, 0);
+    blitCentered(screen, img.textCops, img.textCopsMask, 128, 200 + pos3 + bop2, NULL, 0);
 
     return 1;
 }
@@ -1051,7 +1132,7 @@ int pcPanic(int time, int duration)
     int bop2 = sawtooth(time << 1) >> 3;
     int bop3 = sawtooth(time) >> 3;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern(time);
     EFFECT_TITLE("PC Panic");
 
     if (time > 1500)
@@ -1059,7 +1140,7 @@ int pcPanic(int time, int duration)
         bop = 0;
     }
 
-    blitCentered(screen, img.pcOnStreet, NULL, 128, 256 + bop, NULL, 0);
+    blitCentered(screen, img.pcOnStreet, img.pcOnStreetMask, 128, 256 + bop, NULL, 0);
 
     if (time > 1500)
     {
@@ -1081,8 +1162,8 @@ int pcPanic(int time, int duration)
     int pos1 = pow2(max(0,  600 - time)) >> 8;
     int pos2 = pow2(max(0,  900 - time)) >> 8;
 
-    blitCentered(screen, img.textSureThing, NULL, 256, 60 + pos1 + bop2, NULL, 0);
-    blitCentered(screen, img.textI, NULL, 256, 120 + pos2 + bop3, NULL, 0);
+    blitCentered(screen, img.textSureThing, img.textSureThingMask, 256, 60 + pos1 + bop2, NULL, 0);
+    blitCentered(screen, img.textI, img.textIMask, 256, 120 + pos2 + bop3, NULL, 0);
 
     if ((time > 1200 && time < 1500) && (time & 0x40))
     {
@@ -1096,10 +1177,10 @@ int macbookPanic2(int time, int duration)
 {
     int bop = sawtooth(time << 1) >> 3;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern2(time);
     EFFECT_TITLE("Macbook Panic");
 
-    blitCentered(screen, img.macbookOnStreet, NULL, 384, 256, NULL, 0);
+    blitCentered(screen, img.macbookOnStreet, img.macbookOnStreetMask, 384, 256, NULL, 0);
     blitCentered(screen, img.faceMacbookNoticeMac, NULL, 384 + 40, 256 - 16, NULL, 0);
     if (time & 0x80 && (time > 2300 && time < 2700))
     {
@@ -1108,7 +1189,7 @@ int macbookPanic2(int time, int duration)
 
     int pos1 = pow2(max(0, 2500 - time)) >> 8;
 
-    blitCentered(screen, img.textOhNo, NULL, 256, 60 + pos1 + bop, NULL, 0);
+    blitCentered(screen, img.textOhNo, img.textOhNoMask, 256, 60 + pos1 + bop, NULL, 0);
 
     return 1;
 }
@@ -1127,8 +1208,8 @@ int macHasPlan(int time, int duration)
     rect.w = 8 + (time >> 2);
     rect.h = img.textStepAside->h;
 
-    blitCentered(screen, img.textStepAside, NULL, 192, 60, &rect, 0);
-    blitCentered(screen, img.textKids, NULL, 380, 55 - pos1, NULL, 0);
+    blitCentered(screen, img.textStepAside, img.textStepAsideMask, 192, 60, &rect, 0);
+    blitCentered(screen, img.textKids, img.textKidsMask, 380, 55 - pos1, NULL, 0);
 
     mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 120 + bop, NULL, 0);
     if (time & 0x80 && time < 1300)
