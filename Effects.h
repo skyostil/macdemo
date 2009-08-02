@@ -99,6 +99,8 @@ static struct
     MXSurface* faceMacSad;
     MXSurface* faceMacTalk;
     MXSurface* faceMacIdle;
+    MXSurface* theEnd;
+    MXSurface* credits;
 } img;
 
 const int sintab[256] =
@@ -1345,7 +1347,12 @@ int diskImpact(int time, int duration)
 
 int theEnd(int time, int duration)
 {
-    DUMMY_EFFECT("The End");
+    int scroll = max(time - 3000, 0) >> 3;
+    mxFill(screen, NULL, 1);
+
+    blitCentered(screen, img.theEnd, NULL, 256, 171 - scroll, NULL, 0);
+    blitCentered(screen, img.credits, NULL, 256, 800 - scroll, NULL, 0);
+
     return 1;
 }
 
@@ -1382,7 +1389,6 @@ EffectEntry effects[] =
 {
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
     {clearScreen,             0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-#if 0
     {intro,                   4000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macOnStreet,             6000, 0},
@@ -1415,10 +1421,9 @@ EffectEntry effects[] =
     {macHasPlan,              3000, 0},
     {macLoadDisk,             1500, 0},
     {macFireDisk,             1500, 0},
-#endif
     {diskTwirl,               3000, 0},
     {diskImpact,              3000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-    {theEnd,                  5000, 0},
+    {theEnd,                  15000, 0},
     {NULL, 0, 0}
 };

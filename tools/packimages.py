@@ -115,6 +115,8 @@ files = [
     ("../data/face_mac_sad.png", BW, 0),
     ("../data/face_mac_talk.png", BW, 0),
     ("../data/face_mac_idle.png", BW, 0),
+    ("../data/theend.png", BW, 0),
+    ("../data/credits.png", BW, 0),
 ]
 
 def packImage(out, image, format, flags):
