@@ -1236,6 +1236,19 @@ void drawStreak(int y, int v)
     }
 }
 
+static int _randSeed;
+
+void brokenRandSeed(int seed)
+{
+    _randSeed = seed;
+}
+
+int brokenRand()
+{
+    _randSeed = 16807 * _randSeed;
+    return _randSeed;
+}
+
 int diskTwirl(int time, int duration)
 {
     int i, x, y, j;
@@ -1287,6 +1300,30 @@ int diskTwirl(int time, int duration)
             oldPx = px;
             oldPy = py;
             vertex += 3;
+        }
+    }
+
+    brokenRandSeed(715517);
+    
+    for (i = 0; i < 32; i++)
+    {
+        int y = brokenRand() % 342;
+        int x = (brokenRand() - (((brokenRand() & 0x7fff) + 0x7fff) * time) >> 18) & (512 / 8 - 1);
+        uint8_t* dest = screen->pixels + y * screen->stride + x;
+        const uint8_t colors[] = 
+        {
+            0xff,
+            0xaa,
+            0x88,
+            0x80
+        };
+        uint8_t c = colors[i & 3];
+
+        j = min(brokenRand() & 0xf, 512 / 8 - x);
+        while (j--)
+        {
+            *dest++ = c;
+            x++;
         }
     }
 
@@ -1345,6 +1382,7 @@ EffectEntry effects[] =
 {
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
     {clearScreen,             0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
+#if 0
     {intro,                   4000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macOnStreet,             6000, 0},
@@ -1377,6 +1415,7 @@ EffectEntry effects[] =
     {macHasPlan,              3000, 0},
     {macLoadDisk,             1500, 0},
     {macFireDisk,             1500, 0},
+#endif
     {diskTwirl,               3000, 0},
     {diskImpact,              3000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
