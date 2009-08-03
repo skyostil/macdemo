@@ -7,6 +7,7 @@ static struct
 {
     MXSurface* introCityscape;
     MXSurface* introMac;
+    MXSurface* introMacMask;
     MXSurface* introStreet;
     MXSurface* macOnStreetBg;
     MXSurface* macOnStreet;
@@ -398,17 +399,13 @@ int intro(int time, int duration)
     int bop = (time & 0x100) >> 6;
     MXRect rect;
 
+    mxFill(screen, NULL, 0);
     drawCity(pos);
     EFFECT_TITLE("Intro");
 
     mxBlit(screen, img.textTitle, img.textTitleMask, 256, 30, NULL, 0);
 
-    rect.x = 88;
-    rect.y = 200;
-    rect.w = img.introMac->w;
-    rect.h = 20;
-    mxFill(screen, &rect, 0);
-    mxBlit(screen, img.introMac, NULL, 88, 200 + bop, NULL, 0);
+    mxBlit(screen, img.introMac, img.introMacMask, 88, 200 + bop, NULL, 0);
     return 1;
 }
 
@@ -457,6 +454,9 @@ int macOnStreet(int time, int duration)
     int bop2 = ((time + 177) & 0x100) >> 6;
     int bop = (time & 0x100) >> 6;
     int notePos;
+    int i;
+
+    time = (time * 9) / 7;
 
     mxBlit(screen, img.macOnStreetBg, NULL, 0, 0, NULL, 0);
     EFFECT_TITLE("Mac on street");
@@ -465,6 +465,18 @@ int macOnStreet(int time, int duration)
     pos2 = pos >> 3;
     pos >>= 6;
     notePos = ((time >> 3) & 0x7f);
+
+    int x = 50 - pos2;
+    int y = 200 - (pos2 >> 1);
+    for (i = 0; i < 8; i++)
+    {
+        if (y > 0 && y < 512)
+        {
+            mxDrawLine(screen, max(0, x), y, min(511, x + 240), y);
+        }
+        x += 200;
+        y += 100;
+    }
 
     mxBlit(screen, img.pcOnStreet, NULL, 800 - pos2, 300 - (pos2 >> 1) + bop2, NULL, 0);
     mxBlit(screen, img.macOnStreet, NULL, 10 + pos, 20 + bop + (pos >> 1), NULL, 0);
@@ -502,6 +514,7 @@ int guysSpotMac(int time, int duration)
     int bop2 = ((time + 177) & 0x100) >> 6;
     int bop3 = ((time + 61) & 0x100) >> 6;
     int camPos = max(-time >> 2, -200);
+    int i;
     MXRect rect;
 
     mxBlit(screen, img.macOnStreetBg, NULL, camPos, 0, NULL, 0);
@@ -516,6 +529,18 @@ int guysSpotMac(int time, int duration)
     pos = 72 << 6;
     pos2 = pos >> 3;
     pos >>= 6;
+
+    int x = 50 - pos2 + camPos;
+    int y = 200 - (pos2 >> 1);
+    for (i = 0; i < 8; i++)
+    {
+        if (y > 0 && y < 512 && x > -240)
+        {
+            mxDrawLine(screen, max(0, x), y, min(511, x + 240), y);
+        }
+        x += 200;
+        y += 100;
+    }
 
     mxBlit(screen, img.pcOnStreet, NULL, camPos + 800 - pos2, 300 - (pos2 >> 1) + bop2, NULL, 0);
     mxBlit(screen, img.facePcNoticeMac, NULL, camPos + 52 + 800 - pos2, 20 + 300 - (pos2 >> 1) + bop2, NULL, 0);
@@ -1618,7 +1643,7 @@ void teardownEffects()
     mxDestroySurface(ball);
 }
 
-#define P (20 * 6 * 64)
+#define P (20 * SONG_SPEED * 64)
 EffectEntry effects[] =
 {
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
@@ -1626,37 +1651,37 @@ EffectEntry effects[] =
     {intro,                   P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macOnStreet,             P / 2, 0},
-    {guysSpotMac,             2000, 0},
+    {guysSpotMac,             P / 4, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macbookRidiculePrep,     0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-    {macbookRidicule,         2500, 0},
-    {pcRidicule,              3000, 0},
-    {sadMac,                  3000, 0},
-    {macbookFxIntro,          3000, 0},
+    {macbookRidicule,         P / 4, 0},
+    {pcRidicule,              P / 2, 0},
+    {sadMac,                  P / 2, 0},
+    {macbookFxIntro,          P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-    {macbookFx,               4000, 0},
-    {pcFxIntro,               3000, 0},
+    {macbookFx,               P, 0},
+    {pcFxIntro,               P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-    {pcFx,                    4000, 0},
-    {macbookDare,             3000, 0},
-    {macFxLoading,            6000, 0},
+    {pcFx,                    P, 0},
+    {macbookDare,             P / 2, 0},
+    {macFxLoading,            P, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-    {macFx,                   4000, 0},
-    {guysLol,                 2000, 0},
-    {sadMac2,                 2000, 0},
+    {macFx,                   P, 0},
+    {guysLol,                 P / 2, 0},
+    {sadMac2,                 P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-    {kidHelp,                 2000, 0},
-    {pedobearRunSide,         3000, 0},
-    {pedobearRunFront,        2000, 0},
-    {macbookPanic,            3000, 0},
-    {pcPanic,                 4000, 0},
-    {macbookPanic2,           4000, 0},
+    {kidHelp,                 P / 4, 0},
+    {pedobearRunSide,         P / 4, 0},
+    {pedobearRunFront,        P / 2, 0},
+    {macbookPanic,            P / 2, 0},
+    {pcPanic,                 P / 2, 0},
+    {macbookPanic2,           P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-    {macHasPlan,              3000, 0},
-    {macLoadDisk,             1500, 0},
-    {macFireDisk,             1500, 0},
-    {diskTwirl,               3000, 0},
-    {diskImpact,              3000, 0},
+    {macHasPlan,              P / 2, 0},
+    {macLoadDisk,             P / 4, 0},
+    {macFireDisk,             P / 4, 0},
+    {diskTwirl,               P, 0},
+    {diskImpact,              P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {theEnd,                  15000, 0},
     {NULL, 0, 0}

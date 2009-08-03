@@ -27,6 +27,7 @@ MXSurface* loadImage(FILE* packFile);
  */
 #define PACKFILE        "images.dat"
 #define SONGFILE        "macmod.mod"
+#define SONG_SPEED      6
 #define SCREEN_WIDTH    512
 #define SCREEN_HEIGHT   342
 #define MUSIC_LENGTH    (2 * 60)

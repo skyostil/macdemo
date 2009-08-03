@@ -23,6 +23,7 @@ C = MX_SURFACE_FLAG_RLE
 files = [
     ("../data/intro_cityscape.png", BW, PS),
     ("../data/intro_mac.png", BW, 0),
+    ("../data/intro_mac.png", BW, A),
     ("../data/intro_street.png", BW, PS),
     ("../data/mac_on_street_bg.png", BW, C),
     ("../data/mac_on_street.png", BW, PS),
