@@ -149,6 +149,8 @@ static int x = 93, y = 17;
 static int dx = 1, dy = 1;
 static MXSurface* ball = 0;
 
+uint8_t dither(int y, int i);
+
 void moveBall()
 {
     x += dx;
@@ -181,7 +183,7 @@ void moveBall()
 
 void drawLoadingScreen(int steps, int total)
 {
-    int loadingX = (((steps << 8) / total) * screen->w) >> 8;
+    int loadingX = (((steps << 8) / total) * (screen->w - 16)) >> 8;
     MXRect rect;
 
     if (loadingX < 8)
@@ -189,7 +191,19 @@ void drawLoadingScreen(int steps, int total)
         loadingX = 8;
     }
 
-    rect.x = 0;
+    rect.x = 2;
+    rect.y = 171 - 10;
+    rect.w = screen->w - 4;
+    rect.h = 20;
+    mxFill(screen, &rect, 0);
+
+    rect.x = 3;
+    rect.y = 171 - 9;
+    rect.w = screen->w - 6;
+    rect.h = 18;
+    mxFill(screen, &rect, 1);
+
+    rect.x = 4;
     rect.y = 171 - 8;
     rect.w = loadingX;
     rect.h = 16;
@@ -698,6 +712,50 @@ void drawBackgroundPattern4(int time)
     }
 }
 
+void drawBackgroundPattern5(int time)
+{
+    int t = time >> 3;
+    int t2 = time >> 5;
+    int x, y;
+    uint32_t* dest = (uint32_t*)screen->pixels;
+    uint32_t color = (0xffffffff << (t & 0x3f));
+
+    assert(!(screen->stride & 4));
+
+    if (t & 0x20)
+    {
+        color = ~color;
+    }
+
+    for (y = 0; y < screen->h; y++)
+    {
+        uint32_t c1 = color;
+        uint32_t c2;
+        //c1 = (c1 << (y & 0x1f)) | (0xffffffff >> (64 - (y & 0x1f)));
+#if !defined(BIG_ENDIAN)
+        c1 = swapEndian(c1);
+#endif
+        c2 = ~c1;
+
+        int d = dither(y, sawtooth((t2 << 4) + (y >> 2)));
+        d  |= (d << 8) | (d << 16) | (d << 24);
+        c1 |= d;
+        c2 |= d;
+
+        for (x = 0; x < screen->w; x += 64)
+        {
+            *dest++ = c1;
+            *dest++ = c2;
+        }
+
+        color <<= 1;
+        if ((t + y) & 0x20)
+        {
+            color |= 1;
+        }
+    }
+}
+
 int pcRidicule(int time, int duration)
 {
     int bop = sawtooth(time >> 1) >> 3;
@@ -1177,9 +1235,9 @@ int pedobearRunSide(int time, int duration)
 
 int pedobearRunFront(int time, int duration)
 {
-    int bop = (time & 0x100) >> 6;
+    int bop = sawtooth(time >> 1) >> 3;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern5(time);
     mxBlit(screen, img.pedobearRunFront, img.pedobearRunFrontMask, 256 - 128, 171 - 128 + bop, NULL, 0);
     EFFECT_TITLE("Pedobear Run");
     return 1;
