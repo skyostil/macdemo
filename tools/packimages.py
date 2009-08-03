@@ -142,7 +142,7 @@ def packImage(out, image, format, flags):
             if flags & MX_PACK_ALPHA_CHANNEL:
                 c = p[-1]
             else:
-                c = not (p[0] | p[1] | p[2])
+                c = (p[0] + p[1] + p[2]) < 128 * 3
             if c:
                 data[y * stride + (x >> 3)] |= (0x80 >> (x & 0x7))
     out.write(header)

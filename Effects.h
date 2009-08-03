@@ -482,12 +482,12 @@ int macOnStreet(int time, int duration)
     mxBlit(screen, img.macOnStreet, NULL, 10 + pos, 20 + bop + (pos >> 1), NULL, 0);
     if (time > (72 << 6))
     {
-        mxBlit(screen, img.faceMacHuh, NULL, 10 + 52 + pos, 20 + 35 + bop + (pos >> 1), NULL, 0);
+        mxBlit(screen, img.faceMacHuh, NULL, 10 + 52 + pos, 20 + 37 + bop + (pos >> 1), NULL, 0);
         mxBlit(screen, img.facePcNoticeMac, NULL, 52 + 800 - pos2, 20 + 300 - (pos2 >> 1) + bop2, NULL, 0);
     }
     else
     {
-        mxBlit(screen, img.faceMacHappy, NULL, 10 + 52 + pos, 20 + 35 + bop + (pos >> 1), NULL, 0);
+        mxBlit(screen, img.faceMacHappy, NULL, 10 + 52 + pos, 20 + 37 + bop + (pos >> 1), NULL, 0);
         mxBlit(screen, img.facePcIdle, NULL, 52 + 800 - pos2, 20 + 300 - (pos2 >> 1) + bop2, NULL, 0);
     }
 
@@ -545,7 +545,7 @@ int guysSpotMac(int time, int duration)
     mxBlit(screen, img.pcOnStreet, NULL, camPos + 800 - pos2, 300 - (pos2 >> 1) + bop2, NULL, 0);
     mxBlit(screen, img.facePcNoticeMac, NULL, camPos + 52 + 800 - pos2, 20 + 300 - (pos2 >> 1) + bop2, NULL, 0);
     mxBlit(screen, img.macOnStreet, NULL, camPos + 10 + pos, 20 + bop + (pos >> 1), NULL, 0);
-    mxBlit(screen, img.faceMacHuh, NULL, camPos + 10 + 52 + pos, 20 + 35 + bop + (pos >> 1), NULL, 0);
+    mxBlit(screen, img.faceMacHuh, NULL, camPos + 10 + 52 + pos, 20 + 37 + bop + (pos >> 1), NULL, 0);
     mxBlit(screen, img.macbookOnStreet, NULL, camPos + 1050 - pos2, 400 - (pos2 >> 1) + bop3, NULL, 0);
     mxBlit(screen, img.faceMacbookNoticeMac, NULL, 104 + camPos + 1050 - pos2, 20 + 400 - (pos2 >> 1) + bop3, NULL, 0);
     return 1;
@@ -831,11 +831,11 @@ int sadMac(int time, int duration)
     blitCentered(screen, img.macCloseUp, NULL, 256 + shift, 100 + 150 + bop, NULL, 0);
     if (time & 0x80 && time < 1500)
     {
-        blitCentered(screen, img.faceMacTalk, NULL, 256 + shift + 28, 100 + 150 + bop - 40, NULL, 0);
+        blitCentered(screen, img.faceMacTalk, NULL, 256 + shift + 28, 100 + 140 + bop - 40, NULL, 0);
     }
     else
     {
-        blitCentered(screen, img.faceMacIdle, NULL, 256 + shift + 28, 100 + 150 + bop - 40, NULL, 0);
+        blitCentered(screen, img.faceMacIdle, NULL, 256 + shift + 28, 100 + 140 + bop - 40, NULL, 0);
     }
 
     rect.x = 0;
@@ -1066,7 +1066,7 @@ int macbookDare(int time, int duration)
 
 int macFxLoading(int time, int duration)
 {
-    int bop = -time >> 8;
+    int bop = -time >> 9;
     MXRect rect;
 
     drawBackgroundPattern3(time);
@@ -1084,18 +1084,18 @@ int macFxLoading(int time, int duration)
 
         if (time & 0x80 && time < 1500)
         {
-            blitCentered(screen, img.faceMacTalk, NULL, 256 + 28, 100 + 160 + bop - 40, NULL, 0);
+            blitCentered(screen, img.faceMacTalk, NULL, 256 + 28, 100 + 150 + bop - 40, NULL, 0);
         }
         else
         {
-            blitCentered(screen, img.faceMacIdle, NULL, 256 + 28, 100 + 160 + bop - 40, NULL, 0);
+            blitCentered(screen, img.faceMacIdle, NULL, 256 + 28, 100 + 150 + bop - 40, NULL, 0);
         }
     }
     else
     {
         rect.x = 256 - 44;
-        rect.y = 120 + bop + 100;
-        rect.w = 8 + (min(144, max(0, (time - 2000)) >> 5) & ~7);
+        rect.y = 120 + bop + 80;
+        rect.w = 8 + (min(132, max(0, (time - 2000)) >> 5) & ~7);
         rect.h = 16;
         mxFill(screen, &rect, 1);
     }
@@ -1131,7 +1131,7 @@ int macFx(int time, int duration)
     rect.h = 32;
     mxFill(screen, &rect, 1);
 
-    rect.x = 256 - 42 + (17 << 3);
+    rect.x = 256 - 42 + (15 << 3);
     rect.y = 150 + (p2 << 3);
     rect.w = 8;
     rect.h = 32;
@@ -1142,12 +1142,12 @@ int macFx(int time, int duration)
         bx += dx;
         by += dy;
 
-        if (bx < 2 || bx > 15)
+        if (bx < 2 || bx > 13)
         {
             dx = -dx;
         }
 
-        if (by < 2 || by > 12)
+        if (by < 2 || by > 7)
         {
             dy = -dy;
         }
@@ -1228,7 +1228,7 @@ int sadMac2(int time, int duration)
     EFFECT_TITLE("Sad Mac #2");
 
     blitCentered(screen, img.macCloseUp, NULL, 256, 100 + 150 + bop, NULL, 0);
-    blitCentered(screen, img.faceMacSad, NULL, 256 + 28, 100 + 150 + bop - 40, NULL, 0);
+    blitCentered(screen, img.faceMacSad, NULL, 256 + 28, 100 + 140 + bop - 40, NULL, 0);
 
     return 1;
 }
@@ -1391,11 +1391,11 @@ int macHasPlan(int time, int duration)
     mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 120 + bop, NULL, 0);
     if (time & 0x80 && time < 1300)
     {
-        blitCentered(screen, img.faceMacTalk, NULL, 256 + 28, 100 + 180 + bop - 40, NULL, 0);
+        blitCentered(screen, img.faceMacTalk, NULL, 256 + 28, 100 + 160 + bop - 40, NULL, 0);
     }
     else
     {
-        blitCentered(screen, img.faceMacIdle, NULL, 256 + 28, 100 + 180 + bop - 40, NULL, 0);
+        blitCentered(screen, img.faceMacIdle, NULL, 256 + 28, 100 + 160 + bop - 40, NULL, 0);
     }
 
     return 1;
