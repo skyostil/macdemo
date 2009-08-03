@@ -612,6 +612,92 @@ void drawBackgroundPattern2(int time)
     }
 }
 
+void drawBackgroundPattern3(int time)
+{
+    int t = time >> 7;
+    int x, y;
+    uint32_t* dest = (uint32_t*)screen->pixels;
+    uint32_t color = rol(0x88880000, t & 31);
+
+    assert(!(screen->stride & 4));
+
+    for (y = 0; y < screen->h; y++)
+    {
+        if ((y + t & 0x3) == 0)
+        {
+            uint32_t c = color;
+            int s = (sini((y + t) << 2) >> 13);
+
+            if (s < 0)
+            {
+                c = ror(c, -s);
+            }
+            else
+            {
+                c = rol(c, s);
+            }
+#if !defined(BIG_ENDIAN)
+            c = swapEndian(c);
+#endif
+
+            for (x = 0; x < screen->w; x += 32)
+            {
+                *dest++ = c;
+            }
+        }
+        else
+        {
+            for (x = 0; x < screen->w; x += 32)
+            {
+                *dest++ = 0;
+            }
+        }
+    }
+}
+
+void drawBackgroundPattern4(int time)
+{
+    int t = -time >> 7;
+    int x, y;
+    uint32_t* dest = (uint32_t*)screen->pixels;
+    uint32_t color = rol(0x88880000, t & 31);
+
+    assert(!(screen->stride & 4));
+
+    for (y = 0; y < screen->h; y++)
+    {
+        if ((y + t & 0x3) == 0)
+        {
+            uint32_t c = color;
+            int s = sawtooth((y + t) << 3) >> 3;
+
+            if (s < 0)
+            {
+                c = ror(c, -s);
+            }
+            else
+            {
+                c = rol(c, s);
+            }
+#if !defined(BIG_ENDIAN)
+            c = swapEndian(c);
+#endif
+
+            for (x = 0; x < screen->w; x += 32)
+            {
+                *dest++ = c;
+            }
+        }
+        else
+        {
+            for (x = 0; x < screen->w; x += 32)
+            {
+                *dest++ = 0;
+            }
+        }
+    }
+}
+
 int pcRidicule(int time, int duration)
 {
     int bop = sawtooth(time >> 1) >> 3;
@@ -649,7 +735,7 @@ int sadMac(int time, int duration)
     int shift = sawtooth(time >> 2) >> 2;
     MXRect rect;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern3(time);
     EFFECT_TITLE("Sad Mac");
 
     blitCentered(screen, img.macCloseUp, NULL, 256 + shift, 100 + 150 + bop, NULL, 0);
@@ -893,7 +979,7 @@ int macFxLoading(int time, int duration)
     int bop = -time >> 8;
     MXRect rect;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern3(time);
     EFFECT_TITLE("Mac Fx Loading");
 
     rect.x = 0;
@@ -937,7 +1023,7 @@ int macFx(int time, int duration)
     static int p2 = 2;
     static int t = 0;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern3(time);
     EFFECT_TITLE("Mac Fx");
 
     blitCentered(screen, img.macCloseUp, NULL, 256, 100 + 135, NULL, 0);
@@ -1036,7 +1122,7 @@ int guysLol(int time, int duration)
 {
     int bop = sawtooth(time << 1) >> 3;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern4(time);
     drawGuys(time, true);
     blitCentered(screen, img.textLol, img.textLolMask, 256, 60 + bop, NULL, 0);
 
@@ -1048,7 +1134,7 @@ int sadMac2(int time, int duration)
 {
     int bop = time >> 6;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern3(time);
     EFFECT_TITLE("Sad Mac #2");
 
     blitCentered(screen, img.macCloseUp, NULL, 256, 100 + 150 + bop, NULL, 0);
@@ -1062,7 +1148,7 @@ int kidHelp(int time, int duration)
     int bop = sawtooth(time << 1) >> 3;
     int pos = pow2(max(0,  500 - time)) >> 8;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern4(time);
     EFFECT_TITLE("Kid Help");
     drawGuys(time, false);
 
@@ -1177,6 +1263,7 @@ int macbookPanic2(int time, int duration)
 {
     int bop = sawtooth(time << 1) >> 3;
 
+    mxFill(screen, NULL, 0);
     drawBackgroundPattern2(time);
     EFFECT_TITLE("Macbook Panic");
 
@@ -1200,7 +1287,7 @@ int macHasPlan(int time, int duration)
     MXRect rect;
     int pos1 = pow2(max(0, 1300 - time)) >> 8;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern3(time);
     EFFECT_TITLE("Mac Has Plan");
 
     rect.x = 0;
@@ -1228,7 +1315,7 @@ int macLoadDisk(int time, int duration)
 {
     int bop = time >> 4;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern3(time);
     EFFECT_TITLE("Mac Load Disk");
 
     mxBlit(screen, img.macDiskLoad, NULL, 256 - 128 - bop, 50, NULL, 0);
@@ -1239,7 +1326,7 @@ int macFireDisk(int time, int duration)
 {
     int bop = -time >> 5;
 
-    mxFill(screen, NULL, 0);
+    drawBackgroundPattern3(time);
     EFFECT_TITLE("Mac Fire Disk");
 
     mxBlit(screen, img.macDiskFire, NULL, 256 - 128 - bop, 50, NULL, 0);
