@@ -430,10 +430,21 @@ void mxFillSierpinskiPattern(MXSurface* s)
     GEN_SURFACE_FILLER(x & y);
 }
 
+void mxDrawClippedLine(MXSurface* dest, int x0, int y0, int x1, int y1)
+{
+    /* TODO: clipping */
+	if (x0 < 0 || y0 < 0 || x1 < 0 || y1 < 0 ||
+		x0 >= dest->w - 1 || y0 >= dest->h - 1 ||
+		x1 >= dest->w - 1 || y1 >= dest->h - 1)
+	{
+		return;
+	}
+	mxDrawLine(dest, x0, y0, x1, y1);
+}
+
 void mxDrawLine(MXSurface* dest, int x0, int y0, int x1, int y1)
 {
     /* Based on http://www.cs.unc.edu/~mcmillan/comp136/Lecture6/Lines.html */
-    /* TODO: clipping */
     int dy = y1 - y0;
     int dx = x1 - x0;
     int stepx, stepy;

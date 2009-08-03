@@ -474,10 +474,7 @@ int macOnStreet(int time, int duration)
     int y = 200 - (pos2 >> 1);
     for (i = 0; i < 8; i++)
     {
-        if (y > 0 && y < 512)
-        {
-            mxDrawLine(screen, max(0, x), y, min(511, x + 240), y);
-        }
+        mxDrawClippedLine(screen, max(0, x), y, min(511, x + 240), y);
         x += 200;
         y += 100;
     }
@@ -538,10 +535,7 @@ int guysSpotMac(int time, int duration)
     int y = 200 - (pos2 >> 1);
     for (i = 0; i < 8; i++)
     {
-        if (y > 0 && y < 512 && x > -240)
-        {
-            mxDrawLine(screen, max(0, x), y, min(511, x + 240), y);
-        }
+        mxDrawClippedLine(screen, max(0, x), y, min(511, x + 240), y);
         x += 200;
         y += 100;
     }
@@ -595,7 +589,7 @@ inline uint32_t rol(uint32_t value, uint32_t n)
 
 void drawBackgroundPattern(int time)
 {
-    int t = time >> 7;
+    int t = time >> 5;
     int x, y;
     uint32_t* dest = (uint32_t*)screen->pixels;
     uint32_t color = ror(0x88880000, t & 31);
@@ -629,7 +623,7 @@ void drawBackgroundPattern(int time)
 
 void drawBackgroundPattern2(int time)
 {
-    int t = time >> 7;
+    int t = time >> 5;
     int x, y;
     uint32_t* dest = (uint32_t*)screen->pixels;
     uint32_t color = rol(0x88880000, t & 31);
@@ -664,7 +658,7 @@ void drawBackgroundPattern2(int time)
 
 void drawBackgroundPattern3(int time)
 {
-    int t = time >> 7;
+    int t = time >> 5;
     int x, y;
     uint32_t* dest = (uint32_t*)screen->pixels;
     uint32_t color = rol(0x88880000, t & 31);
@@ -707,7 +701,7 @@ void drawBackgroundPattern3(int time)
 
 void drawBackgroundPattern4(int time)
 {
-    int t = -time >> 7;
+    int t = -time >> 5;
     int x, y;
     uint32_t* dest = (uint32_t*)screen->pixels;
     uint32_t color = rol(0x88880000, t & 31);
@@ -1248,7 +1242,7 @@ int kidHelp(int time, int duration)
 
     blitCentered(screen, img.textHelp, img.textHelpMask, 256 - pos, 60 + bop, NULL, 0);
 
-    if ((time < 500) && (time & 0x80))
+    if ((time < 700) && (time & 0x40))
     {
         mxInvert(screen, NULL);
     }
