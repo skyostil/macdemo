@@ -1464,14 +1464,14 @@ void drawStreak(int y, int v)
     }
 }
 
-static int _randSeed;
+static uint32_t _randSeed;
 
 void brokenRandSeed(int seed)
 {
     _randSeed = seed;
 }
 
-int brokenRand()
+uint32_t brokenRand()
 {
     _randSeed = 16807 * _randSeed;
     return _randSeed;
@@ -1547,7 +1547,7 @@ int diskTwirl(int time, int duration)
         };
         uint8_t c = colors[i & 3];
 
-        j = min(brokenRand() & 0xf, 512 / 8 - x);
+        j = min(brokenRand() & 0xf, 512 / 8 - x - 1);
         while (j--)
         {
             *dest++ = c;
