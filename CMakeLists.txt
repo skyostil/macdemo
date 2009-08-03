@@ -33,8 +33,10 @@ link_libraries(
 
 if (WIN32)
     link_libraries(${SDLMAIN_LIBRARY})
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MT")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MT")
+    if (MSVC)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MT")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MT")
+    endif (MSVC)
 endif (WIN32)
 
 if (NOT APPLE AND NOT WIN32)
