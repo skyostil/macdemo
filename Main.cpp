@@ -31,6 +31,9 @@ MXSurface* loadImage(FILE* packFile);
 #define SCREEN_WIDTH    512
 #define SCREEN_HEIGHT   342
 #define MUSIC_LENGTH    (2 * 60)
+//#define MUSIC_STATS
+//#define DEMO_STATS
+//#define DEMO_LOOP
 #define RAWMUSICFILE    "music.raw"
 
 int sawtooth(int t)
@@ -89,13 +92,15 @@ public:
         fclose(audioFile);
     }
     
-    void preload(int bytesToLoad = 0x20000)
+    void preload(int bytesToLoad = 0x10000)
     {
         while (bytesToLoad > 0)
         {
             int readPos = readBytes & (audioBuffer->bytes - 1);
             int readSize = min(bytesToLoad, audioBuffer->bytes - readPos);
-            //printf("LOAD %d bytes at %d (%d total)\n", readSize, readPos, readBytes);
+#ifdef MUSIC_STATS
+            printf("LOAD %d bytes at %d (%d total)\n", readSize, readPos, readBytes);
+#endif
             int n = fread(audioBuffer->data + readPos, 1, readSize, audioFile);
             if (n <= 0)
             {
@@ -111,14 +116,19 @@ public:
         int bytesToPlay = buffer->bytes;
         while (playBytes + buffer->bytes > readBytes && !feof(audioFile))
         {
-            //printf("UNDERRUN (%d read, %d played)\n", readBytes, playBytes);
-            preload();
+#ifdef MUSIC_STATS
+            printf("UNDERRUN (%d read, %d played)\n", readBytes, playBytes);
+#endif
+            //preload();
+            return;
         }
         while (bytesToPlay > 0)
         {
             int playPos = playBytes & (audioBuffer->bytes - 1);
             int playSize = min(bytesToPlay, audioBuffer->bytes - playPos);
-            //printf("PLAY %d bytes (%d total, %d read)\n", playSize, playBytes, readBytes);
+#ifdef MUSIC_STATS
+            printf("PLAY %d bytes (%d total, %d read)\n", playSize, playBytes, readBytes);
+#endif
             memcpy(buffer->data, audioBuffer->data + playPos, playSize);
             bytesToPlay -= playSize;
             playBytes += playSize;
@@ -152,7 +162,7 @@ void setup()
     //Audio(8, 11127, 0, 512);
     //Audio(8, 22050, 0, 512);
 #if defined(CODEWARRIOR)
-    audio = new Audio(8, 11127, false, 0x8000);
+    audio = new Audio(8, 11127, false, 0x1000);
 #else
     audio = new Audio(8, 11127, false, 512);
 #endif
@@ -232,17 +242,23 @@ void demo()
         time = video->ticks();
         if (!timeline.run(time - startTime))
         {
+#if DEMO_LOOP
             timeline.reset();
             startTime = time;
+#else
+            break;
+#endif
         }
-
+#ifdef DEMO_STATS
         drawDebugText(screen, 512 - 20 * 8, 0, status);
+#endif
         flipScreen();
 
         if (!video->processInput())
         {
             break;
         }
+#ifdef DEMO_STATS
         if (++frames == 60 && time > frameStartTime)
         {
             int fps = 1000 * ((frames << 16) / ((time - frameStartTime)));
@@ -250,6 +266,7 @@ void demo()
             frames = 0;
             sprintf(status, "%d fps, %d ms", fps >> 16, time);
         }
+#endif
     }
 }
 

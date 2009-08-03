@@ -16,6 +16,13 @@ bool Timeline::run(int time)
     int t = m_baseTime;
     EffectEntry* f = m_effects;
 
+    if (f->flags & EFFECT_FLAG_DYNAMIC_DONE)
+    {
+        m_baseTime = time;
+        m_effects++;
+        return 1;
+    }
+
     while (t + f->duration < time)
     {
         if (f->flags & EFFECT_FLAG_DYNAMIC)
@@ -40,9 +47,12 @@ bool Timeline::run(int time)
         {
             if (!(f->flags & EFFECT_FLAG_INFINITESIMAL))
             {
-                m_baseTime += dt;
+                f->flags |= EFFECT_FLAG_DYNAMIC_DONE;
             }
-            f++;
+            else
+            {
+                f++;
+            }
         }
     }
     else

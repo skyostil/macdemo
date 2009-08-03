@@ -12,7 +12,8 @@ typedef int (*Effect)(int time, int duration);
 enum EffectFlags
 {
     EFFECT_FLAG_DYNAMIC       = 0x1,
-    EFFECT_FLAG_INFINITESIMAL = 0x2
+    EFFECT_FLAG_INFINITESIMAL = 0x2,
+    EFFECT_FLAG_DYNAMIC_DONE  = 0x4
 };
 
 typedef struct EffectEntry_t

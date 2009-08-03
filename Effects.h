@@ -217,7 +217,11 @@ void blitCentered(MXSurface* dest, MXSurface* src, MXSurface* mask, int x, int y
     mxBlit(dest, src, mask, x - (src->w >> 1), y - (src->h >> 1), srcRect, flags);
 }
 
-#define EFFECT_TITLE(NAME) drawDebugText(screen, 0, 0, NAME);
+#ifdef DEMO_STATS
+#    define EFFECT_TITLE(NAME) drawDebugText(screen, 0, 0, NAME);
+#else
+#    define EFFECT_TITLE(NAME)
+#endif
 
 int yesWeHaveALoadingScreen(int time, int duration)
 {
@@ -266,7 +270,7 @@ int yesWeHaveALoadingScreen(int time, int duration)
     musicLength = mixFreq * MUSIC_LENGTH;
     
     /* Load music */
-#if 0
+#if 1
     if (musicLoadingPos < musicLength)
     {
         if (!rawMusicFile)
@@ -336,7 +340,7 @@ int yesWeHaveALoadingScreen(int time, int duration)
         assert(musicRenderer);
         audio->start(musicRenderer);
     }
-#elif 1
+#elif 0
     mixer = new Mixer(mixFreq, 4);
     modPlayer = new ModPlayer(mixer);
     assert(modPlayer);
@@ -937,7 +941,7 @@ int pcFxIntro(int time, int duration)
     return 1;
 }
 
-inline uint8_t dither(int y, int v)
+uint8_t dither(int y, int v)
 {
 #if 0
     static uint32_t const dither4x4[] =
@@ -1244,7 +1248,7 @@ int kidHelp(int time, int duration)
 
     blitCentered(screen, img.textHelp, img.textHelpMask, 256 - pos, 60 + bop, NULL, 0);
 
-    if ((time < 500) && (time & 0x40))
+    if ((time < 500) && (time & 0x80))
     {
         mxInvert(screen, NULL);
     }
@@ -1657,30 +1661,41 @@ EffectEntry effects[] =
     {macbookRidicule,         P / 4, 0},
     {pcRidicule,              P / 2, 0},
     {sadMac,                  P / 2, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macbookFxIntro,          P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macbookFx,               P, 0},
     {pcFxIntro,               P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {pcFx,                    P, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macbookDare,             P / 2, 0},
     {macFxLoading,            P, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macFx,                   P, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {guysLol,                 P / 2, 0},
     {sadMac2,                 P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {kidHelp,                 P / 4, 0},
     {pedobearRunSide,         P / 4, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {pedobearRunFront,        P / 2, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macbookPanic,            P / 2, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {pcPanic,                 P / 2, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macbookPanic2,           P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macHasPlan,              P / 2, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macLoadDisk,             P / 4, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macFireDisk,             P / 4, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {diskTwirl,               P, 0},
+    {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {diskImpact,              P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {theEnd,                  15000, 0},
