@@ -140,9 +140,11 @@ def packImage(out, image, format, flags):
         for x in range(0, image.size[0]):
             p = image.getpixel((x, y))
             if flags & MX_PACK_ALPHA_CHANNEL:
-                c = p[-1]
+                c = p[-1] > 128
             else:
-                c = (p[0] + p[1] + p[2]) < 128 * 3
+                c = ((p[0] + p[1] + p[2]) < 128 * 3)
+                if abs(p[0] - p[1]) + abs(p[2] - p[1]) > 4:
+                    c = 0
             if c:
                 data[y * stride + (x >> 3)] |= (0x80 >> (x & 0x7))
     out.write(header)

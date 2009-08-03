@@ -4,7 +4,7 @@
 #ifndef GAMEENGINE_H
 #define GAMEENGINE_H
 
-#include "../Config.h"
+#include "Config.h"
 
 typedef unsigned int    Pixel32;
 typedef unsigned short  Pixel16;
