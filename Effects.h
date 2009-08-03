@@ -265,7 +265,7 @@ int yesWeHaveALoadingScreen(int time, int duration)
     musicLength = mixFreq * MUSIC_LENGTH;
     
     /* Load music */
-#if 1
+#if 0
     if (musicLoadingPos < musicLength)
     {
         if (!rawMusicFile)
@@ -335,6 +335,13 @@ int yesWeHaveALoadingScreen(int time, int duration)
         assert(musicRenderer);
         audio->start(musicRenderer);
     }
+#elif 1
+    mixer = new Mixer(mixFreq, 4);
+    modPlayer = new ModPlayer(mixer);
+    assert(modPlayer);
+    assert(modPlayer->load(SONGFILE));
+    modPlayer->play();
+    audio->start(mixer);
 #else
     musicRenderer = new MusicRenderer(mixFreq);
     assert(musicRenderer);
@@ -1611,13 +1618,14 @@ void teardownEffects()
     mxDestroySurface(ball);
 }
 
+#define P (20 * 6 * 64)
 EffectEntry effects[] =
 {
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
     {clearScreen,             0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-    {intro,                   4000, 0},
+    {intro,                   P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-    {macOnStreet,             6000, 0},
+    {macOnStreet,             P / 2, 0},
     {guysSpotMac,             2000, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macbookRidiculePrep,     0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
@@ -1653,3 +1661,4 @@ EffectEntry effects[] =
     {theEnd,                  15000, 0},
     {NULL, 0, 0}
 };
+#undef P

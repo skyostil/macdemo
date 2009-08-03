@@ -261,7 +261,7 @@ void Mixer::render(SampleChunk *buffer)
 //                        *data = (unsigned char)((a>>8));
 //                        *data ^= 0x80;
 //						data++;
-                        *data++ = (a >> 2) ^ 0x80;
+                        *data++ = (a >> 2);
 
                         if (++tickerCounter == tickerInterval)
                         {

@@ -29,7 +29,7 @@ MXSurface* loadImage(FILE* packFile);
 #define SONGFILE        "macmod.mod"
 #define SCREEN_WIDTH    512
 #define SCREEN_HEIGHT   342
-#define MUSIC_LENGTH    (1 * 60)
+#define MUSIC_LENGTH    (2 * 60)
 #define RAWMUSICFILE    "music.raw"
 
 int sawtooth(int t)
@@ -235,7 +235,7 @@ void demo()
             startTime = time;
         }
 
-        drawDebugText(screen, 512 - 8 * 8, 0, status);
+        drawDebugText(screen, 512 - 20 * 8, 0, status);
         flipScreen();
 
         if (!video->processInput())
@@ -247,7 +247,7 @@ void demo()
             int fps = 1000 * ((frames << 16) / ((time - frameStartTime)));
             frameStartTime = time;
             frames = 0;
-            sprintf(status, "%d fps", fps >> 16);
+            sprintf(status, "%d fps, %d ms", fps >> 16, time);
         }
     }
 }

@@ -136,7 +136,7 @@ static const unsigned char sineTable[] =
 ModPlayer::ModPlayer(Mixer *_mixer):
         mixer(_mixer),
         channels(0),
-        songSpeed(7),
+        songSpeed(6),
         channel(0),
         note(0),
         order(0),
@@ -522,7 +522,9 @@ void ModPlayer::play()
         playing = true;
         
         if (sample && note && channel && order && songLength)
-                mixer->installTicker(this, 2 * 125 / 5);
+        {
+            mixer->installTicker(this, 2 * 125 / 5);
+        }
 }
 
 void ModPlayer::tick()
@@ -800,12 +802,14 @@ void ModPlayer::playNote(int ch, ModNote *n)
                 if (currentRow > 63) currentRow = 0;
                 if (currentOrder > songLength-1) currentOrder = 0;
         break;
+#if 0
         case 0xf: // set speed
                 if (n->effectParameter < 0x1f)
                         songSpeed = n->effectParameter;
                 else
                         mixer->installTicker(this, 7 * n->effectParameter / 16);
         break;
+#endif
         case 0xe:
         {
                 unsigned char x = n->effectParameter & 0xf;
@@ -826,6 +830,7 @@ void ModPlayer::playNote(int ch, ModNote *n)
                 case 0x4: // set vibrato waveform
                         if (x < 4)
                                 channel[ch].vibratoWaveform = x;
+
                         else
                                 channel[ch].vibratoWaveformRetrig = (1<<x);
                 break;
