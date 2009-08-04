@@ -26,7 +26,9 @@ static struct
     MXSurface* pedobearRunFront;
     MXSurface* pedobearRunFrontMask;
     MXSurface* macDiskLoad;
+    MXSurface* macDiskLoadMask;
     MXSurface* macDiskFire;
+    MXSurface* macDiskFireMask;
     MXSurface* diskImpact;
     MXSurface* diskImpactMask;
     MXSurface* pedobearImpact;
@@ -479,7 +481,7 @@ int macOnStreet(int time, int duration)
         y += 100;
     }
 
-    mxBlit(screen, img.pcOnStreet, NULL, 800 - pos2, 300 - (pos2 >> 1) + bop2, NULL, 0);
+    mxBlit(screen, img.pcOnStreet, img.pcOnStreetMask, 800 - pos2, 300 - (pos2 >> 1) + bop2, NULL, 0);
     mxBlit(screen, img.macOnStreet, NULL, 10 + pos, 20 + bop + (pos >> 1), NULL, 0);
     if (time > (72 << 6))
     {
@@ -540,7 +542,7 @@ int guysSpotMac(int time, int duration)
         y += 100;
     }
 
-    mxBlit(screen, img.pcOnStreet, NULL, camPos + 800 - pos2, 300 - (pos2 >> 1) + bop2, NULL, 0);
+    mxBlit(screen, img.pcOnStreet, img.pcOnStreetMask, camPos + 800 - pos2, 300 - (pos2 >> 1) + bop2, NULL, 0);
     mxBlit(screen, img.facePcNoticeMac, NULL, camPos + 52 + 800 - pos2, 20 + 300 - (pos2 >> 1) + bop2, NULL, 0);
     mxBlit(screen, img.macOnStreet, NULL, camPos + 10 + pos, 20 + bop + (pos >> 1), NULL, 0);
     mxBlit(screen, img.faceMacHuh, NULL, camPos + 10 + 52 + pos, 20 + 37 + bop + (pos >> 1), NULL, 0);
@@ -1318,7 +1320,7 @@ int pcPanic(int time, int duration)
 
     if (time > 1500)
     {
-        blitCentered(screen, img.pcCloseUpBluescreen, img.pcCloseUpBluescreenMask, 128 - 28, 256 - 12 + bop, NULL, 0);
+        blitCentered(screen, img.pcCloseUpBluescreen, img.pcCloseUpBluescreenMask, 128 - 20, 256 - 12 + bop, NULL, 0);
         bop2 = bop3 = 0;
     }
     else
@@ -1406,7 +1408,7 @@ int macLoadDisk(int time, int duration)
     drawBackgroundPattern3(time);
     EFFECT_TITLE("Mac Load Disk");
 
-    mxBlit(screen, img.macDiskLoad, NULL, 256 - 128 - bop, 50, NULL, 0);
+    mxBlit(screen, img.macDiskLoad, img.macDiskLoadMask, 256 - 128 - bop, 50, NULL, 0);
     return 1;
 }
 
@@ -1417,7 +1419,7 @@ int macFireDisk(int time, int duration)
     drawBackgroundPattern3(time);
     EFFECT_TITLE("Mac Fire Disk");
 
-    mxBlit(screen, img.macDiskFire, NULL, 256 - 128 - bop, 50, NULL, 0);
+    mxBlit(screen, img.macDiskFire, img.macDiskFireMask, 256 - 128 - bop, 50, NULL, 0);
 
     if (time & 0x40)
     {
