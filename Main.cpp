@@ -90,6 +90,7 @@ public:
     {
         delete audioBuffer;
         fclose(audioFile);
+		unlink(RAWMUSICFILE);
     }
     
     void preload(int bytesToLoad = 0x10000)

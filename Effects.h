@@ -148,41 +148,9 @@ const int sintab[256] =
 #define sini(X) (sintab[(X) & 0xff])
 #define cosi(X) (sintab[((X) + 64) & 0xff])
 
-static int x = 93, y = 17;
-static int dx = 1, dy = 1;
 static MXSurface* ball = 0;
 
 uint8_t dither(int y, int i);
-
-void moveBall()
-{
-    x += dx;
-    y += dy;
-
-    if (x < 0)
-    {
-        x = -x;
-        dx = -dx;
-    }
-
-    if (x + ball->w > screen->w)
-    {
-        x += 2 * (screen->w - (x + ball->w));
-        dx = -dx;
-    }
-
-    if (y < 0)
-    {
-        y = -y;
-        dy = -dy;
-    }
-
-    if (y + ball->h > screen->h)
-    {
-        y += 2 * (screen->h - (y + ball->h));
-        dy = -dy;
-    }
-}
 
 void drawLoadingScreen(int steps, int total)
 {
@@ -370,9 +338,8 @@ int preloadMusic(int steps, int total)
 int dummyEffect(const char* name, int time, int duration)
 {
     mxFill(screen, NULL, 0);
-    mxBlit(screen, ball, ball, x, y, NULL, 0);
+    mxBlit(screen, ball, ball, 0, 0, NULL, 0);
     EFFECT_TITLE(name);
-    moveBall();
     return 1;
 }
 

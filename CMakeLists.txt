@@ -48,7 +48,7 @@ if (NOT APPLE AND NOT WIN32)
 endif (NOT APPLE AND NOT WIN32)
 
 add_executable(
-    macdemo
+    three_and_a_half_inches_is_enough
     WIN32
     MACOSX_BUNDLE
     ${SOURCES}
