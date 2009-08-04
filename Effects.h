@@ -376,7 +376,7 @@ int intro(int time, int duration)
     drawCity(pos);
     EFFECT_TITLE("Intro");
 
-    mxBlit(screen, img.textTitle, img.textTitleMask, 256, 30, NULL, 0);
+    mxBlit(screen, img.textTitle, img.textTitleMask, 128, 30, NULL, 0);
 
     mxBlit(screen, img.introMac, img.introMacMask, 88, 200 + bop, NULL, 0);
     return 1;
