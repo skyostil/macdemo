@@ -1066,7 +1066,7 @@ int macbookDare(int time, int duration)
 
 int macFxLoading(int time, int duration)
 {
-    int bop = -time >> 9;
+    int bop = (-time >> 9) - 10;
     MXRect rect;
 
     drawBackgroundPattern3(time);
