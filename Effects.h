@@ -539,8 +539,8 @@ int macbookRidicule(int time, int duration)
         mxBlit(screen, img.faceMacbookNoticeMacTalk, NULL, 104 - 200 + 1050 - (72 << 3) + 32, 20 + 400 - (72 << 2) + 50, NULL, 0);
     }
 
-    blitCentered(screen, img.textHey, img.textHeyMask, 100 + pos1, 40, NULL, 0);
-    blitCentered(screen, img.textLook, img.textLookMask, 200 + pos2, 100, NULL, 0);
+    blitCentered(screen, img.textHey, img.textHeyMask, 200 + pos1, 100, NULL, 0);
+    blitCentered(screen, img.textLook, img.textLookMask, 300 + pos2, 100, NULL, 0);
     blitCentered(screen, img.textIts, img.textItsMask, 256 + pos3, 180, NULL, 0);
     blitCentered(screen, img.textGramps, img.textGrampsMask, 256, 250 + pos4, NULL, 0);
     return 1;
@@ -840,8 +840,8 @@ int macbookFxIntro(int time, int duration)
 
     blitCentered(screen, img.textHa, img.textHaMask, -128 + 352 + bop2, 60 + pos1, NULL, 0);
     blitCentered(screen, img.textCheck, img.textCheckMask, -128 + 320, 120 + pos2, NULL, 0);
-    blitCentered(screen, img.textThis, img.textThisMask, -128 + 288, 200 + pos3, NULL, 0);
-    blitCentered(screen, img.textOut, img.textOutMask, -128 + 256, 280 + pos4, NULL, 0);
+    blitCentered(screen, img.textThis, img.textThisMask, -128 + 288, 180 + pos3, NULL, 0);
+    blitCentered(screen, img.textOut, img.textOutMask, -128 + 256, 240 + pos4, NULL, 0);
 
     return 1;
 }
@@ -898,8 +898,8 @@ int pcFxIntro(int time, int duration)
 
     blitCentered(screen, img.textYeah, img.textYeahMask, 128 + 160 + bop2, 60 + pos1, NULL, 0);
     blitCentered(screen, img.textGetA, img.textGetAMask, 128 + 192, 120 + pos2, NULL, 0);
-    blitCentered(screen, img.textLoadOf, img.textLoadOfMask, 128 + 224, 200 + pos3, NULL, 0);
-    blitCentered(screen, img.textThis, img.textThisMask, 128 + 256, 280 + pos4, NULL, 0);
+    blitCentered(screen, img.textLoadOf, img.textLoadOfMask, 128 + 224, 180 + pos3, NULL, 0);
+    blitCentered(screen, img.textThis, img.textThisMask, 128 + 256, 240 + pos4, NULL, 0);
 
     return 1;
 }
@@ -1026,7 +1026,7 @@ int macbookDare(int time, int duration)
     rect.w = img.textLetsSee->w;
     rect.h = (time >> 3);
 
-    blitCentered(screen, img.textLetsSee, img.textLetsSeeMask, 192, 342 / 3, &rect, 0);
+    blitCentered(screen, img.textLetsSee, img.textLetsSeeMask, 192, 342 / 3 + 32, &rect, 0);
 
     return 1;
 }
