@@ -205,7 +205,8 @@ MXSurface* loadImage(FILE* packFile)
 {
     MXSurface header;
     MXSurface* surf;
-    assert(fread(&header, sizeof(int) * 7, 1, packFile) == 1);
+	int headerLen = fread(&header, sizeof(int) * 7, 1, packFile);
+    assert(headerLen == 1);
     
 #ifdef BIG_ENDIAN
     header.w = swapEndian(header.w);
@@ -222,7 +223,8 @@ MXSurface* loadImage(FILE* packFile)
         return surf;
     }
 
-    assert(fread(surf->pixels, header.planeSize, 1, packFile) == 1);
+    int readLen = fread(surf->pixels, header.planeSize, 1, packFile);
+	assert(readLen == 1);
     mxFlushSurface(surf);
 
     return surf;

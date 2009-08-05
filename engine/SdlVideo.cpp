@@ -15,6 +15,8 @@ static bool paused = false;
 static int timeSkipOffset = 0;
 static int pauseTime = 0;
 
+//#define DEMO_DEBUG
+
 Video::Video(int w, int h)
 {
     win = SDL_SetVideoMode(w, h, 32, 0);
@@ -24,6 +26,7 @@ Video::Video(int w, int h)
         return;
     }
     backbuffer = mxCreateSurface(win->w, win->h, MX_PIXELFORMAT_I1, 0);
+	SDL_WM_SetCaption("3.5 inches is enough", NULL);
 
     printf("Video: %dx%d, 1 bpp\n", w, h);
 }
@@ -114,6 +117,7 @@ bool Video::processInput(void)
                 {
                     return false;
                 }
+#ifdef DEMO_DEBUG
                 else if (event.key.keysym.sym == 'p')
                 {
                     if (!paused)
@@ -139,7 +143,8 @@ bool Video::processInput(void)
                     timeSkip = false;
                 }
                 break;
-        }
+#endif
+		}
     }
     return true;
 }

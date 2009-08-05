@@ -266,12 +266,14 @@ int yesWeHaveALoadingScreen(int time, int duration)
         {
             modPlayer = new ModPlayer(mixer);
             assert(modPlayer);
-            assert(modPlayer->load(SONGFILE));
+            bool songLoaded = modPlayer->load(SONGFILE);
+			assert(songLoaded);
             modPlayer->play();
         }
 
         mixer->render(sampleChunk);
-        assert(fwrite(sampleChunk->data, sampleChunk->bytes, 1, rawMusicFile) == 1);
+        int writeLen = fwrite(sampleChunk->data, sampleChunk->bytes, 1, rawMusicFile);
+		assert(writeLen == 1);
         musicLoadingPos += sampleChunk->length;
         drawLoadingScreen(musicLoadingPos / 2 + musicLength / 2, musicLength);
         EFFECT_TITLE("Loading screen (music)    ");
@@ -376,7 +378,7 @@ int intro(int time, int duration)
     drawCity(pos);
     EFFECT_TITLE("Intro");
 
-    mxBlit(screen, img.textTitle, img.textTitleMask, 128, 30, NULL, 0);
+    blitCentered(screen, img.textTitle, img.textTitleMask, 256, 100, NULL, 0);
 
     mxBlit(screen, img.introMac, img.introMacMask, 88, 200 + bop, NULL, 0);
     return 1;
@@ -526,15 +528,15 @@ int macbookRidiculePrep(int time, int duration)
 
 int macbookRidicule(int time, int duration)
 {
-    int pos1 = pow2(max(0,  400 - time)) >> 8;
-    int pos2 = pow2(max(0,  500 - time)) >> 8;
-    int pos3 = pow2(max(0, 1200 - time)) >> 8;
-    int pos4 = pow2(max(0, 1400 - time)) >> 8;
+    int pos1 = pow2(max(0,  200 - time)) >> 8;
+    int pos2 = pow2(max(0,  200 - time)) >> 8;
+    int pos3 = pow2(max(0,  600 - time)) >> 8;
+    int pos4 = pow2(max(0,  800 - time)) >> 8;
 
     mxBlit(screen, img.macOnStreetBg, NULL, 0, 0, NULL, 0);
     EFFECT_TITLE("Macbook Ridicule");
 
-    if (time & 0x80 && time < 1600)
+    if (time & 0x80 && time < 1000)
     {
         mxBlit(screen, img.faceMacbookNoticeMacTalk, NULL, 104 - 200 + 1050 - (72 << 3) + 32, 20 + 400 - (72 << 2) + 50, NULL, 0);
     }
@@ -778,9 +780,9 @@ int pcRidicule(int time, int duration)
     int pos3 = pow2(max(0, 1200 - time)) >> 8;
     int pos4 = pow2(max(0, 1500 - time)) >> 8;
 
-    blitCentered(screen, img.textRun, img.textRunMask, 256 - 64, 40 + pos1, NULL, 0);
-    blitCentered(screen, img.textAny, img.textAnyMask, 256 + 64, 100 + pos2, NULL, 0);
-    blitCentered(screen, img.textDemos, img.textDemosMask, 256, 180 + pos3, NULL, 0);
+    blitCentered(screen, img.textRun, img.textRunMask, 256 - 80, 80 + pos1, NULL, 0);
+    blitCentered(screen, img.textAny, img.textAnyMask, 256 + 80, 80 + pos2, NULL, 0);
+    blitCentered(screen, img.textDemos, img.textDemosMask, 256, 160 + pos3, NULL, 0);
     blitCentered(screen, img.textLately, img.textLatelyMask, 256, 260 + pos4, NULL, 0);
 
     return 1;
@@ -899,7 +901,7 @@ int pcFxIntro(int time, int duration)
     blitCentered(screen, img.textYeah, img.textYeahMask, 128 + 160 + bop2, 60 + pos1, NULL, 0);
     blitCentered(screen, img.textGetA, img.textGetAMask, 128 + 192, 120 + pos2, NULL, 0);
     blitCentered(screen, img.textLoadOf, img.textLoadOfMask, 128 + 224, 180 + pos3, NULL, 0);
-    blitCentered(screen, img.textThis, img.textThisMask, 128 + 256, 240 + pos4, NULL, 0);
+    blitCentered(screen, img.textThis, img.textThisMask, 96 + 256, 240 + pos4, NULL, 0);
 
     return 1;
 }
@@ -1221,12 +1223,12 @@ int kidHelp(int time, int duration)
 
 int pedobearRunSide(int time, int duration)
 {
-    int pos = -128 + (time >> 2);
+    int pos = -128 + (time / 3);
     int bop = sawtooth(time >> 1) >> 2;
 
     mxFill(screen, NULL, 0);
     drawCity(0);
-    mxBlit(screen, img.guysOnStreet, NULL, 0, 200, NULL, 0);
+    mxBlit(screen, img.guysOnStreet, NULL, 0, 180, NULL, 0);
     mxBlit(screen, img.pedobearRunSide, img.pedobearRunSideMask, pos, 170 + bop, NULL, 0);
     EFFECT_TITLE("Pedobear Run");
     return 1;
@@ -1234,10 +1236,10 @@ int pedobearRunSide(int time, int duration)
 
 int pedobearRunFront(int time, int duration)
 {
-    int bop = sawtooth(time >> 1) >> 3;
+    int bop = sawtooth(time >> 1) >> 2;
 
     drawBackgroundPattern5(time);
-    mxBlit(screen, img.pedobearRunFront, img.pedobearRunFrontMask, 256 - 128, 171 - 128 + bop, NULL, 0);
+    mxBlit(screen, img.pedobearRunFront, img.pedobearRunFrontMask, 256 - 128, 171 - 180 + bop, NULL, 0);
     EFFECT_TITLE("Pedobear Run");
     return 1;
 }
@@ -1352,8 +1354,8 @@ int macHasPlan(int time, int duration)
     rect.w = 8 + (time >> 2);
     rect.h = img.textStepAside->h;
 
-    blitCentered(screen, img.textStepAside, img.textStepAsideMask, 192, 60, &rect, 0);
-    blitCentered(screen, img.textKids, img.textKidsMask, 380, 55 - pos1, NULL, 0);
+    blitCentered(screen, img.textStepAside, img.textStepAsideMask, 144, 60, &rect, 0);
+    blitCentered(screen, img.textKids, img.textKidsMask, 390, 55 - pos1, NULL, 0);
 
     mxBlit(screen, img.macCloseUp, NULL, 256 - 128, 120 + bop, NULL, 0);
     if (time & 0x80 && time < 1300)
@@ -1615,7 +1617,7 @@ EffectEntry effects[] =
 {
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
     {clearScreen,             0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-    {intro,                   P / 2, 0},
+	{intro,                   P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macOnStreet,             P / 2, 0},
     {guysSpotMac,             P / 4, 0},
@@ -1641,7 +1643,7 @@ EffectEntry effects[] =
     {sadMac2,                 P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {kidHelp,                 P / 4, 0},
-    {pedobearRunSide,         P / 4, 0},
+	{pedobearRunSide,         P / 4, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {pedobearRunFront,        P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
