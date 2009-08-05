@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
+#include <unistd.h>
 
 #if defined(_MSC_VER)
 #   include <sdl_main.h>

@@ -7,7 +7,7 @@
 void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
                    int srcStride, int destStride, int srcFlags)
 {
-    int x;
+    int x = 0;
     int w = ((destRect->w + (destRect->x & 0x7)) >> 3);
 
     /* Right lobe, sub-byte pixels */
@@ -95,7 +95,7 @@ void blit_I1_to_I1(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
 void blit_I1_to_I1_xor(uint8_t* dest, const uint8_t* src, const MXRect* destRect,
                        int srcStride, int destStride, int srcFlags)
 {
-    int x;
+    int x = 0;
     int w = ((destRect->w + (destRect->x & 0x7)) >> 3);
 
     /* Right lobe, sub-byte pixels */
@@ -183,7 +183,7 @@ void blit_I1_to_I1_xor(uint8_t* dest, const uint8_t* src, const MXRect* destRect
 void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mask, const MXRect* destRect,
                            int srcStride, int destStride, int maskStride, int srcFlags)
 {
-    int x;
+    int x = 0;
     int w = ((destRect->w + (destRect->x & 0x7)) >> 3);
 
     /* Right lobe, sub-byte pixels */
@@ -281,7 +281,7 @@ void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mas
 
 void fill_I1(uint8_t* dest, const MXRect* destRect, int destStride, int color)
 {
-    int x;
+    int x = 0;
     int w = ((destRect->w + (destRect->x & 0x7)) >> 3);
     color = color ? 0xff : 0x00;
 
@@ -357,7 +357,7 @@ void fill_I1(uint8_t* dest, const MXRect* destRect, int destStride, int color)
 
 void invert_I1(uint8_t* dest, const MXRect* destRect, int destStride)
 {
-    int x;
+    int x = 0;
     int w = ((destRect->w + (destRect->x & 0x7)) >> 3);
 
     /* Right lobe, sub-byte pixels */
