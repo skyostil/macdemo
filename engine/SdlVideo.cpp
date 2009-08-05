@@ -26,7 +26,7 @@ Video::Video(int w, int h)
         return;
     }
     backbuffer = mxCreateSurface(win->w, win->h, MX_PIXELFORMAT_I1, 0);
-	SDL_WM_SetCaption("3.5 inches is enough", NULL);
+	SDL_WM_SetCaption("Three and a half inches is enough", NULL);
 
     printf("Video: %dx%d, 1 bpp\n", w, h);
 }
