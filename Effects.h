@@ -1262,9 +1262,9 @@ int macbookPanic(int time, int duration)
     int pos2 = pow2(max(0,  900 - time)) >> 8;
     int pos3 = pow2(max(0, 1200 - time)) >> 8;
 
-    blitCentered(screen, img.textQuick, img.textQuickMask, 128, 60 + pos1 + bop2, NULL, 0);
-    blitCentered(screen, img.textCallThe, img.textCallTheMask, 128, 120 + pos2 + bop3, NULL, 0);
-    blitCentered(screen, img.textCops, img.textCopsMask, 128, 200 + pos3 + bop2, NULL, 0);
+    blitCentered(screen, img.textQuick, img.textQuickMask, 192, 60 + pos1 + bop2, NULL, 0);
+    blitCentered(screen, img.textCallThe, img.textCallTheMask, 192, 120 + pos2 + bop3, NULL, 0);
+    blitCentered(screen, img.textCops, img.textCopsMask, 192, 200 + pos3 + bop2, NULL, 0);
 
     return 1;
 }
