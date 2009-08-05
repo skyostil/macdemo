@@ -328,7 +328,7 @@ int yesWeHaveALoadingScreen(int time, int duration)
     return 1;
 }
 
-int preloadMusic(int steps, int total)
+int preloadMusic(int time, int duration)
 {
     if (musicRenderer)
     {
@@ -719,12 +719,13 @@ void drawBackgroundPattern5(int time)
     int t2 = time >> 5;
     int x, y;
     uint32_t* dest = (uint32_t*)screen->pixels;
-    uint32_t color = (0xffffffff << (t & 0x3f));
+    uint32_t color = (0xffffffffu << (t & 0x3f));
 
     assert(!(screen->stride & 4));
 
     if (t & 0x20)
     {
+        color = (0xffffffffu << ((t & 0x3f) - 0x20));
         color = ~color;
     }
 
@@ -1213,7 +1214,7 @@ int kidHelp(int time, int duration)
 
     blitCentered(screen, img.textHelp, img.textHelpMask, 256 - pos, 60 + bop, NULL, 0);
 
-    if ((time < 700) && (time & 0x40))
+    if ((time < 1500) && (time & 0x40))
     {
         mxInvert(screen, NULL);
     }
@@ -1574,11 +1575,21 @@ int diskImpact(int time, int duration)
 
 int theEnd(int time, int duration)
 {
-    int scroll = max(time - 3000, 0) >> 3;
+    int scroll = max(time - 3500, 0) >> 3;
     mxFill(screen, NULL, 1);
+    static int steps = 0;
 
     blitCentered(screen, img.theEnd, NULL, 256, 171 - scroll, NULL, 0);
     blitCentered(screen, img.credits, NULL, 256, 800 - scroll, NULL, 0);
+    
+    steps++;
+    if (steps >= 1 && steps <= 5)
+    {
+        if (musicRenderer)
+        {
+            musicRenderer->preload();
+        }
+    }
 
     return 1;
 }

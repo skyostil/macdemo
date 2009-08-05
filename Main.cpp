@@ -13,7 +13,6 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
-#include <unistd.h>
 
 #if defined(_MSC_VER)
 #   include <sdl_main.h>
@@ -77,7 +76,7 @@ public:
         readBytes = playBytes = 0;
 
         SampleFormat format(8, 1);
-        audioBuffer = new SampleChunk(&format, 0x80000, mixFreq);
+        audioBuffer = new SampleChunk(&format, 0x120000, mixFreq);
         assert(audioBuffer);
         assert(audioBuffer->data);
     
@@ -91,14 +90,14 @@ public:
     {
         delete audioBuffer;
         fclose(audioFile);
-		unlink(RAWMUSICFILE);
+		remove(RAWMUSICFILE);
     }
     
-    void preload(int bytesToLoad = 0x10000)
+    void preload(int bytesToLoad = 0x9000)
     {
         while (bytesToLoad > 0)
         {
-            int readPos = readBytes & (audioBuffer->bytes - 1);
+            int readPos = readBytes % (audioBuffer->bytes);
             int readSize = min(bytesToLoad, audioBuffer->bytes - readPos);
 #ifdef MUSIC_STATS
             printf("LOAD %d bytes at %d (%d total)\n", readSize, readPos, readBytes);
@@ -126,7 +125,7 @@ public:
         }
         while (bytesToPlay > 0)
         {
-            int playPos = playBytes & (audioBuffer->bytes - 1);
+            int playPos = playBytes % (audioBuffer->bytes);
             int playSize = min(bytesToPlay, audioBuffer->bytes - playPos);
 #ifdef MUSIC_STATS
             printf("PLAY %d bytes (%d total, %d read)\n", playSize, playBytes, readBytes);
