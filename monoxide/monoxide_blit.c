@@ -256,7 +256,7 @@ void blit_I1_to_I1_mask_I1(uint8_t* dest, const uint8_t* src, const uint8_t* mas
         mask += x;
         w    &= 0x3;
     }
-
+    
     /* Center lobe, 8-bit pixels */
     if (w)
     {

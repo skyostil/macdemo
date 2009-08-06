@@ -30,7 +30,8 @@ Video::Video(int w, int h, bool fullscreen)
 
     if (!win)
     {
-        return;
+		win = SDL_SetVideoMode(w, h, 16, flags);
+		assert(win);
     }
     backbuffer = mxCreateSurface(win->w, win->h, MX_PIXELFORMAT_I1, 0);
 	SDL_WM_SetCaption("Three and a half inches is enough", NULL);
@@ -82,7 +83,38 @@ void* Video::screenPixels()
     return backbuffer->pixels;
 }
 
-void Video::swapBuffers()
+static void _swap16()
+{
+    int x, y;
+    const uint16_t palette[] = {
+        0xffff,
+        0x0000,
+    };
+    const MXSurface* s = backbuffer;
+    const uint8_t* src = (uint8_t*)s->pixels;
+    
+    assert(win);
+    assert(s->pixelFormat == MX_PIXELFORMAT_I1);
+
+    SDL_LockSurface(win);
+    uint16_t* dest = (uint16_t*)win->pixels;
+
+    for (y = 0; y < s->h; y++)
+    {
+        for (x = 0; x < s->w; x++)
+        {
+            int color = (src[x / 8] & (1 << (7 - (x & 0x7)))) ? 1 : 0;
+            dest[x] = palette[color];
+        }
+        dest += win->pitch / 2;
+        src += s->stride;
+    }
+
+    SDL_UnlockSurface(win);
+    SDL_Flip(win);
+}
+
+static void _swap32()
 {
     int x, y;
     const uint32_t palette[] = {
@@ -111,6 +143,20 @@ void Video::swapBuffers()
 
     SDL_UnlockSurface(win);
     SDL_Flip(win);
+}
+
+void Video::swapBuffers()
+{
+    assert(win);
+    switch (win->format->BitsPerPixel)
+    {
+    case 16:
+        _swap16();
+        break;
+    case 32:
+        _swap32();
+        break;
+    }
 }
 
 bool Video::processInput(void)
