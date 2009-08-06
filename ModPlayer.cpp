@@ -480,7 +480,7 @@ ModPlayer::ModSample::ModSample(int _length, char _fineTune, char _volume, unsig
         loopStart(_loopStart),
         loopLength(_loopLength)
 {
-        SampleFormat sf(8,1);
+        SampleFormat sf(8, 1, false);
         sample = new SampleChunk(&sf, _length, MOD_FREQ_BASE / (428*2));
 }
 

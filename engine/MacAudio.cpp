@@ -216,3 +216,8 @@ int Audio::mixFreq()
 {
     return currentMixFreq;
 }
+
+const SampleFormat& Audio::format() const
+{
+    return *format;
+}

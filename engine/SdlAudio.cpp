@@ -9,7 +9,7 @@
 
 static AudioRenderer* _renderer = 0;
 static SDL_AudioSpec  _audioSpec;
-static SampleFormat   _sampleFormat(0, 0);
+static SampleFormat   _sampleFormat(0, 0, false);
 static bool           _monoUpMix = false;
 static bool           _8bitUpMix = false;
 
@@ -61,7 +61,15 @@ Audio::Audio(int bits, int mixFreq, bool stereo, int bufferSize)
         printf("Unable to open audio device.\n");
     }
     printf("Audio: format 0x%x, %d channels, %d Hz\n", _audioSpec.format, _audioSpec.channels, _audioSpec.freq);
-    _sampleFormat = SampleFormat(bits, _audioSpec.channels);
+
+    bool signedData = false;
+    if (_audioSpec.format == AUDIO_S8 || _audioSpec.format == AUDIO_S16LSB ||
+        _audioSpec.format == AUDIO_S16MSB || _audioSpec.format == AUDIO_S16)
+    {
+        signedData = true;
+    }
+
+    _sampleFormat = SampleFormat(bits, _audioSpec.channels, signedData);
 
     if (_audioSpec.channels > 1 && !stereo)
     {
@@ -98,3 +106,9 @@ int Audio::mixFreq()
 {
     return _audioSpec.freq;
 }
+
+const SampleFormat& Audio::format() const
+{
+    return _sampleFormat;
+}
+

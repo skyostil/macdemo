@@ -39,6 +39,14 @@ MXSurface* loadImage(FILE* packFile);
 #endif
 #define RAWMUSICFILE    "music.raw"
 
+/*
+ * Global state
+ */
+static MXSurface*     screen = 0;
+static Audio*         audio = 0;
+static Video*         video = 0;
+static MXSurface*     physicalScreen = 0;
+
 int sawtooth(int t)
 {
     t &= 0xff;
@@ -78,8 +86,7 @@ public:
         mixFreq = _mixFreq;
         readBytes = playBytes = 0;
 
-        SampleFormat format(8, 1);
-        audioBuffer = new SampleChunk(&format, 0x120000, mixFreq);
+        audioBuffer = new SampleChunk(&audio->format(), 0x120000, mixFreq);
         assert(audioBuffer);
         assert(audioBuffer->data);
     
@@ -93,7 +100,7 @@ public:
     {
         delete audioBuffer;
         fclose(audioFile);
-		remove(RAWMUSICFILE);
+        remove(RAWMUSICFILE);
     }
     
     void preload(int bytesToLoad = 0x9000)
@@ -145,13 +152,6 @@ private:
     int readBytes, playBytes, mixFreq;
 };
 
-/*
- * Global state
- */
-static MXSurface*     screen = 0;
-static Audio*         audio = 0;
-static Video*         video = 0;
-static MXSurface*     physicalScreen = 0;
 static MusicRenderer* musicRenderer = 0;
 
 #include "Effects.h"
@@ -166,7 +166,7 @@ void setup(bool fullscreen)
 #if defined(CODEWARRIOR)
     audio = new Audio(8, 11127, false, 0x1000);
 #else
-    audio = new Audio(8, 11127, false, 512);
+    audio = new Audio(8, 44100, false, 512);
 #endif
     
     //assert(player.load(SONGFILE));
@@ -206,7 +206,7 @@ MXSurface* loadImage(FILE* packFile)
 {
     MXSurface header;
     MXSurface* surf;
-	int headerLen = fread(&header, sizeof(int) * 7, 1, packFile);
+    int headerLen = fread(&header, sizeof(int) * 7, 1, packFile);
     assert(headerLen == 1);
     
 #ifdef BIG_ENDIAN
@@ -225,7 +225,7 @@ MXSurface* loadImage(FILE* packFile)
     }
 
     int readLen = fread(surf->pixels, header.planeSize, 1, packFile);
-	assert(readLen == 1);
+    assert(readLen == 1);
     mxFlushSurface(surf);
 
     return surf;

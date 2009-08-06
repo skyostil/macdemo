@@ -20,6 +20,7 @@ public:
     void start(AudioRenderer* renderer);
     void stop();
     int mixFreq();
+    const SampleFormat& format() const;
 };
 
 #endif

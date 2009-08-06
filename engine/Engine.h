@@ -21,18 +21,18 @@ typedef Sample16        Sample;         // default format
 #else
 //typedef unsigned long long UInt64;
 #endif
-typedef unsigned int	UInt32;
-typedef unsigned short	UInt16;
-typedef unsigned char	UInt8;
+typedef unsigned int    UInt32;
+typedef unsigned short  UInt16;
+typedef unsigned char   UInt8;
 
 #ifdef _MSC_VER
 //typedef signed __int64 Int64;
 #else
 //typedef signed long long Int64;
 #endif
-typedef signed int		Int32;
-typedef signed short	Int16;
-typedef signed char		Int8;
+typedef signed int      Int32;
+typedef signed short    Int16;
+typedef signed char     Int8;
 
 class PixelFormat
 {
@@ -82,8 +82,8 @@ public:
         Pixel                   getPixel(int x, int y);
         //! \param pixel must be in the correct format.
         void                    setPixel(int x, int y, Pixel color);
-		
-		void					renderTransparentSurface(const Surface *s, int x, int y, Pixel colorMask = (Pixel)-1);
+        
+        void                    renderTransparentSurface(const Surface *s, int x, int y, Pixel colorMask = (Pixel)-1);
 
         Pixel                   *pixels;
         int                     width, height, bytes, pitch;
@@ -94,7 +94,7 @@ public:
 class SampleFormat
 {
 public:
-        SampleFormat(int _bits, int _channels);
+        SampleFormat(int _bits, int _channels, bool _signedData);
         
         //! Convert from the default sample format to this format.
         inline Sample makeSample(Sample sample)
@@ -104,19 +104,20 @@ public:
 
         int                     bits, bytesPerSample;
         int                     channels;
+        bool                    signedData;
 };
 
 class SampleChunk
 {
 public:
-        SampleChunk(SampleFormat* _format, Sample8* _data, int _length, int _rate);
-        SampleChunk(SampleFormat* _format, int _length, int _rate);
+        SampleChunk(const SampleFormat* _format, Sample8* _data, int _length, int _rate);
+        SampleChunk(const SampleFormat* _format, int _length, int _rate);
         virtual ~SampleChunk();
         
         //! \param sample must be in the correct format.
         void    setSample(int n, int channel, Sample sample);
 
-        Sample8*		data;
+        Sample8*        data;
         int             length;
         int             rate;
         int             bytes;
@@ -181,7 +182,7 @@ public:
         virtual unsigned int getTickCount() = 0;
         virtual unsigned int getTicksPerSecond() = 0;
         
-		virtual const char *findResource(const char *name, bool mustExist = true) { return name; }
+        virtual const char *findResource(const char *name, bool mustExist = true) { return name; }
 
         virtual Surface *loadImage(const char *name, PixelFormat *pf = 0);
         virtual SampleChunk *loadSample(const char *name, SampleFormat *sf = 0);

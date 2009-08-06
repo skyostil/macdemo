@@ -255,7 +255,7 @@ int yesWeHaveALoadingScreen(int time, int duration)
 
         if (!sampleChunk)
         {
-            SampleFormat format(8, 1);
+            SampleFormat format(audio->format());
             sampleChunk = new SampleChunk(&format, mixFreq * 4, mixFreq);
             assert(sampleChunk);
         }
