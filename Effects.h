@@ -216,7 +216,11 @@ int yesWeHaveALoadingScreen(int time, int duration)
             assert(packFile);
         }
 
+#if defined(REALTIME_MUSIC)
+        drawLoadingScreen(loadingPos, imageCount);
+#else
         drawLoadingScreen(loadingPos / 2, imageCount);
+#endif
         EFFECT_TITLE("Loading screen (graphics)");
         imagesToLoad[loadingPos] = loadImage(packFile);
         assert(imagesToLoad[loadingPos]);
@@ -240,7 +244,7 @@ int yesWeHaveALoadingScreen(int time, int duration)
     musicLength = mixFreq * MUSIC_LENGTH;
     
     /* Load music */
-#if 1
+#if !defined(REALTIME_MUSIC)
     if (musicLoadingPos < musicLength)
     {
         if (!rawMusicFile)
@@ -312,7 +316,7 @@ int yesWeHaveALoadingScreen(int time, int duration)
         assert(musicRenderer);
         audio->start(musicRenderer);
     }
-#elif 0
+#elif defined(REALTIME_MUSIC)
     mixer = new Mixer(mixFreq, 4);
     modPlayer = new ModPlayer(mixer);
     assert(modPlayer);

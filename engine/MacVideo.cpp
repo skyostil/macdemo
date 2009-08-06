@@ -65,10 +65,11 @@ void VBLRemove()
     VRemove((QElemPtr)&vblData.task);
 }
 
-Video::Video(int w, int h)
+Video::Video(int w, int h, bool fullscreen)
 {
     (void)w;
     (void)h;
+	(void)fullscreen;
     MaxApplZone();
     InitGraf((Ptr) &qd.thePort);
     InitFonts();

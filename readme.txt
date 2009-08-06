@@ -28,3 +28,5 @@
 
 
             http://www.unrealvoodoo.org
+
+             Hint: -w for windowed mode

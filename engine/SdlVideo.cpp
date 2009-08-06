@@ -17,9 +17,16 @@ static int pauseTime = 0;
 
 //#define DEMO_DEBUG
 
-Video::Video(int w, int h)
+Video::Video(int w, int h, bool fullscreen)
 {
-    win = SDL_SetVideoMode(w, h, 32, 0);
+	int flags = 0;
+
+	if (fullscreen)
+	{
+		flags |= SDL_FULLSCREEN;
+	}
+
+    win = SDL_SetVideoMode(w, h, 32, flags);
 
     if (!win)
     {
@@ -27,6 +34,7 @@ Video::Video(int w, int h)
     }
     backbuffer = mxCreateSurface(win->w, win->h, MX_PIXELFORMAT_I1, 0);
 	SDL_WM_SetCaption("Three and a half inches is enough", NULL);
+	SDL_ShowCursor(0);
 
     printf("Video: %dx%d, 1 bpp\n", w, h);
 }

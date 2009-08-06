@@ -34,6 +34,9 @@ MXSurface* loadImage(FILE* packFile);
 //#define MUSIC_STATS
 //#define DEMO_STATS
 //#define DEMO_LOOP
+#if !defined(CODEWARRIOR)
+#    define REALTIME_MUSIC
+#endif
 #define RAWMUSICFILE    "music.raw"
 
 int sawtooth(int t)
@@ -153,15 +156,13 @@ static MusicRenderer* musicRenderer = 0;
 
 #include "Effects.h"
 
-void setup()
+void setup(bool fullscreen)
 {
-    video = new Video(SCREEN_WIDTH, SCREEN_HEIGHT);
+    video = new Video(SCREEN_WIDTH, SCREEN_HEIGHT, fullscreen);
     physicalScreen = mxCreateUserMemorySurface(video->screenWidth(), video->screenHeight(), 
                                                MX_PIXELFORMAT_I1, video->screenStride(), 
                                                0, video->screenPixels());
     screen = mxCreateSurface(video->screenWidth(), video->screenHeight(), MX_PIXELFORMAT_I1, 0);
-    //Audio(8, 11127, 0, 512);
-    //Audio(8, 22050, 0, 512);
 #if defined(CODEWARRIOR)
     audio = new Audio(8, 11127, false, 0x1000);
 #else
@@ -273,12 +274,33 @@ void demo()
     }
 }
 
+void usage()
+{
+	printf("Usage: three_and_a_half_inches_is_enough [OPTIONS]\n");
+	printf("Options:\n");
+	printf("-h		This text\n");
+	printf("-w		Windowed mode\n");
+}
+
 int main(int argc, char** argv)
 {
-    (void)argc;
-    (void)argv;
+	bool fullscreen = true;
+	int i;
 
-    setup();
+	for (i = 0; i < argc; i++)
+	{
+		if (!strcmp(argv[i], "-h"))
+		{
+			usage();
+			return 0;
+		}
+		else if (!strcmp(argv[i], "-w"))
+		{
+			fullscreen = false;
+		}
+	}
+
+    setup(fullscreen);
     demo();
     teardown();
 

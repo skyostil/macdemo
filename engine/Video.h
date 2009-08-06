@@ -9,7 +9,7 @@
 class Video
 {
 public:
-    Video(int w, int h);
+    Video(int w, int h, bool fullscreen);
     ~Video();
     
     void waitRefresh();
