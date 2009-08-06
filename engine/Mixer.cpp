@@ -93,8 +93,6 @@ Mixer::~Mixer()
     delete[] channel;
 }
 
-#include <stdio.h>
-
 void Mixer::render(SampleChunk *buffer)
 {
     int ch;

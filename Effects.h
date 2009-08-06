@@ -271,13 +271,13 @@ int yesWeHaveALoadingScreen(int time, int duration)
             modPlayer = new ModPlayer(mixer);
             assert(modPlayer);
             bool songLoaded = modPlayer->load(SONGFILE);
-			assert(songLoaded);
+            assert(songLoaded);
             modPlayer->play();
         }
 
         mixer->render(sampleChunk);
         int writeLen = fwrite(sampleChunk->data, sampleChunk->bytes, 1, rawMusicFile);
-		assert(writeLen == 1);
+        assert(writeLen == 1);
         musicLoadingPos += sampleChunk->length;
         drawLoadingScreen(musicLoadingPos / 2 + musicLength / 2, musicLength);
         EFFECT_TITLE("Loading screen (music)    ");
@@ -320,7 +320,8 @@ int yesWeHaveALoadingScreen(int time, int duration)
     mixer = new Mixer(mixFreq, 4);
     modPlayer = new ModPlayer(mixer);
     assert(modPlayer);
-    assert(modPlayer->load(SONGFILE));
+    bool songLoaded = modPlayer->load(SONGFILE);
+    assert(songLoaded);
     modPlayer->play();
     audio->start(mixer);
 #else
@@ -1632,7 +1633,7 @@ EffectEntry effects[] =
 {
     {yesWeHaveALoadingScreen, 0, EFFECT_FLAG_DYNAMIC},
     {clearScreen,             0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
-	{intro,                   P / 2, 0},
+    {intro,                   P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {macOnStreet,             P / 2, 0},
     {guysSpotMac,             P / 4, 0},
@@ -1658,7 +1659,7 @@ EffectEntry effects[] =
     {sadMac2,                 P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {kidHelp,                 P / 4, 0},
-	{pedobearRunSide,         P / 4, 0},
+    {pedobearRunSide,         P / 4, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
     {pedobearRunFront,        P / 2, 0},
     {preloadMusic,            0, EFFECT_FLAG_DYNAMIC | EFFECT_FLAG_INFINITESIMAL},
