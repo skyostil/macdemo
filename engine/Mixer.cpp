@@ -103,7 +103,7 @@ void Mixer::render(SampleChunk *buffer)
         
         //int j;
         //for (j = 0; j < buffer->length; j++)
-        //	buffer->data[j] = j << 4;
+        //  buffer->data[j] = j << 4;
 
         //if (!ticker)
         if (0)
@@ -150,7 +150,7 @@ void Mixer::render(SampleChunk *buffer)
                 Sample8 *data = (Sample8*)buffer->data;
 
 //                                if (channelMask & (1 << channelNum))
-//               								channelMask &= ~(1 << channelNum);
+//                                              channelMask &= ~(1 << channelNum);
 #define MIX_CHANNEL(channelNum) \
                                 if (c->sample && c->pos <= c->sample->length)\
                                 {\
@@ -174,12 +174,12 @@ void Mixer::render(SampleChunk *buffer)
 #if 1
                 Sample16 a;
                 Channel* c;
-				
+                
                 while (count)
                 {
                         int dt = tickerInterval - tickerCounter;
                         int run = count < dt ? count : dt;
-                		
+                        
                         count -= run;
                         tickerCounter += run;
 
@@ -195,7 +195,7 @@ void Mixer::render(SampleChunk *buffer)
                                 c++;
                                 MIX_CHANNEL(3)
 #if defined(CODEWARRIOR) || defined(_MSC_VER) || defined(WIN32)
-								/* Yay for portability */
+                                /* Yay for portability */
                                 *data++ = (a >> 2) ^ 0x80;
 #else
                                 *data++ = (a >> 2);
@@ -205,7 +205,7 @@ void Mixer::render(SampleChunk *buffer)
 //                      *data++ = (a/(channelCount*2))>>8;
 //                        *data = (unsigned char)((a>>8));
 //                        *data ^= 0x80;
-//						data++;
+//                      data++;
 
                         if (tickerCounter == tickerInterval)
                         {
@@ -217,7 +217,7 @@ void Mixer::render(SampleChunk *buffer)
 //                                    Channel* c = &channel[ch];
 //                                    if (c->sample)
 //                                    {
-//                                    	channelMask |= (1 << ch);
+//                                      channelMask |= (1 << ch);
 //                                    }
 //                                }
                         }
@@ -235,32 +235,32 @@ void Mixer::render(SampleChunk *buffer)
                                 {
                                         //a+=channel[ch].play();
                                         //a+=(Sample16)channel[ch].sample;
-						                if (c->loopLength)
-	          								if (c->pos>=c->loopEnd)
-                        				{
-                            				c->pos-=c->loopLength;
-                        				}
-				        		        else if (c->pos >= c->sample->length)
-										{
-               								c->sample = 0;
-											continue;
-										}
-				                        a += (c->sample->data[c->pos]);
-		        				        c->counter += c->lspeed;
-                						c->pos += c->hspeed;
+                                        if (c->loopLength)
+                                            if (c->pos>=c->loopEnd)
+                                        {
+                                            c->pos-=c->loopLength;
+                                        }
+                                        else if (c->pos >= c->sample->length)
+                                        {
+                                            c->sample = 0;
+                                            continue;
+                                        }
+                                        a += (c->sample->data[c->pos]);
+                                        c->counter += c->lspeed;
+                                        c->pos += c->hspeed;
                 
-                						if (c->counter >> 16)
-               							{
-                        					c->counter -= 0xffff;
-                        					c->pos++;
-										}
-                        		}
+                                        if (c->counter >> 16)
+                                        {
+                                            c->counter -= 0xffff;
+                                            c->pos++;
+                                        }
+                                }
                         }
 
 //                      *data++ = (a/(channelCount*2))>>8;
 //                        *data = (unsigned char)((a>>8));
 //                        *data ^= 0x80;
-//						data++;
+//                      data++;
                         *data++ = (a >> 2);
 
                         if (++tickerCounter == tickerInterval)
