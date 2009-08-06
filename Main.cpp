@@ -166,7 +166,7 @@ void setup(bool fullscreen)
 #if defined(CODEWARRIOR)
     audio = new Audio(8, 11127, false, 0x1000);
 #else
-    audio = new Audio(8, 44100, false, 512);
+    audio = new Audio(8, 44100, false, 4096);
 #endif
     
     //assert(player.load(SONGFILE));
