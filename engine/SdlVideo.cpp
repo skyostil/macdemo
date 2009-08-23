@@ -15,7 +15,7 @@ static bool paused = false;
 static int timeSkipOffset = 0;
 static int pauseTime = 0;
 
-//#define DEMO_DEBUG
+#define DEMO_DEBUG
 
 Video::Video(int w, int h, bool fullscreen)
 {
