@@ -34,7 +34,7 @@ static void audioCallback(void* userData, Uint8* stream, int len)
         assert(_sampleFormat.bytesPerSample == 1);
         int i;
         // mono & 16bit expansion
-        for (i = len / 4; i >= 0; i--)
+        for (i = (len - 4) / 4; i >= 0; i--)
         {
             stream[i * 4] = 
             stream[i * 4 + 1] = 
