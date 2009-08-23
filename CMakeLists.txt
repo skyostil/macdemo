@@ -9,9 +9,6 @@ set(SOURCES
     engine/Mixer.cpp
     engine/SdlVideo.cpp
     engine/SdlAudio.cpp
-    FixedPointMath.cpp
-    FixedPointMatrix.cpp
-    FixedPointVector.cpp
     ModPlayer.cpp
     Main.cpp
     Font.cpp
