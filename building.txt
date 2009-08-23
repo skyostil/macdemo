@@ -1,0 +1,18 @@
+Building "3.5 inches is enough"
+-------------------------------
+
+ 1. Generate build files
+
+    $ cmake .
+
+ 2. Compile
+
+    $ make
+
+ 3. Generate data file
+
+    $ cd tools; python packimages.py
+
+ 4. Run
+
+    $ ./three_and_a_half_inches_is_enough
