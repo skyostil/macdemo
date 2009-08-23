@@ -6,10 +6,10 @@
 
 #define VBL_RATE 1
 #if 0
-#define SCREEN_WIDTH 	(qd.screenBits.bounds.right - qd.screenBits.bounds.left)
-#define SCREEN_HEIGHT	(qd.screenBits.bounds.bottom - qd.screenBits.bounds.top)
+#define SCREEN_WIDTH    (qd.screenBits.bounds.right - qd.screenBits.bounds.left)
+#define SCREEN_HEIGHT   (qd.screenBits.bounds.bottom - qd.screenBits.bounds.top)
 #else
-#define SCREEN_WIDTH	512
+#define SCREEN_WIDTH    512
 #define SCREEN_HEIGHT   342
 #endif
 
@@ -24,9 +24,9 @@ void VBLRemoveAll(void);
 
 typedef struct
 {
-    VBLTask	task;
-    long	a5;
-    int		ticks;
+    VBLTask task;
+    long    a5;
+    int     ticks;
     volatile long vsyncFlag;
 } VBLData;
 
@@ -69,7 +69,7 @@ Video::Video(int w, int h, bool fullscreen)
 {
     (void)w;
     (void)h;
-	(void)fullscreen;
+    (void)fullscreen;
     MaxApplZone();
     InitGraf((Ptr) &qd.thePort);
     InitFonts();
@@ -82,12 +82,12 @@ Video::Video(int w, int h, bool fullscreen)
     FlushEvents( everyEvent, 0 );
     VBLInstall();
 }
-	
+    
 Video::~Video()
 {
     VBLRemove();
 }
-	
+    
 void Video::waitRefresh()
 {
     while (!vblData.vsyncFlag /* && !Button()*/)
@@ -123,14 +123,14 @@ int Video::screenStride()
 
 int Video::ticks()
 {
-	UnsignedWide t;
-	Microseconds(&t);
+    UnsignedWide t;
+    Microseconds(&t);
     return t.lo / 1000;
 }
 
 int Video::processInput()
 {
-	return !Button();
+    return !Button();
 }
 
 void Video::swapBuffers()

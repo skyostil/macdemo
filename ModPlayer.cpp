@@ -504,9 +504,9 @@ void ModPlayer::unload()
         delete[] channel;
         delete[] order;
         channels = 0;
-		note = 0;
-		channel = 0;
-		order = 0;
+        note = 0;
+        channel = 0;
+        order = 0;
 }
 
 void ModPlayer::play()

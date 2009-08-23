@@ -222,7 +222,7 @@ void drawDebugText(MXSurface* surf, int x, int y, const char* text)
 
     while (*text && x < surf->w - 8)
     {
-	    uint8_t* d = dest;
+        uint8_t* d = dest;
         for (fy = 0; fy < 8; fy++, d += surf->stride)
         {
             uint8_t pixel = 0;

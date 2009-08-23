@@ -53,7 +53,7 @@ protected:
         SampleChunk             *sample;
         signed char             fineTune, volume;
         unsigned short          loopStart, loopLength;
-        char					padding[6];
+        char                    padding[6];
     };
 
     class ModNote
@@ -64,7 +64,7 @@ protected:
         signed short    note;
         unsigned char   effectNumber;
         unsigned char   effectParameter;
-        char			padding[1];
+        char            padding[1];
     };
 
     class ModChannel
@@ -100,7 +100,7 @@ protected:
         signed char     loopRow;
         signed char     loopCounter;
         
-        char			padding[3];
+        char            padding[3];
     };
 
     ModSample       *sample[31];

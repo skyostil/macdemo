@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 Engine::Engine(Framework* _framework):
-	framework(_framework)
+    framework(_framework)
 {
 }
 
@@ -21,7 +21,7 @@ Framework::~Framework()
 {
 }
 
-Surface	*Framework::loadImage(const char *name, PixelFormat *pf)
+Surface *Framework::loadImage(const char *name, PixelFormat *pf)
 {
     return 0;
 }

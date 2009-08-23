@@ -276,29 +276,29 @@ void demo()
 
 void usage()
 {
-	printf("Usage: three_and_a_half_inches_is_enough [OPTIONS]\n");
-	printf("Options:\n");
-	printf("-h		This text\n");
-	printf("-w		Windowed mode\n");
+    printf("Usage: three_and_a_half_inches_is_enough [OPTIONS]\n");
+    printf("Options:\n");
+    printf("-h      This text\n");
+    printf("-w      Windowed mode\n");
 }
 
 int main(int argc, char** argv)
 {
-	bool fullscreen = true;
-	int i;
+    bool fullscreen = true;
+    int i;
 
-	for (i = 0; i < argc; i++)
-	{
-		if (!strcmp(argv[i], "-h"))
-		{
-			usage();
-			return 0;
-		}
-		else if (!strcmp(argv[i], "-w"))
-		{
-			fullscreen = false;
-		}
-	}
+    for (i = 0; i < argc; i++)
+    {
+        if (!strcmp(argv[i], "-h"))
+        {
+            usage();
+            return 0;
+        }
+        else if (!strcmp(argv[i], "-w"))
+        {
+            fullscreen = false;
+        }
+    }
 
     setup(fullscreen);
     demo();
